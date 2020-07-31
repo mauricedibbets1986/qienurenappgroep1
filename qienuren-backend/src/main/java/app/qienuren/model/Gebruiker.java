@@ -63,4 +63,20 @@ public class Gebruiker {
     public void setTelefoonNummer(long telefoonNummer) {
         this.telefoonNummer = telefoonNummer;
     }
+
+    public List<UrenFormulier> getUrenFormulier() {
+        return urenFormulier;
+    }
+
+    public void setUrenFormulier(List<UrenFormulier> urenFormulier) {
+        this.urenFormulier = urenFormulier;
+    }
+
+    public List<Bericht> getBerichtenLijst() {
+        return berichtenLijst;
+    }
+
+    public void setBerichtenLijst(List<Bericht> berichtenLijst) {
+        this.berichtenLijst = berichtenLijst;
+    }
 }
