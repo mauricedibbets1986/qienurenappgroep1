@@ -1,7 +1,22 @@
-*{
+*
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+{
     .container {
-        max-width: 1400px;
+        width: 960px;
+        max-width: 100%;
         padding: 0 40px;
-        margin: auto;
+        margin: 0 auto;
     }
+    .main-header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+
 }
