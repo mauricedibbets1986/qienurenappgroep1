@@ -1,5 +1,7 @@
 package app.qienuren.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,6 +22,7 @@ public class UrenFormulier {
     private double reiskosten;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name="GebruikerId")
     private Gebruiker gebruiker;
 

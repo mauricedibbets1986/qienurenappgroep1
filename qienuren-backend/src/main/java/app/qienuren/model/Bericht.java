@@ -1,5 +1,7 @@
 package app.qienuren.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,7 @@ public class Bericht {
     String bericht;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name="berichtId")
     private Gebruiker gebruiker;
 
