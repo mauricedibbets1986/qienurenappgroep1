@@ -1,0 +1,7 @@
+*{
+    .container {
+        max-width: 1400px;
+        padding: 0 40px;
+        margin: auto;
+    }
+}
