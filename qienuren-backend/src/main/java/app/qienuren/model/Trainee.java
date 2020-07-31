@@ -3,7 +3,7 @@ package app.qienuren.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "trainee")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Trainee extends Gebruiker{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

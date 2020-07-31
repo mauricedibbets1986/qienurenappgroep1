@@ -1,6 +1,7 @@
 package app.qienuren.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,12 +18,14 @@ public class Gebruiker {
     private String geboorteDatum;
     private long telefoonNummer;
 
+
+
     @OneToMany(mappedBy = "gebruiker")
-    @JsonBackReference
+    @JsonManagedReference
     private List<UrenFormulier> urenFormulier = new ArrayList<>();
 
     @OneToMany(mappedBy = "gebruiker")
-    @JsonBackReference
+    @JsonManagedReference
     private List<Bericht> berichtenLijst = new ArrayList<>();
 
     public long getId() {
