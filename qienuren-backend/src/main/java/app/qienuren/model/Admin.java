@@ -3,7 +3,7 @@ package app.qienuren.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "admin")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Admin extends Gebruiker{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
