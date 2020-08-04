@@ -1,18 +1,122 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medewerker Urenregistratie Page</title>
-</head>
-<body>
+    <link rel="stylesheet" href="css/styling.css">
+    <title>Medewerker Urenregistratie Formulier</title>
+    <script>
+        function alertFunction(){
+            alert("It works!");
+        }
 
-    <input type="text" id="Naam" placeholder="Naam">
-    <input type="text" id="Datum" placeholder="Datum">
-    <input type="text" id="starttijd" placeholder="Start Werkdag">
-    <input type="text" id="eindtijd" placeholder="Eind Werkdag">
-    <input type=button onclick=FUNCTIE() value="geef me je geld">
-    <div> </div>
+        function uurOpslaan(){
+            var obj = {};
+            obj.datum = document.getElementById("datum").value;
+            obj.uren = document.getElementById("uren").value;
+            objJSON = JSON.stringify(obj);
+            var srt = document.getElementById("soort-uren").value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST","http://localhost:8082/api/urenformulier/new/"+srt,true);
+            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.send(objJSON);
+            alert(srt+" added to the database");
+        }
+
+        function maandOverzicht(){
+            var txt = "";
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200){
+                    var myObj = JSON.parse(this.responseText);
+                    txt +="<table>"+"<th>"+"Datum"+"</th>"+ "<th>"+"Opdracht"+"</th>" + "<th>"+"Overwerk"+"</th>" +
+                        "<th>"+"Training"+"</th>"+"<th>"+"Overige"+"</th>" +"<th>"+"Opmerking"+"</th>"
+                    for (x in myObj){
+                        txt +=  "<tr>"
+                            + "<td>" + myObj[x].datum + "</td>"+
+                            "<td>" + myObj[x].opdrachtUren + "</td>"+
+                            "<td>" + myObj[x].overwerkUren + "</td>"+
+                            "<td>" + myObj[x].trainingUren + "</td>"+
+                            "<td>" + myObj[x].overigeUren + "</td>"+
+                            "<td>" + myObj[x].opmerking + "</td>"
+                        txt +="</tr>";
+                    }
+                    txt+="</table>"
+
+                    document.getElementById("maandOverzicht").innerHTML = txt;
+                }
+            };
+            xhr.open("GET","http://localhost:8082/api/employee/all", true);
+            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.send();
+        }
+    </script>
+</head>
+<header class="main-header">
+    <div class="header-section-1">
+        <a ref="http://wwww.qien.nl">
+            <img src="https://www.qien.nl/wp-content/uploads/2017/10/logo.svg" class="qien-logo" alt="Qien">
+        </a>
+        <nav class="main-nav-list">
+            <!-- list of options or breadcrumbs -->
+        </nav>
+    </div>
+    <div class="header-section-2">
+    </div>
+    <div class="header-section-3">
+        <a href="inlogscherm.html">
+            <img src="image/logout.png" class="log-uit" alt="loguit">
+        </a>
+    </div>
+</header>
+<body>
+<div class="container">
+    <p><i>Qien > log in > <a href="medewerker.html">medewerker overzicht</a> > Uren Registratie Formulier</i></p>
+</div>
+<div class="container">
+    <input type="date" id="datum">
+    <select name="soort-uren" id="soort-uren">
+        <option value="opdrachtUren">opdracht</option>
+        <option value="overwerkUren">overwerk</option>
+        <option value="trainingUren">training</option>
+        <option value="overigeUren">overige</option>
+    </select>
+
+    <input type="number" id="uren" placeholder="uren">
+    <input type=button onclick=alertFunction() value="opslaan">
+</div>
+<div class="container">
+    <h2>Maand overzicht</h2>
+    <p>
+        <button onclick="maandOverzicht()">Show</button>
+    <div id="maandOverzicht"></div>
+    </p>
+    <table style="width:100%">
+        <tr>
+            <th>Datum</th>
+            <th>Soort</th>
+            <th>Uren</th>
+        </tr>
+        <tr>
+            <td>01-08-2020</td>
+            <td>Opdracht</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>02-08-2020</td>
+            <td>Opdracht</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>03-08-2020</td>
+            <td>Overwerk</td>
+            <td>8</td>
+        </tr>
+    </table>
+</div>
+<div class="container">
+    <input type=button onclick=uurOpslaan() value="versturen">
+    </div>
 </body>
 <footer>
     <div class="container">
@@ -20,4 +124,4 @@
     </div>
 </footer>
 
-</html> -->
+</html>
