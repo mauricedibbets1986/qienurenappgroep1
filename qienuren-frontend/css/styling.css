@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.main-header {
+    padding: 10px 16px;
+    min-height: 120px;
+    width: 100%;
+    text-align: center;
+    background: #9D3FF3;
+    color: white;
+    font-size: 12px;
+
+}
+
+.header-section-1{
+    float: left;
+}
+
+.header-section-3{
+
+}
+
+.header-section-2{
+    float: right;
+}
+
+.qien-logo {
+    position: relative;
+    width: 95px;
+    height: 95px;
+}
+
+.container {
+        width: 960px;
+        max-width: 100%;
+        padding: 0 40px;
+        margin: 40px auto ;
+    text-align: center;
+}
+
+.dashboard{
+    border-color: black;
+    border-style: solid;
+    padding: 10px;
+    text-align: left;
+    min-height: 300px;
+}
+
+.main-header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+}
+
+footer{
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    background-color: #000000;
+    color: white;
+    padding: 30px;
+}
+
+h1 {
+    margin: 20px
+}
+
+input[type=button] {
+    margin: 5px;
+}
