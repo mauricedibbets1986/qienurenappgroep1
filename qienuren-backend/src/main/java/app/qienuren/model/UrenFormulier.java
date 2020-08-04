@@ -23,7 +23,7 @@ public class UrenFormulier {
 
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name = "GebruikerId")
+    @JoinColumn(name = "Gebruiker_Id")
     private Gebruiker gebruiker;
 
     @OneToMany
