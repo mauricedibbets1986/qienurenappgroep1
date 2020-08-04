@@ -23,7 +23,7 @@ public class UrenFormulierEndpoint {
         return ufs.addNewUrenFormulier(urenFormulier);
     }
 
-    @PostMapping("/{ufid}/{wdid}")
+    @PutMapping("/{ufid}/{wdid}")
     public void updateWorkDaytoUrenFormulier(@PathVariable(value = "ufid") long ufid, @PathVariable(value = "wdid") long wdid) {
         ufs.addWorkDaytoUrenFormulier(ufid, wdid);
     }

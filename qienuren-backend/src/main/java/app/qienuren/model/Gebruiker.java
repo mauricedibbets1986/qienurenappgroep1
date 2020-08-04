@@ -20,8 +20,8 @@ public class Gebruiker {
 
 
 
-    @OneToMany(mappedBy = "gebruiker")
-    @JsonManagedReference
+    @OneToMany
+    @JoinColumn(name="urenformulier_id")
     private List<UrenFormulier> urenFormulier = new ArrayList<>();
 
     @OneToMany(mappedBy = "gebruiker")
@@ -78,5 +78,9 @@ public class Gebruiker {
 
     public void setBerichtenLijst(List<Bericht> berichtenLijst) {
         this.berichtenLijst = berichtenLijst;
+    }
+
+    public void addUrenFormulierToArray(UrenFormulier uf) {
+        urenFormulier.add(uf);
     }
 }
