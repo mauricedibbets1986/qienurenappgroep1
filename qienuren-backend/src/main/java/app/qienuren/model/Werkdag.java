@@ -11,11 +11,16 @@ public class Werkdag {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String datumDag;
-    private long uren;
+    private double uren;
+/*    private double opdrachtUren;
+    private double overwerkUren;
+    private double verlofUren;
+    private double ziekteUren;
+    private double trainingsUren;*/
 
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name="werkdag")
+    @JoinColumn(name="urenformulierId")
     private UrenFormulier urenformulier;
 
     public long getId() {
@@ -30,7 +35,7 @@ public class Werkdag {
         this.datumDag = datumDag;
     }
 
-    public long getUren() {
+    public double getUren() {
         return uren;
     }
 
