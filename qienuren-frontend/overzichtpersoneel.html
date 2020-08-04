@@ -4,49 +4,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styling.css">
+    <link rel="stylesheet" href="css/styling.css">
     <title>Document</title>
 
 </head>
 <header class="main-header">
-    <div class="container">
-        <h1 class="qien-logo">
-            <img src="qienlogo.png" width="95" height="95" alt="Qien">
-        </h1>
+    <div class="header-section-1">
+        <a href="http://wwww.qien.nl">
+            <img src="https://www.qien.nl/wp-content/uploads/2017/10/logo.svg" class="qien-logo" alt="Qien">
+        </a>
         <nav class="main-nav-list">
             <!-- list of options or breadcrumbs -->
         </nav>
     </div>
+    <div class="header-section-2">
+    </div>
+    <div class="header-section-3">
+    </div>
 </header>
 
-<body>
+<script>
+    // alle medewerkers zien
+    function alleMedewerkers() {
+        var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    var databaseContents = JSON.parse(this.responseText);
+                    var employeeString = "";
+                    var x;
+
+                    for (x = 0; x < databaseContents.length; x++) {
+
+                        employeeString +=
+                            `
+                    <div>
+                    <p>Naam:  ${databaseContents[x].naam}</p>
+                    <p>Adres: ${databaseContents[x].adres}</p>
+                    <p>Geboorte datum: ${databaseContents[x].geboorteDatum}</p>
+                    <p>Telefoon nummer: ${databaseContents[x].telefoonNummer}</p>
+                    <hr>
+                    </div>
+                    `
+                    }
+                }
+                document.getElementById("gettingalltheemployees").innerHTML = employeeString;
+            }
+            xhr.open("GET", "http://localhost:8082/api/trainee/all", true)
+            xhr.send();
+    }
+</script>
+
+<body onload=alleMedewerkers()>
     <h1>Personeel</h1>
-    <table style="width:100%">
-        <tr>
-            <th>Voornaam</th>
-            <th>Achternaam</th>
-            <th>Leeftijd</th>
-        </tr>
-        <tr>
-          <td>Luke</th>
-          <td>Skywalker</th>
-          <td>21</th>
-        </tr>
-        <tr>
-          <td>Leia</td>
-          <td>FancyPants</td>
-          <td>20</td>
-        </tr>
-        <tr>
-          <td>Darth</td>
-          <td>Vader</td>
-          <td>50</td>
-        </tr>
-      </table>
+ 
+      <div id="gettingalltheemployees"></div>
+      <!-- <input type=button onclick=alleMedewerkers() value="Get all employees"> -->
 </body>
 <footer>
     <div class="container">
-        <small>© 2020 Team1 - Het beste Team </small> <a href="https://www.MessageForYou.com" title="Contact">Contact
+        <small>© 2020 Team1 - Het beste Team </small> <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" title="Contact">Contact
             Qien</a>
     </div>
 </footer>
