@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/urenformulier")
+@RequestMapping("/api/urenformulier")
 public class UrenFormulierEndpoint {
     @Autowired
     UrenFormulierService ufs;
@@ -33,4 +33,8 @@ public class UrenFormulierEndpoint {
         return ufs.getTotaalGewerkteUren(id);
     }
 
+    @GetMapping("/gewerkteurenpermaand/{maandid}")
+    public Iterable<UrenFormulier> getUrenFormulierPerMaand(@PathVariable(value = "maandid") int maandid) {
+        return ufs.getUrenFormulierPerMaand(maandid);
+    }
 }
