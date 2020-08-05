@@ -1,14 +1,13 @@
 package app.qienuren.rest;
 
 import app.qienuren.controller.GebruikerService;
+import app.qienuren.model.Gebruiker;
 import app.qienuren.model.Werkdag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/gebruiker")
 public class GebruikerEndpoint {
     @Autowired
     GebruikerService gs;
@@ -23,4 +22,10 @@ public class GebruikerEndpoint {
         Werkdag wd = gs.getWerkdagGebruiker(gid, ufid, wdid);
         return wd;
     }
+
+    @GetMapping("/{id}")
+    public Gebruiker getGebruikerById(@PathVariable(value = "id") long id) {
+        return gs.getGebruikerById(id);
+    }
+
 }
