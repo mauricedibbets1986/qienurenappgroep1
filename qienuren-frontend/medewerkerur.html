@@ -10,7 +10,7 @@
             alert("It works!");
         }
 
-        function werkdagOpslaan(){
+        function nieuwWerkDag(){
             var obj = {};
             obj.datumDag = document.getElementById("datumDag").value;
             obj.uren = document.getElementById("uren").value;
@@ -42,6 +42,30 @@
             xhr.setRequestHeader("Content-Type","application/json");
             xhr.send();
         }
+
+        function nieuwUrenFormulier(){
+            var obj = {};
+            obj.jaar = document.getElementById("jaar-formulier").value;
+            obj.MAAND = document.getElementById("maand-formulier").value;
+            objJSON = JSON.stringify(obj);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST","http://localhost:8082/urenformulier/new/",true);
+            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.send(objJSON);
+            alert("Nieuw uren formulier aangemaakt");
+        }
+
+        function updateWorkDaytoUrenFormulier(){
+            var obj = {};
+            obj.ufid = document.getElementById("ufid").value;
+            obj.wdid = document.getElementById("wdid").value;
+            objJSON = JSON.stringify(obj);
+            var xhr = new XMLHttpRequest();
+            xhr.open("PUT","http://localhost:8082/urenformulier/"+obj.ufid+"/"+obj.wdid,true);
+            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.send(objJSON);
+            alert("werkdag verbonden met urenformulier!");
+        }
     </script>
 </head>
 <header class="main-header">
@@ -62,24 +86,51 @@
     </div>
 </header>
 <body>
+<section>
 <div class="container">
     <p><i>Qien > log in > <a href="medewerker.html">medewerker overzicht</a> > Uren Registratie Formulier</i></p>
 </div>
+</section>
+<section>
 <div class="container">
-    <input type="number" id="datumDag" min="1" max="31">
-    <input type="number" id="uren" placeholder="uren" min="1" max="12">
-    <input type=button onclick=werkdagOpslaan() value="opslaan">
+    <h2>Huidige maand: Augustus</h2>
+</div>
+    </section>
+    <section class="container">
+<div class="dashboard">
+    <div class="container">
+    <select name="maand-formulier" id="maand-formulier">
+        <option value="augustus">augustus</option>
+        <option value="september">september</option>
+        <option value="oktober">oktober</option>
+    </select>
+    <select name="jaar-formulier" id="jaar-formulier">
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+        <option value="2018">2018</option>
+    </select>
+    <input type=button onclick=nieuwUrenFormulier() value="Nieuw Uren Formulier">
 </div>
 <div class="container">
-    <h2>Maand overzicht</h2>
+    <input type="number" id="datumDag" placeholder="dag" min="1" max="31">
+    <input type="number" id="uren" placeholder="uren" min="1" max="12">
+    <input type=button onclick=nieuwWerkDag() value="Nieuwe Werk Dag">
+</div>
+<div class="container">
+    <input type="text" id="ufid" placeholder="formulierid">
+    <input type="text" id="wdid" placeholder="workdayid">
+    <input type=button onclick=updateWorkDaytoUrenFormulier() value="versturen">
+</div>
+<div class="container">
+    <h2>Maandoverzicht</h2>
     <p>
         <button onclick="werkDagenOverzicht()">Show</button>
     <div id="werkdagen"></div>
     </p>
+
 </div>
-<div class="container">
-    <input type=button onclick=uurOpslaan() value="versturen">
-    </div>
+</div>
+</section>
 </body>
 <footer>
     <div class="container">
