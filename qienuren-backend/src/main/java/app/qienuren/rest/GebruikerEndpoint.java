@@ -25,6 +25,7 @@ public class GebruikerEndpoint {
 
     @GetMapping("/{id}")
     public Gebruiker getGebruikerById(@PathVariable(value = "id") long id) {
+    	System.out.println("endpoint called");
         return gs.getGebruikerById(id);
     }
 

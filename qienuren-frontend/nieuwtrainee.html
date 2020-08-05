@@ -27,8 +27,11 @@
         var obj = {};
         obj.naam = document.getElementById("naam").value;
         obj.adres = document.getElementById("adres").value;
+        obj.postcode = document.getElementById("postcode").value;
+        obj.woonplaats = document.getElementById("woonplaats").value;
         obj.geboorteDatum = document.getElementById("geboorteDatum").value;
         obj.telefoonNummer = document.getElementById("telefoonNummer").value;
+        obj.emailadres = document.getElementById("emailadres").value;
         objJSON = JSON.stringify(obj);
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
@@ -61,12 +64,14 @@
             Adres: <br>
             <input type="text" id=adres placeholder="Adres">
             <input type="text" placeholder="Toev.">
-            <input type="text" placeholder="Postcode">
-            <input type="text" placeholder="Woonplats"><br>
+            <input type="text" id=postcode placeholder="Postcode">
+            <input type="text" id=woonplaats placeholder="Woonplats"><br>
             Geboortedatum: <br>
             <input type="text" id="geboorteDatum"><br>
             Telefoon nummer: <br>
             <input type=text id=telefoonNummer><br>
+            Email: <br>
+            <input type=text id=emailadres id=email><br>
             <input type="button" onclick=traineeToevoegen() value="Bevestigen"><br>
         </div>
     </section>
