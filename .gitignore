@@ -33,4 +33,4 @@ build/
 .vscode/
 
 ## Aplication Properties ##
-qienuren-backend/src/main/resources/application.properties
+/qienuren-backend/src/main/resources/application.properties
