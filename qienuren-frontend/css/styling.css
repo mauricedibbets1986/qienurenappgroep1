@@ -23,11 +23,11 @@ body{
     float: left;
 }
 
-.header-section-3{
+.header-section-2{
 
 }
 
-.header-section-2{
+.header-section-3{
     float: right;
 }
 
@@ -35,6 +35,12 @@ body{
     position: relative;
     width: 95px;
     height: 95px;
+}
+
+.log-uit {
+    position: relative;
+    top: 65px;
+    height: 40px;
 }
 
 .container {
@@ -75,4 +81,12 @@ h1 {
 
 input[type=button] {
     margin: 5px;
+}
+
+table, th, td {
+    text-align: center;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 2px solid #000000;
+    background-color: #ffffff;
 }
