@@ -17,10 +17,21 @@ public class GebruikerService {
     @Autowired
     UrenFormulierRepository ufr;
 
+
+    @Autowired
+    WerkdagRepository wr;
+
     public void addUrenFormulierToGebruiker(long gid, long ufid) {
         Gebruiker g = gr.findById(gid).get();
         UrenFormulier uf = ufr.findById(ufid).get();
         g.addUrenFormulierToArray(uf);
         gr.save(g);
+    }
+
+    public Werkdag getWerkdagGebruiker(long gid, long ufid, long wdid) {
+       /* Gebruiker g = gr.findById(gid).get();
+        UrenFormulier uf = ufr.findById(ufid).get();*/
+        Werkdag wd = wr.findById(wdid).get();
+        return wd;
     }
 }
