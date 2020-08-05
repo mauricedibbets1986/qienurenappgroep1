@@ -34,4 +34,8 @@ public class GebruikerService {
         Werkdag wd = wr.findById(wdid).get();
         return wd;
     }
+
+    public Gebruiker getGebruikerById(long id) {
+        return gr.findById(id).get();
+    }
 }
