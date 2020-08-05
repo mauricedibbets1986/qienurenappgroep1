@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/werkdag")
 public class WerkdagEndpoint {
     @Autowired
     WerkdagService ws;
@@ -16,12 +16,12 @@ public class WerkdagEndpoint {
         return ws.getAllWorkdays();
     }
 
-    @GetMapping("/werkdag/{id}")
+    @GetMapping("/{id}")
     public Object getWerkdagById(@PathVariable(value="id")long id) {
         return ws.getAllWorkdaysById(id);
     }
 
-    @PostMapping("/werkdag/new")
+    @PostMapping("/new")
     public Werkdag addNewWerkdag(@RequestBody Werkdag werkdag) {
         return ws.addNewWorkday(werkdag);
     }

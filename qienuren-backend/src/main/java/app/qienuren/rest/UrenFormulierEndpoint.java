@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/urenformulier")
+@RequestMapping("/api/urenformulier")
 public class UrenFormulierEndpoint {
     @Autowired
     UrenFormulierService ufs;
