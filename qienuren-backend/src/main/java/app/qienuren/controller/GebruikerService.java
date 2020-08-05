@@ -1,8 +1,6 @@
 package app.qienuren.controller;
 
-import app.qienuren.model.Gebruiker;
-import app.qienuren.model.UrenFormulier;
-import app.qienuren.model.Werkdag;
+import app.qienuren.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +35,21 @@ public class GebruikerService {
 
     public Gebruiker getGebruikerById(long id) {
         return gr.findById(id).get();
+    }
+
+    public Gebruiker changeDetails(Gebruiker gebruiker, Gebruiker gebruikerUpdate) {
+        if (gebruikerUpdate.getNaam() != null) {
+            gebruiker.setNaam(gebruikerUpdate.getNaam());
+        }
+        if (gebruikerUpdate.getAdres() != null) {
+            gebruiker.setAdres(gebruikerUpdate.getAdres());
+        }
+        if (gebruikerUpdate.getTelefoonNummer() != 0) {
+            gebruiker.setTelefoonNummer(gebruikerUpdate.getTelefoonNummer());
+        }
+        if (gebruikerUpdate.getGeboorteDatum() != null) {
+                gebruiker.setGeboorteDatum(gebruikerUpdate.getGeboorteDatum());
+        }
+        return gr.save(gebruiker);
     }
 }
