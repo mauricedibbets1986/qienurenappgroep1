@@ -92,7 +92,7 @@
                     document.getElementById("uren-formulier-maand").innerHTML = txt;
                 }
             };
-            xhr.open("GET","http://localhost:8082/api/urenformulier/gewerkteurenpermaand/"+mnd, true);
+            xhr.open("GET","http://localhost:8082/api/urenformulier/permaand/"+mnd, true);
             xhr.setRequestHeader("Content-Type","application/json");
             xhr.send();
         }
@@ -118,7 +118,9 @@
 <body onload=totaalGewerkteUrenById()>
 <section>
 <div class="container">
-    <p><i>Qien > log in > <a href="medewerker.html">medewerker overzicht</a> > Uren Registratie Formulier</i></p>
+    <p><i><a href="https://www.qien.nl/">Qien > </a>
+        <a href="inlogscherm.html"> Log in > </a>
+        <a href= "medewerker.html"> Medewerker Overzicht</a> </i></p>
 </div>
 </section>
 <section>
@@ -163,7 +165,7 @@
     <input type=button onclick="totaalGewerkteUrenById(), updateWorkDaytoUrenFormulier()" value="versturen">
 </div>
 <div class="container">
-    <h2>Maandoverzicht</h2>
+    <h2>Overzicht werkdagen</h2>
     <button onclick="werkDagenOverzicht()">Show</button>
     <div id="werkdagen"></div>
 </div>
