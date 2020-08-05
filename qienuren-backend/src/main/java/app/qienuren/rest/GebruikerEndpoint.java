@@ -17,8 +17,8 @@ public class GebruikerEndpoint {
     @Autowired
     GebruikerRepository gr;
 
-    @PostMapping("/{gid}/{ufid}")
-    public void updateWorkDaytoUrenFormulier(@PathVariable(value = "ufid") long ufid, @PathVariable(value = "gid") long gid) {
+    @PutMapping("/{gid}/{ufid}")
+    public void updateUrenFormulierToGebruiker(@PathVariable(value = "ufid") long ufid, @PathVariable(value = "gid") long gid) {
         gs.addUrenFormulierToGebruiker(gid, ufid);
     }
 
