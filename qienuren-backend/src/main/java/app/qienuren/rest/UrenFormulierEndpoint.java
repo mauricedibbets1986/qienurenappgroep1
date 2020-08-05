@@ -33,4 +33,8 @@ public class UrenFormulierEndpoint {
         return ufs.getTotaalGewerkteUren(id);
     }
 
+    @GetMapping("/gewerkteurenpermaand/{maandid}")
+    public Iterable<UrenFormulier> getUrenFormulierPerMaand(@PathVariable(value = "maandid") int maandid) {
+        return ufs.getUrenFormulierPerMaand(maandid);
+    }
 }

@@ -14,13 +14,29 @@ public class UrenFormulier {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private double totaalGewerkteUren;
-    //    private enum MAAND;
+    private Maand maand;
     private String jaar;
     private String opmerking;
     private boolean goedkeuring;
+
 //  private long ziekDagen;
-//    private long vakantieUren;
-//    private double reiskosten;
+//  private long vakantieUren;
+//  private double reiskosten;
+
+    public enum Maand {
+        JANUARI,
+        FEBRUARI,
+        MAART,
+        APRIL,
+        MEI,
+        JUNI,
+        JULI,
+        AUGUSTUS,
+        SEPTEMBER,
+        OKTOBER,
+        NOVEMBER,
+        DECEMBER
+    };
 
     @ManyToOne
     @JsonBackReference
@@ -81,6 +97,14 @@ public class UrenFormulier {
 
     public void setTotaalGewerkteUren(double totaalGewerkteUren) {
         this.totaalGewerkteUren = totaalGewerkteUren;
+    }
+
+    public Maand getMaand() {
+        return maand;
+    }
+
+    public void setMaand(Maand maand) {
+        this.maand = maand;
     }
 
     public void addWerkdayToArray(Werkdag wd) {

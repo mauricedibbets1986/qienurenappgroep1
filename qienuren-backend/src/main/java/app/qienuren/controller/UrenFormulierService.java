@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,10 +31,20 @@ public class UrenFormulierService {
     }
 
     public UrenFormulier addNewUrenFormulier(UrenFormulier urenFormulier) {
-       return ufr.save(urenFormulier);
+        return ufr.save(urenFormulier);
     }
 
     public double getTotaalGewerkteUren(long id) {
         return ufr.findById(id).get().getTotaalGewerkteUren();
+    }
+
+    public Iterable<UrenFormulier> getUrenFormulierPerMaand(int maandid) {
+        List<UrenFormulier> localUren = new ArrayList<>();
+        for (UrenFormulier uren : ufr.findAll()) {
+            if (uren.getMaand().ordinal() == maandid) {
+                localUren.add(uren);
+            }
+        }
+        return localUren;
     }
 }
