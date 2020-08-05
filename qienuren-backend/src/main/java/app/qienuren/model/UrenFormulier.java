@@ -18,7 +18,8 @@ public class UrenFormulier {
     private String jaar;
     private String opmerking;
     private boolean goedkeuring;
-//    private double vakantieUren;
+//  private long ziekDagen;
+//    private long vakantieUren;
 //    private double reiskosten;
 
     @ManyToOne
