@@ -1,5 +1,6 @@
 package app.qienuren.controller;
 
+import app.qienuren.exceptions.OverwerkException;
 import app.qienuren.model.UrenFormulier;
 import app.qienuren.model.Werkdag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,13 @@ public class UrenFormulierService {
         return ufr.findAll();
     }
 
-    public void addWorkDaytoUrenFormulier(long ufid, long wdid) {
-        UrenFormulier uf = ufr.findById(ufid).get();
-        Werkdag wd = wdr.findById(wdid).get();
-        uf.addWerkdayToArray(wd);
-        ufr.save(uf);
+    public Object addWorkDaytoUrenFormulier(long ufid, long wdid) {
+        try {
+            ufr.findById(ufid).get().addWerkdayToArray(wdr.findById(wdid).get());
+            return ufr.save(ufr.findById(ufid).get());
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
     public UrenFormulier addNewUrenFormulier(UrenFormulier urenFormulier) {

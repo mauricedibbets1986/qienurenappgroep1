@@ -1,5 +1,6 @@
 package app.qienuren.model;
 
+import app.qienuren.exceptions.OverwerkException;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -107,12 +108,20 @@ public class UrenFormulier {
         this.maand = maand;
     }
 
-    public void addWerkdayToArray(Werkdag wd) {
+    public void addWerkdayToArray(Werkdag wd) throws Exception {
         werkdag.add(wd);
         calculateTotaalGewerkt(wd);
     }
 
-    public void calculateTotaalGewerkt(Werkdag wd) {
+    public void calculateTotaalGewerkt(Werkdag wd) throws Exception {
         totaalGewerkteUren += wd.getUren();
+        checkOverUren();
+
+    }
+
+    private void checkOverUren() throws Exception {
+        if (totaalGewerkteUren >= 50) {
+            throw new OverwerkException("HO STOP JE HEBT TEVEEL GEWERKT DEZE WEEK");
+        }
     }
 }
