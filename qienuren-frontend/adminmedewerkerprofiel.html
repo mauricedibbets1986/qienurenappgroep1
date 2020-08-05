@@ -23,37 +23,7 @@
     </div>
 </header>
 
-<script>
-    // alle medewerkers zien
-    function alleMedewerkers() {
-        var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (this.readyState == 4) {
-                    var databaseContents = JSON.parse(this.responseText);
-                    var employeeString = "";
-                    var x;
-
-                    for (x = 0; x < databaseContents.length; x++) {
-
-                        employeeString +=
-                            `
-                    <div>
-                    <p>Naam:  ${databaseContents[x].naam}</p>
-                    <p>Adres: ${databaseContents[x].adres}</p>
-                    <p>Geboorte datum: ${databaseContents[x].geboorteDatum}</p>
-                    <p>Telefoon nummer: ${databaseContents[x].telefoonNummer}</p>
-                    <hr>
-                    </div>
-                    `
-                    }
-                }
-                document.getElementById("gettingalltheemployees").innerHTML = employeeString;
-            }
-            xhr.open("GET", "http://localhost:8082/api/trainee/all", true)
-            xhr.send();
-    }
-</script>
-
+<!-- call up single medewerker -->
 <body onload=alleMedewerkers()>
     <div class="container">
         <p><i><a href="https://www.qien.nl/">Qien > </a>
@@ -62,18 +32,30 @@
     </div>
     <section>
         <div class="container">
-            <h1>Personeel</h1>
+            <h1>MEDEWERKER X</h1>
         </div>
     </section>
     <section class ="container">
         <div class="dashboard">
-            <div id="gettingalltheemployees"></div>
-            
+            <table style="width:100%">
+                <tr>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Age</th>
+                </tr>
+                <tr>
+                  <td>Jill</td>
+                  <td>Smith</td>
+                  <td>50</td>
+                </tr>
+                <tr>
+                  <td>Eve</td>
+                  <td>Jackson</td>
+                  <td>94</td>
+                </tr>
+              </table>
         </div>
     </section>
-
-
-
 
 </body>
 <footer>
