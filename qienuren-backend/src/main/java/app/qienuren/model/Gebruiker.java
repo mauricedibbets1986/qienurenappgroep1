@@ -15,6 +15,7 @@ public class Gebruiker {
     private long id;
     private String naam;
     private String adres;
+    private String evtToevoeging;
     private String postcode;
     private String woonplaats;
     private String geboorteDatum;
@@ -104,6 +105,14 @@ public class Gebruiker {
 
     public void setEmailadres(String emailadres) {
         this.emailadres = emailadres;
+    }
+
+    public String getEvtToevoeging() {
+        return evtToevoeging;
+    }
+
+    public void setEvtToevoeging(String evtToevoeging) {
+        this.evtToevoeging = evtToevoeging;
     }
 
     public void addUrenFormulierToArray(UrenFormulier uf) {
