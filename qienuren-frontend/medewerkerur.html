@@ -28,10 +28,10 @@
             xhr.onreadystatechange = function(){
                 if (this.readyState == 4 && this.status == 200){
                     var myObj = JSON.parse(this.responseText);
-                    txt +="<table>"+"<th>"+"Datum"+"</th>"+ "<th>"+"Uren"+"</th>"
+                    txt +="<table>"+"<th>"+"Datum"+"</th>"+ "<th>"+"Uren"+"</th>" + "<th>"+"id"+"</th>"
                     for (x in myObj){
                         txt +=  "<tr>"
-                            + "<td>" + myObj[x].datumDag + "</td>"+ "<td>" + myObj[x].uren + "</td>"
+                            + "<td>" + myObj[x].datumDag + "</td>"+ "<td>" + myObj[x].uren + "</td>" +"<td>" + myObj[x].id + "</td>"
                         txt +="</tr>";
                     }
                     txt +="</table>"
@@ -64,7 +64,16 @@
             xhr.open("PUT","http://localhost:8082/urenformulier/"+obj.ufid+"/"+obj.wdid,true);
             xhr.setRequestHeader("Content-Type","application/json");
             xhr.send(objJSON);
-            alert("werkdag verbonden met urenformulier!");
+        }
+
+        function totaalGewerkteUren(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                var myObj = JSON.parse(this.responseText);
+                document.getElementById("totaal-uren").innerHTML = myObj;
+            }
+            xhr.open("GET","http://localhost:8082/urenformulier/gewerkteuren/1", true);
+            xhr.send();
         }
     </script>
 </head>
@@ -85,7 +94,7 @@
         </a>
     </div>
 </header>
-<body>
+<body onload=totaalGewerkteUren()>
 <section>
 <div class="container">
     <p><i>Qien > log in > <a href="medewerker.html">medewerker overzicht</a> > Uren Registratie Formulier</i></p>
@@ -94,6 +103,8 @@
 <section>
 <div class="container">
     <h2>Huidige maand: Augustus</h2>
+
+    <p >Totaal gewerkte uren deze maand: <a id="totaal-uren",></a> </p>
 </div>
     </section>
     <section class="container">
@@ -119,15 +130,12 @@
 <div class="container">
     <input type="text" id="ufid" placeholder="formulierid">
     <input type="text" id="wdid" placeholder="workdayid">
-    <input type=button onclick=updateWorkDaytoUrenFormulier() value="versturen">
+    <input type=button onclick="updateWorkDaytoUrenFormulier(), totaalGewerkteUren()" value="versturen">
 </div>
 <div class="container">
     <h2>Maandoverzicht</h2>
-    <p>
-        <button onclick="werkDagenOverzicht()">Show</button>
+    <button onclick="werkDagenOverzicht()">Show</button>
     <div id="werkdagen"></div>
-    </p>
-
 </div>
 </div>
 </section>
