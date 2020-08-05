@@ -1,7 +1,9 @@
 package app.qienuren.rest;
 
+import app.qienuren.controller.GebruikerRepository;
 import app.qienuren.controller.GebruikerService;
 import app.qienuren.model.Gebruiker;
+import app.qienuren.model.Trainee;
 import app.qienuren.model.Werkdag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 public class GebruikerEndpoint {
     @Autowired
     GebruikerService gs;
+
+    @Autowired
+    GebruikerRepository gr;
 
     @PostMapping("/{gid}/{ufid}")
     public void updateWorkDaytoUrenFormulier(@PathVariable(value = "ufid") long ufid, @PathVariable(value = "gid") long gid) {
@@ -29,4 +34,8 @@ public class GebruikerEndpoint {
         return gs.getGebruikerById(id);
     }
 
+    @PutMapping("/changedetails/{id}")
+    public void changeDetailsById(@PathVariable(value = "id") long id, @RequestBody Gebruiker gebruiker) {
+        gs.changeDetails(gr.findById(id).get(), gebruiker);
+    }
 }

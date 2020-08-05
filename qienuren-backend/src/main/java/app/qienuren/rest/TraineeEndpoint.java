@@ -24,9 +24,4 @@ public class TraineeEndpoint {
     public Iterable<Trainee> getTrainees(){
         return ts.getAllTrainees();
     }
-
-    @PutMapping("/changedetails/{id}")
-    public void changeDetailsById(@PathVariable(value = "id") long id, @RequestBody Trainee trainee) {
-        ts.changeDetails(tr.findById(id).get(), trainee);
-    }
 }
