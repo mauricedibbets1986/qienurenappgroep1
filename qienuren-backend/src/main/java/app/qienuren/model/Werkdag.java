@@ -15,7 +15,7 @@ public class Werkdag {
 /*    private double opdrachtUren;
     private double overwerkUren;
     private double verlofUren;
-    private double ziekteUren;
+    private boolean ziekteDag;
     private double trainingsUren;*/
 
     @ManyToOne
