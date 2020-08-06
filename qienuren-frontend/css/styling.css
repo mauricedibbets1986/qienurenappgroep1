@@ -79,10 +79,27 @@ h1 {
 }
 
 input[type=button] {
+    padding: 5px 5px;
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid;
+    border-color: #9D3FF3;
+    border-radius: 4px;
+    font-size: 12px;
     margin: 5px;
+    cursor: pointer;
+    transition: .2s ease;
 }
 
+input[type=button]:hover {
+    background: #9D3FF3;
+    color: white;
+    transition: .2s ease;
+}
+
+
 table, th, td {
+
     text-align: center;
     table-layout: fixed;
     border-collapse: collapse;
