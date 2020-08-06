@@ -1,8 +1,12 @@
 package app.qienuren.model;
 
+import app.qienuren.exceptions.OverwerkException;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "urenFormulier")
@@ -10,72 +14,42 @@ public class UrenFormulier {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String datum;
-    private double opdrachtUren;
-    private double overwerkUren;
-    private double verlofUren;
-    private double ziekteUren;
-    private double trainingsUren;
+    private double totaalGewerkteUren;
+    private Maand maand;
+    private String jaar;
     private String opmerking;
     private boolean goedkeuring;
-    private double vakantieUren;
-    private double reiskosten;
+
+//  private long ziekDagen;
+//  private long vakantieUren;
+//  private double reiskosten;
+
+    public enum Maand {
+        JANUARI,
+        FEBRUARI,
+        MAART,
+        APRIL,
+        MEI,
+        JUNI,
+        JULI,
+        AUGUSTUS,
+        SEPTEMBER,
+        OKTOBER,
+        NOVEMBER,
+        DECEMBER
+    };
 
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name="GebruikerId")
+    @JoinColumn(name = "Gebruiker_Id")
     private Gebruiker gebruiker;
+
+    @OneToMany
+    @JoinColumn(name="werkdag_id")
+    private List<Werkdag> werkdag = new ArrayList<>();
 
     public long getId() {
         return id;
-    }
-
-    public String getDatum() {
-        return datum;
-    }
-
-    public void setDatum(String datum) {
-        this.datum = datum;
-    }
-
-    public double getOpdrachtUren() {
-        return opdrachtUren;
-    }
-
-    public void setOpdrachtUren(double opdrachtUren) {
-        this.opdrachtUren = opdrachtUren;
-    }
-
-    public double getOverwerkUren() {
-        return overwerkUren;
-    }
-
-    public void setOverwerkUren(double overwerkUren) {
-        this.overwerkUren = overwerkUren;
-    }
-
-    public double getVerlofUren() {
-        return verlofUren;
-    }
-
-    public void setVerlofUren(double verlofUren) {
-        this.verlofUren = verlofUren;
-    }
-
-    public double getZiekteUren() {
-        return ziekteUren;
-    }
-
-    public void setZiekteUren(double ziekteUren) {
-        this.ziekteUren = ziekteUren;
-    }
-
-    public double getTrainingsUren() {
-        return trainingsUren;
-    }
-
-    public void setTrainingsUren(double trainingsUren) {
-        this.trainingsUren = trainingsUren;
     }
 
     public String getOpmerking() {
@@ -94,19 +68,60 @@ public class UrenFormulier {
         this.goedkeuring = goedkeuring;
     }
 
-    public double getVakantieUren() {
-        return vakantieUren;
+    public String getJaar() {
+        return jaar;
     }
 
-    public void setVakantieUren(double vakantieUren) {
-        this.vakantieUren = vakantieUren;
+    public void setJaar(String jaar) {
+        this.jaar = jaar;
     }
 
-    public double getReiskosten() {
-        return reiskosten;
+    public Gebruiker getGebruiker() {
+        return gebruiker;
     }
 
-    public void setReiskosten(double reiskosten) {
-        this.reiskosten = reiskosten;
+    public void setGebruiker(Gebruiker gebruiker) {
+        this.gebruiker = gebruiker;
+    }
+
+    public List<Werkdag> getWerkdag() {
+        return werkdag;
+    }
+
+    public void setWerkdag(List<Werkdag> werkdag) {
+        this.werkdag = werkdag;
+    }
+
+    public double getTotaalGewerkteUren() {
+        return totaalGewerkteUren;
+    }
+
+    public void setTotaalGewerkteUren(double totaalGewerkteUren) {
+        this.totaalGewerkteUren = totaalGewerkteUren;
+    }
+
+    public Maand getMaand() {
+        return maand;
+    }
+
+    public void setMaand(Maand maand) {
+        this.maand = maand;
+    }
+
+    public void addWerkdayToArray(Werkdag wd) throws Exception {
+        werkdag.add(wd);
+        calculateTotaalGewerkt(wd);
+    }
+
+    public void calculateTotaalGewerkt(Werkdag wd) throws Exception {
+        totaalGewerkteUren += wd.getUren();
+        checkOverUren();
+
+    }
+
+    private void checkOverUren() throws Exception {
+        if (totaalGewerkteUren >= 50) {
+            throw new OverwerkException("HO STOP JE HEBT TEVEEL GEWERKT DEZE WEEK");
+        }
     }
 }

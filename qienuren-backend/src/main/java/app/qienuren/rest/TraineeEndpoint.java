@@ -1,5 +1,6 @@
 package app.qienuren.rest;
 
+import app.qienuren.controller.TraineeRepository;
 import app.qienuren.controller.TraineeService;
 import app.qienuren.model.Trainee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,11 @@ public class TraineeEndpoint {
     @Autowired
     TraineeService ts;
 
+    @Autowired
+    TraineeRepository tr;
+
     @PostMapping("/new")
-    public Trainee addPhone(@RequestBody Trainee trainee) {
+    public Trainee addTrainee(@RequestBody Trainee trainee) {
         return ts.addTrainee(trainee);
     }
 

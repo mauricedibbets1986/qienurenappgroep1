@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styling.css">
+    <title>Trainee toevoegen</title>
+</head>
+<header class="main-header">
+    <div class="header-section-1">
+        <a href="http://wwww.qien.nl">
+            <img src="https://www.qien.nl/wp-content/uploads/2017/10/logo.svg" class="qien-logo" alt="Qien">
+        </a>
+        <nav class="main-nav-list">
+            <!-- list of options or breadcrumbs -->
+        </nav>
+    </div>
+    <div class="header-section-2">
+    </div>
+    <div class="header-section-3">
+    </div>
+</header>
+<script>
+    // trainee toevoegen
+    function traineeToevoegen() {
+        var obj = {};
+        obj.naam = document.getElementById("naam").value;
+        obj.adres = document.getElementById("adres").value;
+        obj.geboorteDatum = document.getElementById("geboorteDatum").value;
+        obj.telefoonNummer = document.getElementById("telefoonNummer").value;
+        objJSON = JSON.stringify(obj);
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            console.log("answer in console");
+        }
+// straks nieuwe endpoint verbinden
+        xhr.open("POST", "http://localhost:8082/api/trainee/new", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        
+        xhr.send(objJSON);
+    }
+</script>
+
+
+
+<body>
+    <section>
+        <div class="container">
+            <p><i><a href="https://www.qien.nl/">Qien > </a>
+                <a href="inlogscherm.html"> Log in > </a> 
+               <a href= "admin.html"> Admin overzicht</a> </i></p>
+        </div>
+        <div class="container">
+            <h1>Nieuwe Medewerker Aanmaken</h1>
+        </div>
+    </section>
+    <section class="container">
+        <div class="dashboard">
+            Naam:<br>
+            <input type="text" id=naam><br>
+            Adres: <br>
+            <input type="text" id=adres placeholder="Adres">
+            <input type="text" placeholder="Toev.">
+            <input type="text" placeholder="Postcode">
+            <input type="text" placeholder="Woonplats"><br>
+            Geboortedatum: <br>
+            <input type="text" id="geboorteDatum"><br>
+            Telefoon nummer: <br>
+            <input type=text id=telefoonNummer><br>
+            <input type="button" onclick=traineeToevoegen() value="Bevestigen"><br>
+        </div>
+    </section>
+</body>
+
+</html>

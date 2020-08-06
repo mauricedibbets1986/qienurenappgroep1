@@ -11,7 +11,6 @@ public class TraineeService {
     @Autowired TraineeRepository tr;
 
     public Trainee addTrainee(Trainee trainee){
-        System.out.println("In employee Service");
         return tr.save(trainee);
     }
 
