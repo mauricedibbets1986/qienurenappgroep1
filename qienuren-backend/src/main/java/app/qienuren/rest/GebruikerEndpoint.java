@@ -17,13 +17,13 @@ public class GebruikerEndpoint {
     @Autowired
     GebruikerRepository gr;
 
-    @PutMapping("/{gid}/{ufid}")
-    public void updateUrenFormulierToGebruiker(@PathVariable(value = "ufid") long ufid, @PathVariable(value = "gid") long gid) {
+    @PutMapping("/{gebruikerid}/{urenformulierid}")
+    public void updateUrenFormulierToGebruiker(@PathVariable(value = "urenformulierid") long ufid, @PathVariable(value = "gebruikerid") long gid) {
         gs.addUrenFormulierToGebruiker(gid, ufid);
     }
 
-    @GetMapping("/{gid}/{ufid}/{wdid}")
-    public Werkdag getWerkdagGebruiker(@PathVariable(value = "gid") long gid, @PathVariable(value = "ufid") long ufid, @PathVariable(value = "wdid") long wdid){
+    @GetMapping("/{gebruikerid}/{urenformulierid}/{werkdagid}")
+    public Werkdag getWerkdagGebruiker(@PathVariable(value = "gebrukerid") long gid, @PathVariable(value = "urenformulierid") long ufid, @PathVariable(value = "werkdagid") long wdid){
         Werkdag wd = gs.getWerkdagGebruiker(gid, ufid, wdid);
         return wd;
     }

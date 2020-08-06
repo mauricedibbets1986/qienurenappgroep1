@@ -14,7 +14,7 @@ public class MedewerkerEndpoint {
     MedewerkerService ms;
 
     @PostMapping("/new")
-    public Medewerker addPhone(@RequestBody Medewerker medewerker) {
+    public Medewerker addMedewerker(@RequestBody Medewerker medewerker) {
         return ms.addMedewerker(medewerker);
     }
 

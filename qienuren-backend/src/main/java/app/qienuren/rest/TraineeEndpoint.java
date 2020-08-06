@@ -16,7 +16,7 @@ public class TraineeEndpoint {
     TraineeRepository tr;
 
     @PostMapping("/new")
-    public Trainee addPhone(@RequestBody Trainee trainee) {
+    public Trainee addTrainee(@RequestBody Trainee trainee) {
         return ts.addTrainee(trainee);
     }
 
