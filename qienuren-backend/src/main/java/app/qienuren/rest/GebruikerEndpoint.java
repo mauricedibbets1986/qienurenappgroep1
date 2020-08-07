@@ -23,7 +23,7 @@ public class GebruikerEndpoint {
     }
 
     @GetMapping("/{gebruikerid}/{urenformulierid}/{werkdagid}")
-    public Werkdag getWerkdagGebruiker(@PathVariable(value = "gebr``ukerid") long gid, @PathVariable(value = "urenformulierid") long ufid, @PathVariable(value = "werkdagid") long wdid){
+    public Werkdag getWerkdagGebruiker(@PathVariable(value = "gebruikerid") long gid, @PathVariable(value = "urenformulierid") long ufid, @PathVariable(value = "werkdagid") long wdid){
         Werkdag wd = gs.getWerkdagGebruiker(gid, ufid, wdid);
         return wd;
     }
