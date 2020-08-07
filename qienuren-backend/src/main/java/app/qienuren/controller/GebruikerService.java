@@ -52,4 +52,8 @@ public class GebruikerService {
         }
         return gr.save(gebruiker);
     }
+
+    public void deleteGebruikerById(long id) {
+        gr.deleteById(id);
+    }
 }
