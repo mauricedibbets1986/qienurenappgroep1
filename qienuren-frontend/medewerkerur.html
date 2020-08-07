@@ -10,8 +10,6 @@
             var obj = {};
             obj.datumDag = document.getElementById("datumDag"+x).value;
             obj.uren = document.getElementById("uren"+y).value;
-            // obj.datumDag = x;
-            // obj.uren = y;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "http://localhost:8082/api/werkdag/new/", true);
@@ -116,6 +114,17 @@
             document.getElementById("uren"+x).disabled = true;
         }
 
+        function updateUrenFormuliertoGebruiker() {
+            var obj = {};
+            obj.ufid = document.getElementById("ufid2").value;
+            obj.gid = document.getElementById("gid").value;
+            objJSON = JSON.stringify(obj);
+            var xhr = new XMLHttpRequest();
+            xhr.open("PUT", "http://localhost:8082/api/gebruiker/" + obj.gid + "/" + obj.ufid, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(objJSON);
+        }
+
     </script>
 </head>
 <header class="main-header">
@@ -150,10 +159,19 @@
         <p>Totaal gewerkte uren deze maand: <a id="totaal-uren" ,></a></p>
     </div>
     <div class="container">
-        <select name="maand-formulier" id="maand-formulier">
+        <select name="maand-formulier" id="maand-formulier">\
+            <option value="0">januari</option>
+            <option value="1">februari</option>
+            <option value="2">maart</option>
+            <option value="3">april</option>
+            <option value="4">mei</option>
+            <option value="5">juni</option>
+            <option value="6">juli</option>
             <option value="7">augustus</option>
             <option value="8">september</option>
             <option value="9">oktober</option>
+            <option value="10">november</option>
+            <option value="11">december</option>
         </select>
         <select name="jaar-formulier" id="jaar-formulier">
             <option value="2020">2020</option>
@@ -163,6 +181,12 @@
         <input type=button onclick="nieuwUrenFormulier()" value="Nieuw Uren Formulier">
 
     </div>
+    <div class="container">
+        <h2>Verbind urenformulier met gebruiker</h2>
+        <input type="text" id="gid" placeholder="gebruikerid">
+        <input type="text" id="ufid2" placeholder="formulierid">
+        <input type=button onclick="updateUrenFormuliertoGebruiker()" value="versturen">
+    </div>
 </section>
 <section class="container">
     <div class="dashboard">
@@ -170,12 +194,8 @@
         </div>
         <form>
             <div class="container">
-                <h2>Werkdagen invullen</h2>
-<!--                <input type="number" id="datumDag" placeholder="dag" value="1">-->
-<!--                <input type="number" id="uren" placeholder="uren" min="1" max="12">-->
-<!--                <input type=button onclick=nieuwWerkDag() value="Nieuwe Werk Dag opslaan">-->
+                <h2>Uren Formulier</h2>
                 <div id="invulFormulier"></div>
-
             </div>
 
         </form>
@@ -185,22 +205,31 @@
             <input type="text" id="wdid" placeholder="workdayid">
             <input type=button onclick="totaalGewerkteUrenById(), updateWorkDaytoUrenFormulier()" value="versturen">
         </div>
-        <div class="container">
-            <h2>Overzicht werkdagen</h2>
-            <button onclick="werkDagenOverzicht()">Show</button>
-            <div id="werkdagen"></div>
-        </div>
-        <div class="container">
-            <h2>Overzicht per maand</h2>
-            <select name="maand-overzicht" id="maand-overzicht">
-                <option value="7">augustus</option>
-                <option value="8">september</option>
-                <option value="9">oktober</option>
-            </select>
-            <input type="button" onclick="getUrenFormulierByMaand()" value="Show">
-            <div id="uren-formulier-maand"></div>
-        </div>
-
+    </div>
+</section>
+<section>
+    <div class="container">
+        <h2>Werkdagen in database</h2>
+        <input type=button onclick="werkDagenOverzicht()" value="show">
+        <div id="werkdagen"></div>
+    </div>
+    <div class="container">
+        <h2>Urenformulieren in database per maand</h2>
+        <select name="maand-overzicht" onclick="getUrenFormulierByMaand()" id="maand-overzicht">
+            <option value="0">januari</option>
+            <option value="1">februari</option>
+            <option value="2">maart</option>
+            <option value="3">april</option>
+            <option value="4">mei</option>
+            <option value="5">juni</option>
+            <option value="6">juli</option>
+            <option value="7">augustus</option>
+            <option value="8">september</option>
+            <option value="9">oktober</option>
+            <option value="10">november</option>
+            <option value="11">december</option>
+        </select>
+        <div id="uren-formulier-maand"></div>
     </div>
 </section>
 </body>
