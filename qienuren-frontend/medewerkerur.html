@@ -10,8 +10,6 @@
             var obj = {};
             obj.datumDag = document.getElementById("datumDag"+x).value;
             obj.uren = document.getElementById("uren"+y).value;
-            // obj.datumDag = x;
-            // obj.uren = y;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "http://localhost:8082/api/werkdag/new/", true);
@@ -170,12 +168,8 @@
         </div>
         <form>
             <div class="container">
-                <h2>Werkdagen invullen</h2>
-<!--                <input type="number" id="datumDag" placeholder="dag" value="1">-->
-<!--                <input type="number" id="uren" placeholder="uren" min="1" max="12">-->
-<!--                <input type=button onclick=nieuwWerkDag() value="Nieuwe Werk Dag opslaan">-->
+                <h2>Uren Formulier</h2>
                 <div id="invulFormulier"></div>
-
             </div>
 
         </form>
@@ -185,22 +179,22 @@
             <input type="text" id="wdid" placeholder="workdayid">
             <input type=button onclick="totaalGewerkteUrenById(), updateWorkDaytoUrenFormulier()" value="versturen">
         </div>
-        <div class="container">
-            <h2>Overzicht werkdagen</h2>
-            <button onclick="werkDagenOverzicht()">Show</button>
-            <div id="werkdagen"></div>
-        </div>
-        <div class="container">
-            <h2>Overzicht per maand</h2>
-            <select name="maand-overzicht" id="maand-overzicht">
-                <option value="7">augustus</option>
-                <option value="8">september</option>
-                <option value="9">oktober</option>
-            </select>
-            <input type="button" onclick="getUrenFormulierByMaand()" value="Show">
-            <div id="uren-formulier-maand"></div>
-        </div>
-
+    </div>
+</section>
+<section>
+    <div class="container">
+        <h2>Werkdagen in database</h2>
+        <button onclick="werkDagenOverzicht()">Show</button>
+        <div id="werkdagen"></div>
+    </div>
+    <div class="container">
+        <h2>Overzicht per maand</h2>
+        <select name="maand-overzicht" onclick="getUrenFormulierByMaand()" id="maand-overzicht">
+            <option value="7">augustus</option>
+            <option value="8">september</option>
+            <option value="9">oktober</option>
+        </select>
+        <div id="uren-formulier-maand"></div>
     </div>
 </section>
 </body>
