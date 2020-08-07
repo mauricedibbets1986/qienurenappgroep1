@@ -65,20 +65,13 @@
                 employeeString +=
                     `
                         <div>
-                        <p>Naam:  ${databaseContents.naam}</p>
-                        <p>Adres: ${databaseContents.adres}</p>
-                        <p>Woonplaats: ${databaseContents.woonplaats}</p>
-                        <p>Postcode: ${databaseContents.postcode}</p>
-                        <p>Geboorte datum: ${databaseContents.geboorteDatum}</p>
-                        <p>Telefoon nummer: ${databaseContents.telefoonNummer}</p>
-                        <p>Email: ${databaseContents.emailadres}</p>
-                        <hr>
+                       
                         </div>
                         `
                 document.getElementById("gettingemployee").innerHTML = employeeString;
             }
         }
-        request.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
+        request.open("PUT", "http://localhost:8082/api/gebruiker/" + id, true);
         console.log("aliens!")
         request.send();
     }
