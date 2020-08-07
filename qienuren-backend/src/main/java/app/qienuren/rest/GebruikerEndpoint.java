@@ -38,4 +38,10 @@ public class GebruikerEndpoint {
     public void changeDetailsById(@PathVariable(value = "id") long id, @RequestBody Gebruiker gebruiker) {
         gs.changeDetails(gr.findById(id).get(), gebruiker);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteGebruikerById(@PathVariable(value = "id") long id){
+        gs.deleteGebruikerById(id);
+        return "Gebruiker met id " + id + " verwijderd";
+    }
 }
