@@ -15,6 +15,7 @@ public class UrenFormulier {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private double totaalGewerkteUren;
+    @Enumerated(EnumType.STRING)
     private Maand maand;
     private String jaar;
     private String opmerking;
@@ -23,21 +24,6 @@ public class UrenFormulier {
 //  private long ziekDagen;
 //  private long vakantieUren;
 //  private double reiskosten;
-
-    public enum Maand {
-        JANUARI,
-        FEBRUARI,
-        MAART,
-        APRIL,
-        MEI,
-        JUNI,
-        JULI,
-        AUGUSTUS,
-        SEPTEMBER,
-        OKTOBER,
-        NOVEMBER,
-        DECEMBER
-    };
 
     @ManyToOne
     @JsonBackReference
