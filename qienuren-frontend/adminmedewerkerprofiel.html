@@ -33,8 +33,8 @@
             if (this.readyState == 4) {
                 var databaseContents = JSON.parse(this.responseText);
                 var employeeString = "";
-                    employeeString +=
-                        `
+                employeeString +=
+                    `
                         <div>
                         <p>Naam:  ${databaseContents.naam}</p>
                         <p>Adres: ${databaseContents.adres}</p>
@@ -49,33 +49,39 @@
                 document.getElementById("gettingemployee").innerHTML = employeeString;
             }
         }
-
         jojo.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
         console.log("aliens!")
         jojo.send();
     }
-      // trainee toevoegen
-      function gebruikerUpdate() {
-        var obj = new XMLHttpRequest();
-        var id = document.getElementById("empID").value;
-        xhr.onreadystatechange = function () {
-            if (this.readyState == 4) {
-             var obj = {};
-             obj.naam = document.getElementById("naam").value;
-             obj.adres = document.getElementById("adres").value;
-             obj.postcode = document.getElementById("postcode").value;
-             obj.woonplaats = document.getElementById("woonplaats").value;
-             obj.geboorteDatum = document.getElementById("geboorteDatum").value;
-             obj.telefoonNummer = document.getElementById("telefoonNummer").value;
-             obj.emailadres = document.getElementById("emailadres").value;
-            objJSON = JSON.stringify(obj);
-             }
-    xhr.open("PUT", "http://localhost:8082/api/gebruiker/changedetails/" + id, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
 
-         }
-    xhr.send(objJSON);
-     }
+    function getUrenFormByID() {
+        var request = new XMLHttpRequest();
+        var id = document.getElementById("empID").value;
+        var formID = document.getElementById("formID").value;
+        request.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                var databaseContents = JSON.parse(this.responseText);
+                var employeeString = "";
+                employeeString +=
+                    `
+                        <div>
+                        <p>Naam:  ${databaseContents.naam}</p>
+                        <p>Adres: ${databaseContents.adres}</p>
+                        <p>Woonplaats: ${databaseContents.woonplaats}</p>
+                        <p>Postcode: ${databaseContents.postcode}</p>
+                        <p>Geboorte datum: ${databaseContents.geboorteDatum}</p>
+                        <p>Telefoon nummer: ${databaseContents.telefoonNummer}</p>
+                        <p>Email: ${databaseContents.emailadres}</p>
+                        <hr>
+                        </div>
+                        `
+                document.getElementById("gettingemployee").innerHTML = employeeString;
+            }
+        }
+        request.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
+        console.log("aliens!")
+        request.send();
+    }
 </script>
 <!-- call up single medewerker -->
 
@@ -91,18 +97,19 @@
             <input type=text id=empID placeholder="Employee ID">
             <input type="button" onclick=getEmployee() value="Get">
     </section>
-    <section class ="container">
+    <section class="container">
         <div class="dashboard">
             <div id="gettingemployee"></div>
+            <input type="text" id=empID placeholder="ID">
             <input type="text" id=maand placeholder="Maand">
             <input type=button value="Urenfomulier pakken"><br>
             <input type="text" id=reiskostMaand placeholder="Maand">
             <input type=button value="Reiskosten vergoeding"><br>
             <!-- <input type=button value="Vakantiedagen aanvrag checken"> -->
             <input type="button" value="Gegevens aanpassen" onclick="window.location.href='gegevensaanpassen.html';"
-            value="Profiel van medewerker">
-            
-            
+                value="Profiel van medewerker">
+
+
         </div>
     </section>
 
