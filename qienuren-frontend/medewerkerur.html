@@ -6,96 +6,116 @@
     <link rel="stylesheet" href="css/styling.css">
     <title>Medewerker Urenregistratie Formulier</title>
     <script>
-        function nieuwWerkDag(){
+        function nieuwWerkDag(x,y) {
             var obj = {};
-            obj.datumDag = document.getElementById("datumDag").value;
-            obj.uren = document.getElementById("uren").value;
+            obj.datumDag = document.getElementById("datumDag"+x).value;
+            obj.uren = document.getElementById("uren"+y).value;
+            // obj.datumDag = x;
+            // obj.uren = y;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
-            xhr.open("POST","http://localhost:8082/api/werkdag/new/",true);
-            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.open("POST", "http://localhost:8082/api/werkdag/new/", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
             xhr.send(objJSON);
-            alert("werkDag opgeslagen");
         }
 
-        function werkDagenOverzicht(){
+        function werkDagenOverzicht() {
             var txt = "";
             var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function(){
-                if (this.readyState == 4 && this.status == 200){
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
                     var myObj = JSON.parse(this.responseText);
-                    txt +="<table>"+"<th>"+"Datum"+"</th>"+ "<th>"+"Uren"+"</th>" + "<th>"+"id"+"</th>"
-                    for (x in myObj){
-                        txt +=  "<tr>"
-                            + "<td>" + myObj[x].datumDag + "</td>"+ "<td>" + myObj[x].uren + "</td>" +"<td>" + myObj[x].id + "</td>"
-                        txt +="</tr>";
+                    txt += "<table>" + "<th>" + "Datum" + "</th>" + "<th>" + "Uren" + "</th>" + "<th>" + "id" + "</th>"
+                    for (x in myObj) {
+                        txt += "<tr>"
+                            + "<td>" + myObj[x].datumDag + "</td>" + "<td>" + myObj[x].uren + "</td>" + "<td>" + myObj[x].id + "</td>"
+                        txt += "</tr>";
                     }
-                    txt +="</table>"
+                    txt += "</table>"
                     document.getElementById("werkdagen").innerHTML = txt;
                 }
             };
-            xhr.open("GET","http://localhost:8082/api/werkdag/werkdagen", true);
-            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.open("GET", "http://localhost:8082/api/werkdag/werkdagen", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send();
         }
 
-        function nieuwUrenFormulier(){
+        function nieuwUrenFormulier() {
             var obj = {};
             obj.jaar = document.getElementById("jaar-formulier").value;
             obj.maand = document.getElementById("maand-formulier").value;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
-            xhr.open("POST","http://localhost:8082/api/urenformulier/new",true);
-            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.open("POST", "http://localhost:8082/api/urenformulier/new", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send(objJSON);
             alert("Nieuw uren formulier aangemaakt");
         }
 
-        function updateWorkDaytoUrenFormulier(){
+        function updateWorkDaytoUrenFormulier() {
             var obj = {};
             obj.ufid = document.getElementById("ufid").value;
             obj.wdid = document.getElementById("wdid").value;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
-            xhr.open("PUT","http://localhost:8082/api/urenformulier/"+obj.ufid+"/"+obj.wdid,true);
-            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.open("PUT", "http://localhost:8082/api/urenformulier/" + obj.ufid + "/" + obj.wdid, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send(objJSON);
         }
 
-        function totaalGewerkteUrenById(){
+        function totaalGewerkteUrenById() {
             var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function(){
+            xhr.onreadystatechange = function () {
                 var myObj = JSON.parse(this.responseText);
                 document.getElementById("totaal-uren").innerHTML = myObj;
             }
-            xhr.open("GET","http://localhost:8082/api/urenformulier/gewerkteuren/1", true);
+            xhr.open("GET", "http://localhost:8082/api/urenformulier/gewerkteuren/1", true);
             xhr.send();
         }
 
-        function getUrenFormulierByMaand(){
+        function getUrenFormulierByMaand() {
             var txt = "";
             var xhr = new XMLHttpRequest();
             var mnd = document.getElementById("maand-overzicht").value;
-            xhr.onreadystatechange = function(){
-                if (this.readyState == 4 && this.status == 200){
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
                     var myObj = JSON.parse(this.responseText);
-                    txt +="<table>"+"<th>"+"id"+"</th>"+ "<th>"+"totaal"+"</th>" +
-                        "<th>"+"Maand"+"</th>" + "<th>"+"Jaar"+"</th>" + "<th>"+"Werkdag"+"</th>"
-                    for (x in myObj){
-                        txt +=  "<tr>"
-                            + "<td>" + myObj[x].id + "</td>"+ "<td>" + myObj[x].totaalGewerkteUren +
-                            "</td>" +"<td>" + myObj[x].maand + "</td>" +"<td>" + myObj[x].jaar + "</td>" +
-                            "<td>" + myObj[x].werkdag[x].datumDag + "</td>"
-                        txt +="</tr>";
+                    txt += "<table>" + "<th>" + "id" + "</th>" + "<th>" + "totaal" + "</th>" +
+                        "<th>" + "Maand" + "</th>" + "<th>" + "Jaar" + "</th>" + "<th>" + "Werkdag" + "</th>"
+                    for (x in myObj) {
+                        txt += "<tr>"
+                            + "<td>" + myObj[x].id + "</td>" + "<td>" + myObj[x].totaalGewerkteUren +
+                            "</td>" + "<td>" + myObj[x].maand + "</td>" + "<td>" + myObj[x].jaar + "</td>" +
+                            "<td>" + myObj[x].werkdag[x] + "</td>"
+                        txt += "</tr>";
                     }
-                    txt +="</table>"
+                    txt += "</table>"
                     document.getElementById("uren-formulier-maand").innerHTML = txt;
                 }
             };
-            xhr.open("GET","http://localhost:8082/api/urenformulier/permaand/"+mnd, true);
-            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.open("GET", "http://localhost:8082/api/urenformulier/permaand/" + mnd, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send();
         }
+
+        function invulFormulier() {
+            var y = "";
+            var x;
+            for (x = 1; x < 32; x++) {
+                y += `<form><input type="number" id="datumDag${x}" placeholder="dag" min="1" max="31" value="${x}" disabled>
+                <input type="number" id="uren${x}" placeholder="uren" ">
+                <input type=button id="myBtn${x}" onclick="nieuwWerkDag(${x},${x}), disableFunction(${x})" value="opslaan"></form>
+`
+            }
+
+            document.getElementById("invulFormulier").innerHTML = y;
+        }
+
+        function disableFunction(x) {
+            document.getElementById("uren"+x).disabled = true;
+        }
+
     </script>
 </head>
 <header class="main-header">
@@ -115,20 +135,20 @@
         </a>
     </div>
 </header>
-<body onload=totaalGewerkteUrenById()>
+<body onload="totaalGewerkteUrenById(),invulFormulier()">
 <section>
-<div class="container">
-    <p><i><a href="https://www.qien.nl/">Qien > </a>
-        <a href="inlogscherm.html"> Log in > </a>
-        <a href= "medewerker.html"> Medewerker Overzicht</a> </i></p>
-</div>
+    <div class="container">
+        <p><i><a href="https://www.qien.nl/">Qien > </a>
+            <a href="inlogscherm.html"> Log in > </a>
+            <a href="medewerker.html"> Medewerker Overzicht</a> </i></p>
+    </div>
 </section>
 <section>
-<div class="container">
-    <h2>Huidige maand: Augustus</h2>
+    <div class="container">
+        <h2>Huidige maand: Augustus</h2>
 
-    <p >Totaal gewerkte uren deze maand: <a id="totaal-uren",></a> </p>
-</div>
+        <p>Totaal gewerkte uren deze maand: <a id="totaal-uren" ,></a></p>
+    </div>
     <div class="container">
         <select name="maand-formulier" id="maand-formulier">
             <option value="7">augustus</option>
@@ -140,46 +160,48 @@
             <option value="2019">2019</option>
             <option value="2018">2018</option>
         </select>
-        <input type=button onclick=nieuwUrenFormulier() value="Nieuw Uren Formulier">
+        <input type=button onclick="nieuwUrenFormulier()" value="Nieuw Uren Formulier">
+
     </div>
-    </section>
-    <section class="container">
-<div class="dashboard">
-    <div class="container">
-</div>
-<div class="container">
-    <p>Datum Gewerkte Uren</p>
-    <input type="number" id="datumDag" placeholder="dag" value="1" disabled>
-    <input type="number" id="uren" placeholder="uren" min="1" max="12">
-    <input type=button onclick=nieuwWerkDag() value="Nieuwe Werk Dag opslaan"><br>
-    <input type="number" id="datumDag" placeholder="dag" value="2" disabled>
-    <input type="number" id="uren" placeholder="uren" min="1" max="12">
-    <input type=button onclick=nieuwWerkDag() value="Nieuwe Werk Dag opslaan"><br>
-    <input type="number" id="datumDag" placeholder="dag" value="3" disabled>
-    <input type="number" id="uren" placeholder="uren" min="1" max="12">
-    <input type=button onclick=nieuwWerkDag() value="Nieuwe Werk Dag opslaan">
-</div>
-<div class="container">
-    <input type="text" id="ufid" placeholder="formulierid">
-    <input type="text" id="wdid" placeholder="workdayid">
-    <input type=button onclick="totaalGewerkteUrenById(), updateWorkDaytoUrenFormulier()" value="versturen">
-</div>
-<div class="container">
-    <h2>Overzicht werkdagen</h2>
-    <button onclick="werkDagenOverzicht()">Show</button>
-    <div id="werkdagen"></div>
-</div>
-    <div class="container">
-        <h2>Overzicht per maand</h2>
-        <select name="maand-overzicht" id="maand-overzicht">
-            <option value="7">augustus</option>
-            <option value="8">september</option>
-            <option value="9">oktober</option>
-        </select>
-        <input type="button" onclick="getUrenFormulierByMaand()" value="Show">
-        <div id="uren-formulier-maand"></div>
+</section>
+<section class="container">
+    <div class="dashboard">
+        <div class="container">
+        </div>
+        <form>
+            <div class="container">
+                <h2>Werkdagen invullen</h2>
+<!--                <input type="number" id="datumDag" placeholder="dag" value="1">-->
+<!--                <input type="number" id="uren" placeholder="uren" min="1" max="12">-->
+<!--                <input type=button onclick=nieuwWerkDag() value="Nieuwe Werk Dag opslaan">-->
+                <div id="invulFormulier"></div>
+
+            </div>
+
+        </form>
+        <div class="container">
+            <h2>Verbind werkdagen met urenformulier</h2>
+            <input type="text" id="ufid" placeholder="formulierid">
+            <input type="text" id="wdid" placeholder="workdayid">
+            <input type=button onclick="totaalGewerkteUrenById(), updateWorkDaytoUrenFormulier()" value="versturen">
+        </div>
+        <div class="container">
+            <h2>Overzicht werkdagen</h2>
+            <button onclick="werkDagenOverzicht()">Show</button>
+            <div id="werkdagen"></div>
+        </div>
+        <div class="container">
+            <h2>Overzicht per maand</h2>
+            <select name="maand-overzicht" id="maand-overzicht">
+                <option value="7">augustus</option>
+                <option value="8">september</option>
+                <option value="9">oktober</option>
+            </select>
+            <input type="button" onclick="getUrenFormulierByMaand()" value="Show">
+            <div id="uren-formulier-maand"></div>
+        </div>
+
     </div>
-</div>
 </section>
 </body>
 <footer>
