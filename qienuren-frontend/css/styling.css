@@ -97,6 +97,9 @@ input[type=button]:hover {
     transition: .2s ease;
 }
 
+label {
+    display: block;
+}
 
 table, th, td {
 
