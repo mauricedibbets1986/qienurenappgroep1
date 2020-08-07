@@ -24,8 +24,8 @@ public class UrenFormulierEndpoint {
     }
 
     @PutMapping("/{urenformulierid}/{werkdagid}")
-    public Object updateWorkDaytoUrenFormulier(@PathVariable(value = "urenformulierid") long ufid, @PathVariable(value = "werkdagid") long wdid) {
-      return ufs.addWorkDaytoUrenFormulier(ufid, wdid);
+    public void updateWorkDaytoUrenFormulier(@PathVariable(value = "urenformulierid") long ufid, @PathVariable(value = "werkdagid") long wdid) {
+      ufs.addWorkDaytoUrenFormulier(ufid, wdid);
     }
 
     @GetMapping("/gewerkteuren/{id}")

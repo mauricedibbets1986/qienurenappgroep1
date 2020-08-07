@@ -20,7 +20,7 @@ public class Werkdag {
 
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name="urenformulierId")
+    @JoinColumn(name = "urenformulier_id")
     private UrenFormulier urenformulier;
 
     public long getId() {
