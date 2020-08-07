@@ -85,7 +85,7 @@
                         txt += "<tr>"
                             + "<td>" + myObj[x].id + "</td>" + "<td>" + myObj[x].totaalGewerkteUren +
                             "</td>" + "<td>" + myObj[x].maand + "</td>" + "<td>" + myObj[x].jaar + "</td>" +
-                            "<td>" + myObj[x].werkdag[x] + "</td>"
+                            "<td>" + myObj[x].werkdag[x].datumDag + "</td>"
                         txt += "</tr>";
                     }
                     txt += "</table>"
@@ -112,6 +112,18 @@
 
         function disableFunction(x) {
             document.getElementById("uren"+x).disabled = true;
+        }
+
+        function updateUrenFormuliertoGebruiker() {
+            var obj = {};
+            obj.ufid = document.getElementById("ufid2").value;
+            obj.gid = document.getElementById("gid").value;
+            objJSON = JSON.stringify(obj);
+            var xhr = new XMLHttpRequest();
+            xhr.open("PUT", "http://localhost:8082/api/gebruiker/" + obj.gid + "/" + obj.ufid, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(objJSON);
+            alert("Uren Formulier gekoppeld aan Gebruiker met "+obj.gid);
         }
 
     </script>
@@ -148,10 +160,19 @@
         <p>Totaal gewerkte uren deze maand: <a id="totaal-uren" ,></a></p>
     </div>
     <div class="container">
-        <select name="maand-formulier" id="maand-formulier">
+        <select name="maand-formulier" id="maand-formulier">\
+            <option value="0">januari</option>
+            <option value="1">februari</option>
+            <option value="2">maart</option>
+            <option value="3">april</option>
+            <option value="4">mei</option>
+            <option value="5">juni</option>
+            <option value="6">juli</option>
             <option value="7">augustus</option>
             <option value="8">september</option>
             <option value="9">oktober</option>
+            <option value="10">november</option>
+            <option value="11">december</option>
         </select>
         <select name="jaar-formulier" id="jaar-formulier">
             <option value="2020">2020</option>
@@ -178,6 +199,12 @@
             <input type="text" id="ufid" placeholder="formulierid">
             <input type="text" id="wdid" placeholder="workdayid">
             <input type=button onclick="totaalGewerkteUrenById(), updateWorkDaytoUrenFormulier()" value="versturen">
+        </div>
+        <div class="container">
+            <h2>Verbind urenformulier met gebruiker</h2>
+            <input type="text" id="gid" placeholder="gebruikerid">
+            <input type="text" id="ufid2" placeholder="formulierid">
+            <input type=button onclick="updateUrenFormuliertoGebruiker()" value="versturen">
         </div>
     </div>
 </section>

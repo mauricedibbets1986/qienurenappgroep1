@@ -46,7 +46,19 @@
                         <hr>
                         </div>
                         `
-                document.getElementById("gettingemployee").innerHTML = employeeString;
+                var maandoverzicht = "";
+                maandoverzicht += "<table>" +"<th>" + "Jaar" + "</th>" + "<th>" + "Maand" + "</th>" + "<th>" + "Totaal gewerkte uren" + "</th>" + "<th>" + "Gewerkte dagen" + "</th>"
+                for (var x = 0; x <databaseContents.urenFormulier.length; x++) {
+                    maandoverzicht += "<tr>"
+                        + "<td>"+ `${databaseContents.urenFormulier[x].jaar}`+"</td>"
+                        + "<td>"+ `${databaseContents.urenFormulier[x].maand}`+"</td>"
+                        + "<td>"+ `${databaseContents.urenFormulier[x].totaalGewerkteUren}`+"</td>"
+                        + "<td>"+ `${databaseContents.urenFormulier[x].werkdag.length}`+"</td>"
+                maandoverzicht += "</tr>";
+                }
+                maandoverzicht += "</table>"
+
+                document.getElementById("gettingemployee").innerHTML = employeeString+maandoverzicht;
             }
         }
         jojo.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
