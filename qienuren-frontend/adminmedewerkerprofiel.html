@@ -10,7 +10,7 @@
 </head>
 <header class="main-header">
     <div class="header-section-1">
-        <a href="http://wwww.qien.nl">
+        <a ref="http://wwww.qien.nl">
             <img src="https://www.qien.nl/wp-content/uploads/2017/10/logo.svg" class="qien-logo" alt="Qien">
         </a>
         <nav class="main-nav-list">
@@ -20,6 +20,9 @@
     <div class="header-section-2">
     </div>
     <div class="header-section-3">
+        <a href="inlogscherm.html">
+            <img src="image/logout.png" class="log-uit" alt="loguit">
+        </a>
     </div>
 </header>
 <script>
@@ -30,8 +33,8 @@
             if (this.readyState == 4) {
                 var databaseContents = JSON.parse(this.responseText);
                 var employeeString = "";
-                    employeeString +=
-                        `
+                employeeString +=
+                    `
                         <div>
                         <p>Naam:  ${databaseContents.naam}</p>
                         <p>Adres: ${databaseContents.adres}</p>
@@ -46,10 +49,31 @@
                 document.getElementById("gettingemployee").innerHTML = employeeString;
             }
         }
-
         jojo.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
         console.log("aliens!")
         jojo.send();
+    }
+
+    function getUrenFormByID() {
+        var request = new XMLHttpRequest();
+        var id = document.getElementById("empID").value;
+        var formID = document.getElementById("formID").value;
+        request.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                var databaseContents = JSON.parse(this.responseText);
+                var employeeString = "";
+                employeeString +=
+                    `
+                        <div>
+                       
+                        </div>
+                        `
+                document.getElementById("gettingemployee").innerHTML = employeeString;
+            }
+        }
+        request.open("PUT", "http://localhost:8082/api/gebruiker/" + id, true);
+        console.log("aliens!")
+        request.send();
     }
 </script>
 <!-- call up single medewerker -->
@@ -63,14 +87,22 @@
     <section>
         <div class="container">
             <h1>MEDEWERKER X</h1>
-            <!-- <div id="gettingemployee"></div> -->
             <input type=text id=empID placeholder="Employee ID">
             <input type="button" onclick=getEmployee() value="Get">
     </section>
-    <section class ="container">
+    <section class="container">
         <div class="dashboard">
             <div id="gettingemployee"></div>
-            
+            <input type="text" id=empID placeholder="ID">
+            <input type="text" id=maand placeholder="Maand">
+            <input type=button value="Urenfomulier pakken"><br>
+            <input type="text" id=reiskostMaand placeholder="Maand">
+            <input type=button value="Reiskosten vergoeding"><br>
+            <!-- <input type=button value="Vakantiedagen aanvrag checken"> -->
+            <input type="button" value="Gegevens aanpassen" onclick="window.location.href='gegevensaanpassen.html';"
+                value="Profiel van medewerker">
+
+
         </div>
     </section>
 

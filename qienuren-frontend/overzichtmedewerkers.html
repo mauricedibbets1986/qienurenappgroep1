@@ -20,6 +20,9 @@
     <div class="header-section-2">
     </div>
     <div class="header-section-3">
+        <a href="inlogscherm.html">
+            <img src="image/logout.png" class="log-uit" alt="loguit">
+        </a>
     </div>
 </header>
 
@@ -40,6 +43,7 @@
                     <div>
                     <p>Naam:  ${databaseContents[x].naam}</p>
                     <p>Adres: ${databaseContents[x].adres}</p>
+                    <p>Toev.: ${databaseContents[x].evtToevoeging}</p>
                     <p>Woonplaats: ${databaseContents[x].woonplaats}</p>
                     <p>Postcode: ${databaseContents[x].postcode}</p>
                     <p>Geboorte datum: ${databaseContents[x].geboorteDatum}</p>
@@ -52,7 +56,7 @@
                 }
                 document.getElementById("gettingalltheemployees").innerHTML = employeeString;
             }
-            xhr.open("GET", "http://localhost:8082/api/trainee/all", true)
+            xhr.open("GET", "http://localhost:8082/api/medewerker/all", true)
             xhr.send();
     }
 </script>
