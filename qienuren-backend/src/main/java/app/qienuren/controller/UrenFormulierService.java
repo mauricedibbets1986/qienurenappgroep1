@@ -25,11 +25,15 @@ public class UrenFormulierService {
         return ufr.findAll();
     }
 
-    public void addWorkDaytoUrenFormulier(long ufid, long wdid) {
+    public Object addWorkDaytoUrenFormulier(long ufid, long wdid) {
         UrenFormulier uf = ufr.findById(ufid).get();
         Werkdag wd = wdr.findById(wdid).get();
-        uf.addWerkdayToArray(wd);
-        ufr.save(uf);
+        try {
+            uf.addWerkdayToArray(wd);
+            return ufr.save(uf);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
     public UrenFormulier addNewUrenFormulier(UrenFormulier urenFormulier) {
