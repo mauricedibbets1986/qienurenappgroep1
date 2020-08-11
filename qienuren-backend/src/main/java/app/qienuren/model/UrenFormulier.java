@@ -15,6 +15,7 @@ public class UrenFormulier {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private double totaalGewerkteUren;
+    @Enumerated(EnumType.STRING)
     private Maand maand;
     private String jaar;
     private String opmerking;
@@ -24,28 +25,13 @@ public class UrenFormulier {
 //  private long vakantieUren;
 //  private double reiskosten;
 
-    public enum Maand {
-        JANUARI,
-        FEBRUARI,
-        MAART,
-        APRIL,
-        MEI,
-        JUNI,
-        JULI,
-        AUGUSTUS,
-        SEPTEMBER,
-        OKTOBER,
-        NOVEMBER,
-        DECEMBER
-    };
-
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name = "Gebruiker_Id")
+    @JoinColumn(name = "gebruiker_id")
     private Gebruiker gebruiker;
 
     @OneToMany
-    @JoinColumn(name="werkdag_id")
+    @JsonManagedReference
     private List<Werkdag> werkdag = new ArrayList<>();
 
     public long getId() {
@@ -111,6 +97,7 @@ public class UrenFormulier {
     public void addWerkdayToArray(Werkdag wd) throws Exception {
         werkdag.add(wd);
         calculateTotaalGewerkt(wd);
+        wd.setUrenformulier(this);
     }
 
     public void calculateTotaalGewerkt(Werkdag wd) throws Exception {

@@ -23,7 +23,7 @@ public class GebruikerEndpoint {
     }
 
     @GetMapping("/{gebruikerid}/{urenformulierid}/{werkdagid}")
-    public Werkdag getWerkdagGebruiker(@PathVariable(value = "gebrukerid") long gid, @PathVariable(value = "urenformulierid") long ufid, @PathVariable(value = "werkdagid") long wdid){
+    public Werkdag getWerkdagGebruiker(@PathVariable(value = "gebruikerid") long gid, @PathVariable(value = "urenformulierid") long ufid, @PathVariable(value = "werkdagid") long wdid){
         Werkdag wd = gs.getWerkdagGebruiker(gid, ufid, wdid);
         return wd;
     }
@@ -37,5 +37,11 @@ public class GebruikerEndpoint {
     @PutMapping("/changedetails/{id}")
     public void changeDetailsById(@PathVariable(value = "id") long id, @RequestBody Gebruiker gebruiker) {
         gs.changeDetails(gr.findById(id).get(), gebruiker);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteGebruikerById(@PathVariable(value = "id") long id){
+        gs.deleteGebruikerById(id);
+        return "Gebruiker met id " + id + " verwijderd";
     }
 }

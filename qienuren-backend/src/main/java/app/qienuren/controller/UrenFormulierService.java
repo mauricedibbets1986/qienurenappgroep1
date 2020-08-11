@@ -1,6 +1,6 @@
 package app.qienuren.controller;
 
-import app.qienuren.exceptions.OverwerkException;
+import app.qienuren.model.Gebruiker;
 import app.qienuren.model.UrenFormulier;
 import app.qienuren.model.Werkdag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import java.util.List;
 @Service
 @Transactional
 public class UrenFormulierService {
+
     @Autowired
     UrenFormulierRepository ufr;
 
@@ -25,9 +26,11 @@ public class UrenFormulierService {
     }
 
     public Object addWorkDaytoUrenFormulier(long ufid, long wdid) {
+        UrenFormulier uf = ufr.findById(ufid).get();
+        Werkdag wd = wdr.findById(wdid).get();
         try {
-            ufr.findById(ufid).get().addWerkdayToArray(wdr.findById(wdid).get());
-            return ufr.save(ufr.findById(ufid).get());
+            uf.addWerkdayToArray(wd);
+            return ufr.save(uf);
         } catch (Exception e) {
             return e.getMessage();
         }
