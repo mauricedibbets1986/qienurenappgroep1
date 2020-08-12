@@ -11,17 +11,17 @@ import javax.transaction.Transactional;
 @Transactional
 public class MedewerkerService {
     @Autowired
-    MedewerkerRepository mr;
+    MedewerkerRepository medewerkerrepository;
 
     @Autowired
     GebruikerRepository gr;
 
     public Medewerker addMedewerker(Medewerker medewerker) {
-        return mr.save(medewerker);
+        return medewerkerrepository.save(medewerker);
     }
 
     public Iterable<Medewerker> getAllMedewerkers() {
-        return mr.findAll();
+        return medewerkerrepository.findAll();
     }
 
     public Medewerker naarMedewerkerVeranderen(long id) {

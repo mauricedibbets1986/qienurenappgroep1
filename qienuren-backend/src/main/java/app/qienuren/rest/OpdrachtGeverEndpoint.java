@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OpdrachtGeverEndpoint {
     @Autowired
-    OpdrachtGeverService ogs;
+    OpdrachtGeverService opdrachtGeverService;
 }
