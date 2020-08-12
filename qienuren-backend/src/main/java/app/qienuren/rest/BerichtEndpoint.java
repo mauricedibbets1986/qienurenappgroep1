@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BerichtEndpoint {
     @Autowired
-    GebruikerService gs;
+    GebruikerService gebruikerService;
 }

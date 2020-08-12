@@ -7,5 +7,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class BerichtService {
-    @Autowired BerichtRepository br;
+    @Autowired BerichtRepository berichtrepository;
 }

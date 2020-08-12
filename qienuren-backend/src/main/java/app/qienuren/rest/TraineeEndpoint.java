@@ -10,18 +10,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/trainee")
 public class TraineeEndpoint {
     @Autowired
-    TraineeService ts;
+    TraineeService traineeService;
 
     @Autowired
-    TraineeRepository tr;
-
-    @PostMapping("/new")
-    public Trainee addTrainee(@RequestBody Trainee trainee) {
-        return ts.addTrainee(trainee);
-    }
+    TraineeRepository traineeRepository;
 
     @GetMapping("/all")
     public Iterable<Trainee> getTrainees(){
-        return ts.getAllTrainees();
+        return traineeService.getAllTrainees();
     }
 }

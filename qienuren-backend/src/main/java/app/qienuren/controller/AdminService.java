@@ -1,5 +1,8 @@
 package app.qienuren.controller;
 
+import app.qienuren.model.Admin;
+import app.qienuren.model.Trainee;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,5 +11,21 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AdminService {
     @Autowired
-    AdminRepository ar;
-}
+    AdminRepository adminrepository;
+
+    @Autowired
+    TraineeRepository traineerepository;
+
+    public Trainee addTrainee(Trainee trainee){
+        return traineerepository.save(trainee);
+    }
+
+    public Iterable<Trainee> getAllTrainees(){
+        return traineerepository.findAll();
+    }
+
+    public Admin addAdmin(Admin admin) {
+            return adminrepository.save(admin);
+        }
+    }
+

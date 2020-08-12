@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/werkdag")
 public class WerkdagEndpoint {
     @Autowired
-    WerkdagService ws;
+    WerkdagService werkdagService;
 
     @GetMapping("/werkdagen")
     public Iterable<Werkdag> werkdagList() {
-        return ws.getAllWorkdays();
+        return werkdagService.getAllWorkdays();
     }
 
     @GetMapping("/{id}")
     public Object getWerkdagById(@PathVariable(value="id")long id) {
-        return ws.getAllWorkdaysById(id);
+        return werkdagService.getAllWorkdaysById(id);
     }
 
     @PostMapping("/new")
     public Werkdag addNewWerkdag(@RequestBody Werkdag werkdag) {
-        return ws.addNewWorkday(werkdag);
+        return werkdagService.addNewWorkday(werkdag);
     }
 }

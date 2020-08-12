@@ -1,6 +1,5 @@
 package app.qienuren.controller;
 
-import app.qienuren.model.Gebruiker;
 import app.qienuren.model.UrenFormulier;
 import app.qienuren.model.Werkdag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,38 +14,38 @@ import java.util.List;
 public class UrenFormulierService {
 
     @Autowired
-    UrenFormulierRepository ufr;
+    UrenFormulierRepository urenFormulierRepository;
 
     @Autowired
-    WerkdagRepository wdr;
+    WerkdagRepository werkdagRepository;
 
 
     public Iterable<UrenFormulier> getAllUrenFormulieren() {
-        return ufr.findAll();
+        return urenFormulierRepository.findAll();
     }
 
     public Object addWorkDaytoUrenFormulier(long ufid, long wdid) {
-        UrenFormulier uf = ufr.findById(ufid).get();
-        Werkdag wd = wdr.findById(wdid).get();
+        UrenFormulier uf = urenFormulierRepository.findById(ufid).get();
+        Werkdag wd = werkdagRepository.findById(wdid).get();
         try {
             uf.addWerkdayToArray(wd);
-            return ufr.save(uf);
+            return urenFormulierRepository.save(uf);
         } catch (Exception e) {
             return e.getMessage();
         }
     }
 
     public UrenFormulier addNewUrenFormulier(UrenFormulier urenFormulier) {
-        return ufr.save(urenFormulier);
+        return urenFormulierRepository.save(urenFormulier);
     }
 
     public double getTotaalGewerkteUren(long id) {
-        return ufr.findById(id).get().getTotaalGewerkteUren();
+        return urenFormulierRepository.findById(id).get().getTotaalGewerkteUren();
     }
 
     public Iterable<UrenFormulier> getUrenFormulierPerMaand(int maandid) {
         List<UrenFormulier> localUren = new ArrayList<>();
-        for (UrenFormulier uren : ufr.findAll()) {
+        for (UrenFormulier uren : urenFormulierRepository.findAll()) {
             if (uren.getMaand().ordinal() == maandid) {
                 localUren.add(uren);
             }
