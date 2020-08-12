@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styling.css">
-    <title>Document</title>
+    <title>Overzicht van medewerkers/trainees</title>
 
 </head>
 <header class="main-header">
@@ -28,12 +28,13 @@
 
 <script>
     // alle medewerkers zien
-    function alleMedewerkers() {
+    function alleGebruikers() {
+        var employeeString = "";
         var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     var databaseContents = JSON.parse(this.responseText);
-                    var employeeString = "";
+
                     var x;
 
                     for (x = 0; x < databaseContents.length; x++) {
@@ -54,27 +55,46 @@
                     `
                     }
                 }
-                document.getElementById("gettingalltheemployees").innerHTML = employeeString;
+
+                document.getElementById("showGebruikers").innerHTML = employeeString;
             }
-            xhr.open("GET", "http://localhost:8082/api/medewerker/all", true)
+            var typ = document.getElementById("filter").value;
+            if(typ == "all"){
+            xhr.open("GET", "http://localhost:8082/api/admin/all-users", true)
+            }else{
+            xhr.open("GET", "http://localhost:8082/api/admin/all-"+typ, true)
+        }
             xhr.send();
     }
 </script>
 
-<body onload=alleMedewerkers()>
+<body onload=alleGebruikers()>
     <div class="container">
-        <p><i><a href="https://www.qien.nl/">Qien > </a>
-            <a href="inlogscherm.html"> Log in > </a> 
-           <a href= "admin.html"> Admin overzicht</a> </i></p>
+        <p><i><a href="https://www.qien.nl/">Qien</a>>
+            <a href="inlogscherm.html">Log in</a>>
+           <a href= "admin.html">Admin overzicht</a>>
+            Overzicht gebruikers</i></p>
     </div>
     <section>
         <div class="container">
-            <h1>Personeel</h1>
+            <h1>Overzicht Gebruikers</h1>
+            <form name = "type-form">
+                <select name="filter-soort" onclick=alleGebruikers() id="filter">
+                    <option value="all">--filter--</option>
+                    <option value="medewerkers">medewerker</option>
+                    <option value="trainees">trainee</option>
+                </select>
+                </form>
+                <input type="button" onclick="window.location.href='gebruikernieuw.html';"
+                value="Nieuwe gebruiker aanmaken">
+                <input type="button" value="Gebruiker aanpassen" onclick="window.location.href='gebruikeraanpassen.html';"
+                value="Profiel van medewerker">
         </div>
     </section>
     <section class ="container">
         <div class="dashboard">
-            <div id="gettingalltheemployees"></div>
+            <div id="showGebruikers"></div>
+            
             
         </div>
     </section>

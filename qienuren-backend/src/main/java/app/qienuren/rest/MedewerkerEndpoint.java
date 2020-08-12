@@ -24,6 +24,6 @@ public class MedewerkerEndpoint {
 
     @PutMapping("/rol/{id}")
     public Medewerker naarMedewerkerVeranderen(@PathVariable(value = "id") long id) {
-        return ms.naarMedewerkerVeranderen(id);
+        return medewerkerService.naarMedewerkerVeranderen(id);
     }
 }

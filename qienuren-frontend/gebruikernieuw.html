@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styling.css">
-    <title>Trainee toevoegen</title>
+    <title>Nieuw medewerker/trainee aanmaken</title>
 </head>
 <header class="main-header">
     <div class="header-section-1">
@@ -25,9 +25,12 @@
     </div>
 </header>
 <script>
-    // trainee toevoegen
-    function medewerkerToevoegen() {
+    function gebruikerToevoegen() {
         var obj = {};
+
+        var form = document.forms["type-form"];
+        var typ = form["soort"].value;
+        
         obj.naam = document.getElementById("naam").value;
         obj.adres = document.getElementById("adres").value;
         obj.evtToevoeging = document.getElementById("evtToevoeging").value;
@@ -41,10 +44,11 @@
         xhr.onreadystatechange = function () {
             console.log("answer in console");
         }
-        xhr.open("POST", "http://localhost:8082/api/medewerker/new", true);
+        xhr.open("POST", "http://localhost:8082/api/admin/new-"+typ, true);
         xhr.setRequestHeader("Content-Type", "application/json");
         
         xhr.send(objJSON);
+        alert("Nieuwe "+typ+" aangemaakt")
     }
 </script>
 
@@ -53,30 +57,41 @@
 <body>
     <section>
         <div class="container">
-            <p><i><a href="https://www.qien.nl/">Qien > </a>
-                <a href="inlogscherm.html"> Log in > </a> 
-               <a href= "admin.html"> Admin overzicht</a> </i></p>
+            <p><i><a href="https://www.qien.nl/">Qien</a>>
+                <a href="inlogscherm.html">Log in</a>>
+               <a href= "admin.html">Admin overzicht</a>>
+               <a href="gebruikeroverzicht.html">Overzicht gebruikers</a>>
+               Nieuwe gebruiker</i></p>
         </div>
         <div class="container">
-            <h1>Nieuwe Medewerker Aanmaken</h1>
+            <h1>NAW-gegevens nieuwe gebruiker</h1>
         </div>
     </section>
     <section class="container">
-        <div class="dashboard">
-            Naam:<br>
+        <div class="body-form">
+            <form name = "type-form">
+            <input type="radio" id="type-medewerker" name="soort" value="medewerker">
+            <label for="type-medewerker">Medewerker</label>
+            <input type="radio" id="type-trainee" name="soort" value="trainee">
+            <label for="type-trainee">Trainee</label>
+            </form>
+            Naam<br>
             <input type="text" id=naam><br>
-            Adres: <br>
-            <input type="text" id=adres placeholder="Adres">
-            <input type="text" id=evtToevoeging placeholder="Toev.">
-            <input type="text" id=postcode placeholder="Postcode">
-            <input type="text" id=woonplaats placeholder="Woonplats"><br>
-            Geboortedatum: <br>
+            Adres<br>
+            <input type="text" id=adres><br>
+            Evt. toevoeging<br>
+            <input type="text" id=evtToevoeging><br>
+            Postcode<br>
+            <input type="text" id=postcode><br>
+            Woonplaats<br>
+            <input type="text" id=woonplaats><br>
+            Geboortedatum<br>
             <input type="text" id="geboorteDatum"><br>
-            Telefoon nummer: <br>
-            <input type=text id=telefoonNummer placeholder="alleen getallen"><br>
-            Email: <br>
+            Telefoonnummer<br>
+            <input type=text id=telefoonNummer><br>
+            E-mailadres<br>
             <input type=text id=emailadres id=email><br>
-            <input type="button" onclick=medewerkerToevoegen() value="Bevestigen"><br>
+            <input type="button" onclick=gebruikerToevoegen() value="Opslaan"><br>
         </div>
     </section>
 </body>

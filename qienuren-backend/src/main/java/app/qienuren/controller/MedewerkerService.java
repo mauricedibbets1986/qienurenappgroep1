@@ -37,6 +37,6 @@ public class MedewerkerService {
         medewerker.setEmailadres(temp.getEmailadres());
 /*        medewerker.setUrenFormulier(temp.getUrenFormulier());
         medewerker.setBerichtenLijst(temp.getBerichtenLijst());*/
-        return mr.save(medewerker);
+        return medewerkerrepository.save(medewerker);
     }
 }
