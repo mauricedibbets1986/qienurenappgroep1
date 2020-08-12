@@ -34,3 +34,7 @@ build/
 
 ## Aplication Properties ##
 /qienuren-backend/src/main/resources/application.properties
+
+## Mac ongein ##
+.DS_Store
+
