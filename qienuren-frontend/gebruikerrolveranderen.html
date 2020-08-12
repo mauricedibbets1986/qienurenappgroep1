@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styling.css">
+    <title>Document</title>
+</head>
+<header class="main-header">
+    <div class="header-section-1">
+        <a ref="http://wwww.qien.nl">
+            <img src="https://www.qien.nl/wp-content/uploads/2017/10/logo.svg" class="qien-logo" alt="Qien">
+        </a>
+        <nav class="main-nav-list">
+            <!-- list of options or breadcrumbs -->
+        </nav>
+    </div>
+    <div class="header-section-2">
+    </div>
+    <div class="header-section-3">
+        <a href="inlogscherm.html">
+            <img src="image/logout.png" class="log-uit" alt="loguit">
+        </a>
+    </div>
+</header>
+<script>
+    function getEmployee() {
+        var jojo = new XMLHttpRequest();
+        var id = document.getElementById("empID").value;
+        jojo.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                var databaseContents = JSON.parse(this.responseText);
+                var employeeString = "";
+                employeeString +=
+                    `
+                        <div>
+                        <p>Naam:  ${databaseContents.naam}</p>
+                        `
+                document.getElementById("gettingemployee").innerHTML = employeeString;
+                getEmployeeRol(employeeString, databaseContents);
+            }
+        }
+        jojo.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
+        console.log("aliens!")
+        jojo.send();
+    }
+
+    function getEmployeeRol(employeeString) {
+        var jojo = new XMLHttpRequest();
+        var id = document.getElementById("empID").value;
+        jojo.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                var rolstring = this.responseText;
+                rolstring = rolstring.replace(/['"]+/g, '');
+                rolstring = rolstring.substring(19);
+                employeeString +=
+                    `
+                    
+                        <p>Rol:  ${rolstring}</p>
+
+                        <select name="rol-veranderen" id="rol-veranderen">
+                            <option value="Trainee">Trainee</option>
+                            <option value="Medewerker">Medewerker</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+
+                        <input type="button" onclick=rolaanpassen() value="Rol Aanpassen">
+                        </div>
+                        
+                        `
+                document.getElementById("gettingemployee").innerHTML = employeeString;
+            }
+        }
+        jojo.open("GET", "http://localhost:8082/api/gebruiker/rol/" + id, true);
+        jojo.send();
+    }
+
+    function rolaanpassen() {
+        var rollen = document.getElementById("rol-veranderen").value;
+        if (rollen == "Trainee") {
+            naarTraineeVeranderen();
+        } else if (rollen == "Medewerker") {
+            naarMedewerkerVeranderen();
+        } else if (rollen == "Admin") {
+            naarAdminVeranderen();
+        }
+    }
+    
+    function naarTraineeVeranderen() {
+        var xhr = new XMLHttpRequest;
+        var id = document.getElementById("empID").value;
+        xhr.open("PUT", "http://localhost:8082/api/gebruiker/rol/trainee/" + id, true);
+        xhr.send();
+    }    
+
+    function naarMedewerkerVeranderen() {
+        var xhr = new XMLHttpRequest;
+        var id = document.getElementById("empID").value;
+        xhr.open("PUT", "http://localhost:8082/api/medewerker/rol/" + id, true);
+        xhr.send();
+    }    
+
+    function naarAdminVeranderen() {
+        var xhr = new XMLHttpRequest;
+        var id = document.getElementById("empID").value;
+        xhr.open("PUT", "http://localhost:8082/api/gebruiker/rol/admin/" + id, true);
+        xhr.send();
+    } 
+
+
+</script>
+<!-- call up single medewerker -->
+
+<body>
+    <div class="container">
+        <p><i><a href="https://www.qien.nl/">Qien > </a>
+                <a href="inlogscherm.html"> Log in > </a>
+                <a href="admin.html"> Admin overzicht</a> </i></p>
+    </div>
+    <section>
+        <div class="container">
+            <h1>MEDEWERKER X</h1>
+            <input type=text id=empID placeholder="Employee ID">
+            <input type="button" onclick=getEmployee() value="Get">
+    </section>
+    <section class="container">
+        <div class="dashboard">
+            <div id="gettingemployee"></div>
+        </div>
+    </section>
+<section>
+</div>
+</body>
+<footer>
+    <div class="container">
+        <small>© 2020 Team1 - Het beste Team </small> <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            title="Contact">Contact
+            Qien</a>
+    </div>
+</footer>
+
+</html>
+

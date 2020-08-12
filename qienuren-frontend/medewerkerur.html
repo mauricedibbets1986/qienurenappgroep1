@@ -12,10 +12,19 @@
             obj.uren = document.getElementById("uren"+y).value;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {         
+                if (xhr.readyState === 4) {
+                  var objresponse = JSON.parse(this.responseText);
+                  autoAddToUrenformulier(objresponse.id);
+               }
+            }
             xhr.open("POST", "http://localhost:8082/api/werkdag/new/", true);
             xhr.setRequestHeader("Content-Type", "application/json");
-
             xhr.send(objJSON);
+        }
+        
+        function autoAddToUrenformulier(id) {
+            alert(id);
         }
 
         function werkDagenOverzicht() {
@@ -45,10 +54,20 @@
             obj.maand = document.getElementById("maand-formulier").value;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+               if (xhr.readyState == 4) {
+                  var objresponse = JSON.parse(this.responseText);
+                  autoAddToGebruiker(objresponse.id);
+               }
+            }
             xhr.open("POST", "http://localhost:8082/api/urenformulier/new", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send(objJSON);
             alert("Nieuw uren formulier aangemaakt");
+        }
+
+        function autoAddToGebruiker(id) {
+            alert(id);
         }
 
         function updateWorkDaytoUrenFormulier() {
@@ -65,8 +84,10 @@
         function totaalGewerkteUrenById() {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
+                if(xhr.readyState == 4) {
                 var myObj = JSON.parse(this.responseText);
                 document.getElementById("totaal-uren").innerHTML = myObj;
+                }
             }
             xhr.open("GET", "http://localhost:8082/api/urenformulier/gewerkteuren/1", true);
             xhr.send();
