@@ -10,17 +10,17 @@ import javax.transaction.Transactional;
     @Transactional
     public class WerkdagService {
         @Autowired
-        WerkdagRepository wr;
+        WerkdagRepository werkdagRepository;
 
         public Iterable<Werkdag> getAllWorkdays(){
             System.out.println("Je verzoekt alle werkdagen");
-            return wr.findAll();
+            return werkdagRepository.findAll();
         }
 
         public Object getAllWorkdaysById(long id) {
             try {
                 System.out.println("Je verzoekt naar werkdag Id: "+ id);
-                return wr.findById(id).get();
+                return werkdagRepository.findById(id).get();
             }
             catch(Exception e1){
                 System.out.println("Je verzoekt een werkdagId die niet bestaat");
@@ -29,7 +29,7 @@ import javax.transaction.Transactional;
         }
 
         public Werkdag addNewWorkday(Werkdag werkdag) {
-            return wr.save(werkdag);
+            return werkdagRepository.save(werkdag);
         }
     }
 

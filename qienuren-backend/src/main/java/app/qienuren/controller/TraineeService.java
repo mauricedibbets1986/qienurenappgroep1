@@ -8,13 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class TraineeService {
-    @Autowired TraineeRepository tr;
+    @Autowired TraineeRepository traineerepository;
 
     public Trainee addTrainee(Trainee trainee){
-        return tr.save(trainee);
+        return traineerepository.save(trainee);
     }
 
     public Iterable<Trainee> getAllTrainees(){
-        return tr.findAll();
+        return traineerepository.findAll();
     }
 }

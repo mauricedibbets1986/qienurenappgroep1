@@ -8,5 +8,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class OpdrachtGeverService {
     @Autowired
-    OpdrachtGeverRepository ogr;
+    OpdrachtGeverRepository opdrachtgeverrepository;
 }

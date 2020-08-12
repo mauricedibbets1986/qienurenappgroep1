@@ -2,7 +2,6 @@ package app.qienuren.rest;
 
 import app.qienuren.controller.MedewerkerService;
 import app.qienuren.model.Medewerker;
-import app.qienuren.model.Trainee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,16 +10,16 @@ import org.springframework.web.bind.annotation.*;
 public class MedewerkerEndpoint {
 
     @Autowired
-    MedewerkerService ms;
+    MedewerkerService medewerkerService;
 
     @PostMapping("/new")
     public Medewerker addMedewerker(@RequestBody Medewerker medewerker) {
-        return ms.addMedewerker(medewerker);
+        return medewerkerService.addMedewerker(medewerker);
     }
 
     @GetMapping("/all")
     public Iterable<Medewerker> getMedewerkers(){
-        return ms.getAllMedewerkers();
+        return medewerkerService.getAllMedewerkers();
     }
 
     @PutMapping("/rol/{id}")
