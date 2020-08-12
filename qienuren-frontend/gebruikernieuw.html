@@ -55,26 +55,30 @@
 
 
 <body>
+    <div id="sidebar-left">
+        <div class="left-container">
+            <button onclick="window.location.href='gebruikeroverzicht.html'">Overzicht gebruiker</button>
+            <button onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker aanpassen</button>
+        </div>
+    </div>
     <section>
-        <div class="container">
+        <div id="main">
+            <div class="container">
             <p><i><a href="https://www.qien.nl/">Qien</a>>
                 <a href="inlogscherm.html">Log in</a>>
                <a href= "admin.html">Admin overzicht</a>>
                <a href="gebruikeroverzicht.html">Overzicht gebruikers</a>>
                Nieuwe gebruiker</i></p>
-        </div>
-        <div class="container">
+
             <h1>NAW-gegevens nieuwe gebruiker</h1>
-        </div>
-    </section>
-    <section class="container">
-        <div class="body-form">
+            <div class="body-form">
             <form name = "type-form">
             <input type="radio" id="type-medewerker" name="soort" value="medewerker">
             <label for="type-medewerker">Medewerker</label>
             <input type="radio" id="type-trainee" name="soort" value="trainee">
             <label for="type-trainee">Trainee</label>
             </form>
+            <br>
             Naam<br>
             <input type="text" id=naam><br>
             Adres<br>
@@ -91,8 +95,10 @@
             <input type=text id=telefoonNummer><br>
             E-mailadres<br>
             <input type=text id=emailadres id=email><br>
-            <input type="button" onclick=gebruikerToevoegen() value="Opslaan"><br>
+            <input type="button" onclick="gebruikerToevoegen(),window.location.href='gebruikeroverzicht.html'" value="Opslaan"><br>
         </div>
+    </div> 
+</div>
     </section>
 </body>
 <footer>

@@ -58,8 +58,15 @@ body{
     text-align: left;
 }
 
+.left-container {
+    max-width: 100%;
+    padding: 0 40px;
+    margin: 40px auto ;
+    text-align: center;
+}
+
 .dashboard{
-    border-color: black;
+    border-color: #212020;
     border-style: solid;
     border-radius: 20px;
     padding: 10px;
@@ -68,7 +75,7 @@ body{
 }
 
 .loginbox{
-    border-color: black;
+    border-color: #212020;
     border-style: solid;
     border-radius: 20px;
     padding-top:20px;
@@ -90,19 +97,20 @@ body{
     max-width: 300px;
     padding: 10px;
     text-align: left;
-    margin: auto;
+
 }
 
 footer{
-    bottom: 0;
+    clear:both;
     width: 100%;
-    background-color: #000000;
+    background-color: #212020;
     color: white;
     padding: 30px;
 }
 
 h1 {
-    margin: 20px
+    margin: 20px;
+    font-size: 36px;
 }
 
 button{
@@ -115,11 +123,12 @@ button{
     background-color: #ffffff;
     font-family: 'Titillium Web';
     font-size: 16px;
-    color: #000000;
+    color: #212020;
 }
 
 button:hover{
     background-color: #7F4BB7;
+    color: white;
 }
 
 input[type=button] {
@@ -144,8 +153,18 @@ input[type=radio]{
     display: inline-block;
 }
 
+input[type=text], input[type=password], select {
+
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
 label {
-    display: block;
+    display: inline-block;
 }
 
 
@@ -155,32 +174,33 @@ table, th, td {
     margin: 10px auto;
     text-align: center;
     border-collapse: collapse;
-    border: 1px solid #000000;
+    border: 1px solid #212020;
     background-color: #ffffff;
 }
 
 #sidebar-left{
     float:left;
+    margin-top: 50px;
+    margin-left: 100px;
     width:15%;
     background-color: #949494;
+    border-color: #5E5E5E;
+    border-style: solid;
+    border-radius: 20px;
+    min-height: 300px;
+    min-width: 300px;
+
+
 }
 
 #main{
     float:left;
-    width:85%;
+    width:70%;
     background-color: #ffffff;
+    min-height: 677px;
 }
 
+#sidebar-left, #main{
 
-
-#footer{
-    clear:both;
-    height: 50px;
-    width: 100%;
-    text-align: center;
-    background-color: lightblue;
-}
-
-#sidebar-left, #main, #sidebar-right{
-    min-height: 600px				
+   			
 }
