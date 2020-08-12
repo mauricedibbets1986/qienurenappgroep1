@@ -15,7 +15,6 @@ public class GebruikerService {
     @Autowired
     UrenFormulierRepository ufr;
 
-
     @Autowired
     WerkdagRepository wr;
 

@@ -13,4 +13,6 @@ public class Trainee extends Gebruiker{
     public long getId() {
         return id;
     }
+
+
 }

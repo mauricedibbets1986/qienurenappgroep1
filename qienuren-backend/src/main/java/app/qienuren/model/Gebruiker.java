@@ -22,6 +22,7 @@ public class Gebruiker {
     private String geboorteDatum;
     private long telefoonNummer;
     private String emailadres;
+    private long bedrijfId;
 
     @OneToMany
     @JsonManagedReference
@@ -118,5 +119,12 @@ public class Gebruiker {
     public void addUrenFormulierToArray(UrenFormulier uf) {
         urenFormulier.add(uf);
         uf.setGebruiker(this);
+    }
+
+    public long getBedrijfId() {
+        return bedrijfId;
+    }
+    public void setBedrijfId(long bedrijfId) {
+        this.bedrijfId = bedrijfId;
     }
 }

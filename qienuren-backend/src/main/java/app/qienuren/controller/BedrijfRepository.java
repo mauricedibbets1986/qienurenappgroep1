@@ -1,9 +1,9 @@
 package app.qienuren.controller;
 
-import app.qienuren.model.OpdrachtGever;
+import app.qienuren.model.Bedrijf;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface OpdrachtGeverRepository extends CrudRepository<OpdrachtGever, Long> {
+public interface BedrijfRepository extends CrudRepository<Bedrijf, Long> {
 }
