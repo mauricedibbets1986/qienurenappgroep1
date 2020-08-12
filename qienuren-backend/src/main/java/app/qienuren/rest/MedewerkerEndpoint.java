@@ -22,4 +22,9 @@ public class MedewerkerEndpoint {
     public Iterable<Medewerker> getMedewerkers(){
         return ms.getAllMedewerkers();
     }
+
+    @PutMapping("/rol/{id}")
+    public Medewerker naarMedewerkerVeranderen(@PathVariable(value = "id") long id) {
+        return ms.naarMedewerkerVeranderen(id);
+    }
 }

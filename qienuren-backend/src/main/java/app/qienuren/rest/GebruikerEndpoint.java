@@ -34,6 +34,11 @@ public class GebruikerEndpoint {
         return gs.getGebruikerById(id);
     }
 
+    @GetMapping("/rol/{id}")
+    public Object getGebruikerrolById(@PathVariable(value = "id") long id) {
+        return gs.getGebruikerById(id).getClass();
+    }
+
     @PutMapping("/changedetails/{id}")
     public void changeDetailsById(@PathVariable(value = "id") long id, @RequestBody Gebruiker gebruiker) {
         gs.changeDetails(gr.findById(id).get(), gebruiker);
