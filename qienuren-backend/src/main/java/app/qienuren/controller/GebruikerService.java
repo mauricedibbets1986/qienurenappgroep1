@@ -13,11 +13,7 @@ public class GebruikerService {
     GebruikerRepository gebruikerrepository;
 
     @Autowired
-<<<<<<< HEAD
-    UrenFormulierRepository ufr;
-=======
     UrenFormulierRepository urenformulierrepository;
->>>>>>> master
 
     @Autowired
     WerkdagRepository werkdagrepository;
