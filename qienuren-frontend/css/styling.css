@@ -55,7 +55,7 @@ body{
     max-width: 100%;
     padding: 0 40px;
     margin: 40px auto ;
-    text-align: center;
+    text-align: left;
 }
 
 .dashboard{
@@ -86,6 +86,13 @@ body{
         flex-wrap: wrap;
 }
 
+.body-form{
+    max-width: 300px;
+    padding: 10px;
+    text-align: left;
+    margin: auto;
+}
+
 footer{
     bottom: 0;
     width: 100%;
@@ -96,6 +103,23 @@ footer{
 
 h1 {
     margin: 20px
+}
+
+button{
+    border-radius: 30px;
+    text-align: center;
+    height: 50px;
+    width: 150px;
+    margin-top: 10px;
+    border-width: 0px;
+    background-color: #ffffff;
+    font-family: 'Titillium Web';
+    font-size: 16px;
+    color: #000000;
+}
+
+button:hover{
+    background-color: #7F4BB7;
 }
 
 input[type=button] {
@@ -109,7 +133,7 @@ input[type=button] {
     font-size: 12px;
     margin-top: 10px;
     cursor: pointer;
-    transition: .2s ease;
+
 }
 
 input[type=button]:hover {
@@ -135,4 +159,28 @@ table, th, td {
     background-color: #ffffff;
 }
 
+#sidebar-left{
+    float:left;
+    width:15%;
+    background-color: #949494;
+}
 
+#main{
+    float:left;
+    width:85%;
+    background-color: #ffffff;
+}
+
+
+
+#footer{
+    clear:both;
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    background-color: lightblue;
+}
+
+#sidebar-left, #main, #sidebar-right{
+    min-height: 600px				
+}
