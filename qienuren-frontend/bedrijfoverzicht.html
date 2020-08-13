@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styling.css">
-    <title>Overzicht van medewerkers/trainees</title>
+    <title>Overzicht van bedrijven</title>
 
 </head>
 <header class="main-header">
@@ -28,8 +28,8 @@
 
 <script>
     // alle medewerkers zien
-    function alleGebruikers() {
-        var employeeString = "";
+    function alleBedrijven() {
+        var bedrijfString = "";
         var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
@@ -39,40 +39,48 @@
 
                     for (x = 0; x < databaseContents.length; x++) {
 
-                        employeeString +=
+                        bedrijfString +=
                             `
                     <div>
-                    <h2>${databaseContents[x].naam}</h2>
+                    <h2> ${databaseContents[x].bedrijfsNaam}</h2>
+                    <p><b>Contacht Persoon:</b> ${databaseContents[x].contactPersoon}</p>
+                    <p><b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}</p>
+                    <p><b>E-mailadres:</b> ${databaseContents[x].emailAdres}</p>
                     <p><b>Adres:</b> ${databaseContents[x].adres}</p>
                     <p><b>Toev.:</b> ${databaseContents[x].evtToevoeging}</p>
-                    <p><b>Woonplaats:</b> ${databaseContents[x].woonplaats}</p>
-                    <p><b>Postcode:</b> ${databaseContents[x].postcode}</p>
-                    <p><b>Geboortedatum:</b> ${databaseContents[x].geboorteDatum}</p>
-                    <p><b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}</p>
-                    <p><b>E-mailadres:</b> ${databaseContents[x].emailadres}</p>
+                    <p><b>postcode:</b> ${databaseContents[x].postcode}</p>
+                    <p><b>plaats:</b> ${databaseContents[x].plaats}</p>
+                    <p><b>Trainees werkzaam:</b> ${databaseContents[x].lijstTrainees[0]}</p>
                     <hr>
                     </div>
                     `
                     }
                 }
 
-                document.getElementById("showGebruikers").innerHTML = employeeString;
+                document.getElementById("showBedrijven").innerHTML = bedrijfString;
             }
-            var typ = document.getElementById("filter").value;
-            if(typ == "all"){
-            xhr.open("GET", "http://localhost:8082/api/admin/all-users", true)
-            }else{
-            xhr.open("GET", "http://localhost:8082/api/admin/all-"+typ, true)
-        }
+            xhr.open("GET", "http://localhost:8082/api/bedrijf/all", true)
             xhr.send();
     }
+
+    
+    function updateBedrijftoGebruiker() {
+            var obj = {};
+            obj.bid = document.getElementById("bid").value;
+            obj.gid = document.getElementById("gid").value;
+            objJSON = JSON.stringify(obj);
+            var xhr = new XMLHttpRequest();
+            xhr.open("PUT", "http://localhost:8082/api/bedrijf/" + obj.gid + "/" + obj.ufid, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(objJSON);
+        }
 </script>
 
-<body onload=alleGebruikers()>
+<body onload=alleBedrijven()>
     <div id="sidebar-left">
         <div class="left-container">
-        <button onclick="window.location.href='gebruikernieuw.html'">Nieuwe Gebruiker</button>
-        <button onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker aanpassen</button>
+        <button onclick="window.location.href='bedrijfnieuw.html'">Nieuwe opdrachtgevers</button>
+        <button onclick="window.location.href='bedrijfaanpassen.html'">Bedrijf opdrachtgevers</button>
     </div>
     </div>
     <section>
@@ -81,19 +89,15 @@
                 <p><i><a href="https://www.qien.nl/">Qien</a>>
                     <a href="inlogscherm.html">Log in</a>>
                    <a href= "admin.html">Admin overzicht</a>>
-                    Overzicht gebruikers</i></p>
-                    <h1>Overzicht Gebruikers</h1>
-                    <form name = "type-form">
-                        <select name="filter-soort" onclick=alleGebruikers() id="filter">
-                            <option value="all">--filter--</option>
-                            <option value="medewerkers">medewerker</option>
-                            <option value="trainees">trainee</option>
-                        </select>
-                        </form>
+                    Overzicht opdrachtgevers</i></p>
+                    <h1>Overzicht opdrachtgevers</h1>
                         <br>
                         <div class="dashboard">
-                            <div id="showGebruikers"></div>
+                            <div id="showBedrijven"></div>
                         </div>
+                        <input type="text" id="gid" placeholder="gebruikerid">
+                        <input type="text" id="bid" placeholder="bedrijfid">
+                        <input type=button onclick="updateBedrijftoGebruiker()" value="Koppel">
             </div>
         </div>
     </section>
