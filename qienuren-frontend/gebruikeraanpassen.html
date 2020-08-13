@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styling.css">
-    <title>Trainee toevoegen</title>
+    <title>Gebruikers gegevens wijzigen</title>
 </head>
 <header class="main-header">
     <div class="header-section-1">
@@ -29,21 +29,23 @@
      function deleteGebruiker() {
          //make request to delete employee by ID
          var xhr = new XMLHttpRequest();
-         var id = document.getElementById("empID").value;
+         var id = document.getElementById("employeeID").value;
          xhr.onreadystatechange = function () {
              console.log("Gebruiker verwijderd")
          }
          xhr.open("DELETE", "http://localhost:8082/api/gebruiker/delete/" + id, true);
          xhr.send();
+         alert("Gebruiker met id "+ id + " verwijdert");
      }
 
     function gegevensAanpassen() {
         // change details - want to get ID automatically but don't know how to take persistent data from one page to another, will fix
             var xhr = new XMLHttpRequest();
-            var id = document.getElementById("employeeID").value;
+            var id = document.getElementById("employeeID" ).value;
             var obj = {};
             obj.naam = document.getElementById("nieuwNaam").value;
             obj.adres = document.getElementById("nieuwAdres").value;
+            obj.evtToevoeging = document.getElementById("nieuwEvtToevoeging").value;
             obj.postcode = document.getElementById("nieuwPostcode").value;
             obj.woonplaats = document.getElementById("nieuwWoonplaats").value;
             obj.geboorteDatum = document.getElementById("nieuwGeboorteDatum").value;
@@ -55,48 +57,55 @@
                 console.log("the details have been changed!")
                 }
             }
-            xhr.open("PUT", "http://localhost:8082/api/gebruiker/changedetails/" + id, true);
+            xhr.open("PUT", "http://localhost:8082/api/admin/users/changedetails/" + id, true);
             xhr.setRequestHeader("Content-type", "application/json")
             xhr.send(objJSON);
+            alert("Gebruiker met id "+ id + " aangepast");
         }
 
 </script>
-
-
-
 <body>
-    <section>
-        <div class="container">
-            <p><i><a href="https://www.qien.nl/">Qien > </a>
-                    <a href="inlogscherm.html"> Log in > </a>
-                    <a href="admin.html"> Admin overzicht</a> </i></p>
+    <div id="sidebar-left">
+        <div class="left-container">
+            <button onclick="window.location.href='gebruikeroverzicht.html'">Overzicht gebruiker</button>
+            <button onclick="window.location.href='gebruikernieuw.html'">Nieuwe gebruiker</button>
         </div>
-        <div class="container">
-            <h1>Gegevens aanpassen</h1>
-        </div>
-    </section>
-    <section class="container">
-        <div class="dashboard">
-            
-            <div>
-                <h1>Naam veranderen</h1>
-                    <input type=text id=employeeID placeholder="Employee ID">
-                    <input type=text id=nieuwNaam placeholder="Nieuw naam"><br>
-                    Adres veranderen: <br>
-                    <input type="text" id=nieuwAdres placeholder="Adres">
-                    <input type="text" id=evtToevoeging placeholder="Toev.">
-                    <input type="text" id=nieuwPostcode placeholder="Postcode">
-                    <input type="text" id=nieuwWoonplaats placeholder="Woonplats"><br>
-                    Geboortedatum veranderen: <br>
-                    <input type="text" id="nieuwGeboorteDatum"><br>
-                    Telefoon nummer veranderen: <br>
-                    <input type=text id=nieuwTelefoonNummer><br>
-                    Email veranderen: <br>
-                    <input type=text id=nieuwEmailadres id=email><br>
-                    <input type="button" onclick=gegevensAanpassen() value="Bevestigen"><br>
+    </div>
+
+        <div id="main">
+            <div class="container">
+                <p><i><a href="https://www.qien.nl/">Qien</a>>
+                    <a href="inlogscherm.html">Log in</a>>
+                   <a href= "admin.html">Admin overzicht</a>>
+                        <a href="gebruikeroverzicht.html">Overzicht gebruikers</a>>
+                         Gebruiker Aanpassen</i></p>
+                         <h1>Wijzigen NAW-gegevens</h1>
+
+                         <div class="body-form">
+                            Gebruiker ID<br>
+                            <input type=text id=employeeID placeholder="temp"><br>
+                            Naam<br>
+                            <input type=text id=nieuwNaam><br>
+                            Adres<br>
+                            <input type="text" id=nieuwAdres><br>
+                            Evt. toevoeging<br>
+                            <input type="text" id=nieuwEvtToevoeging><br>
+                            Postcode<br>
+                            <input type="text" id=nieuwPostcode><br>
+                            Woonplaats<br>
+                            <input type="text" id=nieuwWoonplaats><br>
+                            Geboortedatum<br>
+                            <input type="text" id=nieuwGeboorteDatum><br>
+                            Telefoonnummer<br>
+                            <input type=text id=nieuwTelefoonNummer><br>
+                            E-mailadres <br>
+                            <input type=text id=nieuwEmailadres><br>
+                            <input type="button" onclick=gegevensAanpassen() value="Opslaan">
+                            <input type="button" onclick=deleteGebruiker()  value="Gebruiker verwijderen"><br>
+        
+                </div>
             </div>
         </div>
-    </section>
 </body>
 <footer>
     <div class="container">

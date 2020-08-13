@@ -47,6 +47,7 @@ public class UrenFormulier {
     }
 
     public boolean isGoedkeuring() {
+        //code voor aanroepen methode in bedrijf die goedkeuring ID trainee naar true zet.
         return goedkeuring;
     }
 

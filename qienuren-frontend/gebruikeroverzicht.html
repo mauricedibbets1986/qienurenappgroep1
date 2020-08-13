@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styling.css">
-    <title>Document</title>
+    <title>Overzicht van medewerkers/trainees</title>
 
 </head>
 <header class="main-header">
@@ -28,12 +28,13 @@
 
 <script>
     // alle medewerkers zien
-    function alleMedewerkers() {
+    function alleGebruikers() {
+        var employeeString = "";
         var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     var databaseContents = JSON.parse(this.responseText);
-                    var employeeString = "";
+
                     var x;
 
                     for (x = 0; x < databaseContents.length; x++) {
@@ -54,34 +55,48 @@
                     `
                     }
                 }
-                document.getElementById("gettingalltheemployees").innerHTML = employeeString;
+
+                document.getElementById("showGebruikers").innerHTML = employeeString;
             }
-            xhr.open("GET", "http://localhost:8082/api/medewerker/all", true)
+            var typ = document.getElementById("filter").value;
+            if(typ == "all"){
+            xhr.open("GET", "http://localhost:8082/api/admin/all-users", true)
+            }else{
+            xhr.open("GET", "http://localhost:8082/api/admin/all-"+typ, true)
+        }
             xhr.send();
     }
 </script>
 
-<body onload=alleMedewerkers()>
-    <div class="container">
-        <p><i><a href="https://www.qien.nl/">Qien > </a>
-            <a href="inlogscherm.html"> Log in > </a> 
-           <a href= "admin.html"> Admin overzicht</a> </i></p>
+<body onload=alleGebruikers()>
+    <div id="sidebar-left">
+        <div class="left-container">
+        <button onclick="window.location.href='gebruikernieuw.html'">Nieuwe Gebruiker</button>
+        <button onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker Aanpassen</button>
+    </div>
     </div>
     <section>
-        <div class="container">
-            <h1>Personeel</h1>
+        <div id="main">
+            <div class="container">
+                <p><i><a href="https://www.qien.nl/">Qien</a>>
+                    <a href="inlogscherm.html">Log in</a>>
+                   <a href= "admin.html">Admin overzicht</a>>
+                    Overzicht gebruikers</i></p>
+                    <h1>Overzicht Gebruikers</h1>
+                    <form name = "type-form">
+                        <select name="filter-soort" onclick=alleGebruikers() id="filter">
+                            <option value="all">--filter--</option>
+                            <option value="medewerkers">medewerker</option>
+                            <option value="trainees">trainee</option>
+                        </select>
+                        </form>
+                        <br>
+                        <div class="dashboard">
+                            <div id="showGebruikers"></div>
+                        </div>
+            </div>
         </div>
     </section>
-    <section class ="container">
-        <div class="dashboard">
-            <div id="gettingalltheemployees"></div>
-            
-        </div>
-    </section>
-
-
-
-
 </body>
 <footer>
     <div class="container">
