@@ -26,6 +26,9 @@ public class AdminEndpoint {
     @Autowired
     GebruikerRepository gebruikerRepository;
 
+    @Autowired
+    MedewerkerService medewerkerService;
+
     /*nieuwe gebruikers*/
     @PostMapping("/new-trainee")
     public Trainee addTrainee(@RequestBody Trainee trainee) {
@@ -43,6 +46,14 @@ public class AdminEndpoint {
     public void changeDetailsById(@PathVariable(value = "id") long id, @RequestBody Gebruiker gebruiker) {
         gebruikerService.changeDetails(gebruikerRepository.findById(id).get(), gebruiker);
     }
+
+    /*Rol gebruiker veranderen*/
+
+    @PutMapping("users/changerole/{id}")
+    public void changeRoleById (@PathVariable(value = "id") long id){
+        medewerkerService.naarMedewerkerVeranderen(id);
+    }
+
 
 
     /*Verwijderen gebruikers*/

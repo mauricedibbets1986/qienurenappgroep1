@@ -30,7 +30,7 @@ public class GebruikerEndpoint {
 
     @GetMapping("/rol/{id}")
     public Object getGebruikerrolById(@PathVariable(value = "id") long id) {
-        return gs.getGebruikerById(id).getClass();
+        return gebruikerService.getGebruikerById(id).getClass();
     }
 
     @PutMapping("/changedetails/{id}")
