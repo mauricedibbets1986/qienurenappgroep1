@@ -75,8 +75,9 @@
         jojo.onreadystatechange = function () {
             if (this.readyState == 4) {
                 var databaseContents = JSON.parse(this.responseText);
-                daglijst += `${databaseContents.urenFormulier[mnd].maand}` +" "+ `${databaseContents.urenFormulier[mnd].jaar}`
-                    +"<table>" +"<th>" + "id" + "</th>" + "<th>" + "dag" + "</th>" + "<th>" + "Totaal gewerkte uren" + "</th>"
+                daglijst += "<table>"+"<tr>"+"<th colspan='3'>"+`${databaseContents.urenFormulier[mnd].maand}` +" "+
+                    `${databaseContents.urenFormulier[mnd].jaar}` +"</th>" +"</tr>"
+                    +"<th>" + "id" + "</th>" + "<th>" + "dag" + "</th>" + "<th>" + "Totaal gewerkte uren" + "</th>"
                 for (var x = 0; x <databaseContents.urenFormulier[mnd].werkdag.length; x++) {
                     daglijst += "<tr>"
                         + "<td>"+ `${databaseContents.urenFormulier[mnd].werkdag[x].id}`+"</td>"
@@ -140,22 +141,17 @@
     <section class="container">
         <div class="dashboard">
             <div id="gettingemployee"></div>
-            <input type="text" id=empID placeholder="ID">
-            <input type="text" id=maand placeholder="Maand">
-            <input type=button value="Urenfomulier pakken"><br>
+<!--            <input type="text" id=empID placeholder="ID">-->
+<!--            <input type="text" id=maand placeholder="Maand">-->
+<!--            <input type=button value="Urenfomulier pakken"><br>-->
+            <input type="text" id="uf-index" placeholder="urenformulierindex">
+            <input type="button" onclick="getWerkDagenByGebruiker()" value="show">
+            <div id="werkdagenlijst"></div>
             <input type="text" id=reiskostMaand placeholder="Maand">
             <input type=button value="Reiskosten vergoeding"><br>
             <!-- <input type=button value="Vakantiedagen aanvrag checken"> -->
-            <input type="button" value="Gegevens aanpassen" onclick="window.location.href='gegevensaanpassen.html';"
-                value="Profiel van medewerker">
         </div>
     </section>
-<section>
-    <div class="container">
-    <input type="text" id="uf-index" placeholder="urenformulierindex">
-    <input type="button" onclick="getWerkDagenByGebruiker()" value="show">
-    <div id="werkdagenlijst"></div></section>
-</div>
 </body>
 <footer>
     <div class="container">

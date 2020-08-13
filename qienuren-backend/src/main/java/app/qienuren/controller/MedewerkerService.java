@@ -35,8 +35,13 @@ public class MedewerkerService {
         medewerker.setGeboorteDatum(temp.getGeboorteDatum());
         medewerker.setTelefoonNummer(temp.getTelefoonNummer());
         medewerker.setEmailadres(temp.getEmailadres());
+<<<<<<< HEAD
         //medewerker.setUrenFormulier(temp.getUrenFormulier());
         //medewerker.setBerichtenLijst(temp.getBerichtenLijst());
+=======
+/*        medewerker.setUrenFormulier(temp.getUrenFormulier());
+        medewerker.setBerichtenLijst(temp.getBerichtenLijst());*/
+>>>>>>> master
         return medewerkerrepository.save(medewerker);
     }
 }

@@ -115,6 +115,7 @@ button{
     text-align: center;
     height: 50px;
     width: 150px;
+    padding: 10px 0px;
     border-width: 0px;
     background-color: #510E99;
     font-family: 'Titillium Web';
