@@ -14,7 +14,7 @@ public class MedewerkerService {
     MedewerkerRepository medewerkerrepository;
 
     @Autowired
-    GebruikerRepository gr;
+    GebruikerRepository gebruikerRepository;
 
     public Medewerker addMedewerker(Medewerker medewerker) {
         return medewerkerrepository.save(medewerker);
@@ -25,7 +25,7 @@ public class MedewerkerService {
     }
 
     public Medewerker naarMedewerkerVeranderen(long id) {
-        Gebruiker temp = gr.findById(id).get();
+        Gebruiker temp = gebruikerRepository.findById(id).get();
         Medewerker medewerker = new Medewerker();
         medewerker.setNaam(temp.getNaam());
         medewerker.setAdres(temp.getAdres());

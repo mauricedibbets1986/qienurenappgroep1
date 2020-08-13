@@ -10,7 +10,6 @@ public class Trainee extends Gebruiker{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private long bedrijfId;
 
     @ManyToOne
     @JsonBackReference
@@ -21,13 +20,4 @@ public class Trainee extends Gebruiker{
     public long getId() {
         return id;
     }
-
-    public long getBedrijfId() {
-        return bedrijfId;
-    }
-    public void setBedrijfId(long bedrijfId) {
-        this.bedrijfId = bedrijfId;
-    }
-
-
 }
