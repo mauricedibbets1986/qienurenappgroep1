@@ -25,6 +25,7 @@
         </a>
     </div>
 </header>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     function getMedewerker() {
         var jojo = new XMLHttpRequest();
@@ -42,7 +43,7 @@
                         <p><b>Geboortedatum:</b> ${databaseContents.geboorteDatum}</p>
                         <p><b>Telefoonnummer:</b> ${databaseContents.telefoonNummer}</p>
                         <p><b>Email:</b> ${databaseContents.emailadres}</p>
-                        <p><b>Opdrachtgever:</b> </p>
+                        <p><b>Opdrachtgever:</b>${databaseContents.bedrijf}</p>
                         </div>
                         `
                 document.getElementById("gettingemployee").innerHTML = employeeString;
@@ -67,6 +68,15 @@
         xhr.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
         xhr.send();
     }
+
+//  JQuery test
+//     $(document).ready(function(){
+//   $("button").click(function(){
+//     $.get("http://localhost:8082/api/gebruiker/3", function(data, status){
+//       alert("Naam: " + data.naam +"\nadres: " + data.adres + "\nStatus: " + status);
+//     });
+//   });
+// });
 
 </script>
 <!-- call up single medewerker -->

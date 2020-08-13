@@ -25,11 +25,9 @@
     </div>
 </header>
 <script>
-    function bedrijf() {
+    function bedrijfToevoegen() {
         var obj = {};
 
-        var form = document.forms["type-form"];
-        var typ = form["soort"].value;
         
         obj.bedrijfsNaam = document.getElementById("bedrijfsNaam").value;
         obj.contactPersoon = document.getElementById("contactPersoon").value;
@@ -44,11 +42,11 @@
         xhr.onreadystatechange = function () {
             console.log("answer in console");
         }
-        xhr.open("POST", "http://localhost:8082/api/bedrijf/new-"+typ, true);
+        xhr.open("POST", "http://localhost:8082/api/bedrijf/new", true);
         xhr.setRequestHeader("Content-Type", "application/json");
         
         xhr.send(objJSON);
-        alert("Nieuwe "+typ+" aangemaakt")
+        alert("Nieuwe opdrachtgever aangemaakt")
     }
 </script>
 
@@ -57,8 +55,8 @@
 <body>
     <div id="sidebar-left">
         <div class="left-container">
-            <button onclick="window.location.href='gebruikeroverzicht.html'">Overzicht gebruiker</button>
-            <button onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker aanpassen</button>
+            <button onclick="window.location.href='bedrijfoverzicht.html'">Overzicht opdrachtgevers</button>
+            <button onclick="window.location.href='bedrijfaanpassen.html'">Opdrachtgever aanpassen</button>
         </div>
     </div>
     <section>
@@ -67,35 +65,29 @@
             <p><i><a href="https://www.qien.nl/">Qien</a>>
                 <a href="inlogscherm.html">Log in</a>>
                <a href= "admin.html">Admin overzicht</a>>
-               <a href="gebruikeroverzicht.html">Overzicht gebruikers</a>>
-               Nieuwe gebruiker</i></p>
+               <a href="gebruikeroverzicht.html">Overzicht opdrachtgevers</a>>
+               Nieuwe opdrachtgever</i></p>
 
-            <h1>NAW-gegevens nieuwe gebruiker</h1>
+            <h1>Contact gegevens nieuwe opdrachtgever</h1>
             <div class="body-form">
-            <form name = "type-form">
-            <input type="radio" id="type-medewerker" name="soort" value="medewerker">
-            <label for="type-medewerker">Medewerker</label>
-            <input type="radio" id="type-trainee" name="soort" value="trainee">
-            <label for="type-trainee">Trainee</label>
-            </form>
             <br>
-            Naam<br>
-            <input type="text" id=naam><br>
+            Bedrijfsnaam<br>
+            <input type="text" id=bedrijfsNaam><br>
+            Naam contact persoon<br>
+            <input type="text" id=contactPersoon><br>
+            Telefoonnummer<br>
+            <input type="text" id=telefoonNummer><br>
+            E-mailadres<br>
+            <input type="text" id=emailAdres><br>
             Adres<br>
             <input type="text" id=adres><br>
             Evt. toevoeging<br>
-            <input type="text" id=evtToevoeging><br>
+            <input type="text" id="evtToevoeging"><br>
             Postcode<br>
-            <input type="text" id=postcode><br>
-            Woonplaats<br>
-            <input type="text" id=woonplaats><br>
-            Geboortedatum<br>
-            <input type="text" id="geboorteDatum"><br>
-            Telefoonnummer<br>
-            <input type=text id=telefoonNummer><br>
-            E-mailadres<br>
-            <input type=text id=emailadres id=email><br>
-            <input type="button" onclick="gebruikerToevoegen(),window.location.href='gebruikeroverzicht.html'" value="Opslaan"><br>
+            <input type=text id=postcode><br>
+            Plaats<br>
+            <input type="text" id=plaats><br>
+            <input type="button" onclick="bedrijfToevoegen(),window.location.href='bedrijfoverzicht.html'" value="Opslaan"><br>
         </div>
     </div> 
 </div>
