@@ -24,7 +24,7 @@ public class MedewerkerService {
         return medewerkerrepository.findAll();
     }
 
-    public Medewerker naarMedewerkerVeranderen(long id) {
+    /*public Medewerker naarMedewerkerVeranderen(long id) {
         Gebruiker temp = gebruikerRepository.findById(id).get();
         Medewerker medewerker = new Medewerker();
         medewerker.setNaam(temp.getNaam());
@@ -35,8 +35,8 @@ public class MedewerkerService {
         medewerker.setGeboorteDatum(temp.getGeboorteDatum());
         medewerker.setTelefoonNummer(temp.getTelefoonNummer());
         medewerker.setEmailadres(temp.getEmailadres());
-/*        medewerker.setUrenFormulier(temp.getUrenFormulier());
-        medewerker.setBerichtenLijst(temp.getBerichtenLijst());*/
+/*      medewerker.setUrenFormulier(temp.getUrenFormulier());
+        medewerker.setBerichtenLijst(temp.getBerichtenLijst());
         return medewerkerrepository.save(medewerker);
-    }
+    }*/
 }

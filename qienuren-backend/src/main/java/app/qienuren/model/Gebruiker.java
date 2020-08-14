@@ -23,6 +23,10 @@ public class Gebruiker {
     private long telefoonNummer;
     private String emailadres;
 
+
+
+    private String rol;
+
     @OneToMany
     @JsonManagedReference
     private List<UrenFormulier> urenFormulier = new ArrayList<>();
@@ -30,6 +34,17 @@ public class Gebruiker {
     @OneToMany
     @JsonManagedReference
     private List<Bericht> berichtenLijst = new ArrayList<>();
+
+    public Gebruiker() {
+    }
+    public Gebruiker(long id, String naam, String adres, String evtToevoeging, String postcode, String woonplaats, String geboorteDatum, long telefoonNummer, String emailadres, List<UrenFormulier> urenFormulier, List<Bericht> berichtenLijst) {
+    }
+    public Gebruiker(Gebruiker gebruiker) {
+        this(gebruiker.getId(), gebruiker.getNaam(), gebruiker.getAdres(), gebruiker.getEvtToevoeging(), gebruiker.getPostcode(), gebruiker.getWoonplaats(), gebruiker.getGeboorteDatum(), gebruiker.getTelefoonNummer(),gebruiker.getEmailadres(), gebruiker.getUrenFormulier(), gebruiker.getBerichtenLijst());
+    }
+
+
+
 
     public long getId() {
         return id;
@@ -113,6 +128,14 @@ public class Gebruiker {
 
     public void setEvtToevoeging(String evtToevoeging) {
         this.evtToevoeging = evtToevoeging;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     public void addUrenFormulierToArray(UrenFormulier uf) {
