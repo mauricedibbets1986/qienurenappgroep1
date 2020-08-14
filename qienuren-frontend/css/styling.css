@@ -81,7 +81,7 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     background-position: 0px 50px;
-    min-height: 640px;
+    min-height: 639px;
 }
 
 .loginbox{
@@ -143,10 +143,11 @@ button:hover{
 
 input[type=button] {
     padding: 5px 5px;
-    background-color: #510E99;
+    background-color: #FBCC2F;
     font-family: 'Titillium Web';
+    font-weight: bold;
     color: #ffffff;
-    border-color: #9D3FF3;
+    border-color: #FBCC2F;
     border-radius: 15px;
     min-width: 60px;
     font-size: 12px;
@@ -156,7 +157,7 @@ input[type=button] {
 }
 
 input[type=button]:hover {
-    background-color: #7F4BB7;
+    background-color: #FFDA5C;
 }
 
 input[type=radio]{
