@@ -46,10 +46,10 @@ body{
 }
 
 
-.log-uit {
+.profile-pic {
     position: relative;
-    top: 50px;
-    height: 40px;
+    right: 50px;
+    height: 80px;
 }
 
 .container {
@@ -77,11 +77,11 @@ body{
 }
 
 .main-login{
-    background-image: url("https://i.imgur.com/rk6Jxg3.png");
-    background-position: center;
+    background-image: url("https://i.imgur.com/SgDsN5x.png");
+    background-position: center center;
     background-repeat: no-repeat;
-    background-position: 0px 50px;
     min-height: 639px;
+
 }
 
 .loginbox{
@@ -146,8 +146,8 @@ input[type=button] {
     background-color: #FBCC2F;
     font-family: 'Titillium Web';
     font-weight: bold;
-    color: #ffffff;
-    border-color: #FBCC2F;
+    color: #000000;
+    border-width: 0px;
     border-radius: 15px;
     min-width: 60px;
     font-size: 12px;
