@@ -1,5 +1,6 @@
 package app.qienuren.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -35,15 +36,13 @@ public class Gebruiker {
     @JsonManagedReference
     private List<Bericht> berichtenLijst = new ArrayList<>();
 
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "bedrijf_id")
+    private Bedrijf bedrijf;
+
     public Gebruiker() {
     }
-    public Gebruiker(long id, String naam, String adres, String evtToevoeging, String postcode, String woonplaats, String geboorteDatum, long telefoonNummer, String emailadres, List<UrenFormulier> urenFormulier, List<Bericht> berichtenLijst) {
-    }
-    public Gebruiker(Gebruiker gebruiker) {
-        this(gebruiker.getId(), gebruiker.getNaam(), gebruiker.getAdres(), gebruiker.getEvtToevoeging(), gebruiker.getPostcode(), gebruiker.getWoonplaats(), gebruiker.getGeboorteDatum(), gebruiker.getTelefoonNummer(),gebruiker.getEmailadres(), gebruiker.getUrenFormulier(), gebruiker.getBerichtenLijst());
-    }
-
-
 
 
     public long getId() {
@@ -119,6 +118,7 @@ public class Gebruiker {
     }
 
     public void setEmailadres(String emailadres) {
+
         this.emailadres = emailadres;
     }
 
