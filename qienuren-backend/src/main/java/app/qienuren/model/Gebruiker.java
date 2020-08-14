@@ -31,6 +31,9 @@ public class Gebruiker {
     @JsonManagedReference
     private List<Bericht> berichtenLijst = new ArrayList<>();
 
+    @OneToOne
+    private User user;
+
     public long getId() {
         return id;
     }
