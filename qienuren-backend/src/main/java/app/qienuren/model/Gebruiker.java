@@ -25,6 +25,8 @@ public class Gebruiker {
 
 
 
+
+
     private String rol;
 
     @OneToMany
@@ -142,4 +144,5 @@ public class Gebruiker {
         urenFormulier.add(uf);
         uf.setGebruiker(this);
     }
+
 }

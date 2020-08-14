@@ -49,10 +49,6 @@ public class AdminEndpoint {
 
     /*Rol gebruiker veranderen*/
 
-    @PutMapping("users/changerole/{id}")
-    public void changeRoleById (@PathVariable(value = "id") long id){
-        medewerkerService.naarMedewerkerVeranderen(id);
-    }
 
 
 

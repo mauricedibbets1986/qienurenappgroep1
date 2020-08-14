@@ -3,6 +3,7 @@ package app.qienuren.rest;
 import app.qienuren.controller.GebruikerRepository;
 import app.qienuren.controller.GebruikerService;
 import app.qienuren.model.Gebruiker;
+import app.qienuren.model.Trainee;
 import app.qienuren.model.Werkdag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,9 @@ public class GebruikerEndpoint {
 
     @Autowired
     GebruikerRepository gebruikerRepository;
+
+    @Autowired
+
 
     @GetMapping("/{gebruikerid}/{urenformulierid}/{werkdagid}")
     public Werkdag getWerkdagGebruiker(@PathVariable(value = "gebruikerid") long gid, @PathVariable(value = "urenformulierid") long ufid, @PathVariable(value = "werkdagid") long wdid){
@@ -48,4 +52,9 @@ public class GebruikerEndpoint {
         gebruikerService.deleteGebruikerById(id);
         return "Gebruiker met id " + id + " verwijderd";
     }
+
+    //@GetMapping("/all-trainees")
+    //public Iterable<Trainee> getTrainees(){
+        //return traineeService.getAllTrainees();
+   // }
 }
