@@ -22,9 +22,9 @@ public class Bedrijf {
     private String postcode;
     private String plaats;
 
-    @OneToMany
-    @JsonManagedReference
-    private List<Trainee> lijstTrainees = new ArrayList<>();
+    //@OneToMany
+    //@JsonManagedReference
+    //private List<Trainee> lijstTrainees = new ArrayList<>();
 
     public long getId() { return Id; }
     public void setId(long id) {
