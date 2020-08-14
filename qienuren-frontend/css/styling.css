@@ -7,6 +7,7 @@
 body{
     font-family: 'Titillium Web';
     min-width:1400px;
+    
 }
 
 
@@ -75,12 +76,20 @@ body{
     min-height: 300px;
 }
 
+.main-login{
+    background-image: url("https://i.imgur.com/rk6Jxg3.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: 0px 50px;
+    min-height: 640px;
+}
+
 .loginbox{
     border-color: #212020;
+    background-color: white;
     border-style: solid;
     border-radius: 20px;
     padding-top:20px;
-
     text-align: center;
     min-height: 400px;
     max-width: 400px;
@@ -170,13 +179,28 @@ label {
 
 
 
-table, th, td {
-    min-width: 120px;
+table {
+    width: 100%;
     margin: 10px auto;
-    text-align: center;
+    text-align: left;
     border-collapse: collapse;
-    border: 1px solid #212020;
-    background-color: #ffffff;
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+tr:nth-child(even){background-color: #f2f2f2;}
+
+tr:hover {background-color: #ddd;}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #7F4BB7;
+  color: white;
 }
 
 #sidebar-left{
