@@ -23,10 +23,7 @@ public class Gebruiker {
     private String geboorteDatum;
     private long telefoonNummer;
     private String emailadres;
-
-
-
-    private String rol;
+    private String role;
 
     @OneToMany
     @JsonManagedReference
@@ -131,11 +128,11 @@ public class Gebruiker {
     }
 
     public String getRol() {
-        return rol;
+        return role;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setRol(String role) {
+        this.role = role;
     }
 
     public void addUrenFormulierToArray(UrenFormulier uf) {
