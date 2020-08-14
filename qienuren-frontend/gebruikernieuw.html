@@ -39,12 +39,13 @@
         obj.geboorteDatum = document.getElementById("geboorteDatum").value;
         obj.telefoonNummer = document.getElementById("telefoonNummer").value;
         obj.emailadres = document.getElementById("emailadres").value;
+        obj.rol = typ;
         objJSON = JSON.stringify(obj);
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             console.log("answer in console");
         }
-        xhr.open("POST", "http://localhost:8082/api/admin/new-" + typ, true);
+        xhr.open("POST", "http://localhost:8082/api/admin/new-admin", true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
         xhr.send(objJSON);
