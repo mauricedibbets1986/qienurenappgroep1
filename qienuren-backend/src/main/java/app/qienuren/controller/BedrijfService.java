@@ -1,9 +1,6 @@
 package app.qienuren.controller;
 
 import app.qienuren.model.Bedrijf;
-import app.qienuren.model.Gebruiker;
-import app.qienuren.model.Trainee;
-import app.qienuren.model.UrenFormulier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
