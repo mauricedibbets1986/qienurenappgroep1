@@ -86,51 +86,76 @@
             naarAdminVeranderen();
         }
     }
-    
+
     function naarTraineeVeranderen() {
         var xhr = new XMLHttpRequest;
         var id = document.getElementById("empID").value;
         xhr.open("PUT", "http://localhost:8082/api/gebruiker/rol/trainee/" + id, true);
         xhr.send();
-    }    
+    }
 
     function naarMedewerkerVeranderen() {
         var xhr = new XMLHttpRequest;
         var id = document.getElementById("empID").value;
         xhr.open("PUT", "http://localhost:8082/api/medewerker/rol/" + id, true);
         xhr.send();
-    }    
+    }
 
     function naarAdminVeranderen() {
         var xhr = new XMLHttpRequest;
         var id = document.getElementById("empID").value;
         xhr.open("PUT", "http://localhost:8082/api/gebruiker/rol/admin/" + id, true);
         xhr.send();
-    } 
+    }
 
+    function getMedewerkerNaam() {
+        var xhr = new XMLHttpRequest();
+        var id = document.getElementById("empID").value;
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                var databaseContents = JSON.parse(this.responseText);
+                var medewerkerNaam = databaseContents.naam;
 
+                document.getElementById("shownaam").innerHTML = medewerkerNaam;
+            }
+        }
+        xhr.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
+        xhr.send();
+    }
 </script>
 <!-- call up single medewerker -->
 
 <body>
-    <div class="container">
-        <p><i><a href="https://www.qien.nl/">Qien > </a>
-                <a href="inlogscherm.html"> Log in > </a>
-                <a href="admin.html"> Admin overzicht</a> </i></p>
+
+    <div id="sidebar-left">
+        <div class="left-container">
+            <button onclick="window.location.href='gebruikeroverzicht.html'">Overzicht gebruiker</button>
+            <button onclick="window.location.href='gebruikernieuw.html'">Nieuwe gebruiker</button>
+            <button onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker aanpassen</button>
+        </div>
     </div>
     <section>
-        <div class="container">
-            <h1>MEDEWERKER X</h1>
-            <input type=text id=empID placeholder="Employee ID">
-            <input type="button" onclick=getEmployee() value="Get">
-    </section>
-    <section class="container">
-        <div class="dashboard">
-            <div id="gettingemployee"></div>
+        <div id="main">
+            <div class="container">
+                <p><i><a href="https://www.qien.nl/">Qien</a>>
+                        <a href="inlogscherm.html">Log in</a>>
+                        <a href="admin.html">Admin overzicht</a>>
+                        <a href="gebruikeroverzicht.html">Overzicht gebruikers</a>>
+                        Gebruiker rol veranderen</i></p>
+
+                <h1>
+                    <div id="shownaam"></div>
+                </h1>
+
+
+                <div class="dashboard">
+                    <div id="gettingemployee"></div>
+                </div>
+                <input type=text id=empID placeholder="temp">
+                <input type="button" onclick="getEmployee(),getMedewerkerNaam()" value="Get">
+            </div>
         </div>
     </section>
-<section>
-</div>
 </body>
 <footer>
     <div class="container">
@@ -141,4 +166,3 @@
 </footer>
 
 </html>
-

@@ -31,18 +31,18 @@
     function alleBedrijven() {
         var bedrijfString = "";
         var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (this.readyState == 4) {
-                    var databaseContents = JSON.parse(this.responseText);
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                var databaseContents = JSON.parse(this.responseText);
 
-                    var x;
+                var x;
 
-                    for (x = 0; x < databaseContents.length; x++) {
+                for (x = 0; x < databaseContents.length; x++) {
 
-                        bedrijfString +=
-                            `
+                    bedrijfString +=
+                        `
                     <div>
-                    <h2> ${databaseContents[x].bedrijfsNaam}</h2>
+                    <h2> ${databaseContents[x].bedrijfsNaam}</h2><br>
                     <p><b>Contacht Persoon:</b> ${databaseContents[x].contactPersoon}</p>
                     <p><b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}</p>
                     <p><b>E-mailadres:</b> ${databaseContents[x].emailAdres}</p>
@@ -54,57 +54,58 @@
                     <hr>
                     </div>
                     `
-                    }
                 }
-
-                document.getElementById("showBedrijven").innerHTML = bedrijfString;
             }
-            xhr.open("GET", "http://localhost:8082/api/bedrijf/all", true)
-            xhr.send();
+
+            document.getElementById("showBedrijven").innerHTML = bedrijfString;
+        }
+        xhr.open("GET", "http://localhost:8082/api/bedrijf/all", true)
+        xhr.send();
     }
 
-    
+
     function updateBedrijftoGebruiker() {
-            var obj = {};
-            obj.bid = document.getElementById("bid").value;
-            obj.gid = document.getElementById("gid").value;
-            objJSON = JSON.stringify(obj);
-            var xhr = new XMLHttpRequest();
-            xhr.open("PUT", "http://localhost:8082/api/bedrijf/" + obj.gid + "/" + obj.ufid, true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(objJSON);
-        }
+        var obj = {};
+        obj.bid = document.getElementById("bid").value;
+        obj.gid = document.getElementById("gid").value;
+        objJSON = JSON.stringify(obj);
+        var xhr = new XMLHttpRequest();
+        xhr.open("PUT", "http://localhost:8082/api/bedrijf/" + obj.gid + "/" + obj.ufid, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(objJSON);
+    }
 </script>
 
 <body onload=alleBedrijven()>
     <div id="sidebar-left">
         <div class="left-container">
-        <button onclick="window.location.href='bedrijfnieuw.html'">Nieuwe opdrachtgevers</button>
-        <button onclick="window.location.href='bedrijfaanpassen.html'">Bedrijf opdrachtgevers</button>
-    </div>
+            <button onclick="window.location.href='bedrijfnieuw.html'">Nieuwe opdrachtgevers</button>
+            <button onclick="window.location.href='bedrijfaanpassen.html'">Bedrijf opdrachtgevers</button>
+        </div>
     </div>
     <section>
         <div id="main">
             <div class="container">
                 <p><i><a href="https://www.qien.nl/">Qien</a>>
-                    <a href="inlogscherm.html">Log in</a>>
-                   <a href= "admin.html">Admin overzicht</a>>
-                    Overzicht opdrachtgevers</i></p>
-                    <h1>Overzicht opdrachtgevers</h1>
-                        <br>
-                        <div class="dashboard">
-                            <div id="showBedrijven"></div>
-                        </div>
-                        <input type="text" id="gid" placeholder="gebruikerid">
-                        <input type="text" id="bid" placeholder="bedrijfid">
-                        <input type=button onclick="updateBedrijftoGebruiker()" value="Koppel">
+                        <a href="inlogscherm.html">Log in</a>>
+                        <a href="admin.html">Admin overzicht</a>>
+                        Overzicht opdrachtgevers</i></p>
+                <h1>Overzicht opdrachtgevers</h1>
+                <br>
+                <div class="dashboard">
+                    <div id="showBedrijven"></div>
+                </div>
+                <input type="text" id="gid" placeholder="gebruikerid">
+                <input type="text" id="bid" placeholder="bedrijfid">
+                <input type=button onclick="updateBedrijftoGebruiker()" value="Koppel">
             </div>
         </div>
     </section>
 </body>
 <footer>
     <div class="container">
-        <small>© 2020 Team1 - Het beste Team </small> <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" title="Contact">Contact
+        <small>© 2020 Team1 - Het beste Team </small> <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            title="Contact">Contact
             Qien</a>
     </div>
 </footer>

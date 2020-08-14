@@ -25,45 +25,46 @@
     </div>
 </header>
 <script>
-     
-     function deleteBedrijf() {
-         //make request to delete employee by ID
-         var xhr = new XMLHttpRequest();
-         var id = document.getElementById("bedrijfID").value;
-         xhr.onreadystatechange = function () {
-             console.log("Bedrijf verwijderd")
-         }
-         xhr.open("DELETE", "http://localhost:8082/api/bedrijf/delete/" + id, true);
-         xhr.send();
-         alert("Bedrijf met id "+ id + " verwijdert");
-     }
+
+    function deleteBedrijf() {
+        //make request to delete employee by ID
+        var xhr = new XMLHttpRequest();
+        var id = document.getElementById("bedrijfID").value;
+        xhr.onreadystatechange = function () {
+            console.log("Bedrijf verwijderd")
+        }
+        xhr.open("DELETE", "http://localhost:8082/api/bedrijf/delete/" + id, true);
+        xhr.send();
+        alert("Bedrijf met id " + id + " verwijdert");
+    }
 
     function bedrijfAanpassen() {
         // change details - want to get ID automatically but don't know how to take persistent data from one page to another, will fix
-            var xhr = new XMLHttpRequest();
-            var id = document.getElementById("bedrijfID" ).value;
-            var obj = {};
-            obj.bedrijfsNaam = document.getElementById("bedrijfsNaam").value;
-            obj.contactPersoon = document.getElementById("contactPersoon").value;
-            obj.telefoonNummer = document.getElementById("telefoonNummer").value;
-            obj.emailAdres = document.getElementById("emailAdres").value;
-            obj.adres = document.getElementById("adres").value;
-            obj.evtToevoeging = document.getElementById("evtToevoeging").value;
-            obj.postcode = document.getElementById("postcode").value;
-            obj.plaats = document.getElementById("plaats").value;
-            objJSON = JSON.stringify(obj);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4) {
+        var xhr = new XMLHttpRequest();
+        var id = document.getElementById("bedrijfID").value;
+        var obj = {};
+        obj.bedrijfsNaam = document.getElementById("bedrijfsNaam").value;
+        obj.contactPersoon = document.getElementById("contactPersoon").value;
+        obj.telefoonNummer = document.getElementById("telefoonNummer").value;
+        obj.emailAdres = document.getElementById("emailAdres").value;
+        obj.adres = document.getElementById("adres").value;
+        obj.evtToevoeging = document.getElementById("evtToevoeging").value;
+        obj.postcode = document.getElementById("postcode").value;
+        obj.plaats = document.getElementById("plaats").value;
+        objJSON = JSON.stringify(obj);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
                 console.log("the details have been changed!")
-                }
             }
-            xhr.open("PUT", "http://localhost:8082/api/bedrijf/changedetails/" + id, true);
-            xhr.setRequestHeader("Content-type", "application/json")
-            xhr.send(objJSON);
-            alert("Bedrijf met id "+ id + " aangepast");
         }
+        xhr.open("PUT", "http://localhost:8082/api/bedrijf/changedetails/" + id, true);
+        xhr.setRequestHeader("Content-type", "application/json")
+        xhr.send(objJSON);
+        alert("Bedrijf met id " + id + " aangepast");
+    }
 
 </script>
+
 <body>
     <div id="sidebar-left">
         <div class="left-container">
@@ -72,40 +73,40 @@
         </div>
     </div>
 
-        <div id="main">
-            <div class="container">
-                <p><i><a href="https://www.qien.nl/">Qien</a>>
+    <div id="main">
+        <div class="container">
+            <p><i><a href="https://www.qien.nl/">Qien</a>>
                     <a href="inlogscherm.html">Log in</a>>
-                   <a href= "admin.html">Admin overzicht</a>>
-                   <a href="bedrijfoverzicht.html">Overzicht opdrachtgevers</a>>
-                   Opdrachtgever aanpassen</i></p>
-                         <h1>Wijzigen opdrachtgever gegevens</h1>
+                    <a href="admin.html">Admin overzicht</a>>
+                    <a href="bedrijfoverzicht.html">Overzicht opdrachtgevers</a>>
+                    Opdrachtgever aanpassen</i></p>
+            <h1>Wijzigen opdrachtgever gegevens</h1>
 
-                         <div class="body-form">
-                            Bedrijf ID<br>
-                            <input type=text id=bedrijfID placeholder="temp"><br>
-                            Bedrijfsnaam<br>
-                            <input type=text id=bedrijfsNaam><br>
-                            Naam contact persoon<br>
-                            <input type="text" id=contactPersoon><br>
-                            Telefoonnummer<br>
-                            <input type="text" id=telefoonNummer><br>
-                            E-mailadres<br>
-                            <input type="text" id=emailAdres><br>
-                            Adres<br>
-                            <input type="text" id=adres><br>
-                            Evt. toevoeging<br>
-                            <input type="text" id=evtToevoeging><br>
-                            Postcode<br>
-                            <input type=text id=postcode><br>
-                            Plaats<br>
-                            <input type=text id=plaats><br>
-                            <input type="button" onclick=bedrijfAanpassen() value="Opslaan">
-                            <input type="button" onclick=deleteBedrijf()  value="Bedrijf verwijderen"><br>
-        
-                </div>
+            <div class="body-form">
+                Bedrijf ID<br>
+                <input type=text id=bedrijfID placeholder="temp"><br>
+                Bedrijfsnaam<br>
+                <input type=text id=bedrijfsNaam><br>
+                Naam contact persoon<br>
+                <input type="text" id=contactPersoon><br>
+                Telefoonnummer<br>
+                <input type="text" id=telefoonNummer><br>
+                E-mailadres<br>
+                <input type="text" id=emailAdres><br>
+                Adres<br>
+                <input type="text" id=adres><br>
+                Evt. toevoeging<br>
+                <input type="text" id=evtToevoeging><br>
+                Postcode<br>
+                <input type=text id=postcode><br>
+                Plaats<br>
+                <input type=text id=plaats><br>
+                <input type="button" onclick=bedrijfAanpassen() value="Opslaan">
+                <input type="button" onclick=deleteBedrijf() value="Bedrijf verwijderen"><br>
+
             </div>
         </div>
+    </div>
 </body>
 <footer>
     <div class="container">
