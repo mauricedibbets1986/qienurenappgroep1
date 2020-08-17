@@ -11,8 +11,8 @@ public class AdminEndpoint {
     @Autowired
     AdminService adminService;
 
-    @Autowired
-    TraineeService traineeService;
+    //@Autowired
+   //TraineeService traineeService;
 
     @Autowired
     GebruikerService gebruikerService;
@@ -26,14 +26,14 @@ public class AdminEndpoint {
     @Autowired
     GebruikerRepository gebruikerRepository;
 
-    @Autowired
-    MedewerkerService medewerkerService;
+    //@Autowired
+    //MedewerkerService medewerkerService;
 
     /*nieuwe gebruikers*/
-    @PostMapping("/new-trainee")
-    public Trainee addTrainee(@RequestBody Trainee trainee) {
-        return traineeService.addTrainee(trainee);
-    }
+   // @PostMapping("/new-trainee")
+   // public Trainee addTrainee(@RequestBody Trainee trainee) {
+       // return traineeService.addTrainee(trainee);
+   // }
 
     @PostMapping("/new-admin")
     public Admin addTrainee(@RequestBody Admin admin) {
@@ -42,33 +42,34 @@ public class AdminEndpoint {
 
 
     /*Wijzigen gebruikers*/
-    @PutMapping("users/changedetails/{id}")
-    public void changeDetailsById(@PathVariable(value = "id") long id, @RequestBody Gebruiker gebruiker) {
-        gebruikerService.changeDetails(gebruikerRepository.findById(id).get(), gebruiker);
-    }
+    //@PutMapping("users/changedetails/{id}")
+    //public void changeDetailsById(@PathVariable(value = "id") long id, @RequestBody Gebruiker gebruiker) {
+       // gebruikerService.changeDetails(gebruikerRepository.findById(id).get(), gebruiker);
+    //}
 
     /*Rol gebruiker veranderen*/
-
-    @PutMapping("users/changerole/{id}")
-    public void changeRoleById (@PathVariable(value = "id") long id){
-        medewerkerService.naarMedewerkerVeranderen(id);
-    }
-
-
 
     /*Verwijderen gebruikers*/
 
 
     /*Overzichten gebruikers*/
-    @GetMapping("/all-trainees")
-    public Iterable<Trainee> getTrainees(){
-        return traineeService.getAllTrainees();
-    }
+   // @GetMapping("/all-trainees")
+   // public Iterable<Trainee> getTrainees(){
+      //  return traineeService.getAllTrainees();
+    //}
 
     @GetMapping("/all-users")
     public Iterable<Gebruiker> getUsers(){
         return gebruikerService.getAllUsers();
     }
+
+    //@GetMapping("/all-trainees/{rol}")
+   //public Gebruiker getGebruikerTrainee(@PathVariable(value="roltrainee") String rolTrainee) ;
+    //Gebruiker gebruikerTrainee = GebruikerService.getGebruikerTrainee(rolTrainee);
+    //return gebruikerTrainee;
+
+
+
     /* Urenformulieren */
     @GetMapping("/{gebruikerid}/{urenformulierid}/{werkdagid}")
     public Werkdag getWerkdagGebruiker(@PathVariable(value = "gebruikerid") long gid, @PathVariable(value = "urenformulierid") long ufid, @PathVariable(value = "werkdagid") long wdid){

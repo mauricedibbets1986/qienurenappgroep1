@@ -1,7 +1,6 @@
 package app.qienuren.controller;
 
 import app.qienuren.model.Admin;
-import app.qienuren.model.Trainee;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,16 +12,16 @@ public class AdminService {
     @Autowired
     AdminRepository adminrepository;
 
-    @Autowired
-    TraineeRepository traineerepository;
+    //@Autowired
+    //TraineeRepository traineerepository;
 
-    public Trainee addTrainee(Trainee trainee){
-        return traineerepository.save(trainee);
-    }
+    //public Trainee addTrainee(Trainee trainee){
+        //return traineerepository.save(trainee);
+    //}
 
-    public Iterable<Trainee> getAllTrainees(){
-        return traineerepository.findAll();
-    }
+    //public Iterable<Trainee> getAllTrainees(){
+       // return traineerepository.findAll();
+   // }
 
     public Admin addAdmin(Admin admin) {
             return adminrepository.save(admin);

@@ -28,15 +28,27 @@ public class GebruikerEndpoint {
         return gebruikerService.getGebruikerById(id);
     }
 
-    @GetMapping("/rol/{id}")
+    @GetMapping("/rol-id/{id}")
     public Object getGebruikerrolById(@PathVariable(value = "id") long id) {
         return gebruikerService.getGebruikerById(id).getClass();
     }
 
-    @PutMapping("/changedetails/{id}")
-    public void changeDetailsById(@PathVariable(value = "id") long id, @RequestBody Gebruiker gebruiker) {
-        gebruikerService.changeDetails(gebruikerRepository.findById(id).get(), gebruiker);
+    @GetMapping("/rol/{role}")
+    public Iterable<Gebruiker> getTrainees(@PathVariable(value = "role") String role){
+        return gebruikerService.getByRole(role);
     }
+
+    @GetMapping("/email/{emailadres}")
+    public Iterable<Gebruiker> getEmail(@PathVariable(value = "emailadres") String emailadres){
+        return gebruikerService.getByEmail(emailadres);
+    }
+
+
+
+    //@PutMapping("/changedetails/{id}")
+    //public void changeDetailsById(@PathVariable(value = "id") long id, @RequestBody Gebruiker gebruiker) {
+       // gebruikerService.changeDetails(gebruikerRepository.findById(id).get(), gebruiker);
+   // }
 
     @PutMapping("/{gebruikerid}/{urenformulierid}")
     public void updateUrenFormulierToGebruiker(@PathVariable(value = "urenformulierid") long ufid, @PathVariable(value = "gebruikerid") long gid) {

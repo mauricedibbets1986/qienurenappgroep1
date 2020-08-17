@@ -36,35 +36,12 @@ public class GebruikerService {
         return gebruikerrepository.findById(id).get();
     }
 
-    public Gebruiker changeDetails(Gebruiker gebruiker, Gebruiker gebruikerUpdate) {
-        if (gebruikerUpdate.getNaam() != null) {
-            gebruiker.setNaam(gebruikerUpdate.getNaam());
-        }
-        if (gebruikerUpdate.getAdres() != null) {
-            gebruiker.setAdres(gebruikerUpdate.getAdres());
-        }
-        if (gebruikerUpdate.getEvtToevoeging() != null){
-            gebruiker.setEvtToevoeging(gebruikerUpdate.getEvtToevoeging());
-        }
-        if (gebruikerUpdate.getPostcode() != null) {
-            gebruiker.setPostcode(gebruikerUpdate.getPostcode());
-        }
-        if (gebruikerUpdate.getWoonplaats() != null) {
-            gebruiker.setWoonplaats(gebruikerUpdate.getWoonplaats());
-        }
-        if (gebruikerUpdate.getGeboorteDatum() != null) {
-            gebruiker.setGeboorteDatum(gebruikerUpdate.getGeboorteDatum());
-        }
-        if (gebruikerUpdate.getTelefoonNummer() != 0) {
-            gebruiker.setTelefoonNummer(gebruikerUpdate.getTelefoonNummer());
-        }
-        if(gebruikerUpdate.getEmailadres() != null){
-            gebruiker.setEmailadres(gebruikerUpdate.getEmailadres());
-        }
+    public Iterable<Gebruiker> getByRole(String role){
+        return this.gebruikerrepository.findByRole(role);
+    }
 
-
-
-        return gebruikerrepository.save(gebruiker);
+    public Iterable<Gebruiker> getByEmail(String emailadres){
+        return this.gebruikerrepository.findByEmail(emailadres);
     }
 
     public void deleteGebruikerById(long id) {
