@@ -3,6 +3,7 @@ package app.qienuren.rest;
 import app.qienuren.controller.BedrijfRepository;
 import app.qienuren.controller.BedrijfService;
 import app.qienuren.model.Bedrijf;
+import app.qienuren.model.Gebruiker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +43,11 @@ public class BedrijfEndpoint {
     @PutMapping("/{bedrijfid}/{gebruikerid}")
     public void addGebruikerToBedrijf(@PathVariable(value = "bedrijfid") long bedrijfId, @PathVariable(value = "gebruikerid") long gebruikerId) {
         bs.addGebruikerToBedrijf(bedrijfId, gebruikerId);
+    }
+
+    @GetMapping("/naam/{naam}")
+    public Iterable<Bedrijf> getBedrijfByNaam(@PathVariable(value = "naam") String bedrijfsNaam){
+        return bs.getByBedrijfsNaam(bedrijfsNaam);
     }
 
 
