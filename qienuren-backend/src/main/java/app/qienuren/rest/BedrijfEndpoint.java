@@ -16,23 +16,23 @@ public class BedrijfEndpoint {
     @Autowired
     BedrijfRepository br;
 
- /*   //Onderstaande methode alleen door Admin!
+    //Onderstaande methode alleen door Admin!
     @PostMapping("/new")
     public Bedrijf addBedrijf(@RequestBody Bedrijf bedrijf) {
         return bs.addBedrijfbyID(bedrijf);
-    }*/
+    }
 
     @GetMapping("/all")
     public Iterable<Bedrijf> getBedrijven(){
         return bs.getAllBedrijven();
     }
 
-/*    //Onderstaande methode alleen door Admin!
+    //Onderstaande methode alleen door Admin!
     @DeleteMapping("/delete/{id}")
     public String deleteBedrijfById(@PathVariable(value = "id") long id){
         bs.deleteBedrijfById(id);
         return "Bedrijf met id " + id + " is verwijderd";
-    }*/
+    }
 
     @PutMapping("/changedetails/{id}")
     public void changeDetailsById(@PathVariable(value = "id") long id, @RequestBody Bedrijf bedrijf) {

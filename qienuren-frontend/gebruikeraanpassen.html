@@ -51,6 +51,7 @@
         obj.geboorteDatum = document.getElementById("nieuwGeboorteDatum").value;
         obj.telefoonNummer = document.getElementById("nieuwTelefoonNummer").value;
         obj.emailadres = document.getElementById("nieuwEmailadres").value;
+        obj.rol = document.getElementById("rol-veranderen").value;
         objJSON = JSON.stringify(obj);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4) {
@@ -70,7 +71,7 @@
         <div class="left-container">
             <button onclick="window.location.href='gebruikeroverzicht.html'">Overzicht gebruiker</button>
             <button onclick="window.location.href='gebruikernieuw.html'">Nieuwe gebruiker</button>
-            <button onclick="window.location.href='gebruikerrolveranderen.html'">Gebruiker rol aanpassen</button>
+            <!-- <button onclick="window.location.href='gebruikerrolveranderen.html'">Gebruiker rol aanpassen</button> -->
         </div>
     </div>
 
@@ -102,6 +103,12 @@
                 <input type=text id=nieuwTelefoonNummer><br>
                 E-mailadres <br>
                 <input type=text id=nieuwEmailadres><br>
+                Nieuwe rol toewijzen <br>
+                <select id=rol-veranderen>
+                    <option value="trainee">Trainee</option>
+                    <option value="medewerker">Medewerker</option>
+                    <option value="admin">Admin</option>
+                </select><br>
                 <input type="button" onclick="gegevensAanpassen(),window.location.href='gebruikeroverzicht.html'" value="Opslaan">
                 <input type="button" onclick="deleteGebruiker(),window.location.href='gebruikeroverzicht.html'" value="Gebruiker verwijderen"><br>
 

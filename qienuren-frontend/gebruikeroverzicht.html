@@ -51,6 +51,8 @@
                     <p><b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}</p>
                     <p><b>E-mailadres:</b> ${databaseContents[x].emailadres}</p>
                     <p><b>Rol:</b> ${databaseContents[x].rol}</p><br>
+                    <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br>
+                    
                     <hr>
                     </div>
                     `
@@ -63,7 +65,7 @@
         if (typ == "all") {
             xhr.open("GET", "http://localhost:8082/api/admin/all-users", true)
         } else {
-            xhr.open("GET", "http://localhost:8082/api/gebruiker/rol/trainee", true)
+            xhr.open("GET", "http://localhost:8082/api/gebruiker/rol/"+typ, true)
         }
         xhr.send();
     }
@@ -75,7 +77,6 @@
             <button onclick="window.location.href='gebruikernieuw.html'">Nieuwe Gebruiker</button>
             <button onclick="window.location.href='gebruikerprofiel.html'">Profiel Medewerker</button>
             <button onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker aanpassen</button>
-            <button onclick="window.location.href='gebruikerrolveranderen.html'">Gebruiker rol aanpassen</button>
         </div>
     </div>
     <section>
