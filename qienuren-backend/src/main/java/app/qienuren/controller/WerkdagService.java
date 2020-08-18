@@ -1,5 +1,6 @@
 package app.qienuren.controller;
 
+import app.qienuren.exceptions.OverwerkException;
 import app.qienuren.model.Werkdag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,9 @@ import javax.transaction.Transactional;
         }
 
         public Werkdag addNewWorkday(Werkdag werkdag) {
+            if (werkdag.getUren() > 10) {
+                throw new OverwerkException("Je mag niet meer dan 10 uur per dag werken");
+            }
             return werkdagRepository.save(werkdag);
         }
     }

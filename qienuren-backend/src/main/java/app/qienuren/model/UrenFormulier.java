@@ -108,8 +108,8 @@ public class UrenFormulier {
     }
 
     private void checkOverUren() throws Exception {
-        if (totaalGewerkteUren >= 50) {
-            throw new OverwerkException("HO STOP JE HEBT TEVEEL GEWERKT DEZE WEEK");
+        if (totaalGewerkteUren >= 220) {
+            throw new OverwerkException("HO STOP JE HEBT TEVEEL GEWERKT DEZE MAAND");
         }
     }
 }
