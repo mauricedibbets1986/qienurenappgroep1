@@ -39,6 +39,11 @@ public class BedrijfEndpoint {
         bs.changeDetails(br.findById(id).get(), bedrijf);
     }
 
+    @PutMapping("/{bedrijfid}/{gebruikerid}")
+    public void addGebruikerToBedrijf(@PathVariable(value = "bedrijfid") long bedrijfId, @PathVariable(value = "gebruikerid") long gebruikerId) {
+        bs.addGebruikerToBedrijf(bedrijfId, gebruikerId);
+    }
+
 
 
 }

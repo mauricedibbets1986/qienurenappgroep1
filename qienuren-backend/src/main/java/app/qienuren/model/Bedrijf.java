@@ -22,9 +22,9 @@ public class Bedrijf {
     private String postcode;
     private String plaats;
 
-    //@OneToMany
-    //@JsonManagedReference
-    //private List<Trainee> lijstTrainees = new ArrayList<>();
+    @OneToMany
+    @JsonManagedReference
+    private List<Gebruiker> lijstGebruikers = new ArrayList<>();
 
     public long getId() { return Id; }
     public void setId(long id) {
@@ -87,4 +87,17 @@ public class Bedrijf {
         this.contactPersoon = contactPersoon;
     }
 
+
+    public List<Gebruiker> getLijstGebruikers() {
+        return lijstGebruikers;
+    }
+
+    public void setLijstGebruikers(List<Gebruiker> lijstGebruikers) {
+        this.lijstGebruikers = lijstGebruikers;
+    }
+
+    public void addGebruikerToLijst(Gebruiker gebruiker) {
+        lijstGebruikers.add(gebruiker);
+        gebruiker.setBedrijf(this);
+    }
 }
