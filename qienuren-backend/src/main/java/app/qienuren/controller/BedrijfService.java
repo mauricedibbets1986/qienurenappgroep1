@@ -12,6 +12,9 @@ public class BedrijfService {
     @Autowired
     BedrijfRepository br;
 
+    @Autowired
+    GebruikerRepository gr;
+
     public Bedrijf addBedrijfbyID(Bedrijf bedrijf){
        return br.save(bedrijf);
     }
@@ -51,5 +54,9 @@ public class BedrijfService {
         }
         return br.save(bedrijf);
         }
+
+    public void addGebruikerToBedrijf(long bedrijfId, long gebruikerId) {
+        br.findById(bedrijfId).get().addGebruikerToLijst(gr.findById(gebruikerId).get());
     }
+}
 

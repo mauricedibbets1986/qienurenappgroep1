@@ -78,33 +78,35 @@
 
     function rolaanpassen() {
         var rollen = document.getElementById("rol-veranderen").value;
+        var id = document.getElementById("empID").value;
         if (rollen == "Trainee") {
-            naarTraineeVeranderen();
+            naarTraineeVeranderen(id);
         } else if (rollen == "Medewerker") {
-            naarMedewerkerVeranderen();
+            naarMedewerkerVeranderen(id);
         } else if (rollen == "Admin") {
-            naarAdminVeranderen();
+            naarAdminVeranderen(id);
         }
     }
+    
+    function naarTraineeVeranderen(i) {
 
-    function naarTraineeVeranderen() {
         var xhr = new XMLHttpRequest;
-        var id = document.getElementById("empID").value;
-        xhr.open("PUT", "http://localhost:8082/api/gebruiker/rol/trainee/" + id, true);
+        //
+        xhr.open("PUT", "http://localhost:8082/api/trainee/rol/" + i, true);
         xhr.send();
     }
 
-    function naarMedewerkerVeranderen() {
+    function naarMedewerkerVeranderen(i) {
         var xhr = new XMLHttpRequest;
-        var id = document.getElementById("empID").value;
-        xhr.open("PUT", "http://localhost:8082/api/medewerker/rol/" + id, true);
+       // var id = document.getElementById("empID").value;
+        xhr.open("PUT", "http://localhost:8082/api/medewerker/rol/" + i, true);
         xhr.send();
     }
 
-    function naarAdminVeranderen() {
+    function naarAdminVeranderen(i) {
         var xhr = new XMLHttpRequest;
-        var id = document.getElementById("empID").value;
-        xhr.open("PUT", "http://localhost:8082/api/gebruiker/rol/admin/" + id, true);
+      //  var id = document.getElementById("empID").value;
+        xhr.open("PUT", "http://localhost:8082/api/admin/rol/" + i, true);
         xhr.send();
     }
 
@@ -123,8 +125,6 @@
         xhr.send();
     }
 </script>
-<!-- call up single medewerker -->
-
 <body>
 
     <div id="sidebar-left">
