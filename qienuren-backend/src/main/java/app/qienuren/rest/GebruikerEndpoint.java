@@ -43,8 +43,6 @@ public class GebruikerEndpoint {
         return gebruikerService.getByEmail(emailadres);
     }
 
-
-
     //@PutMapping("/changedetails/{id}")
     //public void changeDetailsById(@PathVariable(value = "id") long id, @RequestBody Gebruiker gebruiker) {
        // gebruikerService.changeDetails(gebruikerRepository.findById(id).get(), gebruiker);

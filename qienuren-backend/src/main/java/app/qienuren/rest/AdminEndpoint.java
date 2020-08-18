@@ -11,9 +11,6 @@ public class AdminEndpoint {
     @Autowired
     AdminService adminService;
 
-    //@Autowired
-   //TraineeService traineeService;
-
     @Autowired
     GebruikerService gebruikerService;
 
@@ -26,14 +23,11 @@ public class AdminEndpoint {
     @Autowired
     GebruikerRepository gebruikerRepository;
 
-    //@Autowired
-    //MedewerkerService medewerkerService;
-
     /*nieuwe gebruikers*/
-   // @PostMapping("/new-trainee")
-   // public Trainee addTrainee(@RequestBody Trainee trainee) {
-       // return traineeService.addTrainee(trainee);
-   // }
+    @PostMapping("/new-gebruiker")
+    public Gebruiker addGebruiker(@RequestBody Gebruiker gebruiker) {
+        return gebruikerService.addGebruiker(gebruiker);
+    }
 
     @PostMapping("/new-admin")
     public Admin addTrainee(@RequestBody Admin admin) {
@@ -51,6 +45,11 @@ public class AdminEndpoint {
 
     /*Verwijderen gebruikers*/
 
+    @DeleteMapping("/delete/{id}")
+    public String deleteGebruikerById(@PathVariable(value = "id") long id){
+        gebruikerService.deleteGebruikerById(id);
+        return "Gebruiker met id " + id + " verwijderd";
+    }
 
     /*Overzichten gebruikers*/
    // @GetMapping("/all-trainees")
