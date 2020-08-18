@@ -139,4 +139,12 @@ public class Gebruiker {
         urenFormulier.add(uf);
         uf.setGebruiker(this);
     }
+
+    public Bedrijf getBedrijf() {
+        return bedrijf;
+    }
+
+    public void setBedrijf(Bedrijf bedrijf) {
+        this.bedrijf = bedrijf;
+    }
 }
