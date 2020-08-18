@@ -64,6 +64,7 @@ public class GebruikerService {
     }
 
     public Gebruiker addGebruiker(Gebruiker gebruiker) {
-            return gebruikerRepository.save(gebruiker);
+        return gebruikerRepository.save(gebruiker);
+
     }
 }
