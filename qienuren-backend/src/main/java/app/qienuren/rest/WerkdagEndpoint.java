@@ -22,7 +22,12 @@ public class WerkdagEndpoint {
     }
 
     @PostMapping("/new")
-    public Werkdag addNewWerkdag(@RequestBody Werkdag werkdag) {
-        return werkdagService.addNewWorkday(werkdag);
+    public Object addNewWerkdag(@RequestBody Werkdag werkdag) {
+        try {
+            return werkdagService.addNewWorkday(werkdag);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+
     }
 }
