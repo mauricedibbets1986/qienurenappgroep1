@@ -49,15 +49,15 @@
                     <p><b>Adres:</b> ${databaseContents[x].adres}</p>
                     <p><b>Toev.:</b> ${databaseContents[x].evtToevoeging}</p>
                     <p><b>postcode:</b> ${databaseContents[x].postcode}</p>
-                    <p><b>plaats:</b> ${databaseContents[x].plaats}</p>
-                    <p><b>Trainees werkzaam:</b> ${databaseContents[x].lijstTrainees[0]}</p><br>
+                    <p><b>plaats:</b> ${databaseContents[x].plaats}</p><br>
+                    <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p>
                     <hr>
                     </div>
                     `
                 }
             }
 
-            document.getElementById("showBedrijven").innerHTML = bedrijfString;
+            document.getElementById("bedrijvenOverzicht").innerHTML = bedrijfString;
         }
         xhr.open("GET", "http://localhost:8082/api/bedrijf/all", true)
         xhr.send();
@@ -76,7 +76,7 @@
     }
 </script>
 
-<body onload=alleBedrijven()>
+<body onload="alleBedrijven()">
     <div id="sidebar-left">
         <div class="left-container">
             <button onclick="window.location.href='bedrijfnieuw.html'">Nieuwe opdrachtgevers</button>
@@ -93,7 +93,7 @@
                 <h1>Overzicht opdrachtgevers</h1>
                 <br>
                 <div class="dashboard">
-                    <div id="showBedrijven"></div>
+                    <div id="bedrijvenOverzicht"></div>
                 </div>
                 <input type="text" id="gid" placeholder="gebruikerid">
                 <input type="text" id="bid" placeholder="bedrijfid">

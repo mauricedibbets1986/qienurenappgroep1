@@ -4,6 +4,8 @@
     margin: 0;
 }
 
+
+
 body{
     font-family: 'Titillium Web';
     min-width:1400px;
@@ -132,6 +134,7 @@ button{
     border-width: 0px;
     background-color: #ffffff;
     font-family: 'Titillium Web';
+    font-weight: bold;
     font-size: 16px;
     color: #212020;
 }
