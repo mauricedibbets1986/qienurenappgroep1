@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 public class BedrijfEndpoint {
 
     @Autowired
-    BedrijfService bs;
+    BedrijfService bedrijfService;
 
     @Autowired
-    BedrijfRepository br;
+    BedrijfRepository bedrijfRepository;
 
     //Onderstaande methode alleen door Admin!
     @PostMapping("/new")
@@ -25,7 +25,7 @@ public class BedrijfEndpoint {
 
     @GetMapping("/all")
     public Iterable<Bedrijf> getBedrijven(){
-        return bs.getAllBedrijven();
+        return bedrijfService.getAllBedrijven();
     }
 
     //Onderstaande methode alleen door Admin!
@@ -37,7 +37,7 @@ public class BedrijfEndpoint {
 
     @PutMapping("/changedetails/{id}")
     public void changeDetailsById(@PathVariable(value = "id") long id, @RequestBody Bedrijf bedrijf) {
-        bs.changeDetails(br.findById(id).get(), bedrijf);
+        bedrijfService.changeDetails(bedrijfRepository.findById(id).get(), bedrijf);
     }
 
     @PutMapping("/{bedrijfid}/{gebruikerid}")

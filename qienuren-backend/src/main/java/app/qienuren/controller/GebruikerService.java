@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 @Transactional
 public class GebruikerService {
     @Autowired
-    GebruikerRepository gebruikerrepository;
+    GebruikerRepository gebruikerRepository;
 
     @Autowired
     UrenFormulierRepository urenformulierrepository;
@@ -18,11 +18,17 @@ public class GebruikerService {
     @Autowired
     WerkdagRepository werkdagrepository;
 
+
+
+    //public Trainee addTrainee(Trainee trainee){
+    //return traineerepository.save(trainee);
+    //}
+
     public void addUrenFormulierToGebruiker(long gid, long ufid) {
-        Gebruiker g = gebruikerrepository.findById(gid).get();
+        Gebruiker g = gebruikerRepository.findById(gid).get();
         UrenFormulier uf = urenformulierrepository.findById(ufid).get();
         g.addUrenFormulierToArray(uf);
-        gebruikerrepository.save(g);
+        gebruikerRepository.save(g);
     }
 
     public Werkdag getWerkdagGebruiker(long gebruikerid, long urenformulierid, long werkdagid) {
@@ -33,23 +39,23 @@ public class GebruikerService {
     }
 
     public Gebruiker getGebruikerById(long id) {
-        return gebruikerrepository.findById(id).get();
+        return gebruikerRepository.findById(id).get();
     }
 
     public Iterable<Gebruiker> getByRole(String role){
-        return this.gebruikerrepository.findByRole(role);
+        return this.gebruikerRepository.findByRole(role);
     }
 
     public Iterable<Gebruiker> getByEmail(String emailadres){
-        return this.gebruikerrepository.findByEmail(emailadres);
+        return this.gebruikerRepository.findByEmail(emailadres);
     }
 
     public void deleteGebruikerById(long id) {
-        gebruikerrepository.deleteById(id);
+        gebruikerRepository.deleteById(id);
     }
 
     public Iterable<Gebruiker> getAllUsers() {
-        return gebruikerrepository.findAll();
+        return gebruikerRepository.findAll();
     }
 
     public UrenFormulier getUrenformulierGebruiker(long gebruikerid, long urenformulierid) {
@@ -58,6 +64,7 @@ public class GebruikerService {
     }
 
     public Gebruiker addGebruiker(Gebruiker gebruiker) {
-       return gebruikerrepository.save(gebruiker);
+        return gebruikerRepository.save(gebruiker);
+
     }
 }
