@@ -30,10 +30,10 @@ public class AdminEndpoint {
     //MedewerkerService medewerkerService;
 
     /*nieuwe gebruikers*/
-   // @PostMapping("/new-trainee")
-   // public Trainee addTrainee(@RequestBody Trainee trainee) {
-       // return traineeService.addTrainee(trainee);
-   // }
+    @PostMapping("/new-gebruiker")
+    public Gebruiker addGebruiker(@RequestBody Gebruiker gebruiker) {
+       return gebruikerService.addGebruiker(gebruiker);
+    }
 
     @PostMapping("/new-admin")
     public Admin addTrainee(@RequestBody Admin admin) {

@@ -56,4 +56,8 @@ public class GebruikerService {
         UrenFormulier urenformulier = urenformulierrepository.findById(urenformulierid).get();
         return urenformulier;
     }
+
+    public Gebruiker addGebruiker(Gebruiker gebruiker) {
+       return gebruikerrepository.save(gebruiker);
+    }
 }
