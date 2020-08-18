@@ -1,6 +1,7 @@
 package app.qienuren.controller;
 
 import app.qienuren.model.Bedrijf;
+import app.qienuren.model.Gebruiker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +58,10 @@ public class BedrijfService {
 
     public void addGebruikerToBedrijf(long bedrijfId, long gebruikerId) {
         br.findById(bedrijfId).get().addGebruikerToLijst(gr.findById(gebruikerId).get());
+    }
+
+    public Iterable<Bedrijf> getByBedrijfsNaam(String bedrijfsNaam){
+        return this.br.findByNaam(bedrijfsNaam);
     }
 }
 
