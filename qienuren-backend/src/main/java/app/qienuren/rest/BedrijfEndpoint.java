@@ -46,7 +46,7 @@ public class BedrijfEndpoint {
     }
 
     @GetMapping("/naam/{naam}")
-    public Iterable<Bedrijf> getTrainees(@PathVariable(value = "naam") String bedrijfsNaam){
+    public Iterable<Bedrijf> getBedrijfByNaam(@PathVariable(value = "naam") String bedrijfsNaam){
         return bs.getByBedrijfsNaam(bedrijfsNaam);
     }
 
