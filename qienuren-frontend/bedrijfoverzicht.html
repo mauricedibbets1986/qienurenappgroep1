@@ -38,7 +38,7 @@
                 var x;
 
                 for (x = 0; x < databaseContents.length; x++) {
-
+     
                     bedrijfString +=
                         `
                     <div>
@@ -48,9 +48,17 @@
                     <p><b>E-mailadres:</b> ${databaseContents[x].emailAdres}</p>
                     <p><b>Adres:</b> ${databaseContents[x].adres}</p>
                     <p><b>Toev.:</b> ${databaseContents[x].evtToevoeging}</p>
-                    <p><b>postcode:</b> ${databaseContents[x].postcode}</p>
-                    <p><b>plaats:</b> ${databaseContents[x].plaats}</p><br>
-                    <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p>
+                    <p><b>Postcode:</b> ${databaseContents[x].postcode}</p>
+                    <p><b>Plaats:</b> ${databaseContents[x].plaats}</p>
+                    <p><b>Trainees werkzaam:</b>
+                    `
+                    for (var y = 0; y < databaseContents[x].lijstGebruikers.length; y++) {
+                        bedrijfString +=    
+                        `
+                     ${databaseContents[x].lijstGebruikers[y].naam},`}
+                    bedrijfString +=
+                    `
+                    </p><p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p>
                     <hr>
                     </div>
                     `
@@ -70,7 +78,7 @@
         obj.gid = document.getElementById("gid").value;
         objJSON = JSON.stringify(obj);
         var xhr = new XMLHttpRequest();
-        xhr.open("PUT", "http://localhost:8082/api/bedrijf/" + obj.gid + "/" + obj.ufid, true);
+        xhr.open("PUT", "http://localhost:8082/api/bedrijf/" + obj.bid + "/" + obj.gid, true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(objJSON);
     }
@@ -95,8 +103,8 @@
                 <div class="dashboard">
                     <div id="bedrijvenOverzicht"></div>
                 </div>
-                <input type="text" id="gid" placeholder="gebruikerid">
                 <input type="text" id="bid" placeholder="bedrijfid">
+                <input type="text" id="gid" placeholder="gebruikerid">
                 <input type=button onclick="updateBedrijftoGebruiker()" value="Koppel">
             </div>
         </div>
