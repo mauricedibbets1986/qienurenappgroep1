@@ -5,7 +5,10 @@ import app.qienuren.controller.GebruikerService;
 import app.qienuren.model.Gebruiker;
 import app.qienuren.model.Werkdag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/gebruiker")
@@ -47,6 +50,16 @@ public class GebruikerEndpoint {
     @GetMapping("/achternaam/{achternaam}")
     public Iterable<Gebruiker> getGebruikerByAchternaam(@PathVariable(value = "achternaam") String achternaam){
         return gebruikerService.getByAchternaam(achternaam);
+    }
+
+    @GetMapping("/woonplaats/{woonplaats}")
+    public Iterable<Gebruiker> getGebruikerByWoonplaats(@PathVariable(value = "woonplaats") String woonplaats){
+        return gebruikerService.getByWoonplaats(woonplaats);
+    }
+
+    @GetMapping("/geboorteDatum/{geboorteDatum}")
+    public Iterable<Gebruiker> getGebruikerByGeboorteDatum(@PathVariable(value = "geboorteDatum") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate geboorteDatum){
+        return gebruikerService.getByGeboorteDatum(geboorteDatum);
     }
 
     @GetMapping("/email/{emailadres}")

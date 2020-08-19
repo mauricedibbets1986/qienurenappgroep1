@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.Year;
 
 @Service
 @Transactional
@@ -53,6 +55,15 @@ public class GebruikerService {
     public Iterable<Gebruiker> getByAchternaam(String achternaam){
         return this.gebruikerRepository.findByAchternaam(achternaam);
     }
+
+    public Iterable<Gebruiker> getByWoonplaats(String woonplaats){
+        return this.gebruikerRepository.findByWoonplaats(woonplaats);
+    }
+
+    public Iterable<Gebruiker> getByGeboorteDatum(LocalDate geboorteDatum){
+        return this.gebruikerRepository.findByGeboorteDatum(geboorteDatum);
+    }
+
 
     public Iterable<Gebruiker> getByEmail(String emailadres){
         return this.gebruikerRepository.findByEmail(emailadres);

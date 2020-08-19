@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +14,14 @@ public class Gebruiker {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-//    private String naam;
+//  private String naam;
     private String voornaam;
     private String achternaam;
     private String adres;
     private String evtToevoeging;
     private String postcode;
     private String woonplaats;
-    private String geboorteDatum;
+    private LocalDate geboorteDatum;
     private long telefoonNummer;
     private String emailadres;
     @Enumerated(EnumType.STRING)
@@ -78,11 +79,11 @@ public class Gebruiker {
         this.adres = adres;
     }
 
-    public String getGeboorteDatum() {
+    public LocalDate getGeboorteDatum() {
         return geboorteDatum;
     }
 
-    public void setGeboorteDatum(String geboorteDatum) {
+    public void setGeboorteDatum(LocalDate geboorteDatum) {
         this.geboorteDatum = geboorteDatum;
     }
 
