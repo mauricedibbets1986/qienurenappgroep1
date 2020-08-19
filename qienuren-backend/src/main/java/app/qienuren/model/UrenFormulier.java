@@ -21,10 +21,6 @@ public class UrenFormulier {
     private String opmerking;
     private boolean goedkeuring;
 
-//  private long ziekDagen;
-//  private long vakantieUren;
-//  private double reiskosten;
-
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "gebruiker_id")
@@ -97,15 +93,15 @@ public class UrenFormulier {
 
     public void addWerkdayToArray(Werkdag wd) throws Exception {
         werkdag.add(wd);
-        calculateTotaalGewerkt(wd);
+        /*calculateTotaalGewerkt(wd);*/
         wd.setUrenformulier(this);
     }
 
-    public void calculateTotaalGewerkt(Werkdag wd) throws Exception {
+ /*   public void calculateTotaalGewerkt(Werkdag wd) throws Exception {
         totaalGewerkteUren += wd.getUren();
         checkOverUren();
 
-    }
+    }*/
 
     private void checkOverUren() throws Exception {
         if (totaalGewerkteUren >= 220) {
