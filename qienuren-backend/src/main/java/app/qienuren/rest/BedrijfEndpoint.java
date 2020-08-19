@@ -31,7 +31,7 @@ public class BedrijfEndpoint {
     //Onderstaande methode alleen door Admin!
     @DeleteMapping("/delete/{id}")
     public String deleteBedrijfById(@PathVariable(value = "id") long id){
-    	bedrijfService.deleteBedrijfById(id);
+        bedrijfService.deleteBedrijfById(id);
         return "Bedrijf met id " + id + " is verwijderd";
     }
 
@@ -42,14 +42,11 @@ public class BedrijfEndpoint {
 
     @PutMapping("/{bedrijfid}/{gebruikerid}")
     public void addGebruikerToBedrijf(@PathVariable(value = "bedrijfid") long bedrijfId, @PathVariable(value = "gebruikerid") long gebruikerId) {
-    	bedrijfService.addGebruikerToBedrijf(bedrijfId, gebruikerId);
+        bedrijfService.addGebruikerToBedrijf(bedrijfId, gebruikerId);
     }
 
     @GetMapping("/naam/{naam}")
     public Iterable<Bedrijf> getBedrijfByNaam(@PathVariable(value = "naam") String bedrijfsNaam){
         return bedrijfService.getByBedrijfsNaam(bedrijfsNaam);
     }
-
-
-
 }

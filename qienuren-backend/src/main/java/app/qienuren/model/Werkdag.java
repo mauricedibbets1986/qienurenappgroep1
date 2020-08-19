@@ -11,12 +11,11 @@ public class Werkdag {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String datumDag;
-    private double uren;
-/*    private double opdrachtUren;
+    private double opdrachtUren;
     private double overwerkUren;
     private double verlofUren;
     private boolean ziekteDag;
-    private double trainingsUren;*/
+    private double trainingsUren;
 
     @ManyToOne
     @JsonBackReference
@@ -35,19 +34,51 @@ public class Werkdag {
         this.datumDag = datumDag;
     }
 
-    public double getUren() {
-        return uren;
-    }
-
-    public void setUren(long uren) {
-        this.uren = uren;
-    }
-
     public UrenFormulier getUrenformulier() {
         return urenformulier;
     }
 
     public void setUrenformulier(UrenFormulier urenformulier) {
         this.urenformulier = urenformulier;
+    }
+
+    public double getOpdrachtUren() {
+        return opdrachtUren;
+    }
+
+    public void setOpdrachtUren(double opdrachtUren) {
+        this.opdrachtUren = opdrachtUren;
+    }
+
+    public double getOverwerkUren() {
+        return overwerkUren;
+    }
+
+    public void setOverwerkUren(double overwerkUren) {
+        this.overwerkUren = overwerkUren;
+    }
+
+    public double getVerlofUren() {
+        return verlofUren;
+    }
+
+    public void setVerlofUren(double verlofUren) {
+        this.verlofUren = verlofUren;
+    }
+
+    public boolean isZiekteDag() {
+        return ziekteDag;
+    }
+
+    public void setZiekteDag(boolean ziekteDag) {
+        this.ziekteDag = ziekteDag;
+    }
+
+    public double getTrainingsUren() {
+        return trainingsUren;
+    }
+
+    public void setTrainingsUren(double trainingsUren) {
+        this.trainingsUren = trainingsUren;
     }
 }

@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.Year;
 
 @Service
 @Transactional
@@ -46,6 +48,23 @@ public class GebruikerService {
         return this.gebruikerRepository.findByRole(role);
     }
 
+    public Iterable<Gebruiker> getByVoornaam(String voornaam){
+        return this.gebruikerRepository.findByVoornaam(voornaam);
+    }
+
+    public Iterable<Gebruiker> getByAchternaam(String achternaam){
+        return this.gebruikerRepository.findByAchternaam(achternaam);
+    }
+
+    public Iterable<Gebruiker> getByWoonplaats(String woonplaats){
+        return this.gebruikerRepository.findByWoonplaats(woonplaats);
+    }
+
+    public Iterable<Gebruiker> getByGeboorteDatum(LocalDate geboorteDatum){
+        return this.gebruikerRepository.findByGeboorteDatum(geboorteDatum);
+    }
+
+
     public Iterable<Gebruiker> getByEmail(String emailadres){
         return this.gebruikerRepository.findByEmail(emailadres);
     }
@@ -66,5 +85,9 @@ public class GebruikerService {
     public Gebruiker addGebruiker(Gebruiker gebruiker) {
         return gebruikerRepository.save(gebruiker);
 
+    }
+
+    public Iterable<UrenFormulier> getUrenformulierenVanGebruiker(long id) {
+        return gebruikerRepository.findById(id).get().getUrenFormulier();
     }
 }

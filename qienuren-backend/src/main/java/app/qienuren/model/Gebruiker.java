@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,17 +14,18 @@ public class Gebruiker {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String naam;
-    // private String voornaam;
-    // private String achternaam;
+//  private String naam;
+    private String voornaam;
+    private String achternaam;
     private String adres;
     private String evtToevoeging;
     private String postcode;
     private String woonplaats;
-    private String geboorteDatum;
+    private LocalDate geboorteDatum;
     private long telefoonNummer;
     private String emailadres;
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @OneToMany
     @JsonManagedReference
@@ -46,13 +48,28 @@ public class Gebruiker {
         return id;
     }
 
-    public String getNaam() {
-        return naam;
+    public String getVoornaam() {
+        return voornaam;
     }
 
-    public void setNaam(String naam) {
-        this.naam = naam;
+    public void setVoornaam(String voornaam) {
+        this.voornaam = voornaam;
     }
+
+    public String getAchternaam() {
+        return achternaam;
+    }
+
+    public void setAchternaam(String achternaam) {
+        this.achternaam = achternaam;
+    }
+//    public String getNaam() {
+//        return naam;
+//    }
+//
+//    public void setNaam(String naam) {
+//        this.naam = naam;
+//    }
 
     public String getAdres() {
         return adres;
@@ -62,11 +79,11 @@ public class Gebruiker {
         this.adres = adres;
     }
 
-    public String getGeboorteDatum() {
+    public LocalDate getGeboorteDatum() {
         return geboorteDatum;
     }
 
-    public void setGeboorteDatum(String geboorteDatum) {
+    public void setGeboorteDatum(LocalDate geboorteDatum) {
         this.geboorteDatum = geboorteDatum;
     }
 
@@ -127,11 +144,11 @@ public class Gebruiker {
         this.evtToevoeging = evtToevoeging;
     }
 
-    public String getRol() {
+    public Role getRol() {
         return role;
     }
 
-    public void setRol(String role) {
+    public void setRol(Role role) {
         this.role = role;
     }
 
