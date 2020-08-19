@@ -14,8 +14,8 @@ public class Gebruiker {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String naam;
-    // private String voornaam;
-    // private String achternaam;
+    //private String voornaam;
+    //private String achternaam;
     private String adres;
     private String evtToevoeging;
     private String postcode;
