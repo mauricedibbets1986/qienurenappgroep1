@@ -2,6 +2,7 @@ package app.qienuren.controller;
 
 import app.qienuren.model.Admin;
 
+import app.qienuren.model.Gebruiker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AdminService {
     @Autowired
-    AdminRepository adminrepository;
+    AdminRepository adminRepository;
+
+    @Autowired
+    GebruikerRepository gebruikerRepository;
 
     //@Autowired
     //TraineeRepository traineerepository;
@@ -24,7 +28,7 @@ public class AdminService {
    // }
 
     public Admin addAdmin(Admin admin) {
-            return adminrepository.save(admin);
+            return adminRepository.save(admin);
         }
     }
 

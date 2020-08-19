@@ -23,7 +23,8 @@ public class Gebruiker {
     private String geboorteDatum;
     private long telefoonNummer;
     private String emailadres;
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @OneToMany
     @JsonManagedReference
@@ -127,11 +128,11 @@ public class Gebruiker {
         this.evtToevoeging = evtToevoeging;
     }
 
-    public String getRol() {
+    public Role getRol() {
         return role;
     }
 
-    public void setRol(String role) {
+    public void setRol(Role role) {
         this.role = role;
     }
 

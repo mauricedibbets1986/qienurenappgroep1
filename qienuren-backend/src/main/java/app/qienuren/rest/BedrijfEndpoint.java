@@ -12,44 +12,41 @@ import org.springframework.web.bind.annotation.*;
 public class BedrijfEndpoint {
 
     @Autowired
-    BedrijfService bs;
+    BedrijfService bedrijfService;
 
     @Autowired
-    BedrijfRepository br;
+    BedrijfRepository bedrijfRepository;
 
     //Onderstaande methode alleen door Admin!
     @PostMapping("/new")
     public Bedrijf addBedrijf(@RequestBody Bedrijf bedrijf) {
-        return bs.addBedrijfbyID(bedrijf);
+        return bedrijfService.addBedrijfbyID(bedrijf);
     }
 
     @GetMapping("/all")
     public Iterable<Bedrijf> getBedrijven(){
-        return bs.getAllBedrijven();
+        return bedrijfService.getAllBedrijven();
     }
 
     //Onderstaande methode alleen door Admin!
     @DeleteMapping("/delete/{id}")
     public String deleteBedrijfById(@PathVariable(value = "id") long id){
-        bs.deleteBedrijfById(id);
+        bedrijfService.deleteBedrijfById(id);
         return "Bedrijf met id " + id + " is verwijderd";
     }
 
     @PutMapping("/changedetails/{id}")
     public void changeDetailsById(@PathVariable(value = "id") long id, @RequestBody Bedrijf bedrijf) {
-        bs.changeDetails(br.findById(id).get(), bedrijf);
+        bedrijfService.changeDetails(bedrijfRepository.findById(id).get(), bedrijf);
     }
 
     @PutMapping("/{bedrijfid}/{gebruikerid}")
     public void addGebruikerToBedrijf(@PathVariable(value = "bedrijfid") long bedrijfId, @PathVariable(value = "gebruikerid") long gebruikerId) {
-        bs.addGebruikerToBedrijf(bedrijfId, gebruikerId);
+        bedrijfService.addGebruikerToBedrijf(bedrijfId, gebruikerId);
     }
 
     @GetMapping("/naam/{naam}")
     public Iterable<Bedrijf> getBedrijfByNaam(@PathVariable(value = "naam") String bedrijfsNaam){
-        return bs.getByBedrijfsNaam(bedrijfsNaam);
+        return bedrijfService.getByBedrijfsNaam(bedrijfsNaam);
     }
-
-
-
 }

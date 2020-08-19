@@ -22,6 +22,7 @@ public class GebruikerEndpoint {
         return wd;
     }
 
+
     @GetMapping("/{id}")
     public Gebruiker getGebruikerById(@PathVariable(value = "id") long id) {
     	System.out.println("endpoint called");
@@ -42,8 +43,10 @@ public class GebruikerEndpoint {
     public Iterable<Gebruiker> getEmail(@PathVariable(value = "emailadres") String emailadres){
         return gebruikerService.getByEmail(emailadres);
     }
-
-
+    @GetMapping("/all")
+    public Iterable<Gebruiker> getAll() {
+        return gebruikerService.getAllUsers();
+    }
 
     //@PutMapping("/changedetails/{id}")
     //public void changeDetailsById(@PathVariable(value = "id") long id, @RequestBody Gebruiker gebruiker) {
