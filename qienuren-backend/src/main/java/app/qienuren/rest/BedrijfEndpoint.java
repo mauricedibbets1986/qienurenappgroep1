@@ -20,7 +20,7 @@ public class BedrijfEndpoint {
     //Onderstaande methode alleen door Admin!
     @PostMapping("/new")
     public Bedrijf addBedrijf(@RequestBody Bedrijf bedrijf) {
-        return bs.addBedrijfbyID(bedrijf);
+        return bedrijfService.addBedrijfbyID(bedrijf);
     }
 
     @GetMapping("/all")
@@ -31,7 +31,7 @@ public class BedrijfEndpoint {
     //Onderstaande methode alleen door Admin!
     @DeleteMapping("/delete/{id}")
     public String deleteBedrijfById(@PathVariable(value = "id") long id){
-        bs.deleteBedrijfById(id);
+    	bedrijfService.deleteBedrijfById(id);
         return "Bedrijf met id " + id + " is verwijderd";
     }
 
@@ -42,12 +42,12 @@ public class BedrijfEndpoint {
 
     @PutMapping("/{bedrijfid}/{gebruikerid}")
     public void addGebruikerToBedrijf(@PathVariable(value = "bedrijfid") long bedrijfId, @PathVariable(value = "gebruikerid") long gebruikerId) {
-        bs.addGebruikerToBedrijf(bedrijfId, gebruikerId);
+    	bedrijfService.addGebruikerToBedrijf(bedrijfId, gebruikerId);
     }
 
     @GetMapping("/naam/{naam}")
     public Iterable<Bedrijf> getBedrijfByNaam(@PathVariable(value = "naam") String bedrijfsNaam){
-        return bs.getByBedrijfsNaam(bedrijfsNaam);
+        return bedrijfService.getByBedrijfsNaam(bedrijfsNaam);
     }
 
 
