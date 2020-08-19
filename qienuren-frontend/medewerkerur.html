@@ -166,10 +166,12 @@
                     var x;
             
                     for (x = 0; x < gebruikers.length; x++) {
-                        var opt = document.createElement("option");
-                        opt.value = gebruikers[x].id;
-                        opt.innerHTML = gebruikers[x].naam;
-                        newSelect.appendChild(opt);        
+                        if (gebruikers[x].rol == "MEDEWERKER") {
+                            var opt = document.createElement("option");
+                            opt.value = gebruikers[x].id;
+                            opt.innerHTML = gebruikers[x].naam;
+                            newSelect.appendChild(opt);
+                        }        
                     }
                 }
             }
