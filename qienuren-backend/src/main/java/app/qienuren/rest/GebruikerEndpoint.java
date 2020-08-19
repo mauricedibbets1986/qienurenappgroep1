@@ -3,6 +3,7 @@ package app.qienuren.rest;
 import app.qienuren.controller.GebruikerRepository;
 import app.qienuren.controller.GebruikerService;
 import app.qienuren.model.Gebruiker;
+import app.qienuren.model.UrenFormulier;
 import app.qienuren.model.Werkdag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -62,5 +63,10 @@ public class GebruikerEndpoint {
     public String deleteGebruikerById(@PathVariable(value = "id") long id){
         gebruikerService.deleteGebruikerById(id);
         return "Gebruiker met id " + id + " verwijderd";
+    }
+
+    @GetMapping("/{id}/urenformulieren")
+    public Iterable<UrenFormulier> getUrenformulierenByGebruiker(@PathVariable(value = "id") long id) {
+        return gebruikerService.getUrenformulierenVanGebruiker(id);
     }
 }
