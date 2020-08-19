@@ -49,7 +49,4 @@ public class BedrijfEndpoint {
     public Iterable<Bedrijf> getBedrijfByNaam(@PathVariable(value = "naam") String bedrijfsNaam){
         return bedrijfService.getByBedrijfsNaam(bedrijfsNaam);
     }
-
-
-
 }
