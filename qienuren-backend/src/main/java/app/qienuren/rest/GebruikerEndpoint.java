@@ -35,8 +35,18 @@ public class GebruikerEndpoint {
     }
 
     @GetMapping("/rol/{role}")
-    public Iterable<Gebruiker> getTrainees(@PathVariable(value = "role") String role){
+    public Iterable<Gebruiker> getGebruikerByRole(@PathVariable(value = "role") String role){
         return gebruikerService.getByRole(role);
+    }
+
+    @GetMapping("/voornaam/{voornaam}")
+    public Iterable<Gebruiker> getGebruikerByVoornaam(@PathVariable(value = "voornaam") String voornaam){
+        return gebruikerService.getByVoornaam(voornaam);
+    }
+
+    @GetMapping("/achternaam/{achternaam}")
+    public Iterable<Gebruiker> getGebruikerByAchternaam(@PathVariable(value = "achternaam") String achternaam){
+        return gebruikerService.getByAchternaam(achternaam);
     }
 
     @GetMapping("/email/{emailadres}")

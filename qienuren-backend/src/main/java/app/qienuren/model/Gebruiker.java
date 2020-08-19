@@ -13,9 +13,9 @@ public class Gebruiker {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String naam;
-    //private String voornaam;
-    //private String achternaam;
+//    private String naam;
+    private String voornaam;
+    private String achternaam;
     private String adres;
     private String evtToevoeging;
     private String postcode;
@@ -47,13 +47,28 @@ public class Gebruiker {
         return id;
     }
 
-    public String getNaam() {
-        return naam;
+    public String getVoornaam() {
+        return voornaam;
     }
 
-    public void setNaam(String naam) {
-        this.naam = naam;
+    public void setVoornaam(String voornaam) {
+        this.voornaam = voornaam;
     }
+
+    public String getAchternaam() {
+        return achternaam;
+    }
+
+    public void setAchternaam(String achternaam) {
+        this.achternaam = achternaam;
+    }
+//    public String getNaam() {
+//        return naam;
+//    }
+//
+//    public void setNaam(String naam) {
+//        this.naam = naam;
+//    }
 
     public String getAdres() {
         return adres;

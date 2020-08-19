@@ -46,6 +46,14 @@ public class GebruikerService {
         return this.gebruikerRepository.findByRole(role);
     }
 
+    public Iterable<Gebruiker> getByVoornaam(String voornaam){
+        return this.gebruikerRepository.findByVoornaam(voornaam);
+    }
+
+    public Iterable<Gebruiker> getByAchternaam(String achternaam){
+        return this.gebruikerRepository.findByAchternaam(achternaam);
+    }
+
     public Iterable<Gebruiker> getByEmail(String emailadres){
         return this.gebruikerRepository.findByEmail(emailadres);
     }
