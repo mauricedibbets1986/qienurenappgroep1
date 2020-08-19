@@ -67,4 +67,8 @@ public class GebruikerService {
         return gebruikerRepository.save(gebruiker);
 
     }
+
+    public Iterable<UrenFormulier> getUrenformulierenVanGebruiker(long id) {
+        return gebruikerRepository.findById(id).get().getUrenFormulier();
+    }
 }
