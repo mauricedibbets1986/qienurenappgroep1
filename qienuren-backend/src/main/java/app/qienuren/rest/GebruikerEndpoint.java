@@ -3,6 +3,7 @@ package app.qienuren.rest;
 import app.qienuren.controller.GebruikerRepository;
 import app.qienuren.controller.GebruikerService;
 import app.qienuren.model.Gebruiker;
+import app.qienuren.model.StatusGoedkeuring;
 import app.qienuren.model.UrenFormulier;
 import app.qienuren.model.Werkdag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,4 +93,14 @@ public class GebruikerEndpoint {
     public Iterable<UrenFormulier> getUrenformulierenByGebruiker(@PathVariable(value = "id") long id) {
         return gebruikerService.getUrenformulierenVanGebruiker(id);
     }
+
+    @PutMapping("urenformulier/setstatus-checkgebruiker")
+    public UrenFormulier setStatusFormulierCheckGebruiker(@RequestBody UrenFormulier urenFormulier) {
+        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.CHECKGEBRUIKER);
+        return urenFormulier;
+    }
+
+
+
+
 }

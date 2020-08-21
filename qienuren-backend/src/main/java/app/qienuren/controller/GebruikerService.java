@@ -90,4 +90,10 @@ public class GebruikerService {
     public Iterable<UrenFormulier> getUrenformulierenVanGebruiker(long id) {
         return gebruikerRepository.findById(id).get().getUrenFormulier();
     }
+
+    public UrenFormulier changestatusUrenFormulier(UrenFormulier urenFormulier){
+        
+    }
+
+
 }
