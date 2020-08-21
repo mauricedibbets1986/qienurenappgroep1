@@ -53,5 +53,12 @@ public class UrenFormulierService {
         return localUren;
     }
 
+    public UrenFormulier getUrenFormulierById(long id) {
+        return urenFormulierRepository.findById(id).get();
+    }
 
+
+    public double getGewerkteUrenByID(long id) {
+    return 0.0;
+    }
 }

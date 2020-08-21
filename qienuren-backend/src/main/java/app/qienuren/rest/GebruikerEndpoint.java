@@ -2,6 +2,7 @@ package app.qienuren.rest;
 
 import app.qienuren.controller.GebruikerRepository;
 import app.qienuren.controller.GebruikerService;
+import app.qienuren.controller.UrenFormulierService;
 import app.qienuren.model.Gebruiker;
 import app.qienuren.model.StatusGoedkeuring;
 import app.qienuren.model.UrenFormulier;
@@ -17,6 +18,9 @@ import java.time.LocalDate;
 public class GebruikerEndpoint {
     @Autowired
     GebruikerService gebruikerService;
+
+    @Autowired
+    UrenFormulierService urenFormulierService;
 
     @Autowired
     GebruikerRepository gebruikerRepository;
@@ -94,13 +98,16 @@ public class GebruikerEndpoint {
         return gebruikerService.getUrenformulierenVanGebruiker(id);
     }
 
-    @PutMapping("urenformulier/setstatus-checkgebruiker")
-    public UrenFormulier setStatusFormulierCheckGebruiker(@RequestBody UrenFormulier urenFormulier) {
-        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.CHECKGEBRUIKER);
-        return urenFormulier;
+    @GetMapping("/gewerkteuren/{id}")
+    public double getTotaalGewerkteUren(@PathVariable(value = "id") long id) {
+        return urenFormulierService.getGewerkteUrenByID(id);
     }
 
+    @PutMapping("/{id}/setstatus-checkgebruiker")
+    public UrenFormulier setStatusFormulierCheckGebruiker(@PathVariable(value = "id") long id) {
+        urenFormulierService.getUrenFormulierById(id).setStatusGoedkeuring(StatusGoedkeuring.CHECKGEBRUIKER);
+        return urenFormulierService.getUrenFormulierById(id);
+    }
 
+    }
 
-
-}
