@@ -1,6 +1,7 @@
 package app.qienuren.rest;
 
 import app.qienuren.controller.UrenFormulierService;
+import app.qienuren.model.StatusGoedkeuring;
 import app.qienuren.model.UrenFormulier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class UrenFormulierEndpoint {
     @Autowired
     UrenFormulierService urenFormulierService;
+
 
     @GetMapping("/get")
     public Iterable<UrenFormulier> getUrenformulieren(){
@@ -35,4 +37,17 @@ public class UrenFormulierEndpoint {
     public Iterable<UrenFormulier> getUrenFormulierPerMaand(@PathVariable(value = "maandid") int maandid) {
         return urenFormulierService.getUrenFormulierPerMaand(maandid);
     }
+
+    @PutMapping("/{id}/setstatus-checkgebruiker")
+    public UrenFormulier setStatusFormulierCheckGebruiker(@PathVariable(value = "id") long id) {
+        urenFormulierService.getUrenFormulierById(id).setStatusGoedkeuring(StatusGoedkeuring.CHECKGEBRUIKER);
+        return urenFormulierService.getUrenFormulierById(id);
+    }
+
+    @GetMapping("/{id}")
+    public UrenFormulier getUrenFormulierById(@PathVariable(value = "id") long id) {
+        System.out.println("endpoint called");
+        return urenFormulierService.getUrenFormulierById(id);
+    }
+
 }

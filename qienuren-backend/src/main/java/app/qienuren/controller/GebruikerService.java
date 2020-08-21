@@ -41,6 +41,7 @@ public class GebruikerService {
     }
 
     public Gebruiker getGebruikerById(long id) {
+
         return gebruikerRepository.findById(id).get();
     }
 
@@ -92,7 +93,8 @@ public class GebruikerService {
     }
 
     public UrenFormulier changestatusUrenFormulier(UrenFormulier urenFormulier){
-        
+        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.CHECKGEBRUIKER);
+        return urenFormulier;
     }
 
 
