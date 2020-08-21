@@ -20,6 +20,9 @@ public class UrenFormulier {
     private String jaar;
     private String opmerking;
     private boolean goedkeuring;
+    @Enumerated(EnumType.STRING)
+    private StatusGoedkeuring statusGoedkeuring;
+
 
     @ManyToOne
     @JsonBackReference
@@ -30,6 +33,11 @@ public class UrenFormulier {
     @JsonManagedReference
     private List<Werkdag> werkdag = new ArrayList<>();
 
+    public UrenFormulier() {
+        this.setStatusGoedkeuring(StatusGoedkeuring.OPEN);
+    }
+
+    //GETTERS AND SETTERS
     public long getId() {
         return id;
     }
@@ -107,5 +115,13 @@ public class UrenFormulier {
         if (totaalGewerkteUren >= 220) {
             throw new OverwerkException("HO STOP JE HEBT TEVEEL GEWERKT DEZE MAAND");
         }
+    }
+
+    public StatusGoedkeuring getStatusGoedkeuring() {
+        return statusGoedkeuring;
+    }
+
+    public void setStatusGoedkeuring(StatusGoedkeuring statusGoedkeuring) {
+        this.statusGoedkeuring = statusGoedkeuring;
     }
 }
