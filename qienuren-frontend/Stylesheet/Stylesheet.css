@@ -319,10 +319,10 @@ ul.breadcrumb {
 
 .container{
   margin-top: 20px;
-
 }
 
 .content{
+  animation: transitionIn 0.5s;
   padding: 10px;
 }
 
@@ -342,6 +342,7 @@ ul.breadcrumb {
     text-align: center;
     padding: 30px;
     background-color:#8D8D8D;
+    min-width: fit-content;
     width: 100%;
     min-height: 400px;
     box-shadow: 3px 3px 3px;
@@ -350,3 +351,62 @@ ul.breadcrumb {
     border-style: none;
 }
 
+.urenform th{
+  background-color: #682BAA;
+  color: #ffffff;
+}
+
+.urenform tr {
+  line-height: 12px;
+}
+
+.urenform td {
+  position: relative;
+}
+
+.urenform td:hover {
+  position: relative;
+  background-color: #FFDA5C;
+  cursor: pointer;
+
+}
+
+.urenform td input[type=text] {
+  position: absolute;
+  display: block;
+  top:0;
+  left:0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  border: none;
+  padding: 10px;
+  background-color:transparent;
+  box-sizing: border-box;
+}
+
+.tableFixHead          { overflow-y: auto; height: 100px; }
+.tableFixHead thead th { position: sticky; top: 0; z-index: 3;   line-height: 20px }
+
+.my-custom-scrollbar {
+  position: relative;
+  height: 550px;
+  overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+  display: block;
+}
+
+
+@keyframes transitionIn{
+  from{
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+
+  to{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
