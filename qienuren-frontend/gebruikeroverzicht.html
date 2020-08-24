@@ -42,7 +42,7 @@
                     employeeString +=
                         `
                     <div>
-                    <h2>${databaseContents[x].naam}</h2><br>
+                    <h2>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}</h2><br>
                     <p><b>Adres:</b> ${databaseContents[x].adres}</p>
                     <p><b>Toev.:</b> ${databaseContents[x].evtToevoeging}</p>
                     <p><b>Woonplaats:</b> ${databaseContents[x].woonplaats}</p>
@@ -50,9 +50,8 @@
                     <p><b>Geboortedatum:</b> ${databaseContents[x].geboorteDatum}</p>
                     <p><b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}</p>
                     <p><b>E-mailadres:</b> ${databaseContents[x].emailadres}</p>
-                    <p><b>Rol:</b> ${databaseContents[x].rol}</p><br>
-                    <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br>
-                    
+                    <p><b>Rol:</b> ${databaseContents[x].rol.charAt(0) + databaseContents[x].rol.toLowerCase().slice(1)}</p><br>
+                    <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br
                     <hr>
                     </div>
                     `

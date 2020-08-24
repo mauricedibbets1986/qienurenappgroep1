@@ -31,7 +31,8 @@
         var form = document.forms["type-form"];
         var typ = form["soort"].value;
 
-        obj.naam = document.getElementById("naam").value;
+        obj.voornaam = document.getElementById("voornaam").value;
+        obj.achternaam = document.getElementById("achternaam").value;
         obj.adres = document.getElementById("adres").value;
         obj.evtToevoeging = document.getElementById("evtToevoeging").value;
         obj.postcode = document.getElementById("postcode").value;
@@ -49,7 +50,7 @@
         xhr.setRequestHeader("Content-Type", "application/json");
 
         xhr.send(objJSON);
-        alert("Nieuwe " + typ + " aangemaakt")
+        alert("Nieuwe " + typ.toLowerCase() + " aangemaakt")
     }
 </script>
 
@@ -75,13 +76,15 @@
                 <h1>NAW-gegevens nieuwe gebruiker</h1>
                 <div class="body-form">
                     <form name="type-form">
-                        <input type="radio" id="type-medewerker" name="soort" value="medewerker">
+                        <input type="radio" id="type-medewerker" name="soort" value="MEDEWERKER">
                         <label for="type-medewerker">Medewerker</label>
-                        <input type="radio" id="type-trainee" name="soort" value="trainee">
+                        <input type="radio" id="type-trainee" name="soort" value="TRAINEE">
                         <label for="type-trainee">Trainee</label>
                     <br>
-                    Naam<br>
-                    <input type="text" id=naam><br>
+                    Voornaam<br>
+                    <input type="text" id=voornaam><br>
+                    Achternaam<br>
+                    <input type="text" id=achternaam><br>
                     Adres<br>
                     <input type="text" id=adres><br>
                     Evt. toevoeging<br>
@@ -91,7 +94,7 @@
                     Woonplaats<br>
                     <input type="text" id=woonplaats><br>
                     Geboortedatum<br>
-                    <input type="text" id="geboorteDatum"><br>
+                    <input type="date" id="geboorteDatum"><br>
                     Telefoonnummer<br>
                     <input type=text id=telefoonNummer><br>
                     E-mailadres<br>
