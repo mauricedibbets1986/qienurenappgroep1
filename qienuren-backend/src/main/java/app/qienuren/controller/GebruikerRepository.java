@@ -1,6 +1,7 @@
 package app.qienuren.controller;
 
 import app.qienuren.model.Gebruiker;
+import app.qienuren.model.Role;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ public interface GebruikerRepository extends CrudRepository<Gebruiker, Long> {
    //Iterable<Gebruiker> findByRole(String role);
 
    @Query(value = "FROM Gebruiker WHERE role=?1" )
-   Iterable<Gebruiker> findByRole(String role);
+   Iterable<Gebruiker> findByRole(Role role);
 
    @Query(value = "FROM Gebruiker WHERE voornaam=?1" )
    Iterable<Gebruiker> findByVoornaam(String voornaam);
