@@ -1,6 +1,8 @@
 package app.qienuren.rest;
 
+import app.qienuren.controller.GebruikerService;
 import app.qienuren.controller.UrenFormulierService;
+import app.qienuren.model.Role;
 import app.qienuren.model.StatusGoedkeuring;
 import app.qienuren.model.UrenFormulier;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 public class UrenFormulierEndpoint {
     @Autowired
     UrenFormulierService urenFormulierService;
+
+    @Autowired
+    GebruikerService gebruikerService;
 
 
     @GetMapping("/get")
@@ -38,16 +43,26 @@ public class UrenFormulierEndpoint {
         return urenFormulierService.getUrenFormulierPerMaand(maandid);
     }
 
-    @PutMapping("/{id}/setstatus-checkgebruiker")
-    public UrenFormulier setStatusFormulierCheckGebruiker(@PathVariable(value = "id") long id) {
-        urenFormulierService.getUrenFormulierById(id).setStatusGoedkeuring(StatusGoedkeuring.CHECKGEBRUIKER);
-        return urenFormulierService.getUrenFormulierById(id);
-    }
-
     @GetMapping("/{id}")
     public UrenFormulier getUrenFormulierById(@PathVariable(value = "id") long id) {
         System.out.println("endpoint called");
         return urenFormulierService.getUrenFormulierById(id);
     }
+
+    @PutMapping("/{uid}/setstatus-indienengebruiker")
+    public UrenFormulier setStatusFormulierIngediendGebruiker(@PathVariable(value = "uid") long uid) {
+        urenFormulierService.setIndienen(uid);
+        return urenFormulierService.getUrenFormulierById(uid);
+    }
+
+    @PutMapping("/{uid}/{id}/setstatus-goedkeuring")
+    public UrenFormulier setStatusFormulierGoedkeuring(@PathVariable(value = "uid") long uid, @PathVariable(value = "id") long id) {
+        StatusGoedkeuring huidigeStatus =  urenFormulierService.getUrenFormulierById(uid).getStatusGoedkeuring();
+        Role huidigeRol = gebruikerService.getGebruikerById(id).getRol();
+        urenFormulierService.setGoedkeuring(huidigeStatus, huidigeRol, uid);
+        return urenFormulierService.getUrenFormulierById(uid);
+    }
+
+
 
 }
