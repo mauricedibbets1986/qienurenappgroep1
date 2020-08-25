@@ -3,10 +3,7 @@ package app.qienuren.rest;
 import app.qienuren.controller.GebruikerRepository;
 import app.qienuren.controller.GebruikerService;
 import app.qienuren.controller.UrenFormulierService;
-import app.qienuren.model.Gebruiker;
-import app.qienuren.model.StatusGoedkeuring;
-import app.qienuren.model.UrenFormulier;
-import app.qienuren.model.Werkdag;
+import app.qienuren.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +41,7 @@ public class GebruikerEndpoint {
     }
 
     @GetMapping("/rol/{role}")
-    public Iterable<Gebruiker> getGebruikerByRole(@PathVariable(value = "role") String role){
+    public Iterable<Gebruiker> getGebruikerByRole(@PathVariable(value = "role") Role role){
         return gebruikerService.getByRole(role);
     }
 

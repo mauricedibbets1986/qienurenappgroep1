@@ -13,7 +13,7 @@
     <!-- Eigen CSS -->
     <link rel="stylesheet" href="../../css/Stylesheet.css" />
 
-    <title>Pagina template</title>
+    <title>Bedrijf Gegevens Wijzigen</title>
 
     <!-- Eigen JavaScript -->
     <script>
@@ -29,7 +29,7 @@
             xhr.send();
             alert("Bedrijf met id " + id + " verwijdert");
         }
-    
+
         function bedrijfAanpassen() {
             // change details - want to get ID automatically but don't know how to take persistent data from one page to another, will fix
             var xhr = new XMLHttpRequest();
@@ -54,7 +54,7 @@
             xhr.send(objJSON);
             alert("Bedrijf met id " + id + " aangepast");
         }
-    
+
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -102,10 +102,11 @@
         <!-- Breadcrumb -->
         <div>
             <ul class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Pagina1</a></li>
-                <li><a href="#">Pagina2</a></li>
-                <li>Pagina3</li>
+                <li><a href="https://www.qien.nl/">Qien</a></li>
+                <li><a href="../inlogscherm.html">Log in</a></li>
+                <li><a href="admin.html">Admin overzicht </a></li>
+                <li><a href="bedrijfoverzicht.html">Overzicht bedrijf</a></li>
+                <li>Bedrijf wijzigen</li>
             </ul>
         </div>
     </header>
@@ -118,13 +119,16 @@
                 <!-- sidebar -->
                 <div class="col-sm-3">
                     <div class="sidebar">
-                        <button class="button2" onclick="window.location.href='bedrijfoverzicht.html'">Overzicht opdrachtgevers</button>
-                        <button class="button2" onclick="window.location.href='bedrijfnieuw.html'">Nieuw opdrachtgever</button>
+                        <button class="button2" onclick="window.location.href='bedrijfoverzicht.html'">Overzicht
+                            opdrachtgevers</button>
+                        <button class="button2" onclick="window.location.href='bedrijfnieuw.html'">Nieuw
+                            opdrachtgever</button>
                     </div>
                 </div>
                 <!-- main content -->
                 <div class="col-lg-9">
                     <div class="content">
+                        <h2>Opdrachtgever gegevens wijzigen</h2>
                         <div class="body-form">
                             Bedrijf ID<br>
                             <input type=text id=bedrijfID placeholder="temp"><br>
@@ -144,9 +148,13 @@
                             <input type=text id=postcode><br>
                             Plaats<br>
                             <input type=text id=plaats><br>
-                            <input type="button" class="button3" onclick="bedrijfAanpassen(),window.location.href='bedrijfoverzicht.html'" value="Opslaan">
-                            <input type="button" class="button3"  onclick="deleteBedrijf(),window.location.href='bedrijfoverzicht.html'" value="Bedrijf verwijderen"><br>
-            
+                            <input type="button" class="button3"
+                                onclick="bedrijfAanpassen(),window.location.href='bedrijfoverzicht.html'"
+                                value="Opslaan">
+                            <input type="button" class="button3"
+                                onclick="deleteBedrijf(),window.location.href='bedrijfoverzicht.html'"
+                                value="Bedrijf verwijderen"><br>
+
                         </div>
                     </div>
                 </div>
@@ -177,7 +185,8 @@
                 </div>
             </div>
             <!-- Copyright -->
-            <div class="footer-copyright py-3"><hr style="background-color:white">
+            <div class="footer-copyright py-3">
+                <hr style="background-color:white">
                 © 2020 Team 1:
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"> Qien.nl</a>
             </div>
