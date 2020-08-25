@@ -105,7 +105,7 @@ public class GebruikerEndpoint {
 
     @PutMapping("/{id}/setstatus-checkgebruiker")
     public UrenFormulier setStatusFormulierCheckGebruiker(@PathVariable(value = "id") long id) {
-        urenFormulierService.getUrenFormulierById(id).setStatusGoedkeuring(StatusGoedkeuring.CHECKGEBRUIKER);
+        urenFormulierService.getUrenFormulierById(id).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
         return urenFormulierService.getUrenFormulierById(id);
     }
 

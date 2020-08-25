@@ -2,7 +2,7 @@ package app.qienuren.model;
 
 public enum StatusGoedkeuring {
     OPEN,
-    CHECKGEBRUIKER,
-    CHECKBEDRIJF,
-    CHECKADMIN
+    INGEDIEND_GEBRUIKER,
+    GOEDGEKEURD_BEDRIJF,
+    GOEDGEKEURD_ADMIN
 }
