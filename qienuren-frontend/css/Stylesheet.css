@@ -352,6 +352,20 @@ ul.breadcrumb {
   border-color: rgb(212, 212, 212);
 }
 
+.profiel{
+  animation: transitionIn 0.5s;
+  padding: 15px 30px;
+  background-color: #EAEAEA;
+  border-style: solid;
+  border-width: thin;
+  border-color: #510E99;
+  border-radius: 10px;
+}
+
+.wide-row{
+  text-align: center;
+}
+
 .footer-content{
   padding: 30px;
   text-align: left;
