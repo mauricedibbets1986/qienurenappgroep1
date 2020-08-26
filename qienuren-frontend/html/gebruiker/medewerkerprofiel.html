@@ -28,21 +28,21 @@
                     employeeString +=
                         `
                             <div>
-                            <h4><b>Naam:</b> ${databaseContents.voornaam + " " + databaseContents.achternaam}</h4>
-                            <h4><b>Email:</b> ${databaseContents.emailadres}</h4>
-                            <h4><b>Geboortedatum:</b> ${databaseContents.geboorteDatum}</h4>
-                            <h4><b>Telefoonnummer:</b> ${databaseContents.telefoonNummer}</h4>
-                            <h4><b>Adres:</b> ${databaseContents.adres}</h4>
-                            <h4><b>Evt. toevoeging:</b> ${databaseContents.evtToevoeging}</h4>
-                            <h4><b>Postcode:</b> ${databaseContents.postcode}</h4>
-                            <h4><b>Woonplaats:</b> ${databaseContents.woonplaats}</h4>
-                             <h4><b>Opdrachtgever:</b>${databaseContents.bedrijf}</h4>
+                            <h4 class="alignleft">Naam:</h4><p class="alignright"> ${databaseContents.voornaam + " " + databaseContents.achternaam}</p><div style="clear: both;"></div>
+                            <h4 class="alignleft">Email:</h4><p class="alignright"> ${databaseContents.emailadres}</p><div style="clear: both;"></div>
+                            <h4 class="alignleft">Geboortedatum:</h4><p class="alignright"> ${databaseContents.geboorteDatum}</p><div style="clear: both;"></div>
+                            <h4 class="alignleft">Telefoonnummer:</h4><p class="alignright"> ${databaseContents.telefoonNummer}</p><div style="clear: both;"></div>
+                            <h4 class="alignleft">Adres:</h4><p class="alignright"> ${databaseContents.adres}</p><div style="clear: both;"></div>
+                            <h4 class="alignleft">Evt. toevoeging:</h4><p class="alignright"> ${databaseContents.evtToevoeging}</p><div style="clear: both;"></div>
+                            <h4 class="alignleft">Postcode:</h4><p class="alignright"> ${databaseContents.postcode}</p><div style="clear: both;"></div>
+                            <h4 class="alignleft">Woonplaats:</h4><p class="alignright"> ${databaseContents.woonplaats}</p><div style="clear: both;"></div>
+                            <h4 class="alignleft">Opdrachtgever:</h4><p class="alignright">${databaseContents.bedrijf}</p><div style="clear: both;"></div>
                             </div>
                             `
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
                 }
             }
-            jojo.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
+            jojo.open("GET", "http://localhost:8082/api/gebruiker/"+id, true);
             jojo.send();
         }
 
@@ -185,19 +185,16 @@
             </div>
             <div class="row">
                 <!-- sidebar -->
-                <div class="col-sm-2">
+                <div class="col-sm-3">
 
                 </div>
                 <!-- main content -->
-                <div class="col-lg-8">
+                <div class="col-lg-6">
                     <div class="profiel">
                         <div id="persoonsgegevens"></div>
                     </div>
-                    Medewerker ID:
-                    <input type=text id=empID placeholder="temp">
-                    <input type="button" onclick="persoonsGegevens()" value="Get">
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                 </div>
             </div>
             <div class="row">
@@ -206,6 +203,9 @@
                         <button class="btn btn-info btn-lg button3" data-toggle="modal" data-target="#myModal2">Profiel
                             bewerken</button>
                     </div>
+                    Medewerker ID:
+                    <input type=text id=empID placeholder="temp">
+                    <input type="button" onclick="persoonsGegevens()" value="Get">
                 </div>
             </div>
         </div>

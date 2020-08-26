@@ -36,13 +36,13 @@ h4 {
     font-family: 'Titillium Web';
     font-size: 16px;
     font-weight: 600;
-    margin-bottom: 26pt;
+    margin-bottom: 12pt;
 }
 
 p {
     font-family: 'Open Sans';
     font-size: 14px;
-    margin-bottom: 24pt;  
+    margin-bottom: 12pt;  
 }
 
 /* div kleurenschema */
@@ -353,6 +353,7 @@ ul.breadcrumb {
 }
 
 .profiel{
+  margin-bottom: 25px;
   animation: transitionIn 0.5s;
   padding: 15px 30px;
   background-color: #EAEAEA;
@@ -470,6 +471,14 @@ input[type=text], input[type=password], select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+.alignleft {
+  float: left;
+  margin: 0px;
+}
+.alignright {
+	float: right;
 }
 
 @keyframes transitionIn{
