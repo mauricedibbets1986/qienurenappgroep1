@@ -45,7 +45,7 @@ public class GebruikerService {
         return gebruikerRepository.findById(id).get();
     }
 
-    public Iterable<Gebruiker> getByRole(String role){
+    public Iterable<Gebruiker> getByRole(Role role){
         return this.gebruikerRepository.findByRole(role);
     }
 
@@ -93,7 +93,7 @@ public class GebruikerService {
     }
 
     public UrenFormulier changestatusUrenFormulier(UrenFormulier urenFormulier){
-        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.CHECKGEBRUIKER);
+        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
         return urenFormulier;
     }
 

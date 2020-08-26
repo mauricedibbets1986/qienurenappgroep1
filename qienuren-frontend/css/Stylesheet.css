@@ -111,6 +111,7 @@ p {
   /* buttons */
 
   .button1{
+    margin-bottom:25px;
     border-radius: 30px;
     text-align: center;
     height: 50px;
@@ -136,6 +137,7 @@ p {
     background-color: #ffffff;
     border-width: 2px;
     border-color: #510E99;
+    font-size: 16px;
     color: #212020;
 }
 
@@ -337,11 +339,15 @@ ul.breadcrumb {
 
 .container{
   margin-top: 20px;
+  
 }
 
 .content{
   animation: transitionIn 0.5s;
   padding: 10px;
+  border-style: solid;
+  border-width: thin;
+  border-color: rgb(212, 212, 212);
 }
 
 .footer-content{
@@ -380,6 +386,7 @@ ul.breadcrumb {
 
 .urenform td {
   position: relative;
+  width: 75px;
 }
 
 .urenform td:hover {
@@ -403,19 +410,21 @@ ul.breadcrumb {
   box-sizing: border-box;
 }
 
-.tableFixHead          { 
+.tableFixHead { 
   overflow-y: auto; 
   height: 100px; 
 }
+
 .tableFixHead thead th { 
   position: sticky; 
   top: 0; 
   z-index: 3;   
-  line-height: 20px }
+  line-height: 20px 
+}
 
 .my-custom-scrollbar {
   position: relative;
-  height: 550px;
+  height: 450px;
   overflow: auto;
 }
 
@@ -423,6 +432,15 @@ ul.breadcrumb {
   display: block;
 }
 
+input[type=text], input[type=password], select {
+
+  padding: 4px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 
 @keyframes transitionIn{
   from{
