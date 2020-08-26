@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class UrenFormulierService {
     @Autowired
     WerkdagRepository werkdagRepository;
 
+    @Autowired
+    WerkdagService werkdagService;
 
     public Iterable<UrenFormulier> getAllUrenFormulieren() {
         return urenFormulierRepository.findAll();
@@ -38,6 +41,14 @@ public class UrenFormulierService {
     }
 
     public UrenFormulier addNewUrenFormulier(UrenFormulier urenFormulier) {
+        urenFormulierRepository.save(urenFormulier);
+        int maand = urenFormulier.getMaand().ordinal() + 1;
+        YearMonth yearMonth = YearMonth.of(Integer.parseInt(urenFormulier.getJaar()), maand);
+        int daysInMonth = yearMonth.lengthOfMonth();
+        for (int x = 1; x <= daysInMonth; x++) {
+            Werkdag werkdag = werkdagService.addNewWorkday(new Werkdag(x));
+            addWorkDaytoUrenFormulier(urenFormulier.getId(), werkdag.getId());
+        }
         return urenFormulierRepository.save(urenFormulier);
     }
 
@@ -58,7 +69,6 @@ public class UrenFormulierService {
     public UrenFormulier getUrenFormulierById(long uid) {
         return urenFormulierRepository.findById(uid).get();
     }
-
 
     public double getGewerkteUrenByID(long id) {
     return 0.0;

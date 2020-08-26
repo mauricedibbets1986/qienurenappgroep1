@@ -18,7 +18,7 @@ public class UrenFormulier {
     @Enumerated(EnumType.STRING)
     private Maand maand;
     private String jaar;
-    private String opmerking;
+    private String opmerking = "";
     @Enumerated(EnumType.STRING)
     private StatusGoedkeuring statusGoedkeuring;
 

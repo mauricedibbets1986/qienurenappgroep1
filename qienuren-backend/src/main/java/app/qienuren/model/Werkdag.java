@@ -16,7 +16,7 @@ public class Werkdag {
     private double verlofUren;
     private double ziekteDag;
     private double trainingsUren;
-    private String verklaring;
+    private String verklaring = "";
 
     public String getVerklaring() {
 		return verklaring;
@@ -30,6 +30,14 @@ public class Werkdag {
     @JsonBackReference
     @JoinColumn(name = "urenformulier_id")
     private UrenFormulier urenformulier;
+
+    public Werkdag() {
+
+    };
+
+    public Werkdag(int datumDag) {
+        this.datumDag = String.valueOf(datumDag);
+    }
 
     public long getId() {
         return id;
