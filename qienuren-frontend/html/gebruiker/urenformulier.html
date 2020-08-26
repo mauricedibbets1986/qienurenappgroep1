@@ -190,6 +190,26 @@
             xhr.send(objJSON);
         }
       
+          function disableTable() {
+            for (x = 1; x <= 32; x++) {
+              document.getElementById('opdracht' + x).disabled = true;
+              document.getElementById('overwerk' + x).disabled = true;
+              document.getElementById('verlof' + x).disabled = true;
+              document.getElementById('ziektedag' + x).disabled = true;
+              document.getElementById('training' + x).disabled = true;
+              document.getElementById('verklaring' + x).disabled = true;
+            }
+          }
+          function enableTable() {
+            for (x = 1; x <= 32; x++) {
+              document.getElementById('opdracht' + x).disabled = false;
+              document.getElementById('overwerk' + x).disabled = false;
+              document.getElementById('verlof' + x).disabled = false;
+              document.getElementById('ziektedag' + x).disabled = false;
+              document.getElementById('training' + x).disabled = false;
+              document.getElementById('verklaring' + x).disabled = false;
+            }
+          }
 
   </script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -205,7 +225,7 @@
 </head>
 
 <body onload=generateTable()>
-  <!-- Modal -->
+  <!-- Modal bevestiging -->
   <div>
     <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog modal-sm">
@@ -214,7 +234,27 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
-            <p><b>Uren opgeslagen</b></p>
+            <p><b>Formulier opgestuurd!</b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- Modal uren overzicht -->
+    <div class="modal fade" id="myModal2" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Urenformulier van deze maand indienen?</h3>
+          </div>
+          <div class="modal-body">
+            <div id="showUrenformulier"></div>
+          </div>
+          <div class="modal-footer">
+            <h4>Ik heb het formulier goed nagekeken</h4><br>
+            <input type="checkbox" id="form-check" onchange="document.getElementById('indien-knop').disabled = !this.checked;"/>
+            <button type="button" class="btn btn-default button3" id="indien-knop" onclick="" data-dismiss="modal" data-toggle="modal" data-target="#myModal" disabled>Bevestigen</button>
+            <button type="button" class="btn btn-default button2" onclick="enableTable()" data-dismiss="modal">Annuleren</button>
           </div>
         </div>
       </div>
@@ -240,8 +280,7 @@
               <img src="../../image/profilepic.PNG" width="85" height="85" class="rounded-circle">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Profiel</a>
-              <a class="dropdown-item" href="#">Profiel bewerken</a>
+              <a class="dropdown-item" href="medewerkerprofiel.html"><b>PERSOON NAAM</b></a><hr>
               <a class="dropdown-item" href="#">Uitloggen</a>
             </div>
           </li>
@@ -252,9 +291,7 @@
     <!-- Breadcrumb -->
     <div>
       <ul class="breadcrumb">
-        <li><a href="https://www.qien.nl/">Qien</a></li>
-        <li><a href="inlogscherm.html">Log in</a></li>
-        <li><a href="medewerker.html">Medewerker overzicht</a></li>
+        <li><a href="medewerker.html">Medewerker Home</a></li>
         <li>Uren Invoeren</li>
       </ul>
     </div>
@@ -270,12 +307,12 @@
           <div class="sidebar">
             <button class="button2">Uren Invoeren</button>
             <button class="button2">Historie</button>
-            <button class="button2">Vakantie Dagen</button>
               <!-- Trigger the modal with a button -->
             <br>
             <br>
             <br>
             <button class="button3" onclick="urenOpslaanDag()" data-toggle="modal" data-target="#myModal">Opslaan</button>
+            <button type="button" onclick="disableTable()" class="btn btn-info btn-lg button1" data-toggle="modal" data-target="#myModal2">Formulier indienen</button>
           </div>
         </div>
         <!-- main content -->
