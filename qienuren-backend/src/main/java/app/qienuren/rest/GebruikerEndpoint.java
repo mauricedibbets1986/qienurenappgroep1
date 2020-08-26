@@ -194,6 +194,7 @@ public class GebruikerEndpoint {
         return returnValue;
     }
 
+    @PreAuthorize("hasAuthority('CREATE:GEBRUIKER')")
     @PostMapping("/admin/users/addBedrijf")
     public BedrijfDetailsResponse createBedrijf(@RequestBody BedrijfDetailsRequest bedrijfDetails) {
         GebruikerDto gebruikerDto = new GebruikerDto();
