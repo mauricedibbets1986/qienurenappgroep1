@@ -2,7 +2,6 @@ package app.qienuren.rest;
 
 import app.qienuren.controller.GebruikerService;
 import app.qienuren.controller.UrenFormulierService;
-import app.qienuren.model.Role;
 import app.qienuren.model.StatusGoedkeuring;
 import app.qienuren.model.UrenFormulier;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,14 +54,12 @@ public class UrenFormulierEndpoint {
         return urenFormulierService.getUrenFormulierById(uid);
     }
 
+    //FOUT getRol() BESTAAT NOG NIET
     @PutMapping("/{uid}/{id}/setstatus-goedkeuring")
     public UrenFormulier setStatusFormulierGoedkeuring(@PathVariable(value = "uid") long uid, @PathVariable(value = "id") long id) {
         StatusGoedkeuring huidigeStatus =  urenFormulierService.getUrenFormulierById(uid).getStatusGoedkeuring();
-        Role huidigeRol = gebruikerService.getGebruikerById(id).getRol();
-        urenFormulierService.setGoedkeuring(huidigeStatus, huidigeRol, uid);
+//        Roles huidigeRol = gebruikerService.getGebruikerById(id).getRol();
+//        urenFormulierService.setGoedkeuring(huidigeStatus, huidigeRol, uid);
         return urenFormulierService.getUrenFormulierById(uid);
     }
-
-
-
 }

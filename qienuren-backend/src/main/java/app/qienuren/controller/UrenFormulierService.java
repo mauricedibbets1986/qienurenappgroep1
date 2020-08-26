@@ -1,6 +1,6 @@
 package app.qienuren.controller;
 
-import app.qienuren.model.Role;
+import app.qienuren.gebruikerDto.Roles;
 import app.qienuren.model.StatusGoedkeuring;
 import app.qienuren.model.UrenFormulier;
 import app.qienuren.model.Werkdag;
@@ -81,23 +81,23 @@ public class UrenFormulierService {
         return getUrenFormulierById(uid);
     }
 
-    public UrenFormulier setGoedkeuring(StatusGoedkeuring huidigeStatus, Role huidigeRol, long uid){
+    public UrenFormulier setGoedkeuring(StatusGoedkeuring huidigeStatus, Roles huidigeRol, long uid){
         //Deze methode kijkt naar de huidige status van het urenformulier en de rol en kijkt
         // dan wat de volgende stap van goedkeuring is.
-        if (huidigeRol == Role.TRAINEE && huidigeStatus == StatusGoedkeuring.INGEDIEND_GEBRUIKER) {
+        if (huidigeRol == Roles.ROLE_TRAINEE && huidigeStatus == StatusGoedkeuring.INGEDIEND_GEBRUIKER) {
             getUrenFormulierById(uid).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_BEDRIJF);
             //methode notificatie naar admin
             //BEDRIJF GOEDKEURING VAN TRAINEE URENFORMULIER:
             //vergelijkt of iemand een trainee is en of het formulier is ingediend door de gebruiker.
             //Zet dan status goedkeuring om in CHECK_BEDRIJF
         }
-        if (huidigeRol == Role.TRAINEE && huidigeStatus == StatusGoedkeuring.GOEDGEKEURD_BEDRIJF) {
+        if (huidigeRol == Roles.ROLE_TRAINEE && huidigeStatus == StatusGoedkeuring.GOEDGEKEURD_BEDRIJF) {
             getUrenFormulierById(uid).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_ADMIN);
             //ADMIN GOEDKEURING TRAINEE URENFORMULIER NA BEDRIJF:
             //vergelijkt of iemand een trainee is en of de status goedkeuring staat op
             //goedgekeurd door bedrijf. Zo ja dan zet deze de status om naar CHECK_ADMIN
         }
-        if (huidigeRol == Role.MEDEWERKER && huidigeStatus == StatusGoedkeuring.INGEDIEND_GEBRUIKER) {
+        if (huidigeRol == Roles.ROLE_MEDEWERKER && huidigeStatus == StatusGoedkeuring.INGEDIEND_GEBRUIKER) {
             getUrenFormulierById(uid).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_ADMIN);
             //ADMIN GOEDKEURING MEDEWERKER (slaat bedrijf over voor werknemers Qien):
             //Vergelijkt of iemand een rol medewerker heeft en status goedkeuring staat op
