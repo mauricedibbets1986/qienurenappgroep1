@@ -150,6 +150,7 @@ p {
 }
 
 .button3{
+  margin-bottom:25px;
   border-radius: 30px;
   text-align: center;
   height: 50px;
@@ -335,6 +336,7 @@ ul.breadcrumb {
   
 .navbar{
   background-color: #C894F8;
+  min-height:120px;
 }
 
 .container{
@@ -344,7 +346,7 @@ ul.breadcrumb {
 
 .content{
   animation: transitionIn 0.5s;
-  padding: 10px;
+  padding: 15px 30px;
   border-style: solid;
   border-width: thin;
   border-color: rgb(212, 212, 212);
@@ -373,6 +375,19 @@ ul.breadcrumb {
     border: #212020;
     border-radius: 10px;
     border-style: none;
+}
+
+.login{
+  text-align: center;
+  padding: 30px;
+  background-color:#EAEAEA;
+  min-width: fit-content;
+  width: 100%;
+  min-height: 500px;
+  border: #212020;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: thin;
 }
 
 .urenform th{
