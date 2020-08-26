@@ -223,6 +223,21 @@ public class GebruikerEndpoint {
         return returnValue;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN') or #id == principal.userId")
+    @PutMapping("/users/{id}")
+    public GebruikerDetailsResponse updateGebruiker(@PathVariable String id, @RequestBody GebruikerDetailsRequest gebruikerDetailsRequest) {
+        GebruikerDetailsResponse returnValue = new GebruikerDetailsResponse();
+
+        GebruikerDto gebruikerDto = new GebruikerDto();
+        BeanUtils.copyProperties(gebruikerDetailsRequest, gebruikerDto);
+
+        GebruikerDto updatedGebruiker = gebruikerService.updateGebruiker(id, gebruikerDto);
+        BeanUtils.copyProperties(updatedGebruiker, returnValue);
+
+        return returnValue;
+    }
+
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/users")
     public Iterable<Gebruiker> getAllUsers() {

@@ -19,7 +19,7 @@ import java.util.HashSet;
 
 @Service
 @Transactional
-public class GebruikerService implements GebruikerServiceInterface{
+public class GebruikerService implements GebruikerServiceInterface {
     @Autowired
     GebruikerRepository gebruikerRepository;
 
@@ -160,7 +160,6 @@ public class GebruikerService implements GebruikerServiceInterface{
         }
         gebruiker.setRoles(roleEntities);
 
-
         Gebruiker opgeslagenGebruikerDetails = gebruikerRepository.save(gebruiker);
 
         GebruikerDto returnValue = new GebruikerDto();
@@ -168,4 +167,38 @@ public class GebruikerService implements GebruikerServiceInterface{
 
         return returnValue;
     }
+
+    public GebruikerDto updateGebruiker(String userId, GebruikerDto gebruikerDto) {
+        GebruikerDto returnValue = new GebruikerDto();
+        Gebruiker gebruiker = gebruikerRepository.findByUserId(userId);
+
+        if (gebruiker == null) {
+            throw new RuntimeException("GEEN GEBRUIKER GEVONDEN");
+        }
+        if (gebruikerDto.getVoornaam() != null && gebruikerDto.getVoornaam() !="")
+            gebruiker.setVoornaam(gebruikerDto.getVoornaam());
+        if (gebruikerDto.getAchternaam() != null && gebruikerDto.getAchternaam() !="")
+            gebruiker.setAchternaam(gebruikerDto.getAchternaam());
+        if (gebruikerDto.getEmail() != null && gebruikerDto.getEmail() !="")
+            gebruiker.setEmail(gebruikerDto.getEmail());
+        if (gebruikerDto.getAdres() != null && gebruikerDto.getAdres() !="")
+            gebruiker.setAdres(gebruikerDto.getAdres());
+        if (gebruikerDto.getEvtToevoeging() != null && gebruikerDto.getEvtToevoeging() !="")
+            gebruiker.setEvtToevoeging(gebruikerDto.getEvtToevoeging());
+        if (gebruikerDto.getPostcode() != null && gebruikerDto.getPostcode() !="")
+            gebruiker.setPostcode(gebruikerDto.getPostcode());
+        if (gebruikerDto.getWoonplaats() != null && gebruikerDto.getWoonplaats() !="")
+            gebruiker.setWoonplaats(gebruikerDto.getWoonplaats());
+        if (gebruikerDto.getGeboorteDatum() != null)
+            gebruiker.setGeboorteDatum(gebruikerDto.getGeboorteDatum());
+        if (gebruikerDto.getTelefoonNummer() != 0)
+            gebruiker.setTelefoonNummer(gebruikerDto.getTelefoonNummer());
+
+        Gebruiker updatedGebruiker = gebruikerRepository.save(gebruiker);
+
+        BeanUtils.copyProperties(gebruiker, returnValue);
+
+        return returnValue;
+    }
 }
+
