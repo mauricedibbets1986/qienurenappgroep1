@@ -52,6 +52,7 @@
             }
             jojo.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
             console.log("aliens!")
+            xhr.setRequestHeader("Authorization: " + localStorage.getItem("token"));
             jojo.send();
         }
 
@@ -79,7 +80,7 @@
                 }
             }
             jojo.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
-            console.log("aliens!")
+            xhr.setRequestHeader("Authorization: " + localStorage.getItem("token"));
             jojo.send();
         }
 
@@ -105,7 +106,7 @@
                 }
             }
             request.open("PUT", "http://localhost:8082/api/gebruiker/" + id, true);
-            console.log("aliens!")
+            xhr.setRequestHeader("Authorization: " + localStorage.getItem("token"));
             request.send();
         }
 
@@ -121,6 +122,7 @@
                 }
             }
             xhr.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
+            xhr.setRequestHeader("Authorization: " + localStorage.getItem("token"));
             xhr.send();
         }
 

@@ -41,7 +41,8 @@
                         <b>Geboortedatum:</b> ${databaseContents[x].geboorteDatum}<br>
                         <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
                         <b>E-mailadres:</b> ${databaseContents[x].emailadres}<br>
-                        <b>Rol:</b> ${databaseContents[x].rol.charAt(0) + databaseContents[x].rol.toLowerCase().slice(1)}<br>
+                       
+                        <!-- <b>Rol:</b> ${databaseContents[x].rol.charAt(0) + databaseContents[x].rol.toLowerCase().slice(1)}<br><
                         <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br
                         <hr>
                         </div>
@@ -53,10 +54,11 @@
             }
             var typ = document.getElementById("filter").value;
             if (typ == "all") {
-                xhr.open("GET", "http://localhost:8082/api/admin/all-users", true)
+                xhr.open("GET", "http://localhost:8082/api/users", true)
             } else {
                 xhr.open("GET", "http://localhost:8082/api/gebruiker/rol/" + typ, true)
             }
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
         }
     </script>

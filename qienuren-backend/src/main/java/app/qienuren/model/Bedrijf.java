@@ -4,19 +4,19 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "bedrijf")
-public class Bedrijf {
+public class Bedrijf extends Gebruiker {
+    private static final long serialVersionUID = 132432L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long Id;
+    private String userId;
     private String bedrijfsNaam;
     private String contactPersoon;
     private long telefoonNummer;
-    private String emailAdres;
+    private String email;
     private String adres;
     private String evtToevoeging;
     private String postcode;
@@ -26,14 +26,26 @@ public class Bedrijf {
     @JsonManagedReference
     private List<Gebruiker> lijstGebruikers = new ArrayList<>();
 
-    public long getId() { return Id; }
-    public void setId(long id) {
-        Id = id;
+    @JsonManagedReference
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    //join table with roles so a relation can be made, table columns:user_id(user.id from table user) AND roles_id(role.id from table role)
+    @JoinTable(name = "bedrijf_roles",
+            joinColumns = @JoinColumn(name = "bedrijf_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
+    private Collection<RoleEntity> roles;
+
+    public String getuserId() {
+        return userId;
+    }
+
+    public void setuserId(String userid) {
+        this.userId = userid;
     }
 
     public String getBedrijfsNaam() {
         return bedrijfsNaam;
     }
+
     public void setBedrijfsNaam(String bedrijfsNaam) {
         this.bedrijfsNaam = bedrijfsNaam;
     }
@@ -41,20 +53,23 @@ public class Bedrijf {
     public long getTelefoonNummer() {
         return telefoonNummer;
     }
+
     public void setTelefoonNummer(long telefoonNummer) {
         this.telefoonNummer = telefoonNummer;
     }
 
-    public String getEmailAdres() {
-        return emailAdres;
+    public String getEmail() {
+        return email;
     }
-    public void setEmailAdres(String emailAdres) {
-        this.emailAdres = emailAdres;
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAdres() {
         return adres;
     }
+
     public void setAdres(String adres) {
         this.adres = adres;
     }
@@ -62,6 +77,7 @@ public class Bedrijf {
     public String getEvtToevoeging() {
         return evtToevoeging;
     }
+
     public void setEvtToevoeging(String evtToevoeging) {
         this.evtToevoeging = evtToevoeging;
     }
@@ -69,6 +85,7 @@ public class Bedrijf {
     public String getPostcode() {
         return postcode;
     }
+
     public void setPostcode(String postcode) {
         this.postcode = postcode;
     }
@@ -76,6 +93,7 @@ public class Bedrijf {
     public String getPlaats() {
         return plaats;
     }
+
     public void setPlaats(String plaats) {
         this.plaats = plaats;
     }
@@ -83,10 +101,10 @@ public class Bedrijf {
     public String getContactPersoon() {
         return contactPersoon;
     }
+
     public void setContactPersoon(String contactPersoon) {
         this.contactPersoon = contactPersoon;
     }
-
 
     public List<Gebruiker> getLijstGebruikers() {
         return lijstGebruikers;
@@ -99,5 +117,25 @@ public class Bedrijf {
     public void addGebruikerToLijst(Gebruiker gebruiker) {
         lijstGebruikers.add(gebruiker);
         gebruiker.setBedrijf(this);
+    }
+
+    @Override
+    public String getUserId() {
+        return userId;
+    }
+
+    @Override
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    @Override
+    public Collection<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    @Override
+    public void setRoles(Collection<RoleEntity> roles) {
+        this.roles = roles;
     }
 }

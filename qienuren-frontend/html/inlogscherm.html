@@ -28,6 +28,47 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+        <script>
+            const submitLogInHandler = () => {
+              $(document).ready(() => {
+                let loginSubmitAction = () => {
+                  let obj = {};
+                  obj.email = document.getElementById("email").value;
+                  obj.password = document.getElementById("password").value;
+                  objJSON = JSON.stringify(obj);
+                  var xhr = new XMLHttpRequest();
+                  xhr.onreadystatechange = () => {
+                    var myToken = xhr.getResponseHeader("Authorization");
+                    var myUserId = xhr.getResponseHeader("userId");
+                    var myUserRole = xhr.getResponseHeader("userRole");
+        
+                    if (myToken && myUserId && myUserRole != null) {
+                      localStorage.setItem("token", myToken);
+                      localStorage.setItem("userId", myUserId);
+                      localStorage.setItem("userRole", myUserRole);
+                    }
+        
+                    if (myUserRole == "[ROLE_ADMIN]") {
+                      window.location.href = "./admin/admin.html";
+                    }
+                    if (myUserRole == "[ROLE_MEDEWERKER]") {
+                      window.location.href = "./gebruiker/medewerker.html";
+                    }
+                    if (myUserRole == "[ROLE_TRAINEE]") {
+                      window.location.href = "./gebruiker/trainee.html";
+                    }
+                    if (myUserRole == "[ROLE_BEDRIJF]") {
+                      window.location.href = "./gebruiker/opdrachtgever.html";
+                    }
+                  };
+                  xhr.open("POST", "http://localhost:8082/api/login", true);
+                  xhr.setRequestHeader("Content-Type", "application/json");
+                  xhr.send(objJSON);
+                };
+                loginSubmitAction();
+              });
+            };
+        </script>  
 </head>
 
 <body>
@@ -57,12 +98,12 @@
                     <div class="login">
                         <p>
                         <h2>Inloggen</h2>
-                        <b>E-mailadres<br> </b><input type=text id=gebruikersnaam><br>
-                        <b>Wachtwoord<br> </b><input type=password id=wachtwoord><br>
+                        <b>E-mailadres<br> </b><input type=text id=email><br>
+                        <b>Wachtwoord<br> </b><input type=password id=password><br>
                         <input type="checkbox"> Onthoud mij
                         </p>
-                        <input type="button" class="button3" onclick="window.location.href='admin/admin.html';"
-                            value="Log In"><br>
+                        <input type="button" class="button3" onclick="submitLogInHandler()" value="Log In" />
+                        <br>
                         <a href="">E-mailadres/wachtwoord vergeten?</a>
                     </div>
                 </div>
@@ -106,8 +147,20 @@
             </div>
         </div>
     </footer>
-
-
 </body>
-
 </html>
+
+<!--
+     xhr.setRequestHeader("Authorization: " + localStorage.getItem("token"));  
+    bij alle XMLHttpRequest deze code toevoegen zodat header token word meegestuurd( NA open() en VOOR send()! ) 
+    nieuwe endpoints postman voor testen(gebruik authorisatie met bearer token van een admin): 
+    medewerker aanmaken =============>  localhost:8082/api/admin/users/addMedewerker  (POST) 
+    admin aanmaken ==================>  localhost:8082/api/admin/users/addAdmin  (POST)
+    opdrachtgever(bedrijf) aanmaken =>  localhost:8082/api/admin/users/addBedrijf  (POST)
+    trainee aanmaken ================>  localhost:8082/api/admin/users/addTrainee (POST)
+    login ===========================>  localhost:8082/api/login (POST)
+    zie alle gebruikers =============>  localhost:8082/api/users  (GET)
+    zie individuele gebruiker(userId)>  localhost:8082/api/users/{userId}   (mag alleen admin/eigen account (bearer 1 van deze 2 gebruiken))  (GET)
+
+-->
+
