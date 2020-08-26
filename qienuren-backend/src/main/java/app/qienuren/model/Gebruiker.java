@@ -45,7 +45,6 @@ public class Gebruiker {
     private LocalDate geboorteDatum;
     private long telefoonNummer;
 
-    @Enumerated(EnumType.STRING)
     @OneToMany
     @JsonManagedReference
     private List<UrenFormulier> urenFormulier = new ArrayList<>();
