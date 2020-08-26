@@ -2,6 +2,7 @@ package app.qienuren.gebruikerDto;
 
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collection;
 
 public class GebruikerDto implements Serializable {
@@ -17,7 +18,7 @@ public class GebruikerDto implements Serializable {
     private String evtToevoeging;
     private String postcode;
     private String woonplaats;
-    private String geboorteDatum;
+    private LocalDate geboorteDatum;
     private long telefoonNummer;
     private String bedrijfsNaam;
     private String contactPersoon;
@@ -154,11 +155,11 @@ public class GebruikerDto implements Serializable {
         this.woonplaats = woonplaats;
     }
 
-    public String getGeboorteDatum() {
+    public LocalDate getGeboorteDatum() {
         return geboorteDatum;
     }
 
-    public void setGeboorteDatum(String geboorteDatum) {
+    public void setGeboorteDatum(LocalDate geboorteDatum) {
         this.geboorteDatum = geboorteDatum;
     }
 

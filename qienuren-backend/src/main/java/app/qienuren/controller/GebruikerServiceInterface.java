@@ -7,4 +7,5 @@ public interface GebruikerServiceInterface extends UserDetailsService {
     GebruikerDto createUser(GebruikerDto user);
     GebruikerDto getUser(String email);
     GebruikerDto getUserByUserId(String userId);
+    GebruikerDto updateGebruiker(String userId, GebruikerDto gebruiker);
 }
