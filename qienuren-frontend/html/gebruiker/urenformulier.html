@@ -59,6 +59,8 @@
       var y = "";
       var x = 0;
 
+      var xhr = new XMLHttpRequest();
+
       y += `<table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm urenform tableFixHead" cellspacing="0"
         width="100%">
         <thead>
@@ -73,22 +75,35 @@
             <th class="th-sm">Verklaring</th>
           </tr>
         </thead><tbody>`
-      for (x = 1; x <= aantalDagen; x++) {
-        y += `<tr>
-            <td>${x}</td>
-            <td><input type="text" id="opdracht${x}" size="2" placeholder="0"></td>
-            <td><input type="text" id="overwerk${x}" size="2" placeholder="0"></td>
-            <td><input type="text" id="verlof${x}" size="2" placeholder="0"></td>
-            <td><input type="text" id="ziektedag${x}" size="2" placeholder="0"></td>
-            <td><input type="text" id="training${x}" size="2" placeholder="0"></td>
-            <td><input type="text" id="overig${x}" size="2" placeholder="0"></td>
-            <td><input type="text" id="verklaring${x}"></td>
-            </tr>
-            `
-      }
-      y += `</tbody></table>`
-
-      document.getElementById("showUrenformulier").innerHTML = y;
+      xhr.onreadystatechange = function() {
+        if (this.readyState == 4) {
+          var obj = JSON.parse(this.responseText);
+          var c;
+          for (c = 0; c < obj.length; c++) {
+           
+              for (x = 0; x < obj[c].werkdag.length; x++) {
+              
+              y += `<tr>
+                <td id="datum${x}">${obj[c].werkdag[x].datumDag}</td>
+                <td><input type="text" id="opdracht${x}" size="2" value="${obj[c].werkdag[x].opdrachtUren}"></td>
+                <td><input type="text" id="overwerk${x}" size="2" value="${obj[c].werkdag[x].overwerkUren}"></td>
+                <td><input type="text" id="verlof${x}" size="2" value="${obj[c].werkdag[x].verlofUren}"></td>
+                <td><input type="text" id="ziektedag${x}" size="2" value="${obj[c].werkdag[x].ziekteDag}"></td>
+                <td><input type="text" id="training${x}" size="2" value="${obj[c].werkdag[x].trainingsUren}"></td>
+                <td><input type="text" id="overig${x}" size="2" value="${obj[c].werkdag[x].overigeUren}"></td>
+                <td><input type="text" id="verklaring${x}" value="${obj[c].werkdag[x].verklaring}"></td>
+                </tr>
+                `
+            }
+          }
+          y += `</tbody></table>`;
+          document.getElementById("showUrenformulier").innerHTML = y;
+        }
+      };
+      
+      xhr.open("GET", "http://localhost:8082/api/gebruiker/1/urenformulieren/", true);
+      xhr.send();
+      
     }
 
     // saves hours to work-day in database
@@ -99,7 +114,8 @@
 
       for (x = 1; x <= aantalDagen; x++) {
         var obj = {};
-        obj.datumDag = x;
+        obj.id = 
+        obj.datumDag = document.getElementById("datum" + x).value;
         obj.opdrachtUren = document.getElementById("opdracht" + x).value;
         obj.overwerkUren = document.getElementById("overwerk" + x).value;
         obj.verlofUren = document.getElementById("verlof" + x).value;

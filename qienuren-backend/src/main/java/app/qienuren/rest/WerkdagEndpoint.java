@@ -28,6 +28,10 @@ public class WerkdagEndpoint {
         } catch (Exception e) {
             return e.getMessage();
         }
+    }
 
+    @PutMapping("/edit/{id}")
+    public Werkdag editWerkdag(@PathVariable(value = "id") Long id, @RequestBody Werkdag werkdag) {
+       return werkdagService.editWerkdag(id, werkdag);
     }
 }

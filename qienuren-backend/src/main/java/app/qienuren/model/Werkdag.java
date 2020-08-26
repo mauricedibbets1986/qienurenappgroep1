@@ -16,6 +16,7 @@ public class Werkdag {
     private double verlofUren;
     private double ziekteDag;
     private double trainingsUren;
+    private double overigeUren;
     private String verklaring = "";
 
     public String getVerklaring() {
@@ -83,7 +84,7 @@ public class Werkdag {
         this.verlofUren = verlofUren;
     }
 
-    public double isZiekteDag() {
+    public double getZiekteDag() {
         return ziekteDag;
     }
 
@@ -97,5 +98,13 @@ public class Werkdag {
 
     public void setTrainingsUren(double trainingsUren) {
         this.trainingsUren = trainingsUren;
+    }
+
+    public double getOverigeUren() {
+        return overigeUren;
+    }
+
+    public void setOverigeUren(double overigeUren) {
+        this.overigeUren = overigeUren;
     }
 }
