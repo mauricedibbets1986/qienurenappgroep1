@@ -225,4 +225,9 @@ public class Gebruiker {
     public void setBedrijf(Bedrijf bedrijf) {
         this.bedrijf = bedrijf;
     }
+
+    public void addUrenFormulierToArray(UrenFormulier uf) {
+        urenFormulier.add(uf);
+        uf.setGebruiker(this);
+    }
 }
