@@ -335,6 +335,7 @@ ul.breadcrumb {
   
 .navbar{
   background-color: #C894F8;
+  min-height:120px;
 }
 
 .container{
@@ -374,6 +375,20 @@ ul.breadcrumb {
     border-radius: 10px;
     border-style: none;
 }
+
+.login{
+  text-align: center;
+  padding: 30px;
+  background-color:#EAEAEA;
+  min-width: fit-content;
+  width: 100%;
+  min-height: 500px;
+  border: #212020;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: thin;
+}
+
 
 .urenform th{
   background-color: #682BAA;
