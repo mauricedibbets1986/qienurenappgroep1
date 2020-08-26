@@ -18,8 +18,7 @@ public class UrenFormulier {
     @Enumerated(EnumType.STRING)
     private Maand maand;
     private String jaar;
-    private String opmerking;
-    private boolean goedkeuring;
+    private String opmerking = "";
     @Enumerated(EnumType.STRING)
     private StatusGoedkeuring statusGoedkeuring;
 
@@ -48,15 +47,6 @@ public class UrenFormulier {
 
     public void setOpmerking(String opmerking) {
         this.opmerking = opmerking;
-    }
-
-    public boolean isGoedkeuring() {
-        //code voor aanroepen methode in bedrijf die goedkeuring ID trainee naar true zet.
-        return goedkeuring;
-    }
-
-    public void setGoedkeuring(boolean goedkeuring) {
-        this.goedkeuring = goedkeuring;
     }
 
     public String getJaar() {

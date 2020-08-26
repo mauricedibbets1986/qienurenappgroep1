@@ -12,7 +12,7 @@
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <!-- Eigen CSS -->
   <link rel="stylesheet" href="../../css/Stylesheet.css" />
-  <title>Medewerker Uren Invoeren</title>
+  <title>Urenformulier sjabloon</title>
 
   <!-- Eigen JavaScript -->
   <script>
@@ -32,26 +32,9 @@
       $('.dataTables_length').addClass('bs-select');
     });
 
-    // function test() {
-    //   var myRows = [];
-    //   var $headers = $("th");
-    //   var $rows = $("tbody tr").each(function (index) {
-    //     $cells = $(this).find("td");
-    //     myRows[index] = {};
-    //     $cells.each(function (cellIndex) {
-    //       myRows[index][$($headers[cellIndex]).html()] = $(this).html();
-    //     });
-    //   });
-
-    //   // Let's put this in the object like you want and convert to JSON (Note: jQuery will also do this for you on the Ajax request)
-    //   var myObj = {};
-    //   myObj.myrows = myRows;
-    //   alert(JSON.stringify(myObj));
-    // }
-
-
     // here the table is generated with input fields for the employee to fill in
     function generateTable() {
+        console.log("table begin to load");
       maand = document.getElementById("maand-formulier").value;
       jaar = document.getElementById("jaar-formulier").value;
       var aantalDagen = dagenInMaand(jaar, maand);
@@ -171,27 +154,8 @@
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send();
         }
-
-        // creates new urenformulier in database
-        function nieuwUrenFormulier() {
-            var obj = {};
-            obj.jaar = document.getElementById("jaar-formulier").value;
-            obj.maand = document.getElementById("maand-formulier").value;
-            objJSON = JSON.stringify(obj);
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-               if (xhr.readyState == 4) {
-                  var objresponse = JSON.parse(this.responseText);
-                  return objresponse;
-               }
-            }
-            xhr.open("POST", "http://localhost:8082/api/urenformulier/new", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(objJSON);
-        }
-      
-
   </script>
+
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

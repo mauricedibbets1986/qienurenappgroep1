@@ -93,7 +93,7 @@ public class GebruikerService {
     }
 
     public UrenFormulier changestatusUrenFormulier(UrenFormulier urenFormulier){
-        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.CHECKGEBRUIKER);
+        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
         return urenFormulier;
     }
 
