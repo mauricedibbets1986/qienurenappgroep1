@@ -91,6 +91,28 @@
       document.getElementById("showUrenformulier").innerHTML = y;
     }
 
+    function disableTable(){
+        for (x = 1; x <= 32; x++) {
+       document.getElementById('opdracht'+x).disabled = true;
+       document.getElementById('overwerk'+x).disabled = true;
+       document.getElementById('verlof'+x).disabled = true;
+      document.getElementById('ziektedag'+x).disabled = true;
+       document.getElementById('training'+x).disabled = true;
+       document.getElementById('verklaring'+x).disabled = true;
+      }
+    }
+      function enableTable(){
+        for (x = 1; x <= 32; x++) {
+       document.getElementById('opdracht'+x).disabled = false;
+       document.getElementById('overwerk'+x).disabled = false;
+       document.getElementById('verlof'+x).disabled = false;
+      document.getElementById('ziektedag'+x).disabled = false;
+       document.getElementById('training'+x).disabled = false;
+       document.getElementById('verklaring'+x).disabled = false;
+      }
+      }
+
+
     // saves hours to work-day in database
     function urenOpslaanDag() {
       maand = document.getElementById("maand-formulier").value;
@@ -220,6 +242,26 @@
       </div>
     </div>
   </div>
+    <!-- Modal uren form -->
+    <div class="modal fade" id="myModal2" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Urenformulier van deze maand indienen?</h3>
+          </div>
+          <div class="modal-body">
+            <div id="showUrenformulier"></div>
+          </div>
+          <div class="modal-footer">
+            <h4>Ik heb het formulier goed nagekeken</h4><br>
+            <input type="checkbox" id="form-check" onchange="document.getElementById('indien-knop').disabled = !this.checked;"/>
+            <button type="button" class="btn btn-default button3" id="indien-knop" onclick="" data-dismiss="modal" data-toggle="modal" data-target="#myModal" disabled>Bevestigen</button>
+            <button type="button" class="btn btn-default button2" onclick="enableTable()" data-dismiss="modal">annuleren</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Header -->
   <header>
     <!-- Qien Logo -->
@@ -270,12 +312,12 @@
           <div class="sidebar">
             <button class="button2">Uren Invoeren</button>
             <button class="button2">Historie</button>
-            <button class="button2">Vakantie Dagen</button>
               <!-- Trigger the modal with a button -->
             <br>
             <br>
             <br>
             <button class="button3" onclick="urenOpslaanDag()" data-toggle="modal" data-target="#myModal">Opslaan</button>
+            <button type="button" onclick="disableTable()" class="btn btn-info btn-lg button1" data-toggle="modal" data-target="#myModal2">Formulier indienen</button>
           </div>
         </div>
         <!-- main content -->
