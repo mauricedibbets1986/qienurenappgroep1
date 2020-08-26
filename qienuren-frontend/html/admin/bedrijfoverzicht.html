@@ -62,6 +62,7 @@
                 document.getElementById("bedrijvenOverzicht").innerHTML = bedrijfString;
             }
             xhr.open("GET", "http://localhost:8082/api/bedrijf/all", true)
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
         }
 
@@ -74,6 +75,7 @@
             var xhr = new XMLHttpRequest();
             xhr.open("PUT", "http://localhost:8082/api/bedrijf/" + obj.bid + "/" + obj.gid, true);
             xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
         }
     </script>
