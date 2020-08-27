@@ -23,7 +23,7 @@ public class RoleEntity implements Serializable {
     private Collection<Gebruiker> users;
 
     //join table with authorities so a relation can be made, table columns:roles_id(role.id from table role) AND authorities_id(authority.id from table authority)
-    @JsonManagedReference
+    //@JsonManagedReference
     @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinTable(name = "roles_authorities",
             joinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"),
