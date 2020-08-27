@@ -116,7 +116,7 @@ public class GebruikerEndpoint {
 
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
     @GetMapping("/gebruiker/{id}/urenformulieren")
-    public Iterable<UrenFormulier> getUrenformulierenByGebruiker(@PathVariable(value = "id") long id) {
+    public Iterable<UrenFormulier> getUrenformulierenByGebruiker(@PathVariable(value = "id") String id) {
         return gebruikerService.getUrenformulierenVanGebruiker(id);
     }
 
@@ -242,6 +242,12 @@ public class GebruikerEndpoint {
     @GetMapping("/users")
     public Iterable<Gebruiker> getAllUsers() {
         return gebruikerService.getAllUsers();
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping("/urenformulier/new")
+    public UrenFormulier newUrenFormulier(@RequestBody UrenFormulier urenFormulier) {
+        return urenFormulierService.addNewUrenFormulier(urenFormulier);
     }
 }
 
