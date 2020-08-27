@@ -2,15 +2,11 @@ package app.qienuren.rest;
 
 import app.qienuren.controller.GebruikerService;
 import app.qienuren.controller.UrenFormulierService;
-import app.qienuren.gebruikerDto.Roles;
-import app.qienuren.model.RoleEntity;
 import app.qienuren.model.StatusGoedkeuring;
 import app.qienuren.model.UrenFormulier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/urenformulier")
@@ -61,36 +57,49 @@ public class UrenFormulierEndpoint {
         return urenFormulierService.getUrenFormulierById(id);
     }
 
+
+    //goedkeuringen endpoints gebruiker_ingediend, admin
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
-    @PutMapping("/{uid}/setstatus-indienengebruiker")
-    public UrenFormulier setStatusFormulierIngediendGebruiker(@PathVariable(value = "uid") long uid) {
-        urenFormulierService.setIndienen(uid);
-        return urenFormulierService.getUrenFormulierById(uid);
+    @PutMapping("/{urenformulierid}/setstatus-indienengebruiker")
+    public UrenFormulier setStatusFormulierIngediendGebruiker(@PathVariable(value = "urenformulierid") long urenformulierid) {
+        urenFormulierService.setIndienen(urenformulierid, "GEBRUIKER");
+        return urenFormulierService.getUrenFormulierById(urenformulierid);
+    }
+    @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
+    @PutMapping("/{urenformulierid}/setstatus-goedkeuring-admin")
+    public UrenFormulier setStatusGoedkeuringAdmin(@PathVariable(value = "urenformulierid") long urenformulierid) {
+        urenFormulierService.setIndienen(urenformulierid, "ADMIN");
+        return urenFormulierService.getUrenFormulierById(urenformulierid);
+    }
+    @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
+    @PutMapping("/{urenformulierid}/setstatus-goedkeuring-bedrijf")
+    public UrenFormulier setStatusGoedkeuringBedrijf(@PathVariable(value = "urenformulierid") long urenformulierid) {
+        urenFormulierService.setIndienen(urenformulierid, "BEDRIJF");
+        return urenFormulierService.getUrenFormulierById(urenformulierid);
     }
 
-
-    @PreAuthorize("hasAuthority('APPROVE:URENFORMULIER')")
-    @PutMapping("/{uid}/{id}/setstatus-goedkeuring")
-    public UrenFormulier setStatusFormulierGoedkeuring(@PathVariable(value = "uid") long uid, @PathVariable(value = "id") long id) {
-        StatusGoedkeuring huidigeStatus = urenFormulierService.getUrenFormulierById(uid).getStatusGoedkeuring();
-        Collection<RoleEntity> roleCollection = gebruikerService.getGebruikerById(id).getRoles();
-        for (RoleEntity rol : roleCollection) {
-            if (rol.equals(Roles.ROLE_ADMIN)) {
-                this.huidigeRol = rol.toString();
-            }
-            if (rol.equals(Roles.ROLE_TRAINEE)) {
-                this.huidigeRol = rol.toString();
-            }
-            if (rol.equals(Roles.ROLE_BEDRIJF)) {
-                this.huidigeRol = rol.toString();
-            }
-            if (rol.equals(Roles.ROLE_MEDEWERKER)) {
-                this.huidigeRol = rol.toString();
-            }
-        }
-        urenFormulierService.setGoedkeuring(huidigeStatus, huidigeRol, uid);
-        return urenFormulierService.getUrenFormulierById(uid);
-    }
+//    @PreAuthorize("hasAuthority('APPROVE:URENFORMULIER')")
+//    @PutMapping("/{urenformulierid}/{id}/setstatus-goedkeuring")
+//    public UrenFormulier setStatusFormulierGoedkeuring(@PathVariable(value = "urenformulierid") long urenformulierid, @PathVariable(value = "id") long id) {
+//        StatusGoedkeuring huidigeStatus = urenFormulierService.getUrenFormulierById(urenformulierid).getStatusGoedkeuring();
+//        Collection<RoleEntity> roleCollection = gebruikerService.getGebruikerById(id).getRoles();
+//        for (RoleEntity rol : roleCollection) {
+//            if (rol.equals(Roles.ROLE_ADMIN)) {
+//                this.huidigeRol = rol.toString();
+//            }
+//            if (rol.equals(Roles.ROLE_TRAINEE)) {
+//                this.huidigeRol = rol.toString();
+//            }
+//            if (rol.equals(Roles.ROLE_BEDRIJF)) {
+//                this.huidigeRol = rol.toString();
+//            }
+//            if (rol.equals(Roles.ROLE_MEDEWERKER)) {
+//                this.huidigeRol = rol.toString();
+//            }
+//        }
+//        urenFormulierService.setGoedkeuring(huidigeStatus, huidigeRol, urenformulierid);
+//        return urenFormulierService.getUrenFormulierById(urenformulierid);
+//    }
 
     @PreAuthorize("hasAuthority('APPROVE:URENFORMULIER')")
     public UrenFormulier setAfkeuring(long uid) {
