@@ -11,7 +11,7 @@ public class BedrijfDetailsRequest {
     private String evtToevoeging;
     private String postcode;
     private String woonplaats;
-    private LocalDate geboorteDatum;
+//    private LocalDate geboorteDatum;
     private long telefoonNummer;
 
     public String getBedrijfsNaam() {
@@ -78,13 +78,13 @@ public class BedrijfDetailsRequest {
         this.woonplaats = woonplaats;
     }
 
-    public LocalDate getGeboorteDatum() {
-        return geboorteDatum;
-    }
-
-    public void setGeboorteDatum(LocalDate geboorteDatum) {
-        this.geboorteDatum = geboorteDatum;
-    }
+//    public LocalDate getGeboorteDatum() {
+//        return geboorteDatum;
+//    }
+//
+//    public void setGeboorteDatum(LocalDate geboorteDatum) {
+//        this.geboorteDatum = geboorteDatum;
+//    }
 
     public long getTelefoonNummer() {
         return telefoonNummer;
