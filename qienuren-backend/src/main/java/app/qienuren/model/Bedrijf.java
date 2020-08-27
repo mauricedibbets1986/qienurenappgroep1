@@ -12,7 +12,6 @@ import java.util.List;
 public class Bedrijf extends Gebruiker {
     private static final long serialVersionUID = 132432L;
 
-    private String userId;
     private String bedrijfsNaam;
     private String contactPersoon;
     private long telefoonNummer;
@@ -26,21 +25,13 @@ public class Bedrijf extends Gebruiker {
     @JsonManagedReference
     private List<Gebruiker> lijstGebruikers = new ArrayList<>();
 
-    @JsonManagedReference
+
     @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     //join table with roles so a relation can be made, table columns:user_id(user.id from table user) AND roles_id(role.id from table role)
     @JoinTable(name = "bedrijf_roles",
             joinColumns = @JoinColumn(name = "bedrijf_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
     private Collection<RoleEntity> roles;
-
-    public String getuserId() {
-        return userId;
-    }
-
-    public void setuserId(String userid) {
-        this.userId = userid;
-    }
 
     public String getBedrijfsNaam() {
         return bedrijfsNaam;
@@ -117,16 +108,6 @@ public class Bedrijf extends Gebruiker {
     public void addGebruikerToLijst(Gebruiker gebruiker) {
         lijstGebruikers.add(gebruiker);
         gebruiker.setBedrijf(this);
-    }
-
-    @Override
-    public String getUserId() {
-        return userId;
-    }
-
-    @Override
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     @Override

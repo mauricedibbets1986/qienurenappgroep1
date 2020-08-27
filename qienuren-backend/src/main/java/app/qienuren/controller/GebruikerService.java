@@ -101,8 +101,8 @@ public class GebruikerService implements GebruikerServiceInterface {
 
     }
 
-    public Iterable<UrenFormulier> getUrenformulierenVanGebruiker(long id) {
-        return gebruikerRepository.findById(id).get().getUrenFormulier();
+    public Iterable<UrenFormulier> getUrenformulierenVanGebruiker(String id) {
+        return gebruikerRepository.findByUserId(id).getUrenFormulier();
     }
 
     public UrenFormulier changestatusUrenFormulier(UrenFormulier urenFormulier) {
