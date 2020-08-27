@@ -26,7 +26,7 @@ public class Gebruiker {
     private String achternaam;
     @Column(nullable = false, length = 100)
     private String email;
-    @JsonManagedReference
+
     @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     //join table with roles so a relation can be made, table columns:user_id(user.id from table user) AND roles_id(role.id from table role)
     @JoinTable(name = "user_roles",
