@@ -200,5 +200,14 @@ public class GebruikerService implements GebruikerServiceInterface {
 
         return returnValue;
     }
+
+    @Override
+    public void deleteGebruiker(String userId) {
+        Gebruiker gebruiker = gebruikerRepository.findByUserId(userId);
+        if(gebruiker == null) {
+            throw new RuntimeException("NO RECORD FOUND");
+        }
+        gebruikerRepository.delete(gebruiker);
+    }
 }
 
