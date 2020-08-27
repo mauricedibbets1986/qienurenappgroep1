@@ -237,6 +237,13 @@ public class GebruikerEndpoint {
         return returnValue;
     }
 
+    @PreAuthorize("hasAuthority('DELETE:GEBRUIKER')")
+    @DeleteMapping("/users/{userId}")
+    public String deleteUser(@PathVariable String userId){
+        gebruikerService.deleteGebruiker(userId);
+        return "Delete Succes";
+    }
+
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/users")
