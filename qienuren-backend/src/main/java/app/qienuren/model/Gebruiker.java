@@ -79,6 +79,7 @@ public class Gebruiker {
         this.urenFormulier = urenFormulier;
         this.berichtenLijst = berichtenLijst;
         this.bedrijf = bedrijf;
+
     }
 
     public long getId() {
@@ -228,5 +229,10 @@ public class Gebruiker {
     public void addUrenFormulierToArray(UrenFormulier uf) {
         urenFormulier.add(uf);
         uf.setGebruiker(this);
+    }
+
+    public String getOpdrachtgever(){
+        if(this.bedrijf == null) return "";
+        else return this.bedrijf.getBedrijfsNaam();
     }
 }
