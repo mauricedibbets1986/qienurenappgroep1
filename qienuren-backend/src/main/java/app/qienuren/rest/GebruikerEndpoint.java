@@ -1,9 +1,6 @@
 package app.qienuren.rest;
 
-import app.qienuren.controller.BedrijfService;
-import app.qienuren.controller.GebruikerRepository;
-import app.qienuren.controller.GebruikerService;
-import app.qienuren.controller.UrenFormulierService;
+import app.qienuren.controller.*;
 import app.qienuren.gebruikerDto.*;
 import app.qienuren.model.Gebruiker;
 import app.qienuren.model.StatusGoedkeuring;
@@ -33,6 +30,9 @@ public class GebruikerEndpoint {
 
     @Autowired
     BedrijfService bedrijfService;
+
+    @Autowired
+    WerkdagService werkdagService;
 
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
     @GetMapping("/gebruiker/{gebruikerid}/{urenformulierid}/{werkdagid}")
@@ -249,6 +249,13 @@ public class GebruikerEndpoint {
     public UrenFormulier newUrenFormulier(@RequestBody UrenFormulier urenFormulier) {
         return urenFormulierService.addNewUrenFormulier(urenFormulier);
     }
+
+    @PreAuthorize("hasRole('MEDEWERKER') or hasRole('TRAINEE')")
+    @PutMapping("/werkdag/edit/{werkdagid}")
+    public void newUrenFormulier(@RequestBody Werkdag werkdag, @PathVariable(value = "werkdagid") long id) {
+        werkdagService.editWerkdag(werkdag, id);
+    }
+
 }
 
 
