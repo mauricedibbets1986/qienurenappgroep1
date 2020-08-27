@@ -58,7 +58,7 @@ public class UrenFormulierEndpoint {
     }
 
 
-    //goedkeuringen endpoints gebruiker_ingediend, admin
+    //goedkeuringen endpoints gebruiker_ingediend, admin_ingediend, bedrijf_ingediend
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
     @PutMapping("/{urenformulierid}/setstatus-indienengebruiker")
     public UrenFormulier setStatusFormulierIngediendGebruiker(@PathVariable(value = "urenformulierid") long urenformulierid) {
