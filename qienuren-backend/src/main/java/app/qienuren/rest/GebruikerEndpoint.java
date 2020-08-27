@@ -224,14 +224,14 @@ public class GebruikerEndpoint {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN') or #id == principal.userId")
-    @PutMapping("/users/{id}")
-    public GebruikerDetailsResponse updateGebruiker(@PathVariable String id, @RequestBody GebruikerDetailsRequest gebruikerDetailsRequest) {
+    @PutMapping("/users/{userId}")
+    public GebruikerDetailsResponse updateGebruiker(@PathVariable String userId, @RequestBody GebruikerDetailsRequest gebruikerDetailsRequest) {
         GebruikerDetailsResponse returnValue = new GebruikerDetailsResponse();
 
         GebruikerDto gebruikerDto = new GebruikerDto();
         BeanUtils.copyProperties(gebruikerDetailsRequest, gebruikerDto);
 
-        GebruikerDto updatedGebruiker = gebruikerService.updateGebruiker(id, gebruikerDto);
+        GebruikerDto updatedGebruiker = gebruikerService.updateGebruiker(userId, gebruikerDto);
         BeanUtils.copyProperties(updatedGebruiker, returnValue);
 
         return returnValue;
