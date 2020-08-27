@@ -19,9 +19,9 @@
     <!-- Eigen JavaScript -->
     <script>
         function persoonsGegevens() {
-            var jojo = new XMLHttpRequest();
+            var xhr = new XMLHttpRequest();
             var id = document.getElementById("empID").value;
-            jojo.onreadystatechange = function () {
+            xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     var databaseContents = JSON.parse(this.responseText);
                     var employeeString = "";
@@ -42,8 +42,10 @@
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
                 }
             }
-            jojo.open("GET", "http://localhost:8082/api/gebruiker/"+id, true);
-            jojo.send();
+            xhr.open("GET", "http://localhost:8082/api/gebruiker/"+id, true);
+            console.log("werkt dit?");
+            xhr.setRequestHeader("Authorization" , localStorage.getItem("token"));
+            xhr.send();
         }
 
         function gegevensAanpassen() {
@@ -66,7 +68,7 @@
                 }
             }
             xhr.open("PUT", "http://localhost:8082/api/gebruiker/changedetails/" + id, true);
-            xhr.setRequestHeader("Content-type", "application/json")
+            xhr.setRequestHeader("Content-type", "application/json", "Authorization" , localStorage.getItem("token"))
             xhr.send(objJSON);
         }
 
