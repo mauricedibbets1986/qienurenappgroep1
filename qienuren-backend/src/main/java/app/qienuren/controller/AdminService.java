@@ -5,10 +5,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class AdminService {
-
-    public Admin addAdmin(Admin admin) {
-        return adminRepository.save(admin);
-        }
-    }
+public class AdminService {}
 
