@@ -52,7 +52,7 @@
             }
             jojo.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
             console.log("aliens!")
-            xhr.setRequestHeader("Authorization: " + localStorage.getItem("token"));
+            xhr.setRequestHeader("Authorization" + localStorage.getItem("token"));
             jojo.send();
         }
 

@@ -17,13 +17,6 @@
   <!-- Eigen JavaScript -->
   <script>
 
-    var aantalDagen;
-
-    const dagenInMaand = (jaar, maand) => {     // tel 1 bij maand op omdat DATE niet 0-based is     
-      maand = parseInt(maand) + 1;
-      return new Date(jaar, maand, 0).getDate();
-    }
-
     $(document).ready(function () {
       $('#dtVerticalScrollExample').DataTable({
         "scrollY": "10px",
@@ -68,7 +61,8 @@
             <th class="th-sm">Overig</th>
             <th class="th-sm">Verklaring</th>
           </tr>
-        </thead><tbody>`
+        </thead><tbody>
+        `
 
       xhr.onreadystatechange = function() {
         if (this.readyState == 4) {
@@ -100,7 +94,6 @@
       xhr.open("GET", "http://localhost:8082/api/gebruiker/" + localStorage.getItem("userId") + "/urenformulieren/", true);
       xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
       xhr.send();
-      
     }
 
     function urenOpslaanDag() {
@@ -208,6 +201,23 @@
             }
           }
 
+            function gebruikersnaam() {
+              var naam = "";
+              var xhr = new XMLHttpRequest();
+              xhr.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                  var obj = JSON.parse(this.responseText);
+                  naam = obj.voornaam + " " + obj.achternaam;
+                }
+
+                document.getElementById("gebruikersnaam").innerHTML = naam;
+
+              }
+              xhr.open("GET", "http://localhost:8082/api/users/" + localStorage.getItem("userId"), true);
+              xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+              xhr.send();
+            }
+
   </script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -221,7 +231,7 @@
     crossorigin="anonymous"></script>
 </head>
 
-<body onload=generateTable()>
+<body onload="generateTable(),  gebruikersnaam()">
   <!-- Modal bevestiging -->
   <div>
     <div class="modal fade" id="myModal" role="dialog">
@@ -277,7 +287,7 @@
               <img src="../../image/profilepic.PNG" width="85" height="85" class="rounded-circle">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="medewerkerprofiel.html"><b>PERSOON NAAM</b></a><hr>
+              <a class="dropdown-item" href="medewerkerprofiel.html"><b><div id="gebruikersnaam"></div></b></a><hr>
               <a class="dropdown-item" href="#">Uitloggen</a>
             </div>
           </li>
