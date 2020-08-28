@@ -6,45 +6,45 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!-- Eigen CSS -->
     <link rel="stylesheet" href="../../css/Stylesheet.css" />
     <!-- ../../css/Stylesheet.css -->
-
     <title>Nieuw medewerker/trainee aanmaken</title>
-
     <!-- Eigen JavaScript -->
     <script>
         function gebruikerToevoegen() {
+            // var radioTypeTrainee = document.getElementById("type-trainee").value;
+            // var radioTypeMedewerker = document.getElementById("type-medewerker").value;
+            // var radioTypeBedrijf = document.getElementById("type-bedrijf").value;
+            // var radioTypeAdministrator = document.getElementById("type-administrator").value;
             var obj = {};
-
             var form = document.forms["type-form"];
             var typ = form["soort"].value;
-
             obj.voornaam = document.getElementById("voornaam").value;
             obj.achternaam = document.getElementById("achternaam").value;
             obj.adres = document.getElementById("adres").value;
             obj.evtToevoeging = document.getElementById("evtToevoeging").value;
             obj.postcode = document.getElementById("postcode").value;
             obj.woonplaats = document.getElementById("woonplaats").value;
-            obj.geboorteDatum = document.getElementById("geboorteDatum").value;
+            obj.geboorteDatum = document.getElementById("kalenderGeboortedatum").value;
             obj.telefoonNummer = document.getElementById("telefoonNummer").value;
-            obj.emailadres = document.getElementById("emailadres").value;
+            obj.email = document.getElementById("emailadres").value;
+            obj.password = document.getElementById("wachtwoord").value;
             obj.rol = typ;
-            objJSON = JSON.stringify(obj);
+            var objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 console.log("answer in console");
             }
-            xhr.open("POST", "http://localhost:8082/api/admin/new-admin", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-
-            xhr.send(objJSON);
-            alert("Nieuwe " + typ.toLowerCase() + " aangemaakt")
+                xhr.open("POST", "http://localhost:8082/api/admin/users/addAdmin", true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+                xhr.send(objJSON);
+                window.location.href = 'gebruikeroverzicht.html'
+            
         }
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -102,7 +102,6 @@
         </div>
     </header>
 
-
     <!-- Main content -->
     <main>
         <div class="container">
@@ -110,7 +109,8 @@
                 <!-- sidebar -->
                 <div class="col-sm-3">
                     <div class="sidebar">
-                        <button class="button1" onclick="window.location.href='gebruikeroverzicht.html'">Terug naar overzicht</button>
+                        <button class="button1" onclick="window.location.href='gebruikeroverzicht.html'">Terug naar
+                            overzicht</button>
                         <button class="button2" onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker
                             aanpassen</button>
                     </div>
@@ -118,35 +118,35 @@
                 <!-- main content -->
                 <div class="col-lg-9">
                     <div class="content">
+                        <br>
                         <h2>NAW-gegevens nieuwe gebruiker</h2>
                         <div class="body-form">
                             <form name="type-form">
+                                <input type="radio" id="type-trainee" name="soort" value="TRAINEE" checked="checked">
+                                <label for="type-trainee">Trainee&nbsp;&nbsp;</label>
+                                <input type="radio" id="type-bedrijf" name="soort" value="BEDRIJF">
+                                <label for="type-bedrijf">Bedrijf&nbsp;&nbsp;</label>
                                 <input type="radio" id="type-medewerker" name="soort" value="MEDEWERKER">
-                                <label for="type-medewerker">Medewerker</label>
-                                <input type="radio" id="type-trainee" name="soort" value="TRAINEE">
-                                <label for="type-trainee">Trainee</label>
+                                <label for="type-medewerker">Medewerker&nbsp;&nbsp;</label>
+                                <input type="radio" id="type-administrator" name="soort" value="administrator">
+                                <label for="type-administrator">Administrator&nbsp;&nbsp;</label>
                                 <br>
-                                Voornaam<br>
-                                <input type="text" id=voornaam><br>
-                                Achternaam<br>
-                                <input type="text" id=achternaam><br>
-                                Adres<br>
-                                <input type="text" id=adres><br>
-                                Evt. toevoeging<br>
-                                <input type="text" id=evtToevoeging><br>
-                                Postcode<br>
-                                <input type="text" id=postcode><br>
-                                Woonplaats<br>
-                                <input type="text" id=woonplaats><br>
-                                Geboortedatum<br>
-                                <input type="date" id="geboorteDatum"><br>
-                                Telefoonnummer<br>
-                                <input type=text id=telefoonNummer><br>
-                                E-mailadres<br>
-                                <input type=text id=emailadres id=email><br>
-                                <input type="button"
-                                    onclick="gebruikerToevoegen(),window.location.href='gebruikeroverzicht.html'"
-                                    value="Opslaan"><br>
+                                <br>
+                                <div class="inputData">
+                                    <label>Voornaam*</label><input type="text" id=voornaam><br>
+                                    <label>Achternaam*</label><input type="text" id=achternaam><br>
+                                    <label>Adres</label><input type="text" id=adres><br>
+                                    <label>Evt. toevoeging</label><input type="text" id=evtToevoeging><br>
+                                    <label>Postcode</label><input type="text" id=postcode><br>
+                                    <label>Woonplaats</label><input type="text" id=woonplaats><br>
+                                    <label>Geboortedatum</label><input id="kalenderGeboortedatum" type="date"><br>
+                                    <label>Telefoonnummer</label><input type=text id=telefoonNummer><br>
+                                    <label>E-mailadres*</label><input type=text id=emailadres><br>
+                                    <label>Wachtwoord*</label><input type=text id=wachtwoord> <br>
+
+                                </div>
+                                <input id="buttonGebruikerAanmaken" type="button" onclick="gebruikerToevoegen()"
+                                    value="Gebruiker aanmaken"><br>
                             </form>
                         </div>
                     </div>
@@ -154,7 +154,6 @@
             </div>
         </div>
     </main>
-
 
     <!-- Footer -->
     <footer class="page-footer font-small footer-page">
@@ -185,8 +184,6 @@
             </div>
         </div>
     </footer>
-
-
 </body>
 
 </html>
