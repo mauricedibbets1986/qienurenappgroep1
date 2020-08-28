@@ -26,7 +26,7 @@ public class Gebruiker {
     private String achternaam;
     @Column(nullable = false, length = 100)
     private String email;
-    @JsonManagedReference
+
     @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     //join table with roles so a relation can be made, table columns:user_id(user.id from table user) AND roles_id(role.id from table role)
     @JoinTable(name = "user_roles",
@@ -79,6 +79,7 @@ public class Gebruiker {
         this.urenFormulier = urenFormulier;
         this.berichtenLijst = berichtenLijst;
         this.bedrijf = bedrijf;
+
     }
 
     public long getId() {
@@ -228,5 +229,10 @@ public class Gebruiker {
     public void addUrenFormulierToArray(UrenFormulier uf) {
         urenFormulier.add(uf);
         uf.setGebruiker(this);
+    }
+
+    public String getOpdrachtgever(){
+        if(this.bedrijf == null) return "";
+        else return this.bedrijf.getBedrijfsNaam();
     }
 }

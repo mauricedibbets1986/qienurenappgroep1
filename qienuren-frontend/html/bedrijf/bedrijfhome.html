@@ -14,52 +14,10 @@
     <link rel="stylesheet" href="../../css/Stylesheet.css" />
     <!-- ../../css/Stylesheet.css -->
 
-    <title>Overzicht van medewerkers/trainees</title>
+    <title>Bedrijf Home</title>
 
     <!-- Eigen JavaScript -->
-    <script>
-        // alle medewerkers zien
-        function alleGebruikers() {
-            var employeeString = "";
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (this.readyState == 4) {
-                    var databaseContents = JSON.parse(this.responseText);
-
-                    var x;
-
-                    for (x = 0; x < databaseContents.length; x++) {
-
-                        employeeString +=
-                            `
-                        <div>
-                        <h2>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}</h2>
-                        <b>Adres:</b> ${databaseContents[x].adres}<br>
-                        <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
-                        <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
-                        <b>Postcode:</b> ${databaseContents[x].postcode}<br>
-                        <b>Geboortedatum:</b> ${databaseContents[x].geboorteDatum}<br>
-                        <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
-                        <b>E-mailadres:</b> ${databaseContents[x].email}<br>
-                        <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br
-                        <hr>
-                        </div>
-                        `
-                    }
-                }
-
-                document.getElementById("showGebruikers").innerHTML = employeeString;
-            }
-            var typ = document.getElementById("filter").value;
-            if (typ == "all") {
-                xhr.open("GET", "http://localhost:8082/api/admin/all-users", true)
-            } else {
-                xhr.open("GET", "http://localhost:8082/api/gebruiker/rol/" + typ, true)
-            }
-            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-            xhr.send();
-        }
-    </script>
+    <script type="text/javascript" src=""></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -72,7 +30,7 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body onload=alleGebruikers()>
+<body>
     <!-- Header -->
     <header>
         <!-- Qien Logo -->
@@ -94,8 +52,8 @@
                             <img src="../../image/profilepic.PNG" width="85" height="85" class="rounded-circle">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Profiel</a>
-                            <a class="dropdown-item" href="#">Profiel bewerken</a>
+                            <a class="dropdown-item" href="medewerkerprofiel.html"><b>BEDRIJF NAAM</b></a>
+                            <hr>
                             <a class="dropdown-item" href="#">Uitloggen</a>
                         </div>
                     </li>
@@ -106,10 +64,7 @@
         <!-- Breadcrumb -->
         <div>
             <ul class="breadcrumb">
-                <li><a href="https://www.qien.nl/">Qien</a></li>
-                <li><a href="../inlogscherm.html">Log in</a></li>
-                <li><a href="admin.html">Admin overzicht </a></li>
-                <li>Overzicht gebruikers</li>
+                <li>Bedrijf Home</li>
             </ul>
         </div>
     </header>
@@ -122,27 +77,14 @@
                 <!-- sidebar -->
                 <div class="col-sm-3">
                     <div class="sidebar">
-                        <button class="button2" onclick="window.location.href='gebruikernieuw.html'">Nieuwe
-                            Gebruiker</button>
-                        <button class="button2" onclick="window.location.href='gebruikerprofiel.html'">Profiel
-                            Gebruiker</button>
-                        <button class="button2" onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker
-                            aanpassen</button>
+                        <button href="" class="button2">Overzicht Trainee's</button>
+                        <button href="" class="button2">Openstaande goedkeuringen</button>
                     </div>
                 </div>
                 <!-- main content -->
                 <div class="col-lg-9">
                     <div class="content">
-                        <form name="type-form">
-                            <select name="filter-soort" onclick=alleGebruikers() id="filter">
-                                <option value="all">--filter--</option>
-                                <option value="MEDEWERKER">medewerker</option>
-                                <option value="TRAINEE">trainee</option>
-                            </select>
-                        </form>
-                        <section>
-                            <div id="showGebruikers"></div>
-                        </section>
+
                     </div>
                 </div>
             </div>
@@ -172,8 +114,7 @@
                 </div>
             </div>
             <!-- Copyright -->
-            <div class="footer-copyright py-3">
-                <hr style="background-color:white">
+            <div class="footer-copyright py-3"><hr style="background-color:white">
                 © 2020 Team 1:
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"> Qien.nl</a>
             </div>

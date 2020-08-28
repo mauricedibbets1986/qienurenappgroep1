@@ -101,8 +101,8 @@ public class GebruikerService implements GebruikerServiceInterface {
 
     }
 
-    public Iterable<UrenFormulier> getUrenformulierenVanGebruiker(long id) {
-        return gebruikerRepository.findById(id).get().getUrenFormulier();
+    public Iterable<UrenFormulier> getUrenformulierenVanGebruiker(String id) {
+        return gebruikerRepository.findByUserId(id).getUrenFormulier();
     }
 
     public UrenFormulier changestatusUrenFormulier(UrenFormulier urenFormulier) {
@@ -199,6 +199,15 @@ public class GebruikerService implements GebruikerServiceInterface {
         BeanUtils.copyProperties(gebruiker, returnValue);
 
         return returnValue;
+    }
+
+    @Override
+    public void deleteGebruiker(String userId) {
+        Gebruiker gebruiker = gebruikerRepository.findByUserId(userId);
+        if(gebruiker == null) {
+            throw new RuntimeException("NO RECORD FOUND");
+        }
+        gebruikerRepository.delete(gebruiker);
     }
 }
 

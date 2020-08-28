@@ -1,9 +1,6 @@
 package app.qienuren.rest;
 
-import app.qienuren.controller.BedrijfService;
-import app.qienuren.controller.GebruikerRepository;
-import app.qienuren.controller.GebruikerService;
-import app.qienuren.controller.UrenFormulierService;
+import app.qienuren.controller.*;
 import app.qienuren.gebruikerDto.*;
 import app.qienuren.model.Gebruiker;
 import app.qienuren.model.StatusGoedkeuring;
@@ -33,6 +30,9 @@ public class GebruikerEndpoint {
 
     @Autowired
     BedrijfService bedrijfService;
+
+    @Autowired
+    WerkdagService werkdagService;
 
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
     @GetMapping("/gebruiker/{gebruikerid}/{urenformulierid}/{werkdagid}")
@@ -116,7 +116,7 @@ public class GebruikerEndpoint {
 
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
     @GetMapping("/gebruiker/{id}/urenformulieren")
-    public Iterable<UrenFormulier> getUrenformulierenByGebruiker(@PathVariable(value = "id") long id) {
+    public Iterable<UrenFormulier> getUrenformulierenByGebruiker(@PathVariable(value = "id") String id) {
         return gebruikerService.getUrenformulierenVanGebruiker(id);
     }
 
@@ -224,17 +224,24 @@ public class GebruikerEndpoint {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN') or #id == principal.userId")
-    @PutMapping("/users/{id}")
-    public GebruikerDetailsResponse updateGebruiker(@PathVariable String id, @RequestBody GebruikerDetailsRequest gebruikerDetailsRequest) {
+    @PutMapping("/users/{userId}")
+    public GebruikerDetailsResponse updateGebruiker(@PathVariable String userId, @RequestBody GebruikerDetailsRequest gebruikerDetailsRequest) {
         GebruikerDetailsResponse returnValue = new GebruikerDetailsResponse();
 
         GebruikerDto gebruikerDto = new GebruikerDto();
         BeanUtils.copyProperties(gebruikerDetailsRequest, gebruikerDto);
 
-        GebruikerDto updatedGebruiker = gebruikerService.updateGebruiker(id, gebruikerDto);
+        GebruikerDto updatedGebruiker = gebruikerService.updateGebruiker(userId, gebruikerDto);
         BeanUtils.copyProperties(updatedGebruiker, returnValue);
 
         return returnValue;
+    }
+
+    @PreAuthorize("hasAuthority('DELETE:GEBRUIKER')")
+    @DeleteMapping("/users/{userId}")
+    public String deleteUser(@PathVariable String userId){
+        gebruikerService.deleteGebruiker(userId);
+        return "Delete Succes";
     }
 
 
@@ -243,6 +250,19 @@ public class GebruikerEndpoint {
     public Iterable<Gebruiker> getAllUsers() {
         return gebruikerService.getAllUsers();
     }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping("/urenformulier/new")
+    public UrenFormulier newUrenFormulier(@RequestBody UrenFormulier urenFormulier) {
+        return urenFormulierService.addNewUrenFormulier(urenFormulier);
+    }
+
+    @PreAuthorize("hasRole('MEDEWERKER') or hasRole('TRAINEE')")
+    @PutMapping("/werkdag/edit/{werkdagid}")
+    public void newUrenFormulier(@RequestBody Werkdag werkdag, @PathVariable(value = "werkdagid") long id) {
+        werkdagService.editWerkdag(werkdag, id);
+    }
+
 }
 
 

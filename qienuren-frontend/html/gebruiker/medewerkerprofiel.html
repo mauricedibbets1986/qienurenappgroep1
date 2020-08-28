@@ -19,9 +19,9 @@
     <!-- Eigen JavaScript -->
     <script>
         function persoonsGegevens() {
-            var jojo = new XMLHttpRequest();
+            var xhr = new XMLHttpRequest();
             var id = document.getElementById("empID").value;
-            jojo.onreadystatechange = function () {
+            xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     var databaseContents = JSON.parse(this.responseText);
                     var employeeString = "";
@@ -29,21 +29,22 @@
                         `
                             <div>
                             <h4 class="alignleft">Naam:</h4><p class="alignright"> ${databaseContents.voornaam + " " + databaseContents.achternaam}</p><div style="clear: both;"></div>
-                            <h4 class="alignleft">Email:</h4><p class="alignright"> ${databaseContents.emailadres}</p><div style="clear: both;"></div>
+                            <h4 class="alignleft">Email:</h4><p class="alignright"> ${databaseContents.email}</p><div style="clear: both;"></div>
                             <h4 class="alignleft">Geboortedatum:</h4><p class="alignright"> ${databaseContents.geboorteDatum}</p><div style="clear: both;"></div>
                             <h4 class="alignleft">Telefoonnummer:</h4><p class="alignright"> ${databaseContents.telefoonNummer}</p><div style="clear: both;"></div>
-                            <h4 class="alignleft">Adres:</h4><p class="alignright"> ${databaseContents.adres}</p><div style="clear: both;"></div>
-                            <h4 class="alignleft">Evt. toevoeging:</h4><p class="alignright"> ${databaseContents.evtToevoeging}</p><div style="clear: both;"></div>
+                            <h4 class="alignleft">Adres:</h4><p class="alignright"> ${databaseContents.adres+" "+databaseContents.evtToevoeging}</p><div style="clear: both;"></div>
                             <h4 class="alignleft">Postcode:</h4><p class="alignright"> ${databaseContents.postcode}</p><div style="clear: both;"></div>
                             <h4 class="alignleft">Woonplaats:</h4><p class="alignright"> ${databaseContents.woonplaats}</p><div style="clear: both;"></div>
-                            <h4 class="alignleft">Opdrachtgever:</h4><p class="alignright">${databaseContents.bedrijf}</p><div style="clear: both;"></div>
+                            <h4 class="alignleft">Opdrachtgever:</h4><p class="alignright">${databaseContents.opdrachtgever}</p><div style="clear: both;"></div>
                             </div>
                             `
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
                 }
             }
-            jojo.open("GET", "http://localhost:8082/api/gebruiker/"+id, true);
-            jojo.send();
+            xhr.open("GET", "http://localhost:8082/api/users/"+localStorage.getItem("userId"), true);
+            console.log("werkt dit?");
+            xhr.setRequestHeader("Authorization" , localStorage.getItem("token"));
+            xhr.send();
         }
 
         function gegevensAanpassen() {
@@ -66,7 +67,7 @@
                 }
             }
             xhr.open("PUT", "http://localhost:8082/api/gebruiker/changedetails/" + id, true);
-            xhr.setRequestHeader("Content-type", "application/json")
+            xhr.setRequestHeader("Content-type", "application/json", "Authorization" , localStorage.getItem("token"))
             xhr.send(objJSON);
         }
 

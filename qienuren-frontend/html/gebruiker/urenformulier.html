@@ -17,13 +17,6 @@
   <!-- Eigen JavaScript -->
   <script>
 
-    var aantalDagen;
-
-    const dagenInMaand = (jaar, maand) => {     // tel 1 bij maand op omdat DATE niet 0-based is     
-      maand = parseInt(maand) + 1;
-      return new Date(jaar, maand, 0).getDate();
-    }
-
     $(document).ready(function () {
       $('#dtVerticalScrollExample').DataTable({
         "scrollY": "10px",
@@ -52,12 +45,8 @@
 
     // here the table is generated with input fields for the employee to fill in
     function generateTable() {
-      maand = document.getElementById("maand-formulier").value;
-      jaar = document.getElementById("jaar-formulier").value;
-      var aantalDagen = dagenInMaand(jaar, maand);
-
       var y = "";
-      var x = 0;
+      var xhr = new XMLHttpRequest();
 
       y += `<table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm urenform tableFixHead" cellspacing="0"
         width="100%">
@@ -72,106 +61,107 @@
             <th class="th-sm">Overig</th>
             <th class="th-sm">Verklaring</th>
           </tr>
-        </thead><tbody>`
-      for (x = 1; x <= aantalDagen; x++) {
-        y += `<tr>
-            <td>${x}</td>
-            <td><input type="text" id="opdracht${x}" size="2" placeholder="0"></td>
-            <td><input type="text" id="overwerk${x}" size="2" placeholder="0"></td>
-            <td><input type="text" id="verlof${x}" size="2" placeholder="0"></td>
-            <td><input type="text" id="ziektedag${x}" size="2" placeholder="0"></td>
-            <td><input type="text" id="training${x}" size="2" placeholder="0"></td>
-            <td><input type="text" id="overig${x}" size="2" placeholder="0"></td>
-            <td><input type="text" id="verklaring${x}"></td>
-            </tr>
-            `
-      }
-      y += `</tbody></table>`
+        </thead><tbody>
+        `
 
-      document.getElementById("showUrenformulier").innerHTML = y;
+      xhr.onreadystatechange = function() {
+        if (this.readyState == 4) {
+          
+          var obj = JSON.parse(this.responseText);  
+          var c;
+          for (c = 0; c < obj.length; c++) {
+            if (obj[c].maand == document.getElementById("maand-formulier").value && obj[c].jaar == document.getElementById("jaar-formulier").value) {
+              var x;
+              for (x = 0; x < obj[c].werkdag.length; x++) {
+              y += `<tr id="${obj[c].werkdag[x].id}">
+                <td id="datum${x}">${obj[c].werkdag[x].datumDag}</td>
+                <td><input type="text" id="opdracht${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].opdrachtUren}"></td>
+                <td><input type="text" id="overwerk${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].overwerkUren}"></td>
+                <td><input type="text" id="verlof${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].verlofUren}"></td>
+                <td><input type="text" id="ziektedag${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].ziekteDag}"></td>
+                <td><input type="text" id="training${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].trainingsUren}"></td>
+                <td><input type="text" id="overig${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].overigeUren}"></td>
+                <td><input type="text" id="verklaring${x}" onchange="urenOpslaanDag()" placeholder="${obj[c].werkdag[x].verklaring}"></td>
+                </tr>
+                `
+              }
+            }
+          }
+          y += `</tbody></table>`;
+          document.getElementById("showUrenformulier").innerHTML = y; 
+        }
+      };
+      xhr.open("GET", "http://localhost:8082/api/gebruiker/" + localStorage.getItem("userId") + "/urenformulieren/", true);
+      xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+      xhr.send();
+    }
+
+    function urenOpslaanDag() {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (this.readyState == 4) {
+          var obj = JSON.parse(this.responseText);
+          var c;
+          for (c = 0; c < obj.length; c++) {
+            if (obj[c].maand == document.getElementById("maand-formulier").value && obj[c].jaar == document.getElementById("jaar-formulier").value) {
+                urenOpslaanDagVervolg(obj[c]);
+            }
+          }
+        }
+      }
+      xhr.open("GET", "http://localhost:8082/api/gebruiker/" + localStorage.getItem("userId") + "/urenformulieren/", true);
+      xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+      xhr.send();
     }
 
     // saves hours to work-day in database
-    function urenOpslaanDag() {
-      maand = document.getElementById("maand-formulier").value;
-      jaar = document.getElementById("jaar-formulier").value;
-      var aantalDagen = dagenInMaand(jaar, maand);
-
-      for (x = 1; x <= aantalDagen; x++) {
+    function urenOpslaanDagVervolg(UF) {
+      var x;
+      for (x = 0; x < UF.werkdag.length; x++) {
         var obj = {};
-        obj.datumDag = x;
-        obj.opdrachtUren = document.getElementById("opdracht" + x).value;
-        obj.overwerkUren = document.getElementById("overwerk" + x).value;
-        obj.verlofUren = document.getElementById("verlof" + x).value;
-        obj.ziekteDag = document.getElementById("ziektedag" + x).value;
-        obj.trainingsUren = document.getElementById("training" + x).value;
-        obj.verklaring = document.getElementById("verklaring" + x).value;
+        obj.opdrachtUren = document.getElementById("opdracht" + x).getAttribute("placeholder");
+        obj.overwerkUren = document.getElementById("overwerk" + x).getAttribute("placeholder");
+        obj.verlofUren = document.getElementById("verlof" + x).getAttribute("placeholder");
+        obj.ziekteDag = document.getElementById("ziektedag" + x).getAttribute("placeholder");
+        obj.trainingsUren = document.getElementById("training" + x).getAttribute("placeholder");
+        obj.overigeUren = document.getElementById("overig" + x).getAttribute("placeholder");
+        obj.verklaring = document.getElementById("verklaring" + x).getAttribute("placeholder");
+
+        if (document.getElementById("opdracht" + x).value !== "") {
+          obj.opdrachtUren = document.getElementById("opdracht" + x).value;
+        } else if (document.getElementById("overwerk" + x).value !== "") {
+          obj.overwerkUren = document.getElementById("overwerk" + x).value;
+        } else if (document.getElementById("verlof" + x).value !== "") {
+          obj.verlofUren = document.getElementById("verlof" + x).value;
+        } else if (document.getElementById("ziektedag" + x).value !== "") {
+          obj.ziekteDag = document.getElementById("ziektedag" + x).value;
+        } else if (document.getElementById("training" + x).value !== "") {
+          obj.trainingsUren = document.getElementById("training" + x).value;
+        } else if(document.getElementById("verklaring" + x).value !== "") {
+          obj.verklaring = document.getElementById("verklaring" + x).value;
+        } else if(document.getElementById("overig" + x).value !== "") {
+          obj.overigeUren = document.getElementById("overig" + x).value;
+        }
         objJSON = JSON.stringify(obj);
-        var xhr = new XMLHttpRequest();
+        
         if (checkValidDagen(obj)) {
-          xhr.onreadystatechange = function() {
-            if (this.readyState == 4) {
-              updateWorkDaytoUrenFormulier(obj.id);
-            }
-          }
-          xhr.open("POST", "http://localhost:8082/api/werkdag/new/", true);
+          var xhr = new XMLHttpRequest();
+          xhr.open("PUT", "http://localhost:8082/api/werkdag/edit/" + UF.werkdag[x].id, true);
           xhr.setRequestHeader("Content-Type", "application/json");
+          xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
           xhr.send(objJSON);
-          
-          
         }
       }
     }
 
     // checks to see if hours have been filled in and (in another method) will get saved
-    function checkValidDagen(dag) {
+    function checkValidDagen(dag) { 
       if (dag.opdrachtUren > 0 || dag.overwerkUren > 0 || dag.verlofUren > 0 || dag.trainingsUren > 0 || dag.ziekteDag > 0) {
         return true;
       }
       return false;
     }
-
-    // saves day to urenformulier in database
-    function updateWorkDaytoUrenFormulier(id) {
     
-            var ufid = getUrenFormulierByGebruiker().id;
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = new function() {
-                if (this.readyState == 4) {
-                    if (this.responseText == "HO STOP JE HEBT TEVEEL GEWERKT DEZE MAAND") {
-                        alert("HO STOP JE HEBT TEVEEL GEWERKT DEZE MAAND")
-                    }
-                }
-            }
-            xhr.open("PUT", "http://localhost:8082/api/urenformulier/" + ufid + "/" + id, true);
-            xhr.send();
-        }
-
-        // calls urenformulir from a user to have work days added to it
-        function getUrenFormulierByGebruiker() {
-            var txt = "";
-            var xhr = new XMLHttpRequest();
-            var mnd = "JANUARI";
-            xhr.onreadystatechange = function () {
-                if (this.readyState == 4) {
-                    var myObj = JSON.parse(this.responseText);
-                    for (urenformulier in myObj) {
-                      if (urenformulier.maand == "JANUARI" && urenformulier.jaar == document.getElementById("jaar-formulier").value) {
-                        alert("Gevonden");
-                        return urenformulier;
-                      } else {
-                        alert("Deze bestaat niet, ik maak er een voor je");
-                        var objresponse = new nieuwUrenFormulier();
-                        return objresponse;
-                      }
-                  }
-              }
-            }
-            xhr.open("GET", "http://localhost:8082/api/gebruiker/" + 1 + "/urenformulieren/", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send();
-        }
-
         // creates new urenformulier in database
         function nieuwUrenFormulier() {
             var obj = {};
@@ -211,6 +201,23 @@
             }
           }
 
+            function gebruikersnaam() {
+              var naam = "";
+              var xhr = new XMLHttpRequest();
+              xhr.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                  var obj = JSON.parse(this.responseText);
+                  naam = obj.voornaam + " " + obj.achternaam;
+                }
+
+                document.getElementById("gebruikersnaam").innerHTML = naam;
+
+              }
+              xhr.open("GET", "http://localhost:8082/api/users/" + localStorage.getItem("userId"), true);
+              xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+              xhr.send();
+            }
+
   </script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -224,7 +231,7 @@
     crossorigin="anonymous"></script>
 </head>
 
-<body onload=generateTable()>
+<body onload="generateTable(),  gebruikersnaam()">
   <!-- Modal bevestiging -->
   <div>
     <div class="modal fade" id="myModal" role="dialog">
@@ -248,7 +255,7 @@
             <h3 class="modal-title">Urenformulier van deze maand indienen?</h3>
           </div>
           <div class="modal-body">
-            <div id="showUrenformulier"></div>
+            <div id="showUrenformulier-modal"></div>
           </div>
           <div class="modal-footer">
             <h4>Ik heb het formulier goed nagekeken</h4><br>
@@ -280,7 +287,7 @@
               <img src="../../image/profilepic.PNG" width="85" height="85" class="rounded-circle">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="medewerkerprofiel.html"><b>PERSOON NAAM</b></a><hr>
+              <a class="dropdown-item" href="medewerkerprofiel.html"><b><div id="gebruikersnaam"></div></b></a><hr>
               <a class="dropdown-item" href="#">Uitloggen</a>
             </div>
           </li>
@@ -324,18 +331,18 @@
               <option value="2018">2018</option>
             </select>
             <select name="maand-formulier" id="maand-formulier" onchange="generateTable()">
-              <option value="0">januari</option>
-              <option value="1">februari</option>
-              <option value="2">maart</option>
-              <option value="3">april</option>
-              <option value="4">mei</option>
-              <option value="5">juni</option>
-              <option value="6">juli</option>
-              <option value="7">augustus</option>
-              <option value="8">september</option>
-              <option value="9">oktober</option>
-              <option value="10">november</option>
-              <option value="11">december</option>
+              <option value="JANUARI">januari</option>
+              <option value="FEBRUARI">februari</option>
+              <option value="MAART">maart</option>
+              <option value="APRIL">april</option>
+              <option value="MEI">mei</option>
+              <option value="JUNI">juni</option>
+              <option value="JULI">juli</option>
+              <option value="AUGUSTUS">augustus</option>
+              <option value="SEPTEMBER">september</option>
+              <option value="OKTOBER">oktober</option>
+              <option value="NOVEMBER">november</option>
+              <option value="DECEMBER">december</option>
             </select>
 
             <div class="table-wrapper-scroll-y my-custom-scrollbar">

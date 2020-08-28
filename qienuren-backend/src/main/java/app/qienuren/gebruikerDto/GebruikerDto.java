@@ -1,6 +1,8 @@
 package app.qienuren.gebruikerDto;
 
 
+import app.qienuren.model.Bedrijf;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
@@ -24,6 +26,7 @@ public class GebruikerDto implements Serializable {
     private String contactPersoon;
     private String emailVerificationToken;
     private boolean emailVerificationStatus;
+    private Bedrijf bedrijf;
     private Collection<String> roles;
 
 
@@ -169,5 +172,13 @@ public class GebruikerDto implements Serializable {
 
     public void setTelefoonNummer(long telefoonNummer) {
         this.telefoonNummer = telefoonNummer;
+    }
+
+    public Bedrijf getBedrijf() {
+        return bedrijf;
+    }
+
+    public void setBedrijf(Bedrijf bedrijf) {
+        this.bedrijf = bedrijf;
     }
 }
