@@ -17,13 +17,6 @@
   <!-- Eigen JavaScript -->
   <script>
 
-    var aantalDagen;
-
-    const dagenInMaand = (jaar, maand) => {     // tel 1 bij maand op omdat DATE niet 0-based is     
-      maand = parseInt(maand) + 1;
-      return new Date(jaar, maand, 0).getDate();
-    }
-
     $(document).ready(function () {
       $('#dtVerticalScrollExample').DataTable({
         "scrollY": "10px",
@@ -68,7 +61,8 @@
             <th class="th-sm">Overig</th>
             <th class="th-sm">Verklaring</th>
           </tr>
-        </thead><tbody>`
+        </thead><tbody>
+        `
 
       xhr.onreadystatechange = function() {
         if (this.readyState == 4) {
@@ -100,7 +94,6 @@
       xhr.open("GET", "http://localhost:8082/api/gebruiker/" + localStorage.getItem("userId") + "/urenformulieren/", true);
       xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
       xhr.send();
-      
     }
 
     function urenOpslaanDag() {
