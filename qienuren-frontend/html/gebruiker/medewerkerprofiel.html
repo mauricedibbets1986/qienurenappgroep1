@@ -29,7 +29,7 @@
                         `
                             <div>
                             <h4 class="alignleft">Naam:</h4><p class="alignright"> ${databaseContents.voornaam + " " + databaseContents.achternaam}</p><div style="clear: both;"></div>
-                            <h4 class="alignleft">Email:</h4><p class="alignright"> ${databaseContents.emailadres}</p><div style="clear: both;"></div>
+                            <h4 class="alignleft">Email:</h4><p class="alignright"> ${databaseContents.email}</p><div style="clear: both;"></div>
                             <h4 class="alignleft">Geboortedatum:</h4><p class="alignright"> ${databaseContents.geboorteDatum}</p><div style="clear: both;"></div>
                             <h4 class="alignleft">Telefoonnummer:</h4><p class="alignright"> ${databaseContents.telefoonNummer}</p><div style="clear: both;"></div>
                             <h4 class="alignleft">Adres:</h4><p class="alignright"> ${databaseContents.adres+" "+databaseContents.evtToevoeging}</p><div style="clear: both;"></div>
@@ -41,7 +41,7 @@
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
                 }
             }
-            xhr.open("GET", "http://localhost:8082/api/gebruiker/"+id, true);
+            xhr.open("GET", "http://localhost:8082/api/users/"+localStorage.getItem("userId"), true);
             console.log("werkt dit?");
             xhr.setRequestHeader("Authorization" , localStorage.getItem("token"));
             xhr.send();
