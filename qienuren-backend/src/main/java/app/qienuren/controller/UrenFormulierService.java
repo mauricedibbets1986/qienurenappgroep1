@@ -73,18 +73,21 @@ public class UrenFormulierService {
     return 0.0;
     }
 
-    public UrenFormulier setStatusUrenFormulier(long uid, String welkeGoedkeurder){
+    public UrenFormulier setStatusUrenFormulier(long urenformulierId, String welkeGoedkeurder){
         //deze methode zet de statusGoedkeuring van OPEN naar INGEDIEND_GEBRUIKER nadat deze
         // door de gebruiker is ingediend ter goedkeuring
-        if (welkeGoedkeurder.equals("GEBRUIKER")) {
-            getUrenFormulierById(uid).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
+        if (welkeGoedkeurder.equals("TRAINEE")) {
+            getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_TRAINEE);
+        }
+        if (welkeGoedkeurder.equals("MEDEWERKER")) {
+            getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_MEDEWERKER);
         }
         if(welkeGoedkeurder.equals("ADMIN")) {
-            getUrenFormulierById(uid).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_ADMIN);
+            getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_ADMIN);
         }
         if(welkeGoedkeurder.equals("BEDRIJF")) {
-            getUrenFormulierById(uid).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_BEDRIJF);
+            getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_BEDRIJF);
         }
-        return getUrenFormulierById(uid);
+        return getUrenFormulierById(urenformulierId);
     }
 }
