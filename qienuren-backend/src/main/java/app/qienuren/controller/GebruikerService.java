@@ -105,8 +105,12 @@ public class GebruikerService implements GebruikerServiceInterface {
         return gebruikerRepository.findByUserId(id).getUrenFormulier();
     }
 
-    public UrenFormulier changestatusUrenFormulier(UrenFormulier urenFormulier) {
-        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
+    public UrenFormulier changestatusUrenFormulierTrainee(UrenFormulier urenFormulier) {
+        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_TRAINEE);
+        return urenFormulier;
+    }
+    public UrenFormulier changestatusUrenFormulierMedewerker(UrenFormulier urenFormulier) {
+        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_MEDEWERKER);
         return urenFormulier;
     }
 

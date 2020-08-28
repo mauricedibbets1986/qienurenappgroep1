@@ -126,13 +126,6 @@ public class GebruikerEndpoint {
         return urenFormulierService.getGewerkteUrenByID(id);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
-    @PutMapping("/gebruiker/{id}/setstatus-checkgebruiker")
-    public UrenFormulier setStatusFormulierCheckGebruiker(@PathVariable(value = "id") long id) {
-        urenFormulierService.getUrenFormulierById(id).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
-        return urenFormulierService.getUrenFormulierById(id);
-    }
-
     @PreAuthorize("hasAuthority('CREATE:GEBRUIKER')")
     @PostMapping("/admin/users/addAdmin")
     public GebruikerDetailsResponse createAdmin(@RequestBody GebruikerDetailsRequest gebruikerDetails) {
