@@ -36,6 +36,18 @@ import javax.transaction.Transactional;
             return werkdagRepository.save(werkdag);
         }
     }
+
+    public void editWerkdag(Werkdag werkdag, long id) {
+        Werkdag newWerkdag = werkdagRepository.findById(id).get();
+        newWerkdag.setOpdrachtUren(werkdag.getOpdrachtUren());
+        newWerkdag.setOverwerkUren(werkdag.getOverwerkUren());
+        newWerkdag.setVerlofUren(werkdag.getVerlofUren());
+        newWerkdag.setZiekteDag(werkdag.getZiekteDag());
+        newWerkdag.setTrainingsUren(werkdag.getTrainingsUren());
+        newWerkdag.setOverigeUren(werkdag.getOverigeUren());
+        newWerkdag.setVerklaring(werkdag.getVerklaring());
+        werkdagRepository.save(newWerkdag);
+    }
 }
 //        public Werkdag addNewHours(long hours, long dayId) {
 //           wr.findById(dayId).get().setUren(hours);

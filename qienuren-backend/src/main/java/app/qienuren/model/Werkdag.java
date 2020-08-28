@@ -14,13 +14,31 @@ public class Werkdag {
     private double opdrachtUren;
     private double overwerkUren;
     private double verlofUren;
-    private boolean ziekteDag;
+    private double ziekteDag;
     private double trainingsUren;
+    private double overigeUren;
+    private String verklaring = "";
 
-    @ManyToOne
+    public String getVerklaring() {
+		return verklaring;
+	}
+
+	public void setVerklaring(String verklaring) {
+		this.verklaring = verklaring;
+	}
+
+	@ManyToOne
     @JsonBackReference
     @JoinColumn(name = "urenformulier_id")
     private UrenFormulier urenformulier;
+
+    public Werkdag() {
+
+    };
+
+    public Werkdag(int datumDag) {
+        this.datumDag = String.valueOf(datumDag);
+    }
 
     public long getId() {
         return id;
@@ -66,11 +84,11 @@ public class Werkdag {
         this.verlofUren = verlofUren;
     }
 
-    public boolean isZiekteDag() {
+    public double isZiekteDag() {
         return ziekteDag;
     }
 
-    public void setZiekteDag(boolean ziekteDag) {
+    public void setZiekteDag(double ziekteDag) {
         this.ziekteDag = ziekteDag;
     }
 
@@ -80,5 +98,17 @@ public class Werkdag {
 
     public void setTrainingsUren(double trainingsUren) {
         this.trainingsUren = trainingsUren;
+    }
+
+    public double getZiekteDag() {
+        return ziekteDag;
+    }
+
+    public double getOverigeUren() {
+        return overigeUren;
+    }
+
+    public void setOverigeUren(double overigeUren) {
+        this.overigeUren = overigeUren;
     }
 }
