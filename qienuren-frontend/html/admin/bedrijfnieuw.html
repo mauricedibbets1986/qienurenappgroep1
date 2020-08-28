@@ -32,12 +32,13 @@
             obj.evtToevoeging = document.getElementById("evtToevoeging").value;
             obj.postcode = document.getElementById("postcode").value;
             obj.plaats = document.getElementById("plaats").value;
+            obj.password = document.getElementById("password").value;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 console.log("answer in console");
             }
-            xhr.open("POST", "http://localhost:8082/api/bedrijf/new", true);
+            xhr.open("POST", "http://localhost:8082/api/admin/users/addBedrijf", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
@@ -133,6 +134,8 @@
                         <input type=text id=postcode><br>
                         Plaats<br>
                         <input type="text" id=plaats><br>
+                        Wachtwoord<br>
+                                <input type="password" id=password id=password><br>
                         <input class="button3" type="button"
                             onclick="bedrijfToevoegen(),window.location.href='bedrijfoverzicht.html'"
                             value="Opslaan"><br>
