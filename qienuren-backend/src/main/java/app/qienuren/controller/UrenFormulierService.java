@@ -74,7 +74,8 @@ public class UrenFormulierService {
     }
 
     public UrenFormulier setStatusUrenFormulier(long urenformulierId, String welkeGoedkeurder){
-       //De
+        //deze methode zet de statusGoedkeuring van OPEN naar INGEDIEND_GEBRUIKER nadat deze
+        // door de gebruiker is ingediend ter goedkeuring
         if (welkeGoedkeurder.equals("TRAINEE")) {
             getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_TRAINEE);
         }
