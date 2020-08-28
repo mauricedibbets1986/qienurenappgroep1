@@ -18,12 +18,20 @@
 
     <!-- Eigen JavaScript -->
     <script>
-        function gebruikerToevoegen() {
-            var obj = {};
-
+        function functionPicker() {
             var form = document.forms["type-form"];
             var typ = form["soort"].value;
+            if(typ == "MEDEWERKER") {
+                medewerkerToevoegen();
+            } else if(typ == "TRAINEE") {
+                traineeToevoegen();
+            }
+        }
 
+        function traineeToevoegen() {
+            var obj = {};
+            var form = document.forms["type-form"];
+            var typ = form["soort"].value;
             obj.voornaam = document.getElementById("voornaam").value;
             obj.achternaam = document.getElementById("achternaam").value;
             obj.adres = document.getElementById("adres").value;
@@ -32,20 +40,48 @@
             obj.woonplaats = document.getElementById("woonplaats").value;
             obj.geboorteDatum = document.getElementById("geboorteDatum").value;
             obj.telefoonNummer = document.getElementById("telefoonNummer").value;
-            obj.emailadres = document.getElementById("emailadres").value;
+            obj.email = document.getElementById("emailadres").value;
+            obj.password = document.getElementById("password").value;
             obj.rol = typ;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 console.log("answer in console");
             }
-            xhr.open("POST", "http://localhost:8082/api/admin/new-admin", true);
+            xhr.open("POST", "http://localhost:8082/api/admin/users/addTrainee", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-
             xhr.send(objJSON);
             alert("Nieuwe " + typ.toLowerCase() + " aangemaakt")
         }
+
+        function medewerkerToevoegen() {
+            var obj = {};
+            var form = document.forms["type-form"];
+            var typ = form["soort"].value;
+            obj.voornaam = document.getElementById("voornaam").value;
+            obj.achternaam = document.getElementById("achternaam").value;
+            obj.adres = document.getElementById("adres").value;
+            obj.evtToevoeging = document.getElementById("evtToevoeging").value;
+            obj.postcode = document.getElementById("postcode").value;
+            obj.woonplaats = document.getElementById("woonplaats").value;
+            obj.geboorteDatum = document.getElementById("geboorteDatum").value;
+            obj.telefoonNummer = document.getElementById("telefoonNummer").value;
+            obj.email = document.getElementById("emailadres").value;
+            obj.password = document.getElementById("password").value;
+            obj.rol = typ;
+            objJSON = JSON.stringify(obj);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                console.log("answer in console");
+            }
+            xhr.open("POST", "http://localhost:8082/api/admin/users/addMedewerker", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send(objJSON);
+            alert("Nieuwe " + typ.toLowerCase() + " aangemaakt")
+        }
+
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -144,8 +180,10 @@
                                 <input type=text id=telefoonNummer><br>
                                 E-mailadres<br>
                                 <input type=text id=emailadres id=email><br>
-                                <input type="button"
-                                    onclick="gebruikerToevoegen(),window.location.href='gebruikeroverzicht.html'"
+                                Wachtwoord<br>
+                                <input type="password" id=password id=password><br>
+                                <input type="button" class="button3"
+                                    onclick="functionPicker(), window.location.href='gebruikeroverzicht.html'"
                                     value="Opslaan"><br>
                             </form>
                         </div>
