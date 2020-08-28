@@ -28,6 +28,11 @@ public class UrenFormulierService {
         return urenFormulierRepository.findAll();
     }
 
+    public List<UrenFormulier> urenFormulieren() {
+        return (List<UrenFormulier>) urenFormulierRepository.findAll();
+    }
+
+
     public Object addWorkDaytoUrenFormulier(long ufid, long wdid) {
         UrenFormulier uf = urenFormulierRepository.findById(ufid).get();
         Werkdag wd = werkdagRepository.findById(wdid).get();
