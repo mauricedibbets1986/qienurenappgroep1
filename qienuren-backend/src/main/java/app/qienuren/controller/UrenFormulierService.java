@@ -76,7 +76,10 @@ public class UrenFormulierService {
     public UrenFormulier setStatusUrenFormulier(long uid, String welkeGoedkeurder){
         //deze methode zet de statusGoedkeuring van OPEN naar INGEDIEND_GEBRUIKER nadat deze
         // door de gebruiker is ingediend ter goedkeuring
-        if (welkeGoedkeurder.equals("GEBRUIKER")) {
+        if (welkeGoedkeurder.equals("TRAINEE")) {
+            getUrenFormulierById(uid).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
+        }
+        if (welkeGoedkeurder.equals("MEDEWERKER")) {
             getUrenFormulierById(uid).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
         }
         if(welkeGoedkeurder.equals("ADMIN")) {
