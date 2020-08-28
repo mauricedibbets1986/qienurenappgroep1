@@ -145,21 +145,36 @@
                             opdrachtgevers</button>
                         <button class="button2" onclick="window.location.href='bedrijfaanpassen.html'">Opdrachtgever
                             aanpassen</button>
-
-                        <!-- <button href="" class="button2">button 3</button> -->
-
-                        <!-- <button href="" class="button3">button</button> -->
                     </div>
                 </div>
-                <!-- main content -->
+                <!-- Bedrijf lijst -->
                 <div class="col-lg-9">
                     <div class="content">
                         <div>
                             <div id="bedrijvenOverzicht"></div>
                         </div>
-                        <input type="text" id="bid" placeholder="bedrijfid">
-                        <input type="text" id="gid" placeholder="gebruikerid">
-                        <input type=button onclick="updateBedrijftoGebruiker()" value="Koppel">
+                        <div class="modal fade" id="myModal2" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title">Bewerk mijn profiel</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="text" id="bid" placeholder="bedrijfid">
+                                        <input type="text" id="gid" placeholder="gebruikerid">
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default button3" 
+                                            onclick="updateBedrijftoGebruiker()" data-dismiss="modal" data-toggle="modal"
+                                                data-target="#myModal">Bevestigen</button>
+                                            <button type="button" class="btn btn-default button2"
+                                                 data-dismiss="modal">Annuleren</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-info btn-lg button3" data-toggle="modal"
+                            data-target="#myModal2">Trainee-Bedrijf</button>
                     </div>
                 </div>
             </div>
