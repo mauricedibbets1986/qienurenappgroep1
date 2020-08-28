@@ -208,6 +208,23 @@
             }
           }
 
+            function gebruikersnaam() {
+              var naam = "";
+              var xhr = new XMLHttpRequest();
+              xhr.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                  var obj = JSON.parse(this.responseText);
+                  naam = obj.voornaam + " " + obj.achternaam;
+                }
+
+                document.getElementById("gebruikersnaam").innerHTML = naam;
+
+              }
+              xhr.open("GET", "http://localhost:8082/api/users/" + localStorage.getItem("userId"), true);
+              xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+              xhr.send();
+            }
+
   </script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -221,7 +238,7 @@
     crossorigin="anonymous"></script>
 </head>
 
-<body onload=generateTable()>
+<body onload="generateTable(),  gebruikersnaam()">
   <!-- Modal bevestiging -->
   <div>
     <div class="modal fade" id="myModal" role="dialog">
@@ -277,7 +294,7 @@
               <img src="../../image/profilepic.PNG" width="85" height="85" class="rounded-circle">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="medewerkerprofiel.html"><b>PERSOON NAAM</b></a><hr>
+              <a class="dropdown-item" href="medewerkerprofiel.html"><b><div id="gebruikersnaam"></div></b></a><hr>
               <a class="dropdown-item" href="#">Uitloggen</a>
             </div>
           </li>
