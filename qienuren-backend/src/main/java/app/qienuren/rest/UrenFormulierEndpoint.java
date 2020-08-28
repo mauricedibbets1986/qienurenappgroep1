@@ -17,8 +17,6 @@ public class UrenFormulierEndpoint {
     @Autowired
     GebruikerService gebruikerService;
 
-    String huidigeRol;
-
 
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
     @GetMapping("/get")
@@ -58,11 +56,16 @@ public class UrenFormulierEndpoint {
     }
 
 
-    //goedkeuringen endpoints gebruiker_ingediend, admin_ingediend, bedrijf_ingediend
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
-    @PutMapping("/gebruiker/{urenformulierid}/setstatus-indienengebruiker")
-    public UrenFormulier setStatusFormulierIngediendGebruiker(@PathVariable(value = "urenformulierid") long urenformulierid) {
-        urenFormulierService.setStatusUrenFormulier(urenformulierid, "GEBRUIKER");
+    @PutMapping("/gebruiker/{urenformulierid}/setstatus-indienentrainee")
+    public UrenFormulier setStatusFormulierIngediendTrainee(@PathVariable(value = "urenformulierid") long urenformulierid) {
+        urenFormulierService.setStatusUrenFormulier(urenformulierid, "TRAINEE");
+        return urenFormulierService.getUrenFormulierById(urenformulierid);
+    }
+    @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
+    @PutMapping("/gebruiker/{urenformulierid}/setstatus-indienenmedewerker")
+    public UrenFormulier setStatusFormulierIngediendMedewerker(@PathVariable(value = "urenformulierid") long urenformulierid) {
+        urenFormulierService.setStatusUrenFormulier(urenformulierid, "MEDEWERKER");
         return urenFormulierService.getUrenFormulierById(urenformulierid);
     }
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
@@ -80,11 +83,11 @@ public class UrenFormulierEndpoint {
     }
 
     @PreAuthorize("hasAuthority('APPROVE:URENFORMULIER')")
-    public UrenFormulier setAfkeuring(long uid) {
+    public UrenFormulier setAfkeuring(long urenformulierid) {
         //Als iemand met de rol Admin of Bedrijf deze methode aanroept,
         // zet deze de statusGoedkeuring terug naar OPEN nadat deze
         // door een bedrijf of admin is afgekeurd.
-        getUrenFormulierById(uid).setStatusGoedkeuring(StatusGoedkeuring.OPEN);
-        return getUrenFormulierById(uid);
+        getUrenFormulierById(urenformulierid).setStatusGoedkeuring(StatusGoedkeuring.OPEN);
+        return getUrenFormulierById(urenformulierid);
     }
 }
