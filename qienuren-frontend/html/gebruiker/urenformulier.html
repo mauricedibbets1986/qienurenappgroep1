@@ -213,6 +213,7 @@
 
     // saves hours to work-day in database
     function urenOpslaanDagVervolg(UF) {
+      
       var x;
       for (x = 0; x < UF.werkdag.length; x++) {
         var obj = {};
@@ -278,6 +279,33 @@
     }
 
 
+
+          function csvDownloaden() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+              if (this.readyState == 4) {
+                var bla = xhr.getResponseHeader("Content-Disposition");
+                bla = bla.substr(22, bla.length -1);
+                downloadCSV(this.responseText, bla);
+              }
+            }
+            xhr.open("GET", "http://localhost:8082/api/export-urenformulier/16", true);
+            xhr.setRequestHeader("Content-Type", "application/download");
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send();
+          }
+
+          function downloadCSV(csv, filename) {
+   	        var csvFile;
+	          var downloadLink;
+            csvFile = new Blob([csv], {type:"text/csv"});
+            downloadLink = document.createElement("a");
+            downloadLink.download = filename;
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+          }
 
   </script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -378,9 +406,16 @@
         <!-- sidebar -->
         <div class="col-sm-3">
           <div class="sidebar">
+<<<<<<< HEAD
+            <button class="button2">Uren Invoeren</button>
+            <button class="button2" onclick="csvDownloaden()">CSV Downloaden</button>
+            <button class="button2">Historie</button>
+              <!-- Trigger the modal with a button -->
+=======
             <button class="button2" onclick="">Uren invoer</button>
             <button class="button2" onclick="">Historie</button>
             <!-- Trigger the modal with a button -->
+>>>>>>> master
             <br>
             <br>
             <br>
