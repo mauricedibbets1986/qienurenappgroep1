@@ -17,7 +17,7 @@
     <title>Medewerker Home</title>
 
     <!-- Eigen JavaScript -->
-    <script type="text/javascript" src=""></script>
+    <script src="../../js/javascript.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -30,7 +30,7 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="gebruikersnaam()">
     <!-- Header -->
     <header>
         <!-- Qien Logo -->
@@ -52,8 +52,7 @@
                             <img src="../../image/profilepic.PNG" width="85" height="85" class="rounded-circle">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="medewerkerprofiel.html"><b>PERSOON NAAM</b></a>
-                            <hr>
+                            <a class="dropdown-item" href="medewerkerprofiel.html"><b><div id="gebruikersnaam"></div></b></a><hr>
                             <a class="dropdown-item" href="#">Uitloggen</a>
                         </div>
                     </li>
@@ -88,7 +87,7 @@
                 <div class="col-lg-9">
                     <div class="content">
                         <section>
-                            <h1>Hallo Klaas!</h1>
+                            <h1>Hallo!</h1>
                             <p><i>Huidige periode 1 Augustus 2020 t/m 31 Augustus 2020</i></p>
                             <div class="dashboard">
                                 <h2>Registratie deze periode</h2><br>

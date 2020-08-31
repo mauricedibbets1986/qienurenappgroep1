@@ -6,15 +6,26 @@ import app.qienuren.model.Gebruiker;
 import app.qienuren.model.StatusGoedkeuring;
 import app.qienuren.model.UrenFormulier;
 import app.qienuren.model.Werkdag;
+import com.google.common.collect.Multimap;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.*;
+import org.apache.commons.collections4.MultiValuedMap;
+import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
+import org.checkerframework.checker.units.qual.K;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+
+import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Field;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -124,13 +135,6 @@ public class GebruikerEndpoint {
     @GetMapping("/gebruiker/gewerkteuren/{id}")
     public double getTotaalGewerkteUren(@PathVariable(value = "id") long id) {
         return urenFormulierService.getGewerkteUrenByID(id);
-    }
-
-    @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
-    @PutMapping("/gebruiker/{id}/setstatus-checkgebruiker")
-    public UrenFormulier setStatusFormulierCheckGebruiker(@PathVariable(value = "id") long id) {
-        urenFormulierService.getUrenFormulierById(id).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
-        return urenFormulierService.getUrenFormulierById(id);
     }
 
     @PreAuthorize("hasAuthority('CREATE:GEBRUIKER')")
@@ -262,7 +266,41 @@ public class GebruikerEndpoint {
     public void newUrenFormulier(@RequestBody Werkdag werkdag, @PathVariable(value = "werkdagid") long id) {
         werkdagService.editWerkdag(werkdag, id);
     }
+    @PreAuthorize("hasRole('MEDEWERKER') or hasRole('TRAINEE') or hasRole('ADMIN')")
+    @GetMapping("/export-urenformulier/{id}")
+    public void exportCSV(HttpServletResponse response, @PathVariable(value = "id") long id) throws Exception { 
 
+        //set file name and content type
+        UrenFormulier urenFormulier = urenFormulierService.getUrenFormulierById(id);
+        String filename = urenFormulier.getJaar() + "-" + urenFormulier.getMaand() + "-" + urenFormulier.getGebruiker().getVoornaam() + ".csv";
+
+        response.setContentType("text/csv");
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + filename);
+
+        MultiValuedMap<K, String> map = new HashSetValuedHashMap<>();
+
+
+        MultiValuedMap<Class<?>, Field> m = new HashSetValuedHashMap<Class<?>, Field>();
+        m.put(Werkdag.class, Werkdag.class.getDeclaredField("id"));
+        m.put(Werkdag.class, Werkdag.class.getDeclaredField("urenformulier"));
+
+        MappingStrategy<Werkdag> mappingStrategy = new HeaderColumnNameMappingStrategy();
+        mappingStrategy.setType(Werkdag.class);
+        mappingStrategy.ignoreFields(m);
+
+        //create a csv writer
+        StatefulBeanToCsv<Werkdag> writer = new StatefulBeanToCsvBuilder<Werkdag>(response.getWriter())
+                .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+                .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
+                .withOrderedResults(false)
+                .withMappingStrategy(mappingStrategy)
+                .build();
+
+        //write all users to csv file
+        writer.write(urenFormulierService.getUrenFormulierById(id).getWerkdag());
+
+    }
 }
 
 
