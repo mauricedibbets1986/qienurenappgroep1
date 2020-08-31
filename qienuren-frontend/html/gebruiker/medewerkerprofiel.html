@@ -17,10 +17,10 @@
     <title>Profiel</title>
 
     <!-- Eigen JavaScript -->
+    <script src="../../js/javascript.js"></script>
     <script>
         function persoonsGegevens() {
             var xhr = new XMLHttpRequest();
-            var id = document.getElementById("empID").value;
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     var databaseContents = JSON.parse(this.responseText);
@@ -29,10 +29,10 @@
                         `
                             <div>
                             <h4 class="alignleft">Naam:</h4><p class="alignright"> ${databaseContents.voornaam + " " + databaseContents.achternaam}</p><div style="clear: both;"></div>
-                            <h4 class="alignleft">Email:</h4><p class="alignright"> ${databaseContents.emailadres}</p><div style="clear: both;"></div>
+                            <h4 class="alignleft">Email:</h4><p class="alignright"> ${databaseContents.email}</p><div style="clear: both;"></div>
                             <h4 class="alignleft">Geboortedatum:</h4><p class="alignright"> ${databaseContents.geboorteDatum}</p><div style="clear: both;"></div>
                             <h4 class="alignleft">Telefoonnummer:</h4><p class="alignright"> ${databaseContents.telefoonNummer}</p><div style="clear: both;"></div>
-                            <h4 class="alignleft">Adres:</h4><p class="alignright"> ${databaseContents.adres+" "+databaseContents.evtToevoeging}</p><div style="clear: both;"></div>
+                            <h4 class="alignleft">Adres:</h4><p class="alignright"> ${databaseContents.adres + " " + databaseContents.evtToevoeging}</p><div style="clear: both;"></div>
                             <h4 class="alignleft">Postcode:</h4><p class="alignright"> ${databaseContents.postcode}</p><div style="clear: both;"></div>
                             <h4 class="alignleft">Woonplaats:</h4><p class="alignright"> ${databaseContents.woonplaats}</p><div style="clear: both;"></div>
                             <h4 class="alignleft">Opdrachtgever:</h4><p class="alignright">${databaseContents.opdrachtgever}</p><div style="clear: both;"></div>
@@ -41,9 +41,9 @@
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
                 }
             }
-            xhr.open("GET", "http://localhost:8082/api/gebruiker/"+id, true);
+            xhr.open("GET", "http://localhost:8082/api/users/" + localStorage.getItem("userId"), true);
             console.log("werkt dit?");
-            xhr.setRequestHeader("Authorization" , localStorage.getItem("token"));
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
         }
 
@@ -67,7 +67,7 @@
                 }
             }
             xhr.open("PUT", "http://localhost:8082/api/gebruiker/changedetails/" + id, true);
-            xhr.setRequestHeader("Content-type", "application/json", "Authorization" , localStorage.getItem("token"))
+            xhr.setRequestHeader("Content-type", "application/json", "Authorization", localStorage.getItem("token"))
             xhr.send(objJSON);
         }
 
@@ -84,7 +84,7 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body onload="persoonsGegevens()">
+<body onload="persoonsGegevens(), gebruikersnaam()">
     <!-- Modal bevestiging -->
     <div>
         <div class="modal fade" id="myModal" role="dialog">
@@ -157,7 +157,9 @@
                             <img src="../../image/profilepic.PNG" width="85" height="85" class="rounded-circle">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="medewerkerprofiel.html"><b>PERSOON NAAM</b></a>
+                            <a class="dropdown-item" href="medewerkerprofiel.html"><b>
+                                    <div id="gebruikersnaam"></div>
+                                </b></a>
                             <hr>
                             <a class="dropdown-item" href="#">Uitloggen</a>
                         </div>
@@ -204,9 +206,6 @@
                         <button class="btn btn-info btn-lg button3" data-toggle="modal" data-target="#myModal2">Profiel
                             bewerken</button>
                     </div>
-                    Medewerker ID:
-                    <input type=text id=empID placeholder="temp">
-                    <input type="button" onclick="persoonsGegevens()" value="Get">
                 </div>
             </div>
         </div>

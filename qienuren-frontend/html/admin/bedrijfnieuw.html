@@ -27,17 +27,18 @@
             obj.bedrijfsNaam = document.getElementById("bedrijfsNaam").value;
             obj.contactPersoon = document.getElementById("contactPersoon").value;
             obj.telefoonNummer = document.getElementById("telefoonNummer").value;
-            obj.emailAdres = document.getElementById("emailAdres").value;
+            obj.email = document.getElementById("email").value;
             obj.adres = document.getElementById("adres").value;
             obj.evtToevoeging = document.getElementById("evtToevoeging").value;
             obj.postcode = document.getElementById("postcode").value;
             obj.plaats = document.getElementById("plaats").value;
+            obj.password = document.getElementById("password").value;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 console.log("answer in console");
             }
-            xhr.open("POST", "http://localhost:8082/api/bedrijf/new", true);
+            xhr.open("POST", "http://localhost:8082/api/admin/users/addBedrijf", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
@@ -109,8 +110,9 @@
                     <div class="sidebar">
                         <button class="button2"
                             onclick="window.location.href='bedrijfoverzicht.html'">Opdrachtgevers</button>
-                        <button class="button2" onclick="window.location.href='bedrijfaanpassen.html'">Opdrachtgever
-                            aanpassen</button>
+                        <!-- <button class="button2" >Opdrachtgever
+                            aanpassen</button> -->
+                            <!-- onclick="window.location.href='bedrijfaanpassen.html'" -->
                     </div>
                 </div>
                 <!-- main content -->
@@ -124,7 +126,7 @@
                         Telefoonnummer<br>
                         <input type="text" id=telefoonNummer><br>
                         E-mailadres<br>
-                        <input type="text" id=emailAdres><br>
+                        <input type="text" id=email><br>
                         Adres<br>
                         <input type="text" id=adres><br>
                         Evt. toevoeging<br>
@@ -133,16 +135,16 @@
                         <input type=text id=postcode><br>
                         Plaats<br>
                         <input type="text" id=plaats><br>
-                        <input class="button3" type="button"
-                            onclick="bedrijfToevoegen(),window.location.href='bedrijfoverzicht.html'"
-                            value="Opslaan"><br>
+                        Wachtwoord<br>
+                                <input type="password" id=password id=password><br>
+                        <input class="button3" type="button" onclick="bedrijfToevoegen()" value="Opslaan"><br>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-
+    <!-- ,window.location.href='bedrijfoverzicht.html' -->
     <!-- Footer -->
     <footer class="page-footer font-small footer-page">
         <div class="container">

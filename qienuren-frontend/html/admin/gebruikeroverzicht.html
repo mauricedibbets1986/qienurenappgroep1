@@ -40,9 +40,7 @@
                         <b>Postcode:</b> ${databaseContents[x].postcode}<br>
                         <b>Geboortedatum:</b> ${databaseContents[x].geboorteDatum}<br>
                         <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
-                        <b>E-mailadres:</b> ${databaseContents[x].emailadres}<br>
-                       
-                        <!-- <b>Rol:</b> ${databaseContents[x].rol.charAt(0) + databaseContents[x].rol.toLowerCase().slice(1)}<br><
+                        <b>E-mailadres:</b> ${databaseContents[x].email}<br>
                         <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br
                         <hr>
                         </div>
@@ -54,7 +52,7 @@
             }
             var typ = document.getElementById("filter").value;
             if (typ == "all") {
-                xhr.open("GET", "http://localhost:8082/api/users", true)
+                xhr.open("GET", "http://localhost:8082/api/admin/all-users", true)
             } else {
                 xhr.open("GET", "http://localhost:8082/api/gebruiker/rol/" + typ, true)
             }

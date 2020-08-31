@@ -78,44 +78,21 @@ public class UrenFormulierService {
     return 0.0;
     }
 
-    public UrenFormulier setIndienen(long uid, String welkeGoedkeurder){
+    public UrenFormulier setStatusUrenFormulier(long urenformulierId, String welkeGoedkeurder){
         //deze methode zet de statusGoedkeuring van OPEN naar INGEDIEND_GEBRUIKER nadat deze
         // door de gebruiker is ingediend ter goedkeuring
-        if (welkeGoedkeurder.equals("GEBRUIKER")) {
-            getUrenFormulierById(uid).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
+        if (welkeGoedkeurder.equals("TRAINEE")) {
+            getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_TRAINEE);
+        }
+        if (welkeGoedkeurder.equals("MEDEWERKER")) {
+            getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_MEDEWERKER);
         }
         if(welkeGoedkeurder.equals("ADMIN")) {
-            getUrenFormulierById(uid).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_ADMIN);
+            getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_ADMIN);
         }
         if(welkeGoedkeurder.equals("BEDRIJF")) {
-            getUrenFormulierById(uid).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_BEDRIJF);
+            getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_BEDRIJF);
         }
-        return getUrenFormulierById(uid);
+        return getUrenFormulierById(urenformulierId);
     }
-
-//    public UrenFormulier setGoedkeuring(StatusGoedkeuring huidigeStatus, String huidigeRol, long uid){
-//        //Deze methode kijkt naar de huidige status van het urenformulier en de rol en kijkt
-//        // dan wat de volgende stap van goedkeuring is.
-//        if (huidigeRol.equals("ROLE_TRAINEE") && huidigeStatus == StatusGoedkeuring.INGEDIEND_GEBRUIKER) {
-//            getUrenFormulierById(uid).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_BEDRIJF);
-//            //methode notificatie naar admin
-//            //BEDRIJF GOEDKEURING VAN TRAINEE URENFORMULIER:
-//            //vergelijkt of iemand een trainee is en of het formulier is ingediend door de gebruiker.
-//            //Zet dan status goedkeuring om in CHECK_BEDRIJF
-//        }
-//        if (huidigeRol.equals("ROLE_TRAINEE") && huidigeStatus == StatusGoedkeuring.GOEDGEKEURD_BEDRIJF) {
-//            getUrenFormulierById(uid).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_ADMIN);
-//            //ADMIN GOEDKEURING TRAINEE URENFORMULIER NA BEDRIJF:
-//            //vergelijkt of iemand een trainee is en of de status goedkeuring staat op
-//            //goedgekeurd door bedrijf. Zo ja dan zet deze de status om naar CHECK_ADMIN
-//        }
-//        if (huidigeRol.equals("ROLE_MEDEWERKER") && huidigeStatus == StatusGoedkeuring.INGEDIEND_GEBRUIKER) {
-//            getUrenFormulierById(uid).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_ADMIN);
-//            //ADMIN GOEDKEURING MEDEWERKER (slaat bedrijf over voor werknemers Qien):
-//            //Vergelijkt of iemand een rol medewerker heeft en status goedkeuring staat op
-//            //INGEDIEND_GEBRUIKER. Zo ja, zet over in CHECK_ADMIN
-//        }
-//        return getUrenFormulierById(uid);
-//    }
-
 }
