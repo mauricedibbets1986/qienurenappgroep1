@@ -72,23 +72,27 @@
           var c;
           for (c = 0; c < obj.length; c++) {
             if (obj[c].maand == document.getElementById("maand-formulier").value && obj[c].jaar == document.getElementById("jaar-formulier").value) {
-              var x;
-              for (x = 0; x < obj[c].werkdag.length; x++) {
-                y += `<tr id="${obj[c].werkdag[x].id}">
-                <td id="datum${x}">${obj[c].werkdag[x].datumDag}</td>
-                <td><input type="text" id="opdracht${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].opdrachtUren}"></td>
-                <td><input type="text" id="overwerk${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].overwerkUren}"></td>
-                <td><input type="text" id="verlof${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].verlofUren}"></td>
-                <td><input type="text" id="ziektedag${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].ziekteDag}"></td>
-                <td><input type="text" id="training${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].trainingsUren}"></td>
-                <td><input type="text" id="overig${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].overigeUren}"></td>
-                <td><input type="text" id="verklaring${x}" onchange="urenOpslaanDag()" placeholder="${obj[c].werkdag[x].verklaring}"></td>
-                </tr>
-                `
+              if(obj[c].statusGoedkeuring == "OPEN" ){
+                var x;
+                for (x = 0; x < obj[c].werkdag.length; x++) {
+                  y += `<tr id="${obj[c].werkdag[x].id}">
+                  <td id="datum${x}">${obj[c].werkdag[x].datumDag}</td>
+                  <td><input type="text" id="opdracht${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].opdrachtUren}"></td>
+                  <td><input type="text" id="overwerk${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].overwerkUren}"></td>
+                  <td><input type="text" id="verlof${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].verlofUren}"></td>
+                  <td><input type="text" id="ziektedag${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].ziekteDag}"></td>
+                  <td><input type="text" id="training${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].trainingsUren}"></td>
+                  <td><input type="text" id="overig${x}" onchange="urenOpslaanDag()" size="2" placeholder="${obj[c].werkdag[x].overigeUren}"></td>
+                  <td><input type="text" id="verklaring${x}" onchange="urenOpslaanDag()" placeholder="${obj[c].werkdag[x].verklaring}"></td>
+                  </tr>
+                  `
+                }
               }
             }
           }
           y += `</tbody></table>`;
+
+          
           document.getElementById("showUrenformulier").innerHTML = y;
         }
       };
@@ -188,7 +192,7 @@
 
     function methodeIndienen(x) {
       var xhr = new XMLHttpRequest();
-      xhr.open("PUT", "http://localhost:8082/api/urenformulier/gebruiker/" + x.id + "/setstatus-indienengebruiker", true);
+      xhr.open("PUT", "http://localhost:8082/api/urenformulier/gebruiker/"+ x.id +"/setstatus-indienenmedewerker", true);
       xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
       xhr.send();
     }
