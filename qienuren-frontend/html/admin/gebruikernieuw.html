@@ -21,10 +21,9 @@
             var typ = form["soort"].value;
             if (typ == "MEDEWERKER") {
                 medewerkerToevoegen();
-            } else if (typ == "ADMIN") {
+            } else if (typ =="ADMINISTRATOR") {
                 administratorToevoegen();
-            }
-            else if (typ == "BEDRIJF") {
+            } else if (typ == "BEDRIJF") {
                 bedrijfToevoegen();
             } else if (typ == "TRAINEE") {
                 traineeToevoegen();
@@ -43,7 +42,7 @@
             obj.woonplaats = document.getElementById("woonplaats").value;
             obj.geboorteDatum = document.getElementById("kalenderGeboortedatum").value;
             obj.telefoonNummer = document.getElementById("telefoonNummer").value;
-            obj.email = document.getElementById("email").value;
+            obj.email = document.getElementById("emailadres").value;
             obj.password = document.getElementById("wachtwoord").value;
             obj.rol = typ;
             var objJSON = JSON.stringify(obj);
@@ -68,10 +67,10 @@
             obj.evtToevoeging = document.getElementById("evtToevoeging").value;
             obj.postcode = document.getElementById("postcode").value;
             obj.woonplaats = document.getElementById("woonplaats").value;
-            obj.geboorteDatum = document.getElementById("geboorteDatum").value;
+            obj.geboorteDatum = document.getElementById("kalenderGeboortedatum").value;
             obj.telefoonNummer = document.getElementById("telefoonNummer").value;
             obj.email = document.getElementById("emailadres").value;
-            obj.password = document.getElementById("password").value;
+            obj.password = document.getElementById("wachtwoord").value;
             obj.rol = typ;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
@@ -94,10 +93,10 @@
             obj.evtToevoeging = document.getElementById("evtToevoeging").value;
             obj.postcode = document.getElementById("postcode").value;
             obj.woonplaats = document.getElementById("woonplaats").value;
-            obj.geboorteDatum = document.getElementById("geboorteDatum").value;
+            obj.geboorteDatum = document.getElementById("kalenderGeboortedatum").value;
             obj.telefoonNummer = document.getElementById("telefoonNummer").value;
             obj.email = document.getElementById("emailadres").value;
-            obj.password = document.getElementById("password").value;
+            obj.password = document.getElementById("wachtwoord").value;
             obj.rol = typ;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
@@ -120,10 +119,10 @@
             obj.evtToevoeging = document.getElementById("evtToevoeging").value;
             obj.postcode = document.getElementById("postcode").value;
             obj.woonplaats = document.getElementById("woonplaats").value;
-            obj.geboorteDatum = document.getElementById("geboorteDatum").value;
+            obj.geboorteDatum = document.getElementById("kalenderGeboortedatum").value;
             obj.telefoonNummer = document.getElementById("telefoonNummer").value;
             obj.email = document.getElementById("emailadres").value;
-            obj.password = document.getElementById("password").value;
+            obj.password = document.getElementById("wachtwoord").value;
             obj.rol = typ;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
@@ -206,7 +205,7 @@
                             aanpassen</button>
                     </div>
                 </div>
-                <!-- main content -->
+                <!-- main content , window.location.href='gebruikeroverzicht.html'-->
                 <div class="col-lg-9">
                     <div class="content">
                         <br>
@@ -219,7 +218,7 @@
                                 <label for="type-bedrijf">Bedrijf&nbsp;&nbsp;</label>
                                 <input type="radio" id="type-medewerker" name="soort" value="MEDEWERKER">
                                 <label for="type-medewerker">Medewerker&nbsp;&nbsp;</label>
-                                <input type="radio" id="type-administrator" name="soort" value="administrator">
+                                <input type="radio" id="type-administrator" name="soort" value="ADMINISTRATOR">
                                 <label for="type-administrator">Administrator&nbsp;&nbsp;</label>
                                 <br>
                                 <br>
@@ -236,7 +235,8 @@
                                     <label>Wachtwoord*</label><input type=password id=wachtwoord> <br>
                                 </div>
                                 <input id="buttonGebruikerAanmaken" type="button"
-                                    onclick="functionPicker(), window.location.href='gebruikeroverzicht.html'"
+                                    onclick="functionPicker()"
+                                   
                                     value="Gebruiker aanmaken"><br>
                             </form>
                         </div>
