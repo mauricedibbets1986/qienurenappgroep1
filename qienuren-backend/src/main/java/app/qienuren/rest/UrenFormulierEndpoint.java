@@ -55,13 +55,14 @@ public class UrenFormulierEndpoint {
         return urenFormulierService.getUrenFormulierById(id);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','TRAINEE')or #id == principal.userId")
     @PutMapping("/gebruiker/{urenformulierid}/setstatus-indienentrainee")
     public UrenFormulier setStatusFormulierIngediendTrainee(@PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "TRAINEE");
         return urenFormulierService.getUrenFormulierById(urenformulierid);
     }
   
-    @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
+    @PreAuthorize("hasAnyRole('ADMIN','MEDEWERKER')or #id == principal.userId")
     @PutMapping("/gebruiker/{urenformulierid}/setstatus-indienenmedewerker")
     public UrenFormulier setStatusFormulierIngediendMedewerker(@PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "MEDEWERKER");
