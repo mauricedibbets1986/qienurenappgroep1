@@ -78,6 +78,7 @@
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
         }
+        
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -158,17 +159,6 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h3 class="modal-title">Bewerk mijn profiel</h3>
-                                    </div>
-                                    <div class="modal-body">
-                                        <input type="text" id="bid" placeholder="bedrijfid">
-                                        <input type="text" id="gid" placeholder="gebruikerid">
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default button3" 
-                                            onclick="updateBedrijftoGebruiker()" data-dismiss="modal" data-toggle="modal"
-                                                data-target="#myModal">Bevestigen</button>
-                                            <button type="button" class="btn btn-default button2"
-                                                 data-dismiss="modal">Annuleren</button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

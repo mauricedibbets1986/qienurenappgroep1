@@ -36,7 +36,7 @@
                                 console.log("nah fucking way")
                             } else if (document.getElementById("filter").value == "all" || databaseContents[x].roles[c].name == document.getElementById("filter").value) {
                                 employeeString +=
-                                    `
+                                `
                                 <div>
                                 <h2>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}</h2>
                                 <b>Adres:</b> ${databaseContents[x].adres}<br>
@@ -46,8 +46,8 @@
                                 <b>Geboortedatum:</b> ${databaseContents[x].geboorteDatum}<br>
                                 <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
                                 <b>E-mailadres:</b> ${databaseContents[x].email}<br>
-                                // TODO : ID MOET ERUIT. BELLE!!!! JIJ BENT VERANTWOORDELIJK !!!!!!! 
-                                <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br
+                                <b>Opdrachtgever:</b> ${databaseContents[x].opdrachtgever}<br>
+                                <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br>
                                 <hr>
                                 </div>
                                 `
@@ -61,6 +61,7 @@
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
         }
+
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -130,6 +131,8 @@
                             Gebruiker</button> -->
                         <button class="button2" onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker
                             aanpassen</button>
+                        <button onclick="window.location.href='gebruikerbedrijfkoppelen.html'"
+                            class="button2">Trainee Koppelen</button>
                     </div>
                 </div>
                 <!-- main content -->
