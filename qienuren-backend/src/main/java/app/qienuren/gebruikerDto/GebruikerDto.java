@@ -2,10 +2,13 @@ package app.qienuren.gebruikerDto;
 
 
 import app.qienuren.model.Bedrijf;
+import app.qienuren.model.Gebruiker;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class GebruikerDto implements Serializable {
     private static final long serialVersionUID = 13243292L;
@@ -28,6 +31,7 @@ public class GebruikerDto implements Serializable {
     private boolean emailVerificationStatus;
     private Bedrijf bedrijf;
     private Collection<String> roles;
+    private List<Gebruiker> lijstGebruikers = new ArrayList<>();
 
 
     public long getId() {
@@ -180,5 +184,14 @@ public class GebruikerDto implements Serializable {
 
     public void setBedrijf(Bedrijf bedrijf) {
         this.bedrijf = bedrijf;
+    }
+
+
+    public List<Gebruiker> getLijstGebruikers() {
+        return lijstGebruikers;
+    }
+
+    public void setLijstGebruikers(List<Gebruiker> lijstGebruikers) {
+        this.lijstGebruikers = lijstGebruikers;
     }
 }
