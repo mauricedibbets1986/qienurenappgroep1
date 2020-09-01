@@ -282,9 +282,25 @@
       xhr.send(objJSON);
     }
 
+          function formulierTest() {
+            var idf = "";
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+              if (this.readyState == 4) {
+                var obj = JSON.parse(this.responseText);
+                for (c = 0; c < obj.length; c++) {
+                  if (obj[c].maand == document.getElementById("maand-formulier").value && obj[c].jaar == document.getElementById("jaar-formulier").value) {
+                    csvDownloaden(obj[c]);
+                  }
+                }
+              }
+            }
+            xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/" + localStorage.getItem("userId") + "/urenformulieren/", true);
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send();
+          }
 
-
-          function csvDownloaden() {
+          function csvDownloaden(UF) {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
               if (this.readyState == 4) {
@@ -293,7 +309,7 @@
                 downloadCSV(this.responseText, bla);
               }
             }
-            xhr.open("GET", "http://173.212.208.199:1337/api/export-urenformulier/16", true);
+            xhr.open("GET", "http://173.212.208.199:1337/api/export-urenformulier/" + UF.id, true);
             xhr.setRequestHeader("Content-Type", "application/download");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
@@ -411,7 +427,7 @@
         <div class="col-sm-3">
           <div class="sidebar">
             <button class="button2">Uren Invoeren</button>
-            <button class="button2" onclick="csvDownloaden()">CSV Downloaden</button>
+            <button class="button2" onclick="formulierTest()">CSV Downloaden</button>
             <button class="button2" onclick="">Historie</button>
             <!-- Trigger the modal with a button -->
             <br>
