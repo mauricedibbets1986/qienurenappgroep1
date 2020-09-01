@@ -55,8 +55,11 @@ public class UrenFormulierEndpoint {
         return urenFormulierService.getUrenFormulierById(id);
     }
 
+
     @PreAuthorize("hasAnyRole('ADMIN','TRAINEE')or #id == principal.userId")
     @PutMapping("/gebruiker/{urenformulierid}/setstatus-indienentrainee")
+    //Als iemand met de rol Trainee deze methode aanroept,
+    // zet deze de statusGoedkeuring van OPEN naar INGEDIEND_TRAINEE
     public UrenFormulier setStatusFormulierIngediendTrainee(@PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "TRAINEE");
         return urenFormulierService.getUrenFormulierById(urenformulierid);
@@ -64,12 +67,17 @@ public class UrenFormulierEndpoint {
   
     @PreAuthorize("hasAnyRole('ADMIN','MEDEWERKER')or #id == principal.userId")
     @PutMapping("/gebruiker/{urenformulierid}/setstatus-indienenmedewerker")
+    //Als iemand met de rol Medewerker deze methode aanroept,
+    // zet deze de statusGoedkeuring van OPEN naar INGEDIEND_MEDEWERKER
     public UrenFormulier setStatusFormulierIngediendMedewerker(@PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "MEDEWERKER");
         return urenFormulierService.getUrenFormulierById(urenformulierid);
     }
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
     @PutMapping("/admin/{urenformulierid}/setstatus-goedkeuring-admin")
+    //Als iemand met de rol Admin deze methode aanroept,
+    // zet deze de statusGoedkeuring van GOEDGEKEURD_BEDRIJF of INGEDIEND_MEDEWERKER naar
+    //GOEDGEKEURD_ADMIN
     public UrenFormulier setStatusGoedkeuringAdmin(@PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "ADMIN");
         return urenFormulierService.getUrenFormulierById(urenformulierid);
@@ -77,6 +85,9 @@ public class UrenFormulierEndpoint {
 
     @PreAuthorize("hasAnyRole('ADMIN', 'BEDRIJF')or #id == principal.userId")
     @PutMapping("/bedrijf/{urenformulierid}/setstatus-goedkeuring-bedrijf")
+    //Als iemand met de rol Bedrijf deze methode aanroept,
+    //zet deze de statusGoedkeuring van INGEDIEND_TRAINEE naar
+    //GOEDGEKEURD_BEDRIJF
     public UrenFormulier setStatusGoedkeuringBedrijf(@PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "BEDRIJF");
         return urenFormulierService.getUrenFormulierById(urenformulierid);
