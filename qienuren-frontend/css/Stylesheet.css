@@ -171,6 +171,22 @@ p {
   background-color: #FFDA5C;
 }
 
+.button3-sm{
+  border-radius: 30px;
+  text-align: center;
+  height: 30px;
+  width: 100%;
+  border-width: 0px;
+  background-color: #FBCC2F;
+  font-family: 'Titillium Web';
+  font-size: 16px;
+  color: #000000;
+}
+
+.button3-sm:hover{
+  background-color: #FFDA5C;
+}
+
 #buttonGebruikerAanmaken{
   border-radius: 30px;
   text-align: center;
@@ -459,6 +475,20 @@ ul.breadcrumb {
   padding: 10px;
   background-color:transparent;
   box-sizing: border-box;
+}
+
+.overzichtformulieren{
+    background-color: #fff;
+    border: none;
+}
+
+.overzichtformulieren th{
+  border-bottom: 1px solid black;
+}
+
+.overzichtformulieren tr:hover{
+background-color: #682BAA;
+color: #fff;
 }
 
 .tableFixHead { 
