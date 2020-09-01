@@ -25,7 +25,7 @@
             xhr.onreadystatechange = function () {
                 console.log("Bedrijf verwijderd")
             }
-            xhr.open("DELETE", "http://localhost:8082/api/bedrijf/delete/" + id, true);
+            xhr.open("DELETE", "http://173.212.208.199:1337/api/bedrijf/delete/" + id, true);
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
             alert("Bedrijf met id " + id + " verwijdert");
@@ -50,7 +50,7 @@
                     console.log("the details have been changed!")
                 }
             }
-            xhr.open("PUT", "http://localhost:8082/api/bedrijf/changedetails/" + id, true);
+            xhr.open("PUT", "http://173.212.208.199:1337/api/bedrijf/changedetails/" + id, true);
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);

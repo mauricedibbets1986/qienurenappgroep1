@@ -57,7 +57,7 @@
                 document.getElementById("showGebruikers").innerHTML = employeeString;
                 }
             }
-            xhr.open("GET", "http://localhost:8082/api/admin/all-users", true)
+            xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true)
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
         }
@@ -131,8 +131,6 @@
                             Gebruiker</button> -->
                         <button class="button2" onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker
                             aanpassen</button>
-                        <button onclick="window.location.href='gebruikerbedrijfkoppelen.html'"
-                            class="button2">Trainee Koppelen</button>
                     </div>
                 </div>
                 <!-- main content -->

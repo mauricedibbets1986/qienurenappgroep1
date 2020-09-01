@@ -33,7 +33,7 @@
             xhr.onreadystatechange = function () {
                 console.log("Gebruiker " + id + " was verwijderd")
             }
-            xhr.open("DELETE", "http://localhost:8082/api/gebruiker/delete/" + id, true);
+            xhr.open("DELETE", "http://173.212.208.199:1337/api/gebruiker/delete/" + id, true);
             xhr.send();
         }
 
