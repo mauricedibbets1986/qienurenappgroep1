@@ -38,12 +38,12 @@
                             <h2> ${databaseContents[x].bedrijfsNaam}</h2>
                             <b>Contacht Persoon:</b> ${databaseContents[x].contactPersoon}<br>
                             <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
-                            <b>E-mailadres:</b> ${databaseContents[x].emailAdres}<br>
+                            <b>E-mailadres:</b> ${databaseContents[x].email}<br>
                             <b>Adres:</b> ${databaseContents[x].adres}<br>
                             <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
                             <b>Postcode:</b> ${databaseContents[x].postcode}<br>
                             <b>Plaats:</b> ${databaseContents[x].plaats}<br>
-                            <b>Trainees werkzaam:
+                            <b>Trainees werkzaam: 
                             `
                         for (var y = 0; y < databaseContents[x].lijstGebruikers.length; y++) {
                             bedrijfString +=
@@ -163,8 +163,6 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-info btn-lg button3" data-toggle="modal"
-                            data-target="#myModal2">Trainee-Bedrijf</button>
                     </div>
                 </div>
             </div>
