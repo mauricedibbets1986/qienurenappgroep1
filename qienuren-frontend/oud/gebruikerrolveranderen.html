@@ -41,7 +41,7 @@
                 getEmployeeRol(employeeString, databaseContents);
             }
         }
-        jojo.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
+        jojo.open("GET", "http://173.212.208.199:1337/api/gebruiker/" + id, true);
         console.log("aliens!")
         jojo.send();
     }
@@ -72,7 +72,7 @@
                 document.getElementById("gettingemployee").innerHTML = employeeString;
             }
         }
-        jojo.open("GET", "http://localhost:8082/api/gebruiker/rol/" + id, true);
+        jojo.open("GET", "http://173.212.208.199:1337/api/gebruiker/rol/" + id, true);
         jojo.send();
     }
 
@@ -92,21 +92,21 @@
 
         var xhr = new XMLHttpRequest;
         //
-        xhr.open("PUT", "http://localhost:8082/api/trainee/rol/" + i, true);
+        xhr.open("PUT", "http://173.212.208.199:1337/api/trainee/rol/" + i, true);
         xhr.send();
     }
 
     function naarMedewerkerVeranderen(i) {
         var xhr = new XMLHttpRequest;
        // var id = document.getElementById("empID").value;
-        xhr.open("PUT", "http://localhost:8082/api/medewerker/rol/" + i, true);
+        xhr.open("PUT", "http://173.212.208.199:1337/api/medewerker/rol/" + i, true);
         xhr.send();
     }
 
     function naarAdminVeranderen(i) {
         var xhr = new XMLHttpRequest;
       //  var id = document.getElementById("empID").value;
-        xhr.open("PUT", "http://localhost:8082/api/admin/rol/" + i, true);
+        xhr.open("PUT", "http://173.212.208.199:1337/api/admin/rol/" + i, true);
         xhr.send();
     }
 
@@ -121,7 +121,7 @@
                 document.getElementById("shownaam").innerHTML = medewerkerNaam;
             }
         }
-        xhr.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
+        xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/" + id, true);
         xhr.send();
     }
 </script>

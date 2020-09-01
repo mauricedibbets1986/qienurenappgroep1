@@ -12,11 +12,12 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!-- Eigen CSS -->
     <link rel="stylesheet" href="../../css/Stylesheet.css" />
+    <!-- ../../css/Stylesheet.css -->
 
-    <title>Admin dashboard</title>
+    <title>Trainee Home</title>
 
     <!-- Eigen JavaScript -->
-    <script type="text/javascript" src=""></script>
+    <script src="../../js/javascript.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -29,7 +30,7 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="gebruikersnaam()">
     <!-- Header -->
     <header>
         <!-- Qien Logo -->
@@ -51,8 +52,7 @@
                             <img src="../../image/profilepic.PNG" width="85" height="85" class="rounded-circle">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Profiel</a>
-                            <a class="dropdown-item" href="#">Profiel bewerken</a>
+                            <a class="dropdown-item" href="traineeprofiel.html"><b><div id="gebruikersnaam"></div></b></a><hr>
                             <a class="dropdown-item" href="#">Uitloggen</a>
                         </div>
                     </li>
@@ -63,9 +63,7 @@
         <!-- Breadcrumb -->
         <div>
             <ul class="breadcrumb">
-                <li><a href="https://www.qien.nl/">Qien</a></li>
-                <li><a href="../inlogscherm.html">Log in</a></li>
-                <li>Admin overzicht</li>
+                <li>Trainee Home</li>
             </ul>
         </div>
     </header>
@@ -78,21 +76,28 @@
                 <!-- sidebar -->
                 <div class="col-sm-3">
                     <div class="sidebar">
-                        <button onclick="window.location.href='gebruikeroverzicht.html'"
-                            class="button2">Gebruikers</button>
-
-                        <button onclick="window.location.href='bedrijfoverzicht.html'"
-                            class="button2">Bedrijven</button>
-
-                        <button onclick="window.location.href=''" class="button2" disabled>Goedkeuren</button>
+                        <button class="button2" onclick="window.location.href='urenformulier.html'">Uren
+                            Registratie</button>
+                        <button class="button2" onclick="window.location.href='medewerkeruroverzicht.html'"
+                            disabled>Historie
+                            urenregistratie</button>
                     </div>
                 </div>
                 <!-- main content -->
                 <div class="col-lg-9">
                     <div class="content">
-                        <article>
-                            <h5>Welkom</h5>
-                        </article>
+                        <section>
+                            <h1 id="gebruikersnaam2"></h1>
+                            <p><i>Huidige periode 1 Augustus 2020 t/m 31 Augustus 2020</i></p>
+                            <div class="dashboard">
+                                <h2>Registratie deze periode</h2><br>
+                                <ul style="list-style-type:none;">
+                                    <li>Aantal gewerkte uren: 0</li><br>
+                                    <li>Aantal overuren: 0</li><br>
+                                    <li>Aantal vakante-uren: 0</li><br>
+                                    <li>Aantal ziekte-uren: 0</li><br>
+                                </ul>
+                        </section>
                     </div>
                 </div>
             </div>

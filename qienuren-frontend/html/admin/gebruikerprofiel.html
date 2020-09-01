@@ -50,7 +50,7 @@
                     document.getElementById("gettingemployee").innerHTML = employeeString + maandoverzicht;
                 }
             }
-            jojo.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
+            jojo.open("GET", "http://173.212.208.199:1337/api/gebruiker/" + id, true);
             console.log("aliens!")
             xhr.setRequestHeader("Authorization" + localStorage.getItem("token"));
             jojo.send();
@@ -79,7 +79,7 @@
                     document.getElementById("werkdagenlijst").innerHTML = daglijst;
                 }
             }
-            jojo.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
+            jojo.open("GET", "http://173.212.208.199:1337/api/gebruiker/" + id, true);
             xhr.setRequestHeader("Authorization: " + localStorage.getItem("token"));
             jojo.send();
         }
@@ -105,7 +105,7 @@
                     document.getElementById("gettingemployee").innerHTML = employeeString;
                 }
             }
-            request.open("PUT", "http://localhost:8082/api/gebruiker/" + id, true);
+            request.open("PUT", "http://173.212.208.199:1337/api/gebruiker/" + id, true);
             xhr.setRequestHeader("Authorization: " + localStorage.getItem("token"));
             request.send();
         }
@@ -121,7 +121,7 @@
                     document.getElementById("shownaam").innerHTML = medewerkerNaam;
                 }
             }
-            xhr.open("GET", "http://localhost:8082/api/gebruiker/" + id, true);
+            xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/" + id, true);
             xhr.setRequestHeader("Authorization: " + localStorage.getItem("token"));
             xhr.send();
         }

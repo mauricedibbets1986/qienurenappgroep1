@@ -97,7 +97,7 @@
               updateWorkDaytoUrenFormulier(obj.id);
             }
           }
-          xhr.open("POST", "http://localhost:8082/api/werkdag/new/", true);
+          xhr.open("POST", "http://173.212.208.199:1337/api/werkdag/new/", true);
           xhr.setRequestHeader("Content-Type", "application/json");
           xhr.send(objJSON);
           
@@ -126,7 +126,7 @@
                     }
                 }
             }
-            xhr.open("PUT", "http://localhost:8082/api/urenformulier/" + ufid + "/" + id, true);
+            xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/" + ufid + "/" + id, true);
             xhr.send();
         }
 
@@ -150,7 +150,7 @@
                   }
               }
             }
-            xhr.open("GET", "http://localhost:8082/api/gebruiker/" + 1 + "/urenformulieren/", true);
+            xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/" + 1 + "/urenformulieren/", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send();
         }

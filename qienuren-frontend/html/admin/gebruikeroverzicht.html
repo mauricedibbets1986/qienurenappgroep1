@@ -27,38 +27,41 @@
                     var databaseContents = JSON.parse(this.responseText);
 
                     var x;
+                    var c;
 
                     for (x = 0; x < databaseContents.length; x++) {
+                        for (c = 0; c < databaseContents[x].roles.length; c++) {
 
-                        employeeString +=
-                            `
-                        <div>
-                        <h2>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}</h2>
-                        <b>Adres:</b> ${databaseContents[x].adres}<br>
-                        <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
-                        <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
-                        <b>Postcode:</b> ${databaseContents[x].postcode}<br>
-                        <b>Geboortedatum:</b> ${databaseContents[x].geboorteDatum}<br>
-                        <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
-                        <b>E-mailadres:</b> ${databaseContents[x].email}<br>
-                        <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br
-                        <hr>
-                        </div>
-                        `
+                            if (databaseContents[x].roles[c].name == "ROLE_ADMIN" || databaseContents[x].roles[c].name == "ROLE_BEDRIJF") {
+                                console.log("nah fucking way")
+                            } else if (document.getElementById("filter").value == "all" || databaseContents[x].roles[c].name == document.getElementById("filter").value) {
+                                employeeString +=
+                                `
+                                <div>
+                                <h2>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}</h2>
+                                <b>Adres:</b> ${databaseContents[x].adres}<br>
+                                <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
+                                <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
+                                <b>Postcode:</b> ${databaseContents[x].postcode}<br>
+                                <b>Geboortedatum:</b> ${databaseContents[x].geboorteDatum}<br>
+                                <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
+                                <b>E-mailadres:</b> ${databaseContents[x].email}<br>
+                                <b>Opdrachtgever:</b> ${databaseContents[x].opdrachtgever}<br>
+                                <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br>
+                                <hr>
+                                </div>
+                                `
+                        } 
+                       }
                     }
-                }
-
                 document.getElementById("showGebruikers").innerHTML = employeeString;
+                }
             }
-            var typ = document.getElementById("filter").value;
-            if (typ == "all") {
-                xhr.open("GET", "http://localhost:8082/api/admin/all-users", true)
-            } else {
-                xhr.open("GET", "http://localhost:8082/api/gebruiker/rol/" + typ, true)
-            }
+            xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true)
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
         }
+
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -124,8 +127,8 @@
                     <div class="sidebar">
                         <button class="button2" onclick="window.location.href='gebruikernieuw.html'">Nieuwe
                             Gebruiker</button>
-                        <button class="button2" onclick="window.location.href='gebruikerprofiel.html'">Profiel
-                            Gebruiker</button>
+                        <!-- <button class="button2" onclick="window.location.href='gebruikerprofiel.html'">Profiel
+                            Gebruiker</button> -->
                         <button class="button2" onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker
                             aanpassen</button>
                     </div>
@@ -136,8 +139,8 @@
                         <form name="type-form">
                             <select name="filter-soort" onclick=alleGebruikers() id="filter">
                                 <option value="all">--filter--</option>
-                                <option value="MEDEWERKER">medewerker</option>
-                                <option value="TRAINEE">trainee</option>
+                                <option value="ROLE_MEDEWERKER">medewerker</option>
+                                <option value="ROLE_TRAINEE">trainee</option>
                             </select>
                         </form>
                         <section>

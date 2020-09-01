@@ -60,15 +60,16 @@ public class InitialGebruikerSetup {
         RoleEntity roleBedrijf = createRole(Roles.ROLE_BEDRIJF.name(), Arrays.asList(readUserAuthority, readUrenformulierAuthority, approveUrenformulierAuthority));
 
         //create userentity with adminrole
-        if (roleAdmin == null) return;
-        Gebruiker adminUser = new Gebruiker();
-        adminUser.setVoornaam("Groep1");
-        adminUser.setAchternaam("Qien");
-        adminUser.setEmail("groep1@qien.nl");
-        adminUser.setRoles(Arrays.asList(roleAdmin));
-        adminUser.setUserId(utils.generateUserId(6));
-        adminUser.setEncryptedPassword(bCryptPasswordEncoder.encode("groep1"));
-        gebruikerRepository.save(adminUser);
+        if (gebruikerRepository.findByEmail("groep1@qien.nl") == null) {
+            Gebruiker adminUser = new Gebruiker();
+            adminUser.setVoornaam("Groep1");
+            adminUser.setAchternaam("Qien");
+            adminUser.setEmail("groep1@qien.nl");
+            adminUser.setRoles(Arrays.asList(roleAdmin));
+            adminUser.setUserId(utils.generateUserId(6));
+            adminUser.setEncryptedPassword(bCryptPasswordEncoder.encode("groep1"));
+            gebruikerRepository.save(adminUser);
+        } return;
     }
 
     //function to create authority in table and save it in db
