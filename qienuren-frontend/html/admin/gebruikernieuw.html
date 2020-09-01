@@ -56,6 +56,7 @@
         }
 
         function medewerkerToevoegen() {
+            console.log("answer in top of function");
             var obj = {};
             var form = document.forms["type-form"];
             var typ = form["soort"].value;
@@ -65,10 +66,10 @@
             obj.evtToevoeging = document.getElementById("evtToevoeging").value;
             obj.postcode = document.getElementById("postcode").value;
             obj.woonplaats = document.getElementById("woonplaats").value;
-            obj.geboorteDatum = document.getElementById("geboorteDatum").value;
+            obj.geboorteDatum = document.getElementById("kalenderGeboortedatum").value;
             obj.telefoonNummer = document.getElementById("telefoonNummer").value;
-            obj.email = document.getElementById("emailadres").value;
-            obj.password = document.getElementById("password").value;
+            obj.email = document.getElementById("email").value;
+            obj.password = document.getElementById("wachtwoord").value;
             obj.rol = typ;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
@@ -117,10 +118,10 @@
             obj.evtToevoeging = document.getElementById("evtToevoeging").value;
             obj.postcode = document.getElementById("postcode").value;
             obj.woonplaats = document.getElementById("woonplaats").value;
-            obj.geboorteDatum = document.getElementById("geboorteDatum").value;
+            obj.geboorteDatum = document.getElementById("kalenderGeboortedatum").value;
             obj.telefoonNummer = document.getElementById("telefoonNummer").value;
-            obj.email = document.getElementById("emailadres").value;
-            obj.password = document.getElementById("password").value;
+            obj.email = document.getElementById("email").value;
+            obj.password = document.getElementById("wachtwoord").value;
             obj.rol = typ;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
@@ -199,8 +200,6 @@
                     <div class="sidebar">
                         <button class="button1" onclick="window.location.href='gebruikeroverzicht.html'">Terug naar
                             overzicht</button>
-                        <button class="button2" onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker
-                            aanpassen</button>
                     </div>
                 </div>
                 <!-- main content -->
@@ -216,7 +215,7 @@
                                 <label for="type-bedrijf">Bedrijf&nbsp;&nbsp;</label> -->
                                 <input type="radio" id="type-medewerker" name="soort" value="MEDEWERKER">
                                 <label for="type-medewerker">Medewerker&nbsp;&nbsp;</label>
-                                <input type="radio" id="type-administrator" name="soort" value="administrator">
+                                <input type="radio" id="type-administrator" name="soort" value="ADMIN">
                                 <label for="type-administrator">Administrator&nbsp;&nbsp;</label>
                                 <br>
                                 <br>
@@ -232,9 +231,9 @@
                                     <label>E-mailadres*</label><input type=text id=email><br>
                                     <label>Wachtwoord*</label><input type=password id=wachtwoord> <br>
                                 </div>
-                                <input id="buttonGebruikerAanmaken" type="button"
-                                    onclick="functionPicker(), window.location.href='gebruikeroverzicht.html'"
-                                    value="Gebruiker aanmaken"><br>
+                                <input id="buttonGebruikerAanmaken" type="button" 
+                                onclick="functionPicker()" 
+                                value="Gebruiker aanmaken"><br>
                             </form>
                         </div>
                     </div>
