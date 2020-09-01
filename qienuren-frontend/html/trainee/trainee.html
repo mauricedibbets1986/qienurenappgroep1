@@ -28,6 +28,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+
+        <script>
+            const logout = () => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('userRole');
+                window.location.href = "../inlogscherm.html";
+            }
+        </script>
 </head>
 
 <body onload="gebruikersnaam()">
@@ -53,7 +62,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="traineeprofiel.html"><b><div id="gebruikersnaam"></div></b></a><hr>
-                            <a class="dropdown-item" href="#">Uitloggen</a>
+                            <a onclick="logout()" class="dropdown-item" href="#">Uitloggen</a>
                         </div>
                     </li>
                 </ul>
