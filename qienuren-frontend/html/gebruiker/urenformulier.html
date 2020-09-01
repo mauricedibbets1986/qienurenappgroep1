@@ -96,7 +96,7 @@
           document.getElementById("showUrenformulier").innerHTML = y;
         }
       };
-      xhr.open("GET", "http://localhost:8082/api/gebruiker/" + localStorage.getItem("userId") + "/urenformulieren/", true);
+      xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/" + localStorage.getItem("userId") + "/urenformulieren/", true);
       xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
       xhr.send();
     }
@@ -148,7 +148,7 @@
           document.getElementById("showUrenformulier-modal").innerHTML = y;
         }
       };
-      xhr.open("GET", "http://localhost:8082/api/gebruiker/" + localStorage.getItem("userId") + "/urenformulieren/", true);
+      xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/" + localStorage.getItem("userId") + "/urenformulieren/", true);
       xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
       xhr.send();
     }
@@ -167,7 +167,7 @@
         }
         document.getElementById("formulier-status").innerHTML = status;
       }
-      xhr.open("GET", "http://localhost:8082/api/gebruiker/" + localStorage.getItem("userId") + "/urenformulieren/", true);
+      xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/" + localStorage.getItem("userId") + "/urenformulieren/", true);
       xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
       xhr.send();
     }
@@ -185,14 +185,14 @@
           }
         }
       }
-      xhr.open("GET", "http://localhost:8082/api/gebruiker/" + localStorage.getItem("userId") + "/urenformulieren/", true);
+      xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/" + localStorage.getItem("userId") + "/urenformulieren/", true);
       xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
       xhr.send();
     }
 
     function methodeIndienen(x) {
       var xhr = new XMLHttpRequest();
-      xhr.open("PUT", "http://localhost:8082/api/urenformulier/gebruiker/"+ x.id +"/setstatus-indienenmedewerker", true);
+      xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/gebruiker/"+ x.id +"/setstatus-indienenmedewerker", true);
       xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
       xhr.send();
     }
@@ -210,7 +210,7 @@
           }
         }
       }
-      xhr.open("GET", "http://localhost:8082/api/gebruiker/" + localStorage.getItem("userId") + "/urenformulieren/", true);
+      xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/" + localStorage.getItem("userId") + "/urenformulieren/", true);
       xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
       xhr.send();
     }
@@ -248,7 +248,7 @@
 
         if (checkValidDagen(obj)) {
           var xhr = new XMLHttpRequest();
-          xhr.open("PUT", "http://localhost:8082/api/werkdag/edit/" + UF.werkdag[x].id, true);
+          xhr.open("PUT", "http://173.212.208.199:1337/api/werkdag/edit/" + UF.werkdag[x].id, true);
           xhr.setRequestHeader("Content-Type", "application/json");
           xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
           xhr.send(objJSON);
@@ -277,7 +277,7 @@
           return objresponse;
         }
       }
-      xhr.open("POST", "http://localhost:8082/api/urenformulier/new", true);
+      xhr.open("POST", "http://173.212.208.199:1337/api/urenformulier/new", true);
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.send(objJSON);
     }
@@ -293,7 +293,7 @@
                 downloadCSV(this.responseText, bla);
               }
             }
-            xhr.open("GET", "http://localhost:8082/api/export-urenformulier/16", true);
+            xhr.open("GET", "http://173.212.208.199:1337/api/export-urenformulier/16", true);
             xhr.setRequestHeader("Content-Type", "application/download");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();

@@ -57,7 +57,7 @@
                 document.getElementById("showGebruikers").innerHTML = employeeString;
                 }
             }
-            xhr.open("GET", "http://localhost:8082/api/admin/all-users", true)
+            xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true)
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
         }

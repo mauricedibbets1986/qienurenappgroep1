@@ -41,7 +41,7 @@
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
                 }
             }
-            xhr.open("GET", "http://localhost:8082/api/users/" + localStorage.getItem("userId"), true);
+            xhr.open("GET", "http://173.212.208.199:1337/api/users/" + localStorage.getItem("userId"), true);
             console.log("werkt dit?");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
@@ -66,7 +66,7 @@
                     console.log("the details have been changed!")
                 }
             }
-            xhr.open("PUT", "http://localhost:8082/api/gebruiker/changedetails/" + id, true);
+            xhr.open("PUT", "http://173.212.208.199:1337/api/gebruiker/changedetails/" + id, true);
             xhr.setRequestHeader("Content-type", "application/json", "Authorization", localStorage.getItem("token"))
             xhr.send(objJSON);
         }
