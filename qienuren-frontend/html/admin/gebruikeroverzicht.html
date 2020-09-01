@@ -17,6 +17,8 @@
     <title>Overzicht van medewerkers/trainees</title>
 
     <!-- Eigen JavaScript -->
+    <script src="../../js/javascript.js"></script>
+
     <script>
         // alle medewerkers zien
         function alleGebruikers() {
@@ -99,7 +101,7 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">Profiel</a>
                             <a class="dropdown-item" href="#">Profiel bewerken</a>
-                            <a class="dropdown-item" href="#">Uitloggen</a>
+                            <a onclick="logout()" class="dropdown-item" href="#">Uitloggen</a>
                         </div>
                     </li>
                 </ul>
@@ -119,7 +121,7 @@
 
 
     <!-- Main content -->
-    <main>
+    <main onload="loginAuthAdmin()">
         <div class="container">
             <div class="row">
                 <!-- sidebar -->
