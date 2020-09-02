@@ -59,9 +59,21 @@
                 document.getElementById("showGebruikers").innerHTML = employeeString;
                 }
             }
-            xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true)
+            xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true);
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
+        }
+
+        function urenFormulierKlaarzetten() {
+            var xhr = new XMLHttpRequest();
+            var obj = {};
+            obj.maand = document.getElementById("selectMaand").value;
+            obj.jaar = document.getElementById("selectJaar").value;
+            objJSON = JSON.stringify(obj);
+            xhr.open("POST", "http://localhost:8082/api/urenformulier/klaarzetten", true);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send(objJSON);
         }
 
     </script>
@@ -78,6 +90,39 @@
 </head>
 
 <body onload=alleGebruikers()>
+    <div class="modal fade" id="myModal2" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Urenformulieren Klaarzetten</h3>
+                    <select id="selectMaand">
+                        <option>Kies een Maand</option>
+                        <option value="JANUARI">Januari</option>
+                        <option value="FEBRUARI">Februari</option>
+                        <option value="MAART">Maart</option>
+                        <option value="APRIL">April</option>
+                        <option value="MEI">Mei</option>
+                        <option value="JUNI">Juni</option>
+                        <option value="JULI">Juli</option>
+                        <option value="AUGUSTUS">Augustus</option>
+                        <option value="SEPTEMBER">September</option>
+                        <option value="OKTOBER">Oktober</option>
+                        <option value="NOVEMBER">November</option>
+                        <option value="DECEMBER">December</option>
+                    </select>
+                    <select id="selectJaar">
+                        <option>Kies een Jaar</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                    </select>
+                    <input type="button" class="button3"
+                            onclick="urenFormulierKlaarzetten()"
+                            value="Klaarzetten" data-dismiss="modal"><br>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Header -->
     <header>
         <!-- Qien Logo -->
@@ -133,6 +178,8 @@
                             Gebruiker</button> -->
                         <button class="button2" onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker
                             aanpassen</button>
+                        <input type="button" class="button2" data-toggle="modal"
+                            data-target="#myModal2" value="Urenfomulieren">
                     </div>
                 </div>
                 <!-- main content -->
