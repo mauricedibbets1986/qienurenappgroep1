@@ -192,7 +192,7 @@
 
     function methodeIndienen(x) {
       var xhr = new XMLHttpRequest();
-      xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/gebruiker/"+ x.id +"/setstatus-indienenmedewerker", true);
+      xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/gebruiker/"+ x.id +"/setstatus-indienengebruiker", true);
       xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
       xhr.send();
     }
