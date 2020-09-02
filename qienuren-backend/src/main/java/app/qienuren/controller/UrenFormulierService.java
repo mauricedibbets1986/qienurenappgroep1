@@ -79,20 +79,27 @@ public class UrenFormulierService {
     }
 
     public UrenFormulier setStatusUrenFormulier(long urenformulierId, String welkeGoedkeurder){
-        //deze methode zet de statusGoedkeuring van OPEN naar INGEDIEND_GEBRUIKER nadat deze
-        // door de gebruiker is ingediend ter goedkeuring
-        if (welkeGoedkeurder.equals("TRAINEE")) {
-            getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_TRAINEE);
+
+        //deze methode zet de statusGoedkeuring van OPEN naar INGEDIEND_TRAINEE nadat deze
+        // door de trainee is ingediend ter goedkeuring
+        if (welkeGoedkeurder.equals("GEBRUIKER")) {
+            getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
         }
-        if (welkeGoedkeurder.equals("MEDEWERKER")) {
-            getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_MEDEWERKER);
-        }
+
+        //deze methode zet de statusGoedkeuring van INGEDIEND_TRAINEE of INGEDIEND_MEDEWERKER naar
+        // GOEDGEKEURD_ADMIN nadat deze door de trainee/medewerker is ingediend ter goedkeuring
+        // (en door bedrijf is goedgekeurd indien Trainee)
         if(welkeGoedkeurder.equals("ADMIN")) {
             getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_ADMIN);
         }
+
+        //deze methode zet de statusGoedkeuring van INGEDIEND_TRAINEE naar GOEDGEKEURD_BEDRIJF nadat deze
+        //door de trainee/medewerker is ingediend ter goedkeuring. Medewerker slaat deze methode over
+        //en gaat gelijk naar goedkeuring admin!
         if(welkeGoedkeurder.equals("BEDRIJF")) {
             getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.GOEDGEKEURD_BEDRIJF);
         }
+
         return getUrenFormulierById(urenformulierId);
     }
 }

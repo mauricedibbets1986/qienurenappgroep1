@@ -49,6 +49,7 @@
                             var nam = obj.lijstGebruikers[x].voornaam + " " + obj.lijstGebruikers[x].achternaam;
                             var uid = obj.lijstGebruikers[x].userId;
                             var ufid = obj.lijstGebruikers[x].urenFormulier[y].id;
+
                             if (obj.lijstGebruikers[x].urenFormulier[y].statusGoedkeuring != "OPEN") {
                                 lijst +=
                                     ` <tr>
@@ -152,6 +153,13 @@
             xhr.send();
         }
 
+         function formulierAfkeuren() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/bedrijf/" + storedvalue + "/setstatus-afkeuring", true);
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send();
+        }
+
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -196,6 +204,8 @@
                     <button type="button" class="btn btn-default button3" id="indien-knop" data-dismiss="modal"
                         data-toggle="modal" data-target="#myModal" onclick="formulierGoedkeuren(), lijstTrainees()"
                         disabled>Bevestigen</button>
+                        <button type="button" class="btn btn-default button1" id="afkeur-knop" data-dismiss="modal"
+                        data-toggle="modal" data-target="#myModal" onclick="formulierAfkeuren(), lijstTrainees()">Afkeuren</button>
                     <button type="button" class="btn btn-default button2" onclick=""
                         data-dismiss="modal">Annuleren</button>
                 </div>
