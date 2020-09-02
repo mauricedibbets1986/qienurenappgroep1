@@ -223,12 +223,10 @@ public class GebruikerService implements GebruikerServiceInterface {
                 Iterable<UrenFormulier> medewerkerUrenformulier = gebruiker.getUrenFormulier();
                 for (UrenFormulier uf : medewerkerUrenformulier) {
                     if (!uf.getJaar().equals(newUrenFormulier.getJaar()) & uf.getMaand() != newUrenFormulier.getMaand()) {
-                        System.out.println("Exists true");
                         exists = true;
                     }
                 }
                 if (!exists) {
-                    System.out.println("ik zet ze klaar");
                     gebruiker.addUrenFormulierToArray(newUrenFormulier);
                     gebruikerRepository.save(gebruiker);
                 }
