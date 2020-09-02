@@ -1,6 +1,7 @@
 package app.qienuren.rest;
 
 import app.qienuren.controller.GebruikerService;
+import app.qienuren.controller.UrenFormulierRepository;
 import app.qienuren.controller.UrenFormulierService;
 import app.qienuren.gebruikerDto.Roles;
 import app.qienuren.model.Gebruiker;
@@ -21,6 +22,9 @@ public class UrenFormulierEndpoint {
 
     @Autowired
     GebruikerService gebruikerService;
+
+    @Autowired
+    UrenFormulierRepository urenFormulierRepository;
 
 
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
@@ -113,6 +117,13 @@ public class UrenFormulierEndpoint {
         getUrenFormulierById(urenformulierid).setStatusGoedkeuring(StatusGoedkeuring.OPEN);
         return getUrenFormulierById(urenformulierid);
     }
+
+    @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
+    @PutMapping("/afkeur-opmerking/{id}")
+    public void afkeurOpmerking(@PathVariable(value = "id") long id, @RequestBody UrenFormulier urenFormulier) {
+        urenFormulierService.changeDetails(urenFormulierRepository.findById(id).get(), urenFormulier);
+    }
+
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/klaarzetten")

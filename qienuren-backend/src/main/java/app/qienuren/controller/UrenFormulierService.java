@@ -1,5 +1,6 @@
 package app.qienuren.controller;
 
+import app.qienuren.model.Bedrijf;
 import app.qienuren.model.StatusGoedkeuring;
 import app.qienuren.model.UrenFormulier;
 import app.qienuren.model.Werkdag;
@@ -101,5 +102,13 @@ public class UrenFormulierService {
         }
 
         return getUrenFormulierById(urenformulierId);
+    }
+
+    public UrenFormulier changeDetails(UrenFormulier urenFormulier, UrenFormulier urenFormulierUpdate) {
+        if (urenFormulierUpdate.getOpmerking() != null) {
+            urenFormulier.setOpmerking(urenFormulierUpdate.getOpmerking());
+        }
+
+        return urenFormulierRepository.save(urenFormulier);
     }
 }
