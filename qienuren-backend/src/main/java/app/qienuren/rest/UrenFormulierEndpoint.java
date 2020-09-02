@@ -59,7 +59,6 @@ public class UrenFormulierEndpoint {
         System.out.println("endpoint called");
         return urenFormulierService.getUrenFormulierById(id);
     }
-<<<<<<< HEAD
 
     @PreAuthorize("hasAnyRole('ADMIN','TRAINEE')or #id == principal.userId")
     @PutMapping("/gebruiker/{urenformulierid}/setstatus-indienentrainee")
