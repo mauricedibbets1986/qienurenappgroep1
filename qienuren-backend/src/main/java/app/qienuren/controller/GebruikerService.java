@@ -213,5 +213,25 @@ public class GebruikerService implements GebruikerServiceInterface {
         }
         gebruikerRepository.delete(gebruiker);
     }
+
+    public void urenFormulierenKlaarzetten(UrenFormulier newUrenFormulier) {
+        boolean exists = false;
+        Iterable<Gebruiker> gebruikers = getAllUsers();
+        for (Gebruiker gebruiker : gebruikers) {
+            RoleEntity[] gebruikerRol = gebruiker.getRoles().toArray(new RoleEntity[0]);
+            if (gebruikerRol[0].getName().equals("ROLE_MEDEWERKER") || gebruikerRol[0].getName().equals("ROLE_TRAINEE")) {
+                Iterable<UrenFormulier> medewerkerUrenformulier = gebruiker.getUrenFormulier();
+                for (UrenFormulier uf : medewerkerUrenformulier) {
+                    if (!uf.getJaar().equals(newUrenFormulier.getJaar()) & uf.getMaand() != newUrenFormulier.getMaand()) {
+                        exists = true;
+                    }
+                }
+                if (!exists) {
+                    gebruiker.addUrenFormulierToArray(newUrenFormulier);
+                    gebruikerRepository.save(gebruiker);
+                }
+            }
+        }
+    }
 }
 
