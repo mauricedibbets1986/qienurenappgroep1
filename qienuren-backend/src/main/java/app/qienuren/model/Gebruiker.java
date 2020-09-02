@@ -2,6 +2,7 @@ package app.qienuren.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -45,7 +46,7 @@ public class Gebruiker {
     private LocalDate geboorteDatum;
     private long telefoonNummer;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<UrenFormulier> urenFormulier = new ArrayList<>();
 

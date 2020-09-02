@@ -96,7 +96,11 @@ public class GebruikerService implements GebruikerServiceInterface {
         return urenformulier;
     }
 
-    public Gebruiker addGebruiker(Gebruiker gebruiker) {
+    public Gebruiker addTrainee(Gebruiker gebruiker) {
+        return gebruikerRepository.save(gebruiker);
+
+    }
+    public Gebruiker addMedewerker(Gebruiker gebruiker) {
         return gebruikerRepository.save(gebruiker);
 
     }
@@ -105,12 +109,8 @@ public class GebruikerService implements GebruikerServiceInterface {
         return gebruikerRepository.findByUserId(id).getUrenFormulier();
     }
 
-    public UrenFormulier changestatusUrenFormulierTrainee(UrenFormulier urenFormulier) {
-        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_TRAINEE);
-        return urenFormulier;
-    }
-    public UrenFormulier changestatusUrenFormulierMedewerker(UrenFormulier urenFormulier) {
-        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_MEDEWERKER);
+    public UrenFormulier changestatusUrenFormulierGebruiker(UrenFormulier urenFormulier) {
+        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
         return urenFormulier;
     }
 
@@ -212,6 +212,26 @@ public class GebruikerService implements GebruikerServiceInterface {
             throw new RuntimeException("NO RECORD FOUND");
         }
         gebruikerRepository.delete(gebruiker);
+    }
+
+    public void urenFormulierenKlaarzetten(UrenFormulier newUrenFormulier) {
+        boolean exists = false;
+        Iterable<Gebruiker> gebruikers = getAllUsers();
+        for (Gebruiker gebruiker : gebruikers) {
+            RoleEntity[] gebruikerRol = gebruiker.getRoles().toArray(new RoleEntity[0]);
+            if (gebruikerRol[0].getName().equals("ROLE_MEDEWERKER") || gebruikerRol[0].getName().equals("ROLE_TRAINEE")) {
+                Iterable<UrenFormulier> medewerkerUrenformulier = gebruiker.getUrenFormulier();
+                for (UrenFormulier uf : medewerkerUrenformulier) {
+                    if (!uf.getJaar().equals(newUrenFormulier.getJaar()) & uf.getMaand() != newUrenFormulier.getMaand()) {
+                        exists = true;
+                    }
+                }
+                if (!exists) {
+                    gebruiker.addUrenFormulierToArray(newUrenFormulier);
+                    gebruikerRepository.save(gebruiker);
+                }
+            }
+        }
     }
 }
 

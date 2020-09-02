@@ -2,11 +2,16 @@ package app.qienuren.rest;
 
 import app.qienuren.controller.GebruikerService;
 import app.qienuren.controller.UrenFormulierService;
+import app.qienuren.gebruikerDto.Roles;
+import app.qienuren.model.Gebruiker;
+import app.qienuren.model.RoleEntity;
 import app.qienuren.model.StatusGoedkeuring;
 import app.qienuren.model.UrenFormulier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/urenformulier")
@@ -61,15 +66,25 @@ public class UrenFormulierEndpoint {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "TRAINEE");
         return urenFormulierService.getUrenFormulierById(urenformulierid);
     }
-  
+
     @PreAuthorize("hasAnyRole('ADMIN','MEDEWERKER')or #id == principal.userId")
     @PutMapping("/gebruiker/{urenformulierid}/setstatus-indienenmedewerker")
     public UrenFormulier setStatusFormulierIngediendMedewerker(@PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "MEDEWERKER");
-        return urenFormulierService.getUrenFormulierById(urenformulierid);
+  
+    @PreAuthorize("hasAnyRole('ADMIN','TRAINEE','MEDEWERKER')or #id == principal.userId")
+    @PutMapping("/gebruiker/{urenformulierid}/setstatus-indienengebruiker")
+    //Als iemand met de rol Gebruiker deze methode aanroept,
+    // zet deze de statusGoedkeuring van OPEN naar INGEDIEND_GEBRUIKER
+    public UrenFormulier setStatusFormulierIngediendGebruiker(@PathVariable(value = "urenformulierid") long urenformulierid) {
+        urenFormulierService.setStatusUrenFormulier(urenformulierid, "GEBRUIKER");
     }
+
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
     @PutMapping("/admin/{urenformulierid}/setstatus-goedkeuring-admin")
+    //Als iemand met de rol Admin deze methode aanroept,
+    // zet deze de statusGoedkeuring van GOEDGEKEURD_BEDRIJF of INGEDIEND_MEDEWERKER naar
+    //GOEDGEKEURD_ADMIN
     public UrenFormulier setStatusGoedkeuringAdmin(@PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "ADMIN");
         return urenFormulierService.getUrenFormulierById(urenformulierid);
@@ -77,17 +92,27 @@ public class UrenFormulierEndpoint {
 
     @PreAuthorize("hasAnyRole('ADMIN', 'BEDRIJF')or #id == principal.userId")
     @PutMapping("/bedrijf/{urenformulierid}/setstatus-goedkeuring-bedrijf")
+    //Als iemand met de rol Bedrijf deze methode aanroept,
+    //zet deze de statusGoedkeuring van INGEDIEND_TRAINEE naar
+    //GOEDGEKEURD_BEDRIJF
     public UrenFormulier setStatusGoedkeuringBedrijf(@PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "BEDRIJF");
         return urenFormulierService.getUrenFormulierById(urenformulierid);
     }
 
-    @PreAuthorize("hasAuthority('APPROVE:URENFORMULIER')")
-    public UrenFormulier setAfkeuring(long urenformulierid) {
+    @PreAuthorize("hasAnyRole('ADMIN', 'BEDRIJF')or #id == principal.userId")
+    @PutMapping("/{urenformulierid}/setstatus-afkeuring")
+    public UrenFormulier setAfkeuring(@PathVariable(value = "urenformulierid") long urenformulierid) {
         //Als iemand met de rol Admin of Bedrijf deze methode aanroept,
         // zet deze de statusGoedkeuring terug naar OPEN nadat deze
         // door een bedrijf of admin is afgekeurd.
         getUrenFormulierById(urenformulierid).setStatusGoedkeuring(StatusGoedkeuring.OPEN);
         return getUrenFormulierById(urenformulierid);
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PostMapping("/klaarzetten")
+    public void urenFormulierenKlaarzetten(@RequestBody UrenFormulier newUrenFormulier) {
+        gebruikerService.urenFormulierenKlaarzetten(newUrenFormulier);
     }
 }

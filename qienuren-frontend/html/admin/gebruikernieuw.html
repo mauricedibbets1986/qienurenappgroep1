@@ -23,7 +23,7 @@
             var typ = form["soort"].value;
             if (typ == "MEDEWERKER") {
                 medewerkerToevoegen();
-            } else if (typ == "ADMIN") {
+            } else if (typ =="ADMIN") {
                 administratorToevoegen();
             } else if (typ == "TRAINEE") {
                 traineeToevoegen();
@@ -79,6 +79,32 @@
                 console.log("answer in console");
             }
             xhr.open("POST", "http://173.212.208.199:1337/api/admin/users/addMedewerker", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send(objJSON);
+            alert("Nieuwe " + typ.toLowerCase() + " aangemaakt")
+        }
+        function bedrijfToevoegen() {
+            var obj = {};
+            var form = document.forms["type-form"];
+            var typ = form["soort"].value;
+            obj.voornaam = document.getElementById("voornaam").value;
+            obj.achternaam = document.getElementById("achternaam").value;
+            obj.adres = document.getElementById("adres").value;
+            obj.evtToevoeging = document.getElementById("evtToevoeging").value;
+            obj.postcode = document.getElementById("postcode").value;
+            obj.woonplaats = document.getElementById("woonplaats").value;
+            obj.geboorteDatum = document.getElementById("kalenderGeboortedatum").value;
+            obj.telefoonNummer = document.getElementById("telefoonNummer").value;
+            obj.email = document.getElementById("email").value;
+            obj.password = document.getElementById("wachtwoord").value;
+            obj.rol = typ;
+            objJSON = JSON.stringify(obj);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                console.log("answer in console");
+            }
+            xhr.open("POST", "http://173.212.208.199:1337/api/admin/users/addBedrijf", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
@@ -202,7 +228,7 @@
                             overzicht</button>
                     </div>
                 </div>
-                <!-- main content -->
+                <!-- main content , window.location.href='gebruikeroverzicht.html'-->
                 <div class="col-lg-9">
                     <div class="content">
                         <br>
@@ -231,9 +257,11 @@
                                     <label>E-mailadres*</label><input type=text id=email><br>
                                     <label>Wachtwoord*</label><input type=password id=wachtwoord> <br>
                                 </div>
-                                <input id="buttonGebruikerAanmaken" type="button" 
-                                onclick="functionPicker()" 
-                                value="Gebruiker aanmaken"><br>
+
+                                <input id="buttonGebruikerAanmaken" type="button"
+                                    onclick="functionPicker()"
+                                    value="Gebruiker aanmaken"><br>
+
                             </form>
                         </div>
                     </div>
