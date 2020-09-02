@@ -16,6 +16,8 @@
     <title>Admin dashboard</title>
 
     <!-- Eigen JavaScript -->
+    <script src="../../js/javascript.js"></script>
+
     <script type="text/javascript" src=""></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -29,7 +31,7 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="loginAuthAdmin()">
     <!-- Header -->
     <header>
         <!-- Qien Logo -->
@@ -53,7 +55,7 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">Profiel</a>
                             <a class="dropdown-item" href="#">Profiel bewerken</a>
-                            <a class="dropdown-item" href="#">Uitloggen</a>
+                            <a onclick="logout()" class="dropdown-item" href="#">Uitloggen</a>
                         </div>
                     </li>
                 </ul>
