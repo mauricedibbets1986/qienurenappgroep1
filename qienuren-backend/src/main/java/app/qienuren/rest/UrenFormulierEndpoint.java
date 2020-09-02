@@ -97,7 +97,7 @@ public class UrenFormulierEndpoint {
     @PreAuthorize("hasAnyRole('ADMIN', 'BEDRIJF')or #id == principal.userId")
     @PutMapping("/bedrijf/{urenformulierid}/setstatus-goedkeuring-bedrijf")
     //Als iemand met de rol Bedrijf deze methode aanroept,
-    //zet deze de statusGoedkeuring van INGEDIEND_TRAINEE naar
+    //zet deze de statusGoedkeuring van INGEDIEND_TRAINEE naar de
     //GOEDGEKEURD_BEDRIJF
     public UrenFormulier setStatusGoedkeuringBedrijf(@PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "BEDRIJF");
