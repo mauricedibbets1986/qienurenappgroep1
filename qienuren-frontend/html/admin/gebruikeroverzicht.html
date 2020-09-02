@@ -79,6 +79,66 @@
 
     </script>
     <script>
+    function alleBedrijvenModal() {
+        var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4) { 
+                    var bedrijven = JSON.parse(this.responseText);
+                    var x;
+                    var select = document.getElementById("selectBedrijf");
+                    for (x = 0; x < bedrijven.length; x++) {
+                        var el = document.createElement("option");
+                        el.textContent = bedrijven[x].bedrijfsNaam;
+                        el.value = bedrijven[x].id;
+                        select.appendChild(el);
+                    }
+            }
+        }
+        xhr.open("GET", "http://173.212.208.199:1337/api/bedrijf/all", true)
+        xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+        xhr.send();
+    }
+
+    function alleGebruikersModal() {
+        
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                var databaseContents = JSON.parse(this.responseText);
+
+                var x;
+                var c;
+                var select = document.getElementById("selectGebruiker");
+
+                for (x = 0; x < databaseContents.length; x++) {
+                    for (c = 0; c < databaseContents[x].roles.length; c++) {
+
+                        if (databaseContents[x].roles[c].name == "ROLE_ADMIN" || databaseContents[x].roles[c].name == "ROLE_BEDRIJF" || databaseContents[x].roles[c].name == "ROLE_MEDEWERKER") {
+                            
+                        } else {
+
+                            var el = document.createElement("option");
+                            el.textContent = databaseContents[x].voornaam + " " + databaseContents[x].achternaam;
+                            el.value = databaseContents[x].id;
+                            select.appendChild(el);
+
+                        } 
+                    }
+                }
+            }
+        }
+        xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true)
+        xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+        xhr.send();
+    }
+
+    function updateBedrijftoGebruiker() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("PUT", "http://173.212.208.199:1337/api/bedrijf/" + document.getElementById("selectBedrijf").value + "/" + document.getElementById("selectGebruiker").value, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send();
+        }
 </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -197,6 +257,8 @@
                             Gebruiker</button>
                         <button class="button2" onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker
                             aanpassen</button>
+                            <input type="button" class="button2" data-toggle="modal"
+                            data-target="#myModal3" value="Gebruiker koppelen">
                         <input type="button" class="button2" data-toggle="modal"
                             data-target="#myModal2" value="Urenfomulieren">
                     </div>
