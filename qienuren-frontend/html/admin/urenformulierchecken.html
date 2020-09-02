@@ -17,6 +17,8 @@
     <title>Admin check urenformulier</title>
 
     <!-- Eigen JavaScript -->
+    <script src="../../js/javascript.js"></script>
+
     <script type="text/javascript" src=""></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -87,7 +89,7 @@ function generateTable() {
     }
 
 </script>
-    <body onload=generateTable()>
+    <body onload=generateTable(),loginAuthAdmin()>
         <!-- Modal -->
         <div>
           <div class="modal fade" id="myModal" role="dialog">
@@ -125,7 +127,7 @@ function generateTable() {
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">Profiel</a>
                     <a class="dropdown-item" href="#">Profiel bewerken</a>
-                    <a class="dropdown-item" href="#">Uitloggen</a>
+                    <a onclick="logout()" class="dropdown-item" href="#">Uitloggen</a>
                   </div>
                 </li>
               </ul>
@@ -135,9 +137,7 @@ function generateTable() {
           <!-- Breadcrumb -->
           <div>
             <ul class="breadcrumb">
-                <li><a href="https://www.qien.nl/">Qien</a></li>
-                <li><a href="../inlogscherm.html">Log in</a></li>
-                <li><a href="admin.html">Admin overzicht</a></li>
+                <li><a href="admin.html">Admin Home</a></li>
                 <li>Uren Checken</li>
             </ul>
           </div>

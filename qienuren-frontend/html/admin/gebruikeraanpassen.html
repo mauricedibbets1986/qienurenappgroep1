@@ -17,6 +17,8 @@
     <title>Gebruikers gegevens wijzigen</title>
 
     <!-- Eigen JavaScript -->
+    <script src="../../js/javascript.js"></script>
+
     <script>
 
         function deleteGebruiker() {
@@ -168,7 +170,7 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body onload="alleGebruikers(), alleGebruikersModal(), alleBedrijvenModal()">
+<body onload="alleGebruikers(), alleGebruikersModal(), alleBedrijvenModal()", onload="loginAuthAdmin()">
     
     <div class="modal fade" id="myModal2" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -211,7 +213,7 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">Profiel</a>
                             <a class="dropdown-item" href="#">Profiel bewerken</a>
-                            <a class="dropdown-item" href="#">Uitloggen</a>
+                            <a onclick="logout()" class="dropdown-item" href="#">Uitloggen</a>
                         </div>
                     </li>
                 </ul>
@@ -221,10 +223,8 @@
         <!-- Breadcrumb -->
         <div>
             <ul class="breadcrumb">
-                <li><a href="https://www.qien.nl/">Qien</a></li>
-                <li><a href="../inlogscherm.html">Log in</a></li>
-                <li><a href="admin.html">Admin overzicht </a></li>
-                <li><a href="gebruikeroverzicht.html">Overzicht gebruikers </a></li>
+                <li><a href="admin.html">Admin Home</a></li>
+                <li><a href="gebruikeroverzicht.html">Overzicht gebruikers</a></li>
                 <li>Gebruiker Aanpassen</li>
             </ul>
         </div>
@@ -277,8 +277,6 @@
                             <input type="button" class="button3"
                                 onclick="gegevensAanpassen()"
                                 value="Opslaan">
-                                <input type="button" class="button3" data-toggle="modal"
-                                data-target="#myModal2" value="Trainee-Bedrijf">
                             <input type="button" class="button3"
                                 onclick="deleteGebruiker(),window.location.href='gebruikeroverzicht.html'"
                                 value="Verwijderen"><br>
