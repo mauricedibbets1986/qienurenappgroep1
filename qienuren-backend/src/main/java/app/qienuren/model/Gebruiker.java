@@ -45,7 +45,7 @@ public class Gebruiker {
     private LocalDate geboorteDatum;
     private long telefoonNummer;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<UrenFormulier> urenFormulier = new ArrayList<>();
 
