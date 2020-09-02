@@ -49,6 +49,7 @@
                             var nam = obj.lijstGebruikers[x].voornaam + " " + obj.lijstGebruikers[x].achternaam;
                             var uid = obj.lijstGebruikers[x].userId;
                             var ufid = obj.lijstGebruikers[x].urenFormulier[y].id;
+
                             if (obj.lijstGebruikers[x].urenFormulier[y].statusGoedkeuring != "OPEN") {
                                 lijst +=
                                     ` <tr>
@@ -154,7 +155,7 @@
 
          function formulierAfkeuren() {
             var xhr = new XMLHttpRequest();
-            xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/bedrijf/" + storedvalue + "/setstatus-afkeuren", true);
+            xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/bedrijf/" + storedvalue + "/setstatus-afkeuring", true);
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
         }
