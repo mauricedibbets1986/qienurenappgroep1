@@ -17,7 +17,7 @@ public interface GebruikerRepository extends CrudRepository<Gebruiker, Long> {
    //Iterable<Gebruiker> findByRole(String role);
    //Deze methode doet hetzelfde als degene hieronder
 
-   @Query(value = "FROM Gebruiker WHERE role=?1" )
+   @Query(value = "FROM Gebruiker WHERE roles=?1")
    Iterable<Gebruiker> findByRole(Roles role);
 
    @Query(value = "FROM Gebruiker WHERE voornaam=?1" )
