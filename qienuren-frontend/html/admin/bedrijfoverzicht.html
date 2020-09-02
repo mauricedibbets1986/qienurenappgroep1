@@ -29,7 +29,7 @@
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     var databaseContents = JSON.parse(this.responseText);
-
+                    var lijstGebruikers = JSON.parse(this.responseText);
                     var x;
 
                     for (x = 0; x < databaseContents.length; x++) {
@@ -50,7 +50,7 @@
                         for (var y = 0; y < databaseContents[x].lijstGebruikers.length; y++) {
                             bedrijfString +=
                                 `
-                             ${databaseContents[x].lijstGebruikers[y].naam},`
+                             ${databaseContents[x].lijstGebruikers[y].voornaam}`
                         }
                         bedrijfString +=
                             `
