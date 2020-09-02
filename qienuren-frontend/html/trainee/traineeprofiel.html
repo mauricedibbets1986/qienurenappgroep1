@@ -84,7 +84,7 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body onload="persoonsGegevens(), gebruikersnaam()">
+<body onload="persoonsGegevens(), gebruikersnaam()" >
     <!-- Modal bevestiging -->
     <div>
         <div class="modal fade" id="myModal" role="dialog">
@@ -161,7 +161,7 @@
                                     <div id="gebruikersnaam"></div>
                                 </b></a>
                             <hr>
-                            <a class="dropdown-item" href="#">Uitloggen</a>
+                            <a class="dropdown-item" onclick="logout()" href="#">Uitloggen</a>
                         </div>
                     </li>
                 </ul>

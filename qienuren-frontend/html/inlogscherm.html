@@ -17,6 +17,7 @@
     <title>Log in</title>
 
     <!-- Eigen JavaScript -->
+    <script src="../js/javascript.js"></script>
     <script type="text/javascript" src=""></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -55,14 +56,15 @@
                       window.location.href = "./gebruiker/medewerker.html";
                     }
                     if (myUserRole == "[ROLE_TRAINEE]") {
-                      window.location.href = "./trainee/trainee.html";
+                      window.location.href = "./gebruiker/trainee.html";
                     }
                     if (myUserRole == "[ROLE_BEDRIJF]") {
-                      window.location.href = "./bedrijf/bedrijfhome.html";
+                      window.location.href = "./gebruiker/opdrachtgever.html";
                     }
                   };
                   xhr.open("POST", "http://173.212.208.199:1337/api/login", true);
                   xhr.setRequestHeader("Content-Type", "application/json");
+
                   xhr.send(objJSON);
                 };
                 loginSubmitAction();
@@ -98,13 +100,11 @@
                     <div class="login">
                         <p>
                         <h2>Inloggen</h2>
-                        <b>E-mailadres<br> </b><input type=text id=email><br>
+                        <b>E-mailadres<br> </b><input type=email id=email><br>
                         <b>Wachtwoord<br> </b><input type=password id=password><br>
-                        <input type="checkbox"> Onthoud mij
                         </p>
                         <input type="button" class="button3" onclick="submitLogInHandler()" value="Log In" />
                         <br>
-                        <a href="">E-mailadres/wachtwoord vergeten?</a>
                     </div>
                 </div>
                 <!-- right -->
@@ -154,14 +154,14 @@
      xhr.setRequestHeader("Authorization" , localStorage.getItem("token"));  
     bij alle XMLHttpRequest deze code toevoegen zodat header token word meegestuurd( NA open() en VOOR send()! ) 
     nieuwe endpoints postman voor testen(gebruik authorisatie met bearer token van een admin): 
-    medewerker aanmaken =============>  173.212.208.199:1337/api/admin/users/addMedewerker  (POST) 
-    admin aanmaken ==================>  173.212.208.199:1337/api/admin/users/addAdmin  (POST)
-    opdrachtgever(bedrijf) aanmaken =>  173.212.208.199:1337/api/admin/users/addBedrijf  (POST)
-    trainee aanmaken ================>  173.212.208.199:1337/api/admin/users/addTrainee (POST)
-    login ===========================>  173.212.208.199:1337/api/login (POST)
-    zie alle gebruikers =============>  173.212.208.199:1337/api/users  (GET)
-zie individuele gebruiker(userId) ===>  173.212.208.199:1337/api/users/<String userId invullen>   (mag alleen admin/eigen account (bearer 1 van deze 2 gebruiken))  (GET)
-update individule gebruiker(userId) =>  173.212.208.199:1337/api/users/<String userId invullen>   (mag alleen admin/eigen account  (""))      (PUT)           
+    medewerker aanmaken =============>  http://173.212.208.199:1337/api/admin/users/addMedewerker  (POST) 
+    admin aanmaken ==================>  http://173.212.208.199:1337/api/admin/users/addAdmin  (POST)
+    opdrachtgever(bedrijf) aanmaken =>  http://173.212.208.199:1337/api/admin/users/addBedrijf  (POST)
+    trainee aanmaken ================>  http://173.212.208.199:1337/api/admin/users/addTrainee (POST)
+    login ===========================>  http://173.212.208.199:1337/api/login (POST)
+    zie alle gebruikers =============>  http://173.212.208.199:1337/api/users  (GET)
+zie individuele gebruiker(userId) ===>  http://173.212.208.199:1337/api/users/<String userId invullen>   (mag alleen admin/eigen account (bearer 1 van deze 2 gebruiken))  (GET)
+update individule gebruiker(userId) =>  http://173.212.208.199:1337/api/users/<String userId invullen>   (mag alleen admin/eigen account  (""))      (PUT)           
 
 -->
 

@@ -19,6 +19,8 @@
     <title>Bedrijven overzicht</title>
 
     <!-- Eigen JavaScript -->
+    <script src="../../js/javascript.js"></script>
+
     <script>
         // alle medewerkers zien
         function alleBedrijven() {
@@ -92,7 +94,7 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body onload="alleBedrijven()">
+<body onload= alleBedrijven(),loginAuthAdmin()>
     <!-- Header -->
     <header>
         <!-- Qien Logo -->
@@ -116,7 +118,7 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">Profiel</a>
                             <a class="dropdown-item" href="#">Profiel bewerken</a>
-                            <a class="dropdown-item" href="#">Uitloggen</a>
+                            <a onclick="logout()" class="dropdown-item" href="#">Uitloggen</a>
                         </div>
                     </li>
                 </ul>
