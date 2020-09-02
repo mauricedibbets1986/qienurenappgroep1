@@ -272,7 +272,7 @@ public class GebruikerEndpoint {
 
         //set file name and content type
         UrenFormulier urenFormulier = urenFormulierService.getUrenFormulierById(id);
-        String filename = urenFormulier.getJaar() + "-" + urenFormulier.getMaand() + "-" + urenFormulier.getGebruiker().getVoornaam() + ".csv";
+        String filename = urenFormulier.getJaar() + "-" + urenFormulier.getMaand() + "-" + urenFormulier.getGebruiker().getVoornaam() + " " + urenFormulier.getGebruiker().getAchternaam() + ".csv";
 
         response.setContentType("text/csv");
         response.setHeader(HttpHeaders.CONTENT_DISPOSITION,

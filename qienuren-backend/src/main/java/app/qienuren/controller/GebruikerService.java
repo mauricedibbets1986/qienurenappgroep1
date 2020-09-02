@@ -222,7 +222,7 @@ public class GebruikerService implements GebruikerServiceInterface {
             if (gebruikerRol[0].getName().equals("ROLE_MEDEWERKER") || gebruikerRol[0].getName().equals("ROLE_TRAINEE")) {
                 Iterable<UrenFormulier> medewerkerUrenformulier = gebruiker.getUrenFormulier();
                 for (UrenFormulier uf : medewerkerUrenformulier) {
-                    if (!uf.getJaar().equals(newUrenFormulier.getJaar()) & uf.getMaand() != newUrenFormulier.getMaand()) {
+                    if (uf.getJaar().equals(newUrenFormulier.getJaar()) & uf.getMaand() == newUrenFormulier.getMaand()) {
                         exists = true;
                     }
                 }
