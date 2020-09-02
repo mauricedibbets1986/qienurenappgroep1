@@ -96,7 +96,11 @@ public class GebruikerService implements GebruikerServiceInterface {
         return urenformulier;
     }
 
-    public Gebruiker addGebruiker(Gebruiker gebruiker) {
+    public Gebruiker addTrainee(Gebruiker gebruiker) {
+        return gebruikerRepository.save(gebruiker);
+
+    }
+    public Gebruiker addMedewerker(Gebruiker gebruiker) {
         return gebruikerRepository.save(gebruiker);
 
     }
@@ -105,12 +109,8 @@ public class GebruikerService implements GebruikerServiceInterface {
         return gebruikerRepository.findByUserId(id).getUrenFormulier();
     }
 
-    public UrenFormulier changestatusUrenFormulierTrainee(UrenFormulier urenFormulier) {
-        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_TRAINEE);
-        return urenFormulier;
-    }
-    public UrenFormulier changestatusUrenFormulierMedewerker(UrenFormulier urenFormulier) {
-        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_MEDEWERKER);
+    public UrenFormulier changestatusUrenFormulierGebruiker(UrenFormulier urenFormulier) {
+        urenFormulier.setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
         return urenFormulier;
     }
 

@@ -82,14 +82,8 @@ public class UrenFormulierService {
 
         //deze methode zet de statusGoedkeuring van OPEN naar INGEDIEND_TRAINEE nadat deze
         // door de trainee is ingediend ter goedkeuring
-        if (welkeGoedkeurder.equals("TRAINEE")) {
-            getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_TRAINEE);
-        }
-
-        //deze methode zet de statusGoedkeuring van OPEN naar INGEDIEND_MEDEWERKER nadat deze
-        // door de medewerker is ingediend ter goedkeuring
-        if (welkeGoedkeurder.equals("MEDEWERKER")) {
-            getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_MEDEWERKER);
+        if (welkeGoedkeurder.equals("GEBRUIKER")) {
+            getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
         }
 
         //deze methode zet de statusGoedkeuring van INGEDIEND_TRAINEE of INGEDIEND_MEDEWERKER naar
