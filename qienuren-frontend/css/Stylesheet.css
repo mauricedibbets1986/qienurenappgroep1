@@ -564,3 +564,10 @@ input[type=text], input[type=password], select {
 .inputData label{
   position: absolute;
 }
+
+#nieuwGeboorteDatum{
+  width: 200px;
+  height: 34px;
+  margin-bottom: 8px;
+  margin-top: 12px;
+}
