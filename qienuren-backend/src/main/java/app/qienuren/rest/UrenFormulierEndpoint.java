@@ -71,13 +71,17 @@ public class UrenFormulierEndpoint {
     @PutMapping("/gebruiker/{urenformulierid}/setstatus-indienenmedewerker")
     public UrenFormulier setStatusFormulierIngediendMedewerker(@PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "MEDEWERKER");
-  
-    @PreAuthorize("hasAnyRole('ADMIN','GEBRUIKER')or #id == principal.userId")
+        return urenFormulierService.getUrenFormulierById(urenformulierid);
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','TRAINEE','MEDEWERKER')or #id == principal.userId")
     @PutMapping("/gebruiker/{urenformulierid}/setstatus-indienengebruiker")
     //Als iemand met de rol Gebruiker deze methode aanroept,
     // zet deze de statusGoedkeuring van OPEN naar INGEDIEND_GEBRUIKER
-    public UrenFormulier setStatusFormulierIngediendGebruiker(@PathVariable(value = "urenformulierid") long urenformulierid) {
+    public UrenFormulier setStatusFormulierIngediendGebruiker(
+            @PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "GEBRUIKER");
+        return urenFormulierService.getUrenFormulierById(urenformulierid);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
@@ -93,7 +97,7 @@ public class UrenFormulierEndpoint {
     @PreAuthorize("hasAnyRole('ADMIN', 'BEDRIJF')or #id == principal.userId")
     @PutMapping("/bedrijf/{urenformulierid}/setstatus-goedkeuring-bedrijf")
     //Als iemand met de rol Bedrijf deze methode aanroept,
-    //zet deze de statusGoedkeuring van INGEDIEND_TRAINEE naar
+    //zet deze de statusGoedkeuring van INGEDIEND_TRAINEE naar de
     //GOEDGEKEURD_BEDRIJF
     public UrenFormulier setStatusGoedkeuringBedrijf(@PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "BEDRIJF");
@@ -115,4 +119,7 @@ public class UrenFormulierEndpoint {
     public void urenFormulierenKlaarzetten(@RequestBody UrenFormulier newUrenFormulier) {
         gebruikerService.urenFormulierenKlaarzetten(newUrenFormulier);
     }
+
 }
+
+
