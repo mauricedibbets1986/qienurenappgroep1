@@ -42,7 +42,7 @@
             obj.woonplaats = document.getElementById("woonplaats").value;
             obj.geboorteDatum = document.getElementById("kalenderGeboortedatum").value;
             obj.telefoonNummer = document.getElementById("telefoonNummer").value;
-            obj.email = document.getElementById("emailadres").value;
+            obj.email = document.getElementById("email").value;
             obj.password = document.getElementById("wachtwoord").value;
             obj.rol = typ;
             var objJSON = JSON.stringify(obj);
@@ -70,7 +70,7 @@
             obj.woonplaats = document.getElementById("woonplaats").value;
             obj.geboorteDatum = document.getElementById("kalenderGeboortedatum").value;
             obj.telefoonNummer = document.getElementById("telefoonNummer").value;
-            obj.email = document.getElementById("emailadres").value;
+            obj.email = document.getElementById("email").value;
             obj.password = document.getElementById("wachtwoord").value;
             obj.rol = typ;
             objJSON = JSON.stringify(obj);
@@ -78,7 +78,7 @@
             xhr.onreadystatechange = function () {
                 console.log("answer in console");
             }
-            xhr.open("POST", "http://localhost:8082/api/admin/users/addMedewerker", true);
+            xhr.open("POST", "http://173.212.208.199:1337/api/admin/users/addMedewerker", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
@@ -96,7 +96,7 @@
             obj.woonplaats = document.getElementById("woonplaats").value;
             obj.geboorteDatum = document.getElementById("kalenderGeboortedatum").value;
             obj.telefoonNummer = document.getElementById("telefoonNummer").value;
-            obj.email = document.getElementById("emailadres").value;
+            obj.email = document.getElementById("email").value;
             obj.password = document.getElementById("wachtwoord").value;
             obj.rol = typ;
             objJSON = JSON.stringify(obj);
@@ -104,7 +104,7 @@
             xhr.onreadystatechange = function () {
                 console.log("answer in console");
             }
-            xhr.open("POST", "http://173.212.208.199:1337/api/admin/users/addMedewerker", true);
+            xhr.open("POST", "http://173.212.208.199:1337/api/admin/users/addBedrijf", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
