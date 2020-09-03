@@ -110,7 +110,6 @@ const alleGebruikersModal = () => {
   xhr.onreadystatechange = function () {
     if (this.readyState == 4) {
       var databaseContents = JSON.parse(this.responseText);
-
       var x;
       var c;
       var select = document.getElementById("selectGebruiker");
