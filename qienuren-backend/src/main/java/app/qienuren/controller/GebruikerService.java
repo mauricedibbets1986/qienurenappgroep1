@@ -38,6 +38,9 @@ public class GebruikerService implements GebruikerServiceInterface {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    UrenFormulierService urenformulierService;
+
 
     //FOUTE FUNCTIE, GEBRUIKER.ADDURENFORMULIERTPARRAY??
     public void addUrenFormulierToGebruiker(long gebruikerId, long urenformulierId) {
@@ -229,6 +232,7 @@ public class GebruikerService implements GebruikerServiceInterface {
                 if (!exists) {
                     gebruiker.addUrenFormulierToArray(newUrenFormulier);
                     gebruikerRepository.save(gebruiker);
+                    urenformulierService.addNewUrenFormulier(newUrenFormulier);
                 }
             }
         }
