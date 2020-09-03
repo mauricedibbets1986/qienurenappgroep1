@@ -34,8 +34,7 @@ public class UrenFormulierService {
     }
 
 
-    public Object addWorkDaytoUrenFormulier(long ufid, long wdid) {
-        UrenFormulier uf = urenFormulierRepository.findById(ufid).get();
+    public Object addWorkDaytoUrenFormulier(UrenFormulier uf, long wdid) {
         Werkdag wd = werkdagRepository.findById(wdid).get();
         try {
             uf.addWerkdayToArray(wd);
@@ -45,16 +44,15 @@ public class UrenFormulierService {
         }
     }
 
-    public UrenFormulier addNewUrenFormulier(UrenFormulier urenFormulier) {
-        urenFormulierRepository.save(urenFormulier);
-        int maand = urenFormulier.getMaand().ordinal() + 1;
-        YearMonth yearMonth = YearMonth.of(Integer.parseInt(urenFormulier.getJaar()), maand);
+    public UrenFormulier addNewUrenFormulier(UrenFormulier uf) {
+        int maand = uf.getMaand().ordinal() + 1;
+        YearMonth yearMonth = YearMonth.of(Integer.parseInt(uf.getJaar()), maand);
         int daysInMonth = yearMonth.lengthOfMonth();
         for (int x = 1; x <= daysInMonth; x++) {
             Werkdag werkdag = werkdagService.addNewWorkday(new Werkdag(x));
-            addWorkDaytoUrenFormulier(urenFormulier.getId(), werkdag.getId());
+            addWorkDaytoUrenFormulier(uf, werkdag.getId());
         }
-        return urenFormulierRepository.save(urenFormulier);
+        return urenFormulierRepository.save(uf);
     }
 
     public double getTotaalGewerkteUren(long id) {
