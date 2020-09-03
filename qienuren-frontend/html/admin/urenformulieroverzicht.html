@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="../../css/Stylesheet.css" />
   <!-- ../../css/Stylesheet.css -->
 
-  <title>Admin check urenformulier</title>
+  <title>Openstaande Uren Formulieren</title>
 
   <!-- Eigen JavaScript -->
   <script src="../../js/javascript.js"></script>
@@ -77,7 +77,7 @@
           var uid = obj[x].id;
           if (obj[x].urenFormulier != undefined) {
             for (y = 0; y < obj[x].urenFormulier.length; y++) {
-              if (obj[x].urenFormulier[y].statusGoedkeuring != "OPEN" || obj[x].urenFormulier[y].opmerking != "") {
+              if (obj[x].urenFormulier[y].statusGoedkeuring != "OPEN" && obj[x].urenFormulier[y].statusGoedkeuring != "GOEDGEKEURD_ADMIN" || obj[x].urenFormulier[y].opmerking != "") {
                 lijst +=
                   ` <tr>
                                       <td>${nam}</td>
@@ -173,18 +173,17 @@
     xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/admin/" + storedvalue + "/setstatus-goedkeuring-admin", true);
     xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
     xhr.send();
-    lijstMedewerkers();
     GoedkeurOpmerking();
   }
 
   function formulierAfkeuren() {
+    console.log(storedvalue);
     var xhr = new XMLHttpRequest();
     document.getElementById("modal-bericht").innerHTML = "Formulier afgekeurd.";
     xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/" + storedvalue + "/setstatus-afkeuring", true);
     xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
     xhr.send();
     afkeurOpmerking();
-    lijstMedewerkers();
   }
 
   function afkeurOpmerking() {
@@ -196,6 +195,7 @@
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
     xhr.send(objJSON);
+    lijstMedewerkers();
   }
 
   function GoedkeurOpmerking() {
@@ -207,6 +207,7 @@
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
     xhr.send(objJSON);
+    lijstMedewerkers();
   }
 
 </script>
@@ -270,8 +271,7 @@
         <div class="modal-footer">
 
           <button type="button" class="btn btn-default button3" id="indien-knop" data-dismiss="modal"
-            data-toggle="modal" data-target="#myModal"
-            onclick="formulierGoedkeuren(), lijstMedewerkers()">Goedkeuren</button>
+            data-toggle="modal" data-target="#myModal" onclick="formulierGoedkeuren()">Goedkeuren</button>
           <button type="button" class="btn btn-default button1" id="" data-dismiss="modal" data-toggle="modal"
             data-target="#myModal3" onclick="">Afkeuren</button>
           <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Annuleren</button>
@@ -313,7 +313,7 @@
     <div>
       <ul class="breadcrumb">
         <li><a href="admin.html">Admin Home</a></li>
-        <li>Uren Checken</li>
+        <li>Openstaande Uren Formulieren</li>
       </ul>
     </div>
   </header>
@@ -326,7 +326,7 @@
         <!-- sidebar -->
         <div class="col-sm-3">
           <div class="sidebar">
-            <button class="button2">Uren Invoeren</button>
+            <button class="button2" onclick="window.location.href='urenformuliergoedgekeurd.html'">Goedgekeurd</button>
             <!-- Trigger the modal with a button -->
             <br>
           </div>
