@@ -377,6 +377,10 @@ ul.breadcrumb {
 
   /*toevoegingen*/
   
+#achtergrondbeeld{
+  background-image: url(../image/achtergrond.png)
+}
+
 .navbar{
   background-color: #C894F8;
   min-height:120px;
