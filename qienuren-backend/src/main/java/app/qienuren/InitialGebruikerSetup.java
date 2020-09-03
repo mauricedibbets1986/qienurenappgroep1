@@ -67,7 +67,7 @@ public class InitialGebruikerSetup {
             adminUser.setEmail("admin@qien.nl");
             adminUser.setRoles(Arrays.asList(roleAdmin));
             adminUser.setUserId(utils.generateUserId(6));
-            adminUser.setEncryptedPassword(bCryptPasswordEncoder.encode("groep1"));
+            adminUser.setEncryptedPassword(bCryptPasswordEncoder.encode("admin"));
             gebruikerRepository.save(adminUser);
         } return;
     }
