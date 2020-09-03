@@ -6,10 +6,8 @@ function gebruikersnaam() {
       var obj = JSON.parse(this.responseText);
       voornaam = "Hallo " + obj.voornaam + "!";
       naam = obj.voornaam + " " + obj.achternaam;
+      document.getElementById("gebruikersnaam2").innerHTML = naam;
     }
-
-    document.getElementById("gebruikersnaam").innerHTML = naam;
-    document.getElementById("gebruikersnaam2").innerHTML = voornaam;
   };
   xhr.open(
     "GET",
@@ -112,7 +110,6 @@ const alleGebruikersModal = () => {
   xhr.onreadystatechange = function () {
     if (this.readyState == 4) {
       var databaseContents = JSON.parse(this.responseText);
-
       var x;
       var c;
       var select = document.getElementById("selectGebruiker");
