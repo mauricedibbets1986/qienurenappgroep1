@@ -155,7 +155,7 @@
 
          function formulierAfkeuren() {
             var xhr = new XMLHttpRequest();
-            xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/bedrijf/" + storedvalue + "/setstatus-afkeuring", true);
+            xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/" + storedvalue + "/setstatus-afkeuring", true);
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
         }
