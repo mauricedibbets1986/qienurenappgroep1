@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="../../css/Stylesheet.css" />
   <!-- ../../css/Stylesheet.css -->
 
-  <title>Admin check urenformulier</title>
+  <title>Goedgekeurde formulieren</title>
 
   <!-- Eigen JavaScript -->
   <script src="../../js/javascript.js"></script>
@@ -63,11 +63,8 @@
                         <thead>
                             <tr>
                             <th class="th-sm">Naam</th>
-                            <th class="th-sm">Maand</th>
-                            <th class="th-sm">Jaar</th>
-                            <th class="th-sm">Totaal Uren</th>
-                            <th class="th-sm">Status</th>
-                            <th class="th-sm">Opmerking</th>
+                            <th class="th-sm">E-mail</th>
+                            <th class="th-sm">Opdrachtgever</th>
                             <th></th> 
                         </tr>
                         </thead><tbody>
@@ -75,26 +72,17 @@
         for (x = 0; x < obj.length; x++) {
           var nam = obj[x].voornaam + " " + obj[x].achternaam;
           var uid = obj[x].id;
-          if (obj[x].urenFormulier != undefined) {
-            for (y = 0; y < obj[x].urenFormulier.length; y++) {
-              if (obj[x].urenFormulier[y].statusGoedkeuring != "OPEN" || obj[x].urenFormulier[y].opmerking != "") {
+          if (obj[x].urenFormulier != undefined && obj[x].voornaam != "") {
                 lijst +=
                   ` <tr>
                                       <td>${nam}</td>
-                                      <td>${obj[x].urenFormulier[y].maand}</td>
-                                      <td>${obj[x].urenFormulier[y].jaar}</td>
-                                      <td>${obj[x].urenFormulier[y].totaalGewerkteUren}</td>
-                                      <td>${obj[x].urenFormulier[y].statusGoedkeuring}</td>
-                                      <td>${obj[x].urenFormulier[y].opmerking}</td>
-                                      <td><button onclick="medewerkerUrenFormulier('${uid}','${obj[x].urenFormulier[y].id}'), 
-                                        getNaamEnDatum('${nam}','${obj[x].urenFormulier[y].maand}','${obj[x].urenFormulier[y].jaar}'),
-                                        saveFormulierId('${obj[x].urenFormulier[y].id}')" 
+                                      <td>${obj[x].email}</td>
+                                      <td>${obj[x].opdrachtgever}</td>
+                                      <td><button onclick="" 
                                         class="button3-sm" data-toggle="modal" data-target="#myModal2">bekijken</button></td>
   
                                 </tr>
                                 `
-              }
-            }
           }
         }
       }
