@@ -149,34 +149,39 @@
         }
 
         function formulierGoedkeuren() {
+            console.log(storedvalue);
             var xhr = new XMLHttpRequest();
-            xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/bedrijf/" + storedvalue + "/setstatus-goedkeuring-bedrijf", true);
+            document.getElementById("modal-bericht").innerHTML = "Formulier goedgekeurd!";
+            xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/admin/" + storedvalue + "/setstatus-goedkeuring-admin", true);
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
-            lijstTrainees();
+            lijstMedewerkers();
         }
 
         function formulierAfkeuren() {
-                var xhr = new XMLHttpRequest();
-                document.getElementById("modal-bericht").innerHTML = "Formulier afgekeurd.";
-                xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/" + storedvalue + "/setstatus-afkeuring", true);
-                xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-                xhr.send();
-                lijstTrainees();
-            }
+            console.log(storedvalue);
+            var xhr = new XMLHttpRequest();
+            document.getElementById("modal-bericht").innerHTML = "Formulier afgekeurd.";
+            xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/" + storedvalue + "/setstatus-afkeuring", true);
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send();
+            afkeurOpmerking();
+        }
 
-            function afkeurOpmerking() {
-                var xhr = new XMLHttpRequest();
-                var obj = {};
-                obj.opmerking = document.getElementById("afkeur-text").value;
-                objJSON = JSON.stringify(obj);
-                xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/afkeur-opmerking/" + storedvalue, true);
-                xhr.setRequestHeader("Content-type", "application/json");
-                xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-                xhr.send(objJSON);
-            }
+        function afkeurOpmerking() {
+            var xhr = new XMLHttpRequest();
+            var obj = {};
+            obj.opmerking = document.getElementById("afkeur-text").value;
+            objJSON = JSON.stringify(obj);
+            xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/afkeur-opmerking/" + storedvalue, true);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send(objJSON);
+            lijstMedewerkers();
+        }
 
-        </script>
+
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -191,50 +196,53 @@
 </head>
 
 <body onload="bedrijfsnaam(), lijstTrainees()">
-<!-- Modal bevestiging -->
-<div>
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <div class="modal-body">
-            <p><b><div id="modal-bericht"></div></b></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Modal afkeuren -->
-  <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Reden van afkeur</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="message-text" class="col-form-label">Opmerking: <div style="font-size: 10pt;">(verplicht veld)
-                </div></label>
-              <textarea class="form-control" id="afkeur-text" placeholder="Vul de reden van afkeuring in..."
-                required></textarea>
+    <!-- Modal bevestiging -->
+    <div>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p><b>
+                                <div id="modal-bericht"></div>
+                            </b></p>
+                    </div>
+                </div>
             </div>
-          </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default button2" data-dismiss="modal">Annuleren</button>
-          <button type="button" class="btn btn-default button1" id="afkeur-knop" data-dismiss="modal"
-          data-toggle="modal" data-target="#myModal" onclick="afkeurOpmerking(),formulierAfkeuren()">Afkeuren</button>
-        </div>
-      </div>
     </div>
-  </div>
+    <!-- Modal afkeuren -->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Reden van afkeur</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Opmerking: <div style="font-size: 10pt;">
+                                    (verplicht veld)
+                                </div></label>
+                            <textarea class="form-control" id="afkeur-text"
+                                placeholder="Vul de reden van afkeuring in..." required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default button2" data-dismiss="modal">Annuleren</button>
+                    <button type="button" class="btn btn-default button1" id="afkeur-knop" data-dismiss="modal"
+                        data-toggle="modal" data-target="#myModal" onclick="formulierAfkeuren()">Afkeuren</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Modal uren overzicht -->
     <div class="modal fade" id="myModal2" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -246,9 +254,10 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default button3" id="indien-knop" data-dismiss="modal"
                         data-toggle="modal" data-target="#myModal" onclick="formulierGoedkeuren()">Goedkeuren</button>
-                        <button type="button" class="btn btn-default button1" id="" data-dismiss="modal"
-                        data-toggle="modal" data-target="#myModal3" onclick="">Afkeuren</button>
-                      <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Annuleren</button>
+                    <button type="button" class="btn btn-default button1" id="" data-dismiss="modal" data-toggle="modal"
+                        data-target="#myModal3" onclick="">Afkeuren</button>
+                    <button type="button" class="btn btn-default button2" onclick=""
+                        data-dismiss="modal">Annuleren</button>
                 </div>
             </div>
         </div>
