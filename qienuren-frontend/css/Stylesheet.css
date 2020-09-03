@@ -309,7 +309,7 @@ ul.breadcrumb {
   ul.breadcrumb li {
     display: inline;
     font-size: 18px;
-    font-family: 'Open Sans';
+    font-family: 'Titillium Web';
   }
   
   ul.breadcrumb li+li:before {
