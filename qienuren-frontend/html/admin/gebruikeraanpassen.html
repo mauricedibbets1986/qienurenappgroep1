@@ -20,20 +20,6 @@
     <script src="../../js/javascript.js"></script>
 
     <script>
-
-        function deleteGebruiker() {
-            //make request to delete employee by ID
-            var xhr = new XMLHttpRequest();
-            var id = document.getElementById("employeeID").value;
-            xhr.onreadystatechange = function () {
-                console.log("Gebruiker verwijderd")
-            }
-            xhr.open("DELETE", "http://173.212.208.199:1337/api/gebruiker/delete/" + id, true);
-            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-            xhr.send();
-            alert("Gebruiker met id " + id + " verwijdert");
-        }
-
         function alleGebruikers() {
             var employeeString = "";
             var xhr = new XMLHttpRequest();
@@ -60,71 +46,9 @@
                             } 
                         }
                     }
-                document.getElementById("showGebruikers").innerHTML = employeeString;
                 }
             }
             xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true)
-            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-            xhr.send();
-        }
-
-        function alleBedrijvenModal() {
-            var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                    if (this.readyState == 4) { 
-                        var bedrijven = JSON.parse(this.responseText);
-                        var x;
-                        var select = document.getElementById("selectBedrijf");
-                        for (x = 0; x < bedrijven.length; x++) {
-                            var el = document.createElement("option");
-                            el.textContent = bedrijven[x].bedrijfsNaam;
-                            el.value = bedrijven[x].id;
-                            select.appendChild(el);
-                        }
-                }
-            }
-            xhr.open("GET", "http://173.212.208.199:1337/api/bedrijf/all", true)
-            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-            xhr.send();
-        }
-
-        function alleGebruikersModal() {
-            
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (this.readyState == 4) {
-                    var databaseContents = JSON.parse(this.responseText);
-
-                    var x;
-                    var c;
-                    var select = document.getElementById("selectGebruiker");
-
-                    for (x = 0; x < databaseContents.length; x++) {
-                        for (c = 0; c < databaseContents[x].roles.length; c++) {
-
-                            if (databaseContents[x].roles[c].name == "ROLE_ADMIN" || databaseContents[x].roles[c].name == "ROLE_BEDRIJF" || databaseContents[x].roles[c].name == "ROLE_MEDEWERKER") {
-                                
-                            } else {
-
-                                var el = document.createElement("option");
-                                el.textContent = databaseContents[x].voornaam + " " + databaseContents[x].achternaam;
-                                el.value = databaseContents[x].id;
-                                select.appendChild(el);
-
-                            } 
-                        }
-                    }
-                }
-            }
-            xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true)
-            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-            xhr.send();
-        }
-
-        function updateBedrijftoGebruiker() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("PUT", "http://173.212.208.199:1337/api/bedrijf/" + document.getElementById("selectBedrijf").value + "/" + document.getElementById("selectGebruiker").value, true);
-            xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
         }
@@ -170,13 +94,12 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body onload="alleGebruikers(), alleGebruikersModal(), alleBedrijvenModal()", onload="loginAuthAdmin()">
-    
-    <div class="modal fade" id="myModal2" role="dialog">
+<body onload="alleGebruikers(), alleGebruikersModal(), alleBedrijvenModal(), loginAuthAdmin(), GebruikersVerwijderenModal()">
+    <div class="modal fade" id="myModal3" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">Bewerk mijn profiel</h3>
+                    <h3 class="modal-title">Koppel gebruiker aan bedrijf</h3>
                     <select id="selectGebruiker">
                         <option>Kies een gebruiker</option>
                     </select>
@@ -190,7 +113,24 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="myModal4" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Verwijder gebruiker</h3>
+                    <select id="selectVerwijderGebruiker">
+                        <option>Kies een gebruiker</option>
+                    </select>
+                    <input type="button" class="button3"
+                            onclick="deleteGebruiker()"
+                            value="verwijderen" data-dismiss="modal"><br>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Header -->
+    
     <header>
         <!-- Qien Logo -->
         <nav class="navbar navbar navbar-light navbar-expand-sm">
@@ -238,6 +178,10 @@
                 <!-- sidebar -->
                 <div class="col-sm-3">
                     <div class="sidebar">
+                        <input type="button" class="button2" data-toggle="modal"
+                            data-target="#myModal3" value="Koppel gebruiker">
+                            <input type="button" class="button2" data-toggle="modal"
+                            data-target="#myModal4" value="Verwijder gebruiker">
                         <button class="button1" onclick="window.location.href='gebruikeroverzicht.html'">Terug naar overzicht</button>
                     </div>
                 </div>
@@ -280,7 +224,6 @@
                             <input type="button" class="button3"
                                 onclick="deleteGebruiker(),window.location.href='gebruikeroverzicht.html'"
                                 value="Verwijderen"><br>
-
                         </div>
                     </div>
                 </div>

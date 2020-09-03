@@ -19,6 +19,7 @@
     <!-- Eigen JavaScript -->
     <script src="../../js/javascript.js"></script>
 
+    
     <script>
         // alle medewerkers zien
         function alleGebruikers() {
@@ -70,7 +71,7 @@
             obj.maand = document.getElementById("selectMaand").value;
             obj.jaar = document.getElementById("selectJaar").value;
             objJSON = JSON.stringify(obj);
-            xhr.open("POST", "http://localhost:8082/api/urenformulier/klaarzetten", true);
+            xhr.open("POST", "http://173.212.208.199:1337/api/urenformulier/klaarzetten", true);
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
@@ -87,9 +88,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+        
 </head>
 
-<body onload=alleGebruikers()>
+<body onload="alleGebruikers(), alleGebruikersModal(), alleBedrijvenModal(), loginAuthAdmin()">
     <div class="modal fade" id="myModal2" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -119,6 +121,25 @@
                     <input type="button" class="button3"
                             onclick="urenFormulierKlaarzetten()"
                             value="Klaarzetten" data-dismiss="modal"><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="myModal3" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Bewerk mijn profiel</h3>
+                    <select id="selectGebruiker">
+                        <option>Kies een gebruiker</option>
+                    </select>
+                    <select id="selectBedrijf">
+                        <option>Kies een Bedrijf</option>
+                    </select>
+                    <input type="button" class="button3"
+                            onclick="updateBedrijftoGebruiker()"
+                            value="Koppelen" data-dismiss="modal"><br>
                 </div>
             </div>
         </div>
@@ -164,7 +185,7 @@
 
 
     <!-- Main content -->
-    <main onload="loginAuthAdmin()">
+    <main>
         <div class="container">
             <div class="row">
                 <!-- sidebar -->
@@ -172,8 +193,6 @@
                     <div class="sidebar">
                         <button class="button2" onclick="window.location.href='gebruikernieuw.html'">Nieuwe
                             Gebruiker</button>
-                        <!-- <button class="button2" onclick="window.location.href='gebruikerprofiel.html'">Profiel
-                            Gebruiker</button> -->
                         <button class="button2" onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker
                             aanpassen</button>
                         <input type="button" class="button2" data-toggle="modal"

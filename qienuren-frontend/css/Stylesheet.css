@@ -309,7 +309,7 @@ ul.breadcrumb {
   ul.breadcrumb li {
     display: inline;
     font-size: 18px;
-    font-family: 'Open Sans';
+    font-family: 'Titillium Web';
   }
   
   ul.breadcrumb li+li:before {
@@ -377,6 +377,10 @@ ul.breadcrumb {
 
   /*toevoegingen*/
   
+#achtergrondbeeld{
+  background-image: url(../image/achtergrond.png)
+}
+
 .navbar{
   background-color: #C894F8;
   min-height:120px;
