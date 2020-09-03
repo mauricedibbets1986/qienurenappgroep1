@@ -171,6 +171,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+
+    <script>
+        //JQuery, checkbox uncheck na sluiten van modal
+        $(function(){ $('#myModal2').on('hidden.bs.modal', function(e) {
+        $("#myModal2").find('input:radio, input:checkbox').prop('checked', false);
+        $("#myModal2").find('#indien-knop').prop('disabled', true);
+        }) });
+    </script>
 </head>
 
 <body onload="bedrijfsnaam(), lijstTrainees()">
