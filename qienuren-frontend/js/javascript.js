@@ -92,11 +92,13 @@ const GebruikersVerwijderenModal = () => {
       var x;
       var select = document.getElementById("selectVerwijderGebruiker");
       for (x = 0; x < databaseContents.length; x++) {
-        var el = document.createElement("option");
-        el.textContent =
-          databaseContents[x].voornaam + " " + databaseContents[x].achternaam;
-        el.value = databaseContents[x].userId;
-        select.appendChild(el);
+        if (databaseContents[x].roles[c].name != "ROLE_BEDRIJF") {
+          var el = document.createElement("option");
+          el.textContent =
+            databaseContents[x].voornaam + " " + databaseContents[x].achternaam;
+          el.value = databaseContents[x].userId;
+          select.appendChild(el);
+        }
       }
     }
   };
