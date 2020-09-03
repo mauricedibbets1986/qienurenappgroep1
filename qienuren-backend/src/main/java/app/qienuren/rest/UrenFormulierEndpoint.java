@@ -118,7 +118,7 @@ public class UrenFormulierEndpoint {
         return getUrenFormulierById(urenformulierid);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
+    @PreAuthorize("hasAnyRole('ADMIN', 'BEDRIJF')or #id == principal.userId")
     @PutMapping("/afkeur-opmerking/{id}")
     public void afkeurOpmerking(@PathVariable(value = "id") long id, @RequestBody UrenFormulier urenFormulier) {
         urenFormulierService.changeDetails(urenFormulierRepository.findById(id).get(), urenFormulier);
