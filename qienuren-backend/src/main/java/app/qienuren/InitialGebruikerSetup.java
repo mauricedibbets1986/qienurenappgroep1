@@ -60,21 +60,21 @@ public class InitialGebruikerSetup {
         RoleEntity roleBedrijf = createRole(Roles.ROLE_BEDRIJF.name(), Arrays.asList(readUserAuthority, readUrenformulierAuthority, approveUrenformulierAuthority));
 
         //create userentity with adminrole
-        if (gebruikerRepository.findByEmail("groep1@qien.nl") == null) {
+        if (gebruikerRepository.findByEmail("admin@qien.nl") == null) {
             Gebruiker adminUser = new Gebruiker();
             adminUser.setVoornaam("Admin");
             adminUser.setAchternaam("Qien");
             adminUser.setEmail("admin@qien.nl");
             adminUser.setRoles(Arrays.asList(roleAdmin));
             adminUser.setUserId(utils.generateUserId(6));
-            adminUser.setEncryptedPassword(bCryptPasswordEncoder.encode("admin"));
+            adminUser.setEncryptedPassword(bCryptPasswordEncoder.encode("groep1"));
             gebruikerRepository.save(adminUser);
         } return;
     }
 
     //function to create authority in table and save it in db
     @Transactional
-    private AuthorityEntity createAuthority(String name) {
+    public AuthorityEntity createAuthority(String name) {
         //check if record already exists to prevend duplicates
         AuthorityEntity authority = authorityRepository.findByName(name);
         if (authority == null) {
@@ -86,7 +86,7 @@ public class InitialGebruikerSetup {
 
     //function to create role in table, and then add a collection of authorities to the field authorities in role and then save it in db
     @Transactional
-    private RoleEntity createRole(String name, Collection<AuthorityEntity> authorities) {
+    public RoleEntity createRole(String name, Collection<AuthorityEntity> authorities) {
         //check if record already exists to prevend duplicates
         RoleEntity role = roleRepository.findByName(name);
         if (role == null) {
