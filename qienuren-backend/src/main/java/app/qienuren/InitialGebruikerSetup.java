@@ -62,12 +62,12 @@ public class InitialGebruikerSetup {
         //create userentity with adminrole
         if (gebruikerRepository.findByEmail("groep1@qien.nl") == null) {
             Gebruiker adminUser = new Gebruiker();
-            adminUser.setVoornaam("Groep1");
+            adminUser.setVoornaam("Admin");
             adminUser.setAchternaam("Qien");
-            adminUser.setEmail("groep1@qien.nl");
+            adminUser.setEmail("admin@qien.nl");
             adminUser.setRoles(Arrays.asList(roleAdmin));
             adminUser.setUserId(utils.generateUserId(6));
-            adminUser.setEncryptedPassword(bCryptPasswordEncoder.encode("groep1"));
+            adminUser.setEncryptedPassword(bCryptPasswordEncoder.encode("admin"));
             gebruikerRepository.save(adminUser);
         } return;
     }
