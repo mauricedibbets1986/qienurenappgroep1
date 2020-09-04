@@ -31,6 +31,8 @@
 
     <script>
 
+        var naam;
+
         function ziekMelden() {
             var date = new Date();
             var datumDag = date.getUTCDate();
@@ -51,12 +53,15 @@
             var xhr = new XMLHttpRequest();
             var obj = {};
             obj.emailTo = "jorisvanbreugel@gmail.com";
-            obj.subject = `${getNaamGebruiker()} is ziek vandaag`;
+            obj.subject = `${naam} is ziek vandaag`;
             obj.text = `Beste Cora,
             
-            ${obj.subject} komt niet werken vandaag.
+${naam} is ziek en komt niet op werk vandaag. Dit is automatisch opgeslagen in het systeem.
             
-            Tabee`;
+Met vriendelijke groeten,
+
+
+Groep 1`;
             var json = JSON.stringify(obj);
             xhr.open("POST", "http://173.212.208.199:1337/mail", true);
             xhr.setRequestHeader("Content-type", "application/json");
@@ -70,20 +75,19 @@
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4) {
                     var obj = JSON.parse(this.responseText);
+                    naam = obj.voornaam + " " + obj.achternaam;
                 }
             }
             xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/userid/" + localStorage.getItem("userId"), true);
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-            xhr.send();
-            alert(obj.voornaam);
-            return obj.voornaam;
+            xhr.send();   
         }
 
     </script>
 
 </head>
 
-<body onload="gebruikersnaam()">
+<body onload="gebruikersnaam(), getNaamGebruiker()">
     <!-- Header -->
     <div class="modal fade" id="myModal4" role="dialog">
         <div class="modal-dialog modal-lg">
