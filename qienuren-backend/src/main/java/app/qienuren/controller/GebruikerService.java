@@ -20,6 +20,7 @@ import java.util.HashSet;
 @Service
 @Transactional
 public class GebruikerService implements GebruikerServiceInterface {
+
     @Autowired
     GebruikerRepository gebruikerRepository;
 
@@ -230,7 +231,7 @@ public class GebruikerService implements GebruikerServiceInterface {
                     }
                 }
                 if (!exists) {
-                    urenformulierService.addNewUrenFormulier(newUrenFormulier);
+                    urenformulierService.addNewUrenFormulier(new UrenFormulier(newUrenFormulier));
                     gebruiker.addUrenFormulierToArray(newUrenFormulier);
                     gebruikerRepository.save(gebruiker);
                 }

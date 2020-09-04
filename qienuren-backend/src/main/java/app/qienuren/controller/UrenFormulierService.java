@@ -1,9 +1,6 @@
 package app.qienuren.controller;
 
-import app.qienuren.model.Bedrijf;
-import app.qienuren.model.StatusGoedkeuring;
-import app.qienuren.model.UrenFormulier;
-import app.qienuren.model.Werkdag;
+import app.qienuren.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +21,9 @@ public class UrenFormulierService {
 
     @Autowired
     WerkdagService werkdagService;
+
+    @Autowired
+    GebruikerRepository gebruikerRepository;
 
     public Iterable<UrenFormulier> getAllUrenFormulieren() {
         return urenFormulierRepository.findAll();
@@ -108,5 +108,18 @@ public class UrenFormulierService {
         }
 
         return urenFormulierRepository.save(urenFormulier);
+    }
+
+    public void ziekMelden(String id, UrenFormulier urenFormulier, String datumDag) {
+        Gebruiker gebruiker = gebruikerRepository.findByUserId(id);
+        for (UrenFormulier uf : gebruiker.getUrenFormulier()) {
+            if (uf.getJaar().equals(urenFormulier.getJaar()) && uf.getMaand() == urenFormulier.getMaand()) {
+                for (Werkdag werkdag : uf.getWerkdag()) {
+                    if (werkdag.getDatumDag().equals(datumDag)) {
+                        werkdagRepository.save(werkdag.ikBenZiek());
+                    }
+                }
+            }
+        }
     }
 }
