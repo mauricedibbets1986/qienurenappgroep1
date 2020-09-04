@@ -42,12 +42,12 @@
                         `
         for (x = 0; x < obj.length; x++) {
           var volleNaam = obj[x].voornaam + " " + obj[x].achternaam;
-          var userid = obj[x].userId;
+          var userId = obj[x].userId;
           if (obj[x].voornaam != undefined && obj[x].achternaam != undefined && obj[x].achternaam != "Qien") {
             lijst +=
               ` <tr>
                                       <td>${volleNaam}</td>
-                                      <td><button onclick="persoonsGegevens('${userid}')" 
+                                      <td><button onclick="persoonsGegevens('${userId}')" 
                                         class="button3-sm" data-toggle="modal" data-target="#myModal1">bekijken</button></td>
   
                                 </tr>
@@ -65,7 +65,7 @@
     xhr.send();
   }
 
-  function persoonsGegevens() {
+  function persoonsGegevens(id) {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
@@ -73,21 +73,44 @@
                     var employeeString = "";
                     employeeString +=
                         `
-                            <div>
-                            <h4 class="alignleft">Naam:</h4><p class="alignright"> ${databaseContents.voornaam + " " + databaseContents.achternaam}</p><div style="clear: both;"></div>
-                            <h4 class="alignleft">Email:</h4><p class="alignright"> ${databaseContents.email}</p><div style="clear: both;"></div>
-                            <h4 class="alignleft">Geboortedatum:</h4><p class="alignright"> ${databaseContents.geboorteDatum}</p><div style="clear: both;"></div>
-                            <h4 class="alignleft">Telefoonnummer:</h4><p class="alignright"> ${databaseContents.telefoonNummer}</p><div style="clear: both;"></div>
-                            <h4 class="alignleft">Adres:</h4><p class="alignright"> ${databaseContents.adres + " " + databaseContents.evtToevoeging}</p><div style="clear: both;"></div>
-                            <h4 class="alignleft">Postcode:</h4><p class="alignright"> ${databaseContents.postcode}</p><div style="clear: both;"></div>
-                            <h4 class="alignleft">Woonplaats:</h4><p class="alignright"> ${databaseContents.woonplaats}</p><div style="clear: both;"></div>
-                            <h4 class="alignleft">Opdrachtgever:</h4><p class="alignright">${databaseContents.opdrachtgever}</p><div style="clear: both;"></div>
-                            </div>
+                        <div>
+                            <h5>Gebruiker Profiel</h5>
+                        <table class="enkeleGebruikerTabelLaden">
+                            <tr>
+                            <th>Naam:</th>
+                            <td>${databaseContents.voornaam + " " + databaseContents.achternaam}</td>
+                            </tr>
+                            <tr>
+                            <th>Email: </th>
+                            <td>${databaseContents.email}</td>
+                            </tr>
+                            <tr>
+                            <th>Telefoonnummer: </th>
+                            <td>${databaseContents.telefoonNummer}</td>
+                            </tr>
+                            <tr>
+                            <th>Adres: </th>
+                            <td>${databaseContents.adres + " " + databaseContents.evtToevoeging}</td>
+                            </tr>
+                            <tr>
+                            <th>Postcode: </th>
+                            <td>${databaseContents.postcode}</td>
+                            </tr>
+                            <tr>
+                            <th>Woonplaats: </th>
+                            <td>${databaseContents.woonplaats}</td>
+                            </tr>
+                            <tr>
+                            <th>Opdrachtgever: </th>
+                            <td>${databaseContents.opdrachtgever}</td>
+                            </tr>
+                        </table>
+                        </div>
                             `
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
                 }
             }
-            xhr.open("GET", "http://173.212.208.199:1337/api/users/" + localStorage.getItem("userId"), true);
+            xhr.open("GET", "http://173.212.208.199:1337/api/users/" + id, true);
             console.log("werkt dit?");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
@@ -169,8 +192,8 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div id="showNaam-modal">
+                <div id="persoonsgegevens"></div>
             </div>
-            <div id="persoonsgegevens"></div>
             <div class="modal-body">
               <div id="alleGebruikers"></div>
             </div>
