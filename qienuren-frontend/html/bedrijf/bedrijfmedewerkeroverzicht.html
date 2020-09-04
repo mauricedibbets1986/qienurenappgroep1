@@ -121,7 +121,7 @@
                         </thead><tbody>
                         `
         for (y = 0; y < obj.length; y++) {
-          if (obj[y].statusGoedkeuring == "GOEDGEKEURD_ADMIN") {
+          // if (obj[y].statusGoedkeuring == "GOEDGEKEURD_ADMIN") {
             lijst +=
               ` <tr>
               <td>${obj[y].maand}</td>
@@ -132,7 +132,7 @@
               class="button3-sm" data-toggle="modal" data-target="#myModal2">bekijken</button></td>
               </tr>
               `
-          }
+          // }
         }
       }
       lijst += `</tbody></table>`;
