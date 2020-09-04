@@ -234,7 +234,7 @@ public class GebruikerEndpoint {
         return returnValue;
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN') or #id == principal.userId")
+    @PreAuthorize("hasAnyRole('ADMIN','MEDEWERKER','TRAINEE') or #id == principal.userId")
     @PutMapping("/users/{userId}")
     public GebruikerDetailsResponse updateGebruiker(@PathVariable String userId, @RequestBody GebruikerDetailsRequest gebruikerDetailsRequest) {
         GebruikerDetailsResponse returnValue = new GebruikerDetailsResponse();
