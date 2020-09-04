@@ -120,6 +120,9 @@ p {
   }
 
   /* buttons */
+  button:focus {
+    outline: none;
+}
 
   .button1{
     margin-bottom:25px;

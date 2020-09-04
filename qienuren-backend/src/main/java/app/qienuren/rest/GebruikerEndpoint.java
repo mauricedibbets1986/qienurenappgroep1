@@ -216,7 +216,7 @@ public class GebruikerEndpoint {
         return returnValue;
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
+    @PreAuthorize("hasAnyRole('ADMIN','BEDRIJF')or #id == principal.userId")
     @GetMapping("/users/{id}")
     public GebruikerDetailsResponse getUserByUserId(@PathVariable(value = "id") String id) {
         GebruikerDetailsResponse returnValue = new GebruikerDetailsResponse();

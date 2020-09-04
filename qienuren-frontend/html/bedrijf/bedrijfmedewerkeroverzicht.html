@@ -74,12 +74,12 @@
           var nam = obj.lijstGebruikers[x].voornaam + " " + obj.lijstGebruikers[x].achternaam;
           var uid = obj.lijstGebruikers[x].userId;
 
-            lijst +=
-              ` <tr>
+          lijst +=
+            ` <tr>
                                       <td>${nam}</td>
                                       <td>${obj.lijstGebruikers[x].email}</td>
                                       <td>${obj.lijstGebruikers[x].telefoonNummer}</td>
-                                      <td><button onclick="overzichtFormulieren('${uid}'), 
+                                      <td><button onclick="persoonsGegevens('${uid}') , 
                                         getNaam('${nam}')" 
                                         class="button3-sm" data-toggle="modal" data-target="#myModal3">profiel</button></td>
                                       <td><button onclick="overzichtFormulieren('${uid}'), 
@@ -95,7 +95,7 @@
       document.getElementById("lijst-medewerkers").innerHTML = lijst;
 
     }
-    xhr.open("GET", "http://173.212.208.199:1337/api/users/bedrijf/"+localStorage.getItem("userId"), true);
+    xhr.open("GET", "http://173.212.208.199:1337/api/users/bedrijf/" + localStorage.getItem("userId"), true);
     xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
     xhr.send();
   }
@@ -212,42 +212,91 @@
     document.getElementById("showDatum-modal").innerHTML = print;
   }
 
+  function persoonsGegevens(id) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        var databaseContents = JSON.parse(this.responseText);
+        var employeeString = "";
+        employeeString +=
+          `
+                        <div>
+                            <h5>Gebruiker Profiel</h5>
+                            <table class="enkeleGebruikerTabelLaden">
+                            <tr>
+                            <th>Naam:</th>
+                            <td>${databaseContents.voornaam + " " + databaseContents.achternaam}</td>
+                            </tr>
+                            <tr>
+                            <th>Email: </th>
+                            <td>${databaseContents.email}</td>
+                            </tr>
+                            <tr>
+                            <th>Telefoonnummer: </th>
+                            <td>${databaseContents.telefoonNummer}</td>
+                            </tr>
+                            <tr>
+                            <th>Adres: </th>
+                            <td>${databaseContents.adres + " " + databaseContents.evtToevoeging}</td>
+                            </tr>
+                            <tr>
+                            <th>Postcode: </th>
+                            <td>${databaseContents.postcode}</td>
+                            </tr>
+                            <tr>
+                            <th>Woonplaats: </th>
+                            <td>${databaseContents.woonplaats}</td>
+                            </tr>
+                            <tr>
+                            <th>Opdrachtgever: </th>
+                            <td>${databaseContents.opdrachtgever}</td>
+                            </tr>
+                        </table>
+                        </div>
+                            `
+        document.getElementById("persoonsgegevens").innerHTML = employeeString;
+      }
+    }
+    xhr.open("GET", "http://173.212.208.199:1337/api/users/" + id, true);
+    console.log("werkt dit?");
+    xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+    xhr.send();
+  }
+
 </script>
 
 <body onload=bedrijfsnaam(),lijstMedewerkers()>
-    <!-- Modal gebruiker overzicht -->
-    <div class="modal fade" id="myModal1" role="dialog">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div id="showNaam-modal">
-          </div>
-          <div class="modal-body">
-            <div id="overzichtFormulieren"></div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Sluiten</button>
-          </div>
+  <!-- Modal gebruiker overzicht -->
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div id="showNaam-modal">
+        </div>
+        <div class="modal-body">
+          <div id="overzichtFormulieren"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Sluiten</button>
         </div>
       </div>
     </div>
+  </div>
+  </div>
+  <!-- Modal gebruiker profiel -->
+  <div class="modal fade" id="myModal3" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div id="persoonsgegevens"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Sluiten</button>
+        </div>
+      </div>
     </div>
-        <!-- Modal gebruiker profiel -->
-        <div class="modal fade" id="myModal3" role="dialog">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div id="showNaam-modal">
-              </div>
-              <div class="modal-body">
-                <div id="gebruikerprofiel"></div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Sluiten</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-      <!-- Modal uren overzicht -->
+  </div>
+  </div>
+  <!-- Modal uren overzicht -->
   <div class="modal fade" id="myModal2" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -271,28 +320,28 @@
       </a>
       <!-- Profiel menu -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbar-list-4">
-      <ul class="navbar-nav ml-auto">
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-list-4">
+        <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img src="../../image/profilepic.PNG" width="85" height="85" class="rounded-circle">
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item"><b>
-                          <div id="bedrijfsnaam"></div>
-                      </b></a>
-                  <hr>
-                  <a onclick="logout()" class="dropdown-item" href="#">Uitloggen</a>
-              </div>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="../../image/profilepic.PNG" width="85" height="85" class="rounded-circle">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item"><b>
+                  <div id="bedrijfsnaam"></div>
+                </b></a>
+              <hr>
+              <a onclick="logout()" class="dropdown-item" href="#">Uitloggen</a>
+            </div>
           </li>
-      </ul>
-  </div>
-  </div>
-</nav>
+        </ul>
+      </div>
+      </div>
+    </nav>
     <!-- Breadcrumb -->
     <div>
       <ul class="breadcrumb">
