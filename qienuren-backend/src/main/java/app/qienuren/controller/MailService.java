@@ -14,9 +14,10 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 
-@Component
+@Service
 public class MailService {
 
+    @Autowired
     private JavaMailSender javaMailSender;
 
 
@@ -24,7 +25,7 @@ public class MailService {
         this.javaMailSender = javaMailSender;
     }
 
-    void sendEmail(Mail mail) {
+    public void sendEmail(Mail mail) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(mail.getEmailTo());
         msg.setSubject(mail.getSubject());
