@@ -231,7 +231,7 @@ public class GebruikerService implements GebruikerServiceInterface {
                     }
                 }
                 if (!exists) {
-                    urenformulierService.addNewUrenFormulier(newUrenFormulier);
+                    urenformulierService.addNewUrenFormulier(new UrenFormulier(newUrenFormulier));
                     gebruiker.addUrenFormulierToArray(newUrenFormulier);
                     gebruikerRepository.save(gebruiker);
                 }

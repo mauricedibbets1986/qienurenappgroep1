@@ -32,11 +32,12 @@
     <script>
 
         function ziekMelden() {
-            var urenFormulier = new Date();
-            var datumDag = urenFormulier.getUTCDate();
+            var date = new Date();
+            var datumDag = date.getUTCDate();
+            var urenFormulier = {};
             var months = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"];
-            urenFormulier.maand = months[datum.getMonth()];
-            urenFormulier.jaar = datum.getFullYear();
+            urenFormulier.maand = months[date.getMonth()];
+            urenFormulier.jaar = date.getFullYear();
             urenFormulierJSON = JSON.stringify(urenFormulier);
             var xhr = new XMLHttpRequest();
             xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/ziekmelden/" + localStorage.getItem("userId") + "/" + datumDag, true);
