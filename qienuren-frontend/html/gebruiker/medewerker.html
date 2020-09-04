@@ -72,7 +72,7 @@
                     var obj = JSON.parse(this.responseText);
                 }
             }
-            xhr.open("GET", "http://173.212.208.199:1337/gebruiker/userid/" + localStorage.getItem("userId"), true);
+            xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/userid/" + localStorage.getItem("userId"), true);
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
             alert(obj.voornaam);
