@@ -114,4 +114,8 @@ public class Werkdag {
     public void setOverigeUren(double overigeUren) {
         this.overigeUren = overigeUren;
     }
+
+    public double getUren() {
+        return overigeUren;
+    }
 }
