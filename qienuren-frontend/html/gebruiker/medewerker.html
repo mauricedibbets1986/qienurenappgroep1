@@ -28,10 +28,43 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+
+    <script>
+
+        function ziekMelden() {
+            var urenFormulier = new Date();
+            var datumDag = urenFormulier.getUTCDate();
+            var months = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"];
+            urenFormulier.maand = months[datum.getMonth()];
+            urenFormulier.jaar = datum.getFullYear();
+            urenFormulierJSON = JSON.stringify(urenFormulier);
+            var xhr = new XMLHttpRequest();
+            xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/ziekmelden/" + localStorage.getItem("userId") + "/" + datumDag, true);
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(urenFormulierJSON);
+        }
+
+    </script>
+
 </head>
 
 <body onload="gebruikersnaam()">
     <!-- Header -->
+    <div class="modal fade" id="myModal4" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Ziek melden? Veel Beterschap</h3>
+                    <input type="button" class="button3"
+                            onclick="ziekMelden()"
+                            value="Bevestigen" data-dismiss="modal"><br>
+                    <input type="button" class="button3"
+                            value="Annuleren" data-dismiss="modal"><br>
+                </div>
+            </div>
+        </div>
+    </div>
     <header>
         <!-- Qien Logo -->
         <nav class="navbar navbar navbar-light navbar-expand-sm">
@@ -81,6 +114,8 @@
                         <button class="button2" onclick="window.location.href='medewerkeruroverzicht.html'"
                             disabled>Historie
                             urenregistratie</button>
+                        <input type="button" class="button2" data-toggle="modal"
+                            data-target="#myModal4" value="Ziek melden">
                     </div>
                 </div>
                 <!-- main content -->

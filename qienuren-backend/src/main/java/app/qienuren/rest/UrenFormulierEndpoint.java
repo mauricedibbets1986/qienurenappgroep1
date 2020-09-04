@@ -3,11 +3,7 @@ package app.qienuren.rest;
 import app.qienuren.controller.GebruikerService;
 import app.qienuren.controller.UrenFormulierRepository;
 import app.qienuren.controller.UrenFormulierService;
-import app.qienuren.gebruikerDto.Roles;
-import app.qienuren.model.Gebruiker;
-import app.qienuren.model.RoleEntity;
-import app.qienuren.model.StatusGoedkeuring;
-import app.qienuren.model.UrenFormulier;
+import app.qienuren.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +13,7 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/api/urenformulier")
 public class UrenFormulierEndpoint {
+
     @Autowired
     UrenFormulierService urenFormulierService;
 
@@ -25,7 +22,6 @@ public class UrenFormulierEndpoint {
 
     @Autowired
     UrenFormulierRepository urenFormulierRepository;
-
 
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
     @GetMapping("/get")
@@ -123,6 +119,12 @@ public class UrenFormulierEndpoint {
     @PostMapping("/klaarzetten")
     public void urenFormulierenKlaarzetten(@RequestBody UrenFormulier newUrenFormulier) {
         gebruikerService.urenFormulierenKlaarzetten(newUrenFormulier);
+    }
+
+    @PreAuthorize("hasAnyRole('GEBRUIKER') or #id == principal.userId")
+    @PutMapping("/ziekmelden/{id}/{datumDag}")
+        public void ziekMelden(@PathVariable(value = "id") String id, @RequestBody UrenFormulier urenFormulier, @PathVariable(value = "datumDag") String datumDag) {
+        urenFormulierService.ziekMelden(id, urenFormulier, datumDag);
     }
 
 }

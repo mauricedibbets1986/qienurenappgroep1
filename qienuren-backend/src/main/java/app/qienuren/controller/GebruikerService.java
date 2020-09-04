@@ -20,6 +20,7 @@ import java.util.HashSet;
 @Service
 @Transactional
 public class GebruikerService implements GebruikerServiceInterface {
+
     @Autowired
     GebruikerRepository gebruikerRepository;
 
