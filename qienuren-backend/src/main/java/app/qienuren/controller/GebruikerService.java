@@ -20,6 +20,7 @@ import java.util.HashSet;
 @Service
 @Transactional
 public class GebruikerService implements GebruikerServiceInterface {
+
     @Autowired
     GebruikerRepository gebruikerRepository;
 
@@ -37,6 +38,9 @@ public class GebruikerService implements GebruikerServiceInterface {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    UrenFormulierService urenformulierService;
 
 
     //FOUTE FUNCTIE, GEBRUIKER.ADDURENFORMULIERTPARRAY??
@@ -222,11 +226,12 @@ public class GebruikerService implements GebruikerServiceInterface {
             if (gebruikerRol[0].getName().equals("ROLE_MEDEWERKER") || gebruikerRol[0].getName().equals("ROLE_TRAINEE")) {
                 Iterable<UrenFormulier> medewerkerUrenformulier = gebruiker.getUrenFormulier();
                 for (UrenFormulier uf : medewerkerUrenformulier) {
-                    if (!uf.getJaar().equals(newUrenFormulier.getJaar()) & uf.getMaand() != newUrenFormulier.getMaand()) {
+                    if (uf.getJaar().equals(newUrenFormulier.getJaar()) & uf.getMaand() == newUrenFormulier.getMaand()) {
                         exists = true;
                     }
                 }
                 if (!exists) {
+                    urenformulierService.addNewUrenFormulier(newUrenFormulier);
                     gebruiker.addUrenFormulierToArray(newUrenFormulier);
                     gebruikerRepository.save(gebruiker);
                 }

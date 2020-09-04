@@ -115,7 +115,18 @@ public class Werkdag {
         this.overigeUren = overigeUren;
     }
 
+<<<<<<< HEAD
     public double getUren() {
         return overigeUren;
+=======
+    public Werkdag ikBenZiek() {
+        this.setZiekteDag(8);
+        this.setOverigeUren(0);
+        this.setTrainingsUren(0);
+        this.setVerlofUren(0);
+        this.setOpdrachtUren(0);
+        this.setOverwerkUren(0);
+        return this;
+>>>>>>> master
     }
 }

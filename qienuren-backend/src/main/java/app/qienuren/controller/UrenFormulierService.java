@@ -1,8 +1,6 @@
 package app.qienuren.controller;
 
-import app.qienuren.model.StatusGoedkeuring;
-import app.qienuren.model.UrenFormulier;
-import app.qienuren.model.Werkdag;
+import app.qienuren.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +22,9 @@ public class UrenFormulierService {
     @Autowired
     WerkdagService werkdagService;
 
+    @Autowired
+    GebruikerRepository gebruikerRepository;
+
     public Iterable<UrenFormulier> getAllUrenFormulieren() {
         return urenFormulierRepository.findAll();
     }
@@ -33,8 +34,7 @@ public class UrenFormulierService {
     }
 
 
-    public Object addWorkDaytoUrenFormulier(long ufid, long wdid) {
-        UrenFormulier uf = urenFormulierRepository.findById(ufid).get();
+    public Object addWorkDaytoUrenFormulier(UrenFormulier uf, long wdid) {
         Werkdag wd = werkdagRepository.findById(wdid).get();
         try {
             uf.addWerkdayToArray(wd);
@@ -44,16 +44,15 @@ public class UrenFormulierService {
         }
     }
 
-    public UrenFormulier addNewUrenFormulier(UrenFormulier urenFormulier) {
-        urenFormulierRepository.save(urenFormulier);
-        int maand = urenFormulier.getMaand().ordinal() + 1;
-        YearMonth yearMonth = YearMonth.of(Integer.parseInt(urenFormulier.getJaar()), maand);
+    public UrenFormulier addNewUrenFormulier(UrenFormulier uf) {
+        int maand = uf.getMaand().ordinal() + 1;
+        YearMonth yearMonth = YearMonth.of(Integer.parseInt(uf.getJaar()), maand);
         int daysInMonth = yearMonth.lengthOfMonth();
         for (int x = 1; x <= daysInMonth; x++) {
             Werkdag werkdag = werkdagService.addNewWorkday(new Werkdag(x));
-            addWorkDaytoUrenFormulier(urenFormulier.getId(), werkdag.getId());
+            addWorkDaytoUrenFormulier(uf, werkdag.getId());
         }
-        return urenFormulierRepository.save(urenFormulier);
+        return urenFormulierRepository.save(uf);
     }
 
     public double getTotaalGewerkteUren(long id) {
@@ -101,5 +100,26 @@ public class UrenFormulierService {
         }
 
         return getUrenFormulierById(urenformulierId);
+    }
+
+    public UrenFormulier changeDetails(UrenFormulier urenFormulier, UrenFormulier urenFormulierUpdate) {
+        if (urenFormulierUpdate.getOpmerking() != null) {
+            urenFormulier.setOpmerking(urenFormulierUpdate.getOpmerking());
+        }
+
+        return urenFormulierRepository.save(urenFormulier);
+    }
+
+    public void ziekMelden(String id, UrenFormulier urenFormulier, String datumDag) {
+        Gebruiker gebruiker = gebruikerRepository.findByUserId(id);
+        for (UrenFormulier uf : gebruiker.getUrenFormulier()) {
+            if (uf.getJaar().equals(urenFormulier.getJaar()) && uf.getMaand() == urenFormulier.getMaand()) {
+                for (Werkdag werkdag : uf.getWerkdag()) {
+                    if (werkdag.getDatumDag().equals(datumDag)) {
+                        werkdagRepository.save(werkdag.ikBenZiek());
+                    }
+                }
+            }
+        }
     }
 }

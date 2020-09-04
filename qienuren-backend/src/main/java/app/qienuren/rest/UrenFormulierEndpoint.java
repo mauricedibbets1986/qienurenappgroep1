@@ -1,12 +1,9 @@
 package app.qienuren.rest;
 
 import app.qienuren.controller.GebruikerService;
+import app.qienuren.controller.UrenFormulierRepository;
 import app.qienuren.controller.UrenFormulierService;
-import app.qienuren.gebruikerDto.Roles;
-import app.qienuren.model.Gebruiker;
-import app.qienuren.model.RoleEntity;
-import app.qienuren.model.StatusGoedkeuring;
-import app.qienuren.model.UrenFormulier;
+import app.qienuren.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +13,15 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/api/urenformulier")
 public class UrenFormulierEndpoint {
+
     @Autowired
     UrenFormulierService urenFormulierService;
 
     @Autowired
     GebruikerService gebruikerService;
 
+    @Autowired
+    UrenFormulierRepository urenFormulierRepository;
 
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
     @GetMapping("/get")
@@ -33,12 +33,6 @@ public class UrenFormulierEndpoint {
     @PostMapping("/new")
     public UrenFormulier addNewUrenFormulier(@RequestBody UrenFormulier urenFormulier) {
         return urenFormulierService.addNewUrenFormulier(urenFormulier);
-    }
-
-    @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
-    @PutMapping("/{urenformulierid}/{werkdagid}")
-    public Object updateWorkDaytoUrenFormulier(@PathVariable(value = "urenformulierid") long ufid, @PathVariable(value = "werkdagid") long wdid) {
-        return urenFormulierService.addWorkDaytoUrenFormulier(ufid, wdid);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
@@ -71,13 +65,17 @@ public class UrenFormulierEndpoint {
     @PutMapping("/gebruiker/{urenformulierid}/setstatus-indienenmedewerker")
     public UrenFormulier setStatusFormulierIngediendMedewerker(@PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "MEDEWERKER");
-  
+        return urenFormulierService.getUrenFormulierById(urenformulierid);
+    }
+
     @PreAuthorize("hasAnyRole('ADMIN','TRAINEE','MEDEWERKER')or #id == principal.userId")
     @PutMapping("/gebruiker/{urenformulierid}/setstatus-indienengebruiker")
     //Als iemand met de rol Gebruiker deze methode aanroept,
     // zet deze de statusGoedkeuring van OPEN naar INGEDIEND_GEBRUIKER
-    public UrenFormulier setStatusFormulierIngediendGebruiker(@PathVariable(value = "urenformulierid") long urenformulierid) {
+    public UrenFormulier setStatusFormulierIngediendGebruiker(
+            @PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "GEBRUIKER");
+        return urenFormulierService.getUrenFormulierById(urenformulierid);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
@@ -93,7 +91,7 @@ public class UrenFormulierEndpoint {
     @PreAuthorize("hasAnyRole('ADMIN', 'BEDRIJF')or #id == principal.userId")
     @PutMapping("/bedrijf/{urenformulierid}/setstatus-goedkeuring-bedrijf")
     //Als iemand met de rol Bedrijf deze methode aanroept,
-    //zet deze de statusGoedkeuring van INGEDIEND_TRAINEE naar
+    //zet deze de statusGoedkeuring van INGEDIEND_TRAINEE naar de
     //GOEDGEKEURD_BEDRIJF
     public UrenFormulier setStatusGoedkeuringBedrijf(@PathVariable(value = "urenformulierid") long urenformulierid) {
         urenFormulierService.setStatusUrenFormulier(urenformulierid, "BEDRIJF");
@@ -110,9 +108,25 @@ public class UrenFormulierEndpoint {
         return getUrenFormulierById(urenformulierid);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'BEDRIJF')or #id == principal.userId")
+    @PutMapping("/afkeur-opmerking/{id}")
+    public void afkeurOpmerking(@PathVariable(value = "id") long id, @RequestBody UrenFormulier urenFormulier) {
+        urenFormulierService.changeDetails(urenFormulierRepository.findById(id).get(), urenFormulier);
+    }
+
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/klaarzetten")
     public void urenFormulierenKlaarzetten(@RequestBody UrenFormulier newUrenFormulier) {
         gebruikerService.urenFormulierenKlaarzetten(newUrenFormulier);
     }
+
+    @PreAuthorize("hasAnyRole('GEBRUIKER') or #id == principal.userId")
+    @PutMapping("/ziekmelden/{id}/{datumDag}")
+        public void ziekMelden(@PathVariable(value = "id") String id, @RequestBody UrenFormulier urenFormulier, @PathVariable(value = "datumDag") String datumDag) {
+        urenFormulierService.ziekMelden(id, urenFormulier, datumDag);
+    }
+
 }
+
+
