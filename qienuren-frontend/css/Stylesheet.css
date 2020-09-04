@@ -120,6 +120,9 @@ p {
   }
 
   /* buttons */
+  button:focus {
+    outline: none;
+}
 
   .button1{
     margin-bottom:25px;
@@ -390,6 +393,7 @@ ul.breadcrumb {
 
 .navbar{
   background-color: #C894F8;
+  /* background-color: #9D3FF3  /*in case of emergency: Qien PAARS*/
   min-height:120px;
 }
 
