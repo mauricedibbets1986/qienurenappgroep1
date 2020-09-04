@@ -59,7 +59,6 @@ public class GebruikerService implements GebruikerServiceInterface {
     }
 
     public Gebruiker getGebruikerById(long id) {
-
         return gebruikerRepository.findById(id).get();
     }
 
@@ -236,6 +235,10 @@ public class GebruikerService implements GebruikerServiceInterface {
                 }
             }
         }
+    }
+
+    public Gebruiker getGebruikerByuserId(String id) {
+        return gebruikerRepository.findByUserId(id);
     }
 }
 
