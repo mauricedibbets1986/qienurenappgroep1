@@ -21,6 +21,159 @@
 
     
     <script>
+
+
+function emailenMaar() {
+            console.log("test 1")
+            var xhr = new XMLHttpRequest();
+            var obj = {};
+            obj.emailTo = document.getElementById("emailNaar").value;
+            obj.subject = document.getElementById("onderwerpregel").value;
+            obj.text = document.getElementById("bodyVanEmail").value;
+            var json = JSON.stringify(obj);
+            xhr.open("POST", "http://localhost:8082/mail", true);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send(json);
+            }
+
+        function zoekGebruikerOpVoornaam() {
+            var xhr = new XMLHttpRequest();
+            var voornaam = document.getElementById("voornaam").value;
+            xhr.onreadystatechange = function () {
+
+                console.log("De functie 'zoekGebruikerOpVoornaam' werkt");
+                var databaseContents = JSON.parse(this.responseText);
+                var x;
+                var enkeleWerknemer = "";
+                for (x = 0; x < databaseContents.length; x++) {
+                    enkeleWerknemer +=
+                        `
+                                <div>
+                                <h2>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}</h2>
+                                <b>Adres:</b> ${databaseContents[x].adres}<br>
+                                <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
+                                <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
+                                <b>Postcode:</b> ${databaseContents[x].postcode}<br>
+                                <b>Geboortedatum:</b> ${databaseContents[x].geboorteDatum}<br>
+                                <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
+                                <b>E-mailadres:</b> ${databaseContents[x].email}<br>
+                                <b>Opdrachtgever:</b> ${databaseContents[x].opdrachtgever}<br>
+                                <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br>
+                                <hr>
+                                </div>
+                                `
+                }
+                document.getElementById("demoVoornaam").innerHTML = enkeleWerknemer;
+            }
+            xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/voornaam/" + voornaam, true);
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send();
+        }
+
+        function zoekGebruikerOpAchternaam() {
+            var xhr = new XMLHttpRequest();
+            var achternaam = document.getElementById("achternaam").value;
+            xhr.onreadystatechange = function () {
+
+                console.log("De functie 'zoekGebruikerOpAchternaam' werkt");
+                var databaseContents = JSON.parse(this.responseText);
+                var x;
+                var enkeleWerknemer = "";
+                for (x = 0; x < databaseContents.length; x++) {
+                    enkeleWerknemer +=
+                        `
+                    <div>
+                    <h2>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}</h2>
+                    <b>Adres:</b> ${databaseContents[x].adres}<br>
+                    <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
+                    <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
+                    <b>Postcode:</b> ${databaseContents[x].postcode}<br>
+                    <b>Geboortedatum:</b> ${databaseContents[x].geboorteDatum}<br>
+                    <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
+                    <b>E-mailadres:</b> ${databaseContents[x].email}<br>
+                    <b>Opdrachtgever:</b> ${databaseContents[x].opdrachtgever}<br>
+                    <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br>
+                    <hr>
+                    </div>
+                    `
+                }
+                document.getElementById("demoAchternaam").innerHTML = enkeleWerknemer;
+            }
+            xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/achternaam/" + achternaam, true);
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send();
+        }
+
+        function zoekGebruikerOpWoonplaats() {
+            var xhr = new XMLHttpRequest();
+            var woonplaats = document.getElementById("woonplaats").value;
+            xhr.onreadystatechange = function () {
+
+                console.log("De functie 'zoekGebruikerOpWoonplaats' werkt");
+                var databaseContents = JSON.parse(this.responseText);
+                var x;
+                var enkeleWerknemer = "";
+                for (x = 0; x < databaseContents.length; x++) {
+                    enkeleWerknemer +=
+                        `
+                    <div>
+                    <h2>${databaseContents[x].voornaam} ${databaseContents[x].achternaam} </h2>
+                    <b>Adres:</b> ${databaseContents[x].adres}<br>
+                    <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
+                    <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
+                    <b>Postcode:</b> ${databaseContents[x].postcode}<br>
+                    <b>Geboortedatum:</b> ${databaseContents[x].geboorteDatum}<br>
+                    <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
+                    <b>E-mailadres:</b> ${databaseContents[x].email}<br>
+                    <b>Opdrachtgever:</b> ${databaseContents[x].opdrachtgever}<br>
+                    <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br>
+                    <hr>
+                    </div>
+                    `
+                }
+                document.getElementById("demoWoonplaats").innerHTML = enkeleWerknemer;
+            }
+            xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/woonplaats/" + woonplaats, true);
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send();
+        }
+
+        function zoekGebruikerOpGeboortedatum() {
+            var xhr = new XMLHttpRequest();
+            var geboortedatum = document.getElementById("geboortedatum").value;
+            xhr.onreadystatechange = function () {
+
+                console.log("De functie 'zoekGebruikerOpGeboortedatum' werkt");
+                var databaseContents = JSON.parse(this.responseText);
+                var x;
+                var enkeleWerknemer = "";
+                for (x = 0; x < databaseContents.length; x++) {
+                    enkeleWerknemer +=
+                        `
+                    <div>
+                    <h2>${databaseContents[x].voornaam} ${databaseContents[x].achternaam} </h2>
+                    <b>Adres:</b> ${databaseContents[x].adres}<br>
+                    <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
+                    <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
+                    <b>Postcode:</b> ${databaseContents[x].postcode}<br>
+                    <b>Geboortedatum:</b> ${databaseContents[x].geboorteDatum}<br>
+                    <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
+                    <b>E-mailadres:</b> ${databaseContents[x].email}<br>
+                    <b>Opdrachtgever:</b> ${databaseContents[x].opdrachtgever}<br>
+                    <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br>
+                    <hr>
+                    </div>
+                    `
+                }
+                document.getElementById("demoGeboortedatum").innerHTML = enkeleWerknemer;
+            }
+            xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/geboorteDatum/" + geboortedatum, true);
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send();
+        }
+
+
         // alle medewerkers zien
         function alleGebruikers() {
             var employeeString = "";
@@ -212,6 +365,35 @@
                         <section>
                             <div id="showGebruikers"></div>
                         </section>
+
+                        <h1>Zoek gebruikers</h1>
+                        <form action="/action_page.php">
+                            <input type="text" placeholder="Zoek op voornaam" name="search" id="voornaam">
+                            <input type=button onclick=zoekGebruikerOpVoornaam() value="Zoek en vindt!">
+                            <div id="demoVoornaam"></div>
+                        </form>
+                        <form action="/action_page.php">
+                            <input type="text" placeholder="Zoek op achternaam" name="search" id="achternaam">
+                            <input type=button onclick=zoekGebruikerOpAchternaam() value="Zoek en vindt!">
+                            <div id="demoAchternaam"></div>
+                        </form>
+                        <form action="/action_page.php">
+                            <input type="text" placeholder="Zoek op woonplaats" name="search" id="woonplaats">
+                            <input type=button onclick=zoekGebruikerOpWoonplaats() value="Zoek en vindt!">
+                            <div id="demoWoonplaats"></div>
+                        </form>
+                        <form action="/action_page.php">
+                            <input type="text" placeholder="Zoek op geboortedatum" name="search"
+                                id="geboortedatum">
+                            <input type=button onclick=zoekGebruikerOpGeboortedatum() value="Zoek en vindt!">
+                            <div id="demoGeboortedatum"></div>
+                        </form>
+                        <form>
+                            <input type="text" placeholder="E-mailadres" id="emailNaar">
+                            <input type="text" placeholder="Onderwerpregel" id="onderwerpregel">
+                            <input type="text" placeholder="Bericht" id="bodyVanEmail">
+                            <input type=button onclick=emailenMaar() value="Mail!!">
+                        </form>
                     </div>
                 </div>
             </div>

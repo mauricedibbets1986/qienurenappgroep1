@@ -563,7 +563,7 @@ input[type=text], input[type=password] input[type=email], select {
 }
 
 #kalenderGeboortedatum{
-  width: 196px;
+  width: 199.6px;
   height: 34px;
   margin-bottom: 8px;
 }
@@ -581,7 +581,7 @@ input[type=text], input[type=password] input[type=email], select {
 }
 
 #nieuwGeboorteDatum{
-  width: 200px;
+  width: 199.6px;
   height: 34px;
   margin-bottom: 8px;
   margin-top: 12px;
