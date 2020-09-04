@@ -32,7 +32,13 @@ public class UrenFormulier {
     @JsonManagedReference
     private List<Werkdag> werkdag = new ArrayList<>();
 
-    public UrenFormulier() {
+    public UrenFormulier(UrenFormulier newUrenFormulier) {
+        this.setStatusGoedkeuring(StatusGoedkeuring.OPEN);
+        this.maand = newUrenFormulier.getMaand();
+        this.jaar = newUrenFormulier.getJaar();
+    }
+
+    public UrenFormulier(){
         this.setStatusGoedkeuring(StatusGoedkeuring.OPEN);
     }
 
