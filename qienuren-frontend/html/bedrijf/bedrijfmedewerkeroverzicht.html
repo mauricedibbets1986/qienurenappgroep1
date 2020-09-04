@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="../../css/Stylesheet.css" />
   <!-- ../../css/Stylesheet.css -->
 
-  <title>Goedgekeurde formulieren</title>
+  <title>Overzicht medewerkers</title>
 
   <!-- Eigen JavaScript -->
   <script src="../../js/javascript.js"></script>
@@ -121,7 +121,7 @@
                         </thead><tbody>
                         `
         for (y = 0; y < obj.length; y++) {
-          // if (obj[y].statusGoedkeuring == "GOEDGEKEURD_ADMIN") {
+          if (obj[y].statusGoedkeuring != "OPEN") {
             lijst +=
               ` <tr>
               <td>${obj[y].maand}</td>
@@ -132,7 +132,7 @@
               class="button3-sm" data-toggle="modal" data-target="#myModal2">bekijken</button></td>
               </tr>
               `
-          // }
+          }
         }
       }
       lijst += `</tbody></table>`;
@@ -146,7 +146,7 @@
   }
 
   function medewerkerUrenFormulier(userid, formid) {
-    console.log(userid)
+    console.log(formid)
     var form = "";
     var xhr = new XMLHttpRequest();
 
@@ -170,6 +170,7 @@
       if (this.readyState == 4) {
         var obj = JSON.parse(this.responseText);
         for (y = 0; y < obj.length; y++) {
+          console.log(obj[y].id);
           if (obj[y].id == formid) {
             var z;
             for (z = 0; z < obj[y].werkdag.length; z++) {
@@ -232,6 +233,21 @@
       </div>
     </div>
     </div>
+      <!-- Modal uren overzicht -->
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div id="showDatum-modal">
+        </div>
+        <div class="modal-body">
+          <div id="showUrenformulier-modal"></div>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
   <!-- Header -->
   <header>
     <!-- Qien Logo -->
