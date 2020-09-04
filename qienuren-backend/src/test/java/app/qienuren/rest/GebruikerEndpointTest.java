@@ -36,7 +36,7 @@ public class GebruikerEndpointTest {
 		gebruikerRepo.save(gebruiker);
 
 		this.mockMvc.perform(get("/api/gebruiker/all/")).andDo(print()).andExpect(status().isOk())
-				.andExpect(jsonPath("$.[0].email", is("groep1@qien.nl")))
+				.andExpect(jsonPath("$.[0].email", is("admin@qien.nl")))
 				.andExpect(jsonPath("$.[1].email", is("belle2@qien.nl")));
 	}
 }

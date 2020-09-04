@@ -40,12 +40,6 @@ public class UrenFormulierEndpoint {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
-    @PutMapping("/{urenformulierid}/{werkdagid}")
-    public Object updateWorkDaytoUrenFormulier(@PathVariable(value = "urenformulierid") long ufid, @PathVariable(value = "werkdagid") long wdid) {
-        return urenFormulierService.addWorkDaytoUrenFormulier(ufid, wdid);
-    }
-
-    @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
     @GetMapping("/gewerkteuren/{id}")
     public double getTotaalGewerkteUren(@PathVariable(value = "id") long id) {
         return urenFormulierService.getTotaalGewerkteUren(id);
