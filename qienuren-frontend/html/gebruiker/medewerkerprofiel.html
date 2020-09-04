@@ -38,22 +38,21 @@
                             <h4 class="alignleft">Opdrachtgever:</h4><p class="alignright">${databaseContents.opdrachtgever}</p><div style="clear: both;"></div>
                             </div>
                             `
-
-                    var emailplaceholder = `<label>E-mailadres*</label><input type=text value="${databaseContents.email}" disabled>`        
+                    var emailplaceholder = `<label>E-mailadres</label><input type=text value="${databaseContents.email}" disabled>`   
+                         
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
                     document.getElementById("emailplaceholder").innerHTML = emailplaceholder;
                 }
             }
             xhr.open("GET", "http://173.212.208.199:1337/api/users/" + localStorage.getItem("userId"), true);
-            console.log("werkt dit?");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
         }
 
         function gegevensAanpassen() {
-            // change details - want to get ID automatically but don't know how to take persistent data from one page to another, will fix
             var xhr = new XMLHttpRequest();
             var obj = {};
+            xhr.onreadystatechange = function () {
             obj.voornaam = document.getElementById("nieuwVoornaam").value;
             obj.achternaam = document.getElementById("nieuwAchternaam").value;
             obj.adres = document.getElementById("nieuwAdres").value;
@@ -62,14 +61,11 @@
             obj.woonplaats = document.getElementById("nieuwWoonplaats").value;
             obj.geboorteDatum = document.getElementById("nieuwGeboorteDatum").value;
             obj.telefoonNummer = document.getElementById("nieuwTelefoonNummer").value;
-            objJSON = JSON.stringify(obj);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4) {
-                    console.log("the details have been changed!")
-                }
+            objJSON = JSON.stringify(obj);  
             }
             xhr.open("PUT", "http://173.212.208.199:1337/api/users/" + localStorage.getItem("userId"), true);
-            xhr.setRequestHeader("Content-type", "application/json", "Authorization", localStorage.getItem("token"));
+            xhr.setRequestHeader("Content-type", "application/json")
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
         }
 
@@ -102,9 +98,9 @@
             </div>
         </div>
     </div>
-    <!-- Modal uren overzicht -->
+    <!-- Modal gegevens aanpassen -->
     <div class="modal fade" id="myModal2" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Bewerk mijn profiel</h3>
