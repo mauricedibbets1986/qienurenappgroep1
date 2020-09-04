@@ -146,7 +146,6 @@
   }
 
   function medewerkerUrenFormulier(userid, formid) {
-    console.log(formid)
     var form = "";
     var xhr = new XMLHttpRequest();
 
@@ -170,7 +169,6 @@
       if (this.readyState == 4) {
         var obj = JSON.parse(this.responseText);
         for (y = 0; y < obj.length; y++) {
-          console.log(obj[y].id);
           if (obj[y].id == formid) {
             var z;
             for (z = 0; z < obj[y].werkdag.length; z++) {
