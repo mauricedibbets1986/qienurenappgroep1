@@ -31,7 +31,7 @@ function emailenMaar() {
             obj.subject = document.getElementById("onderwerpregel").value;
             obj.text = document.getElementById("bodyVanEmail").value;
             var json = JSON.stringify(obj);
-            xhr.open("POST", "http://localhost:8082/mail", true);
+            xhr.open("POST", "http://173.212.208.199:1337/mail", true);
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(json);
@@ -50,7 +50,7 @@ function emailenMaar() {
                     enkeleWerknemer +=
                         `
                                 <div>
-                                <h2>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}</h2>
+                                <b >${databaseContents[x].voornaam} ${databaseContents[x].achternaam}</b>
                                 <b>Adres:</b> ${databaseContents[x].adres}<br>
                                 <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
                                 <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
@@ -84,7 +84,7 @@ function emailenMaar() {
                     enkeleWerknemer +=
                         `
                     <div>
-                    <h2>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}</h2>
+                    <b>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}</b>
                     <b>Adres:</b> ${databaseContents[x].adres}<br>
                     <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
                     <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
@@ -118,7 +118,7 @@ function emailenMaar() {
                     enkeleWerknemer +=
                         `
                     <div>
-                    <h2>${databaseContents[x].voornaam} ${databaseContents[x].achternaam} </h2>
+                    <b>${databaseContents[x].voornaam} ${databaseContents[x].achternaam} </b>
                     <b>Adres:</b> ${databaseContents[x].adres}<br>
                     <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
                     <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
@@ -152,7 +152,7 @@ function emailenMaar() {
                     enkeleWerknemer +=
                         `
                     <div>
-                    <h2>${databaseContents[x].voornaam} ${databaseContents[x].achternaam} </h2>
+                    <b>${databaseContents[x].voornaam} ${databaseContents[x].achternaam} </b>
                     <b>Adres:</b> ${databaseContents[x].adres}<br>
                     <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
                     <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
@@ -404,11 +404,54 @@ function emailenMaar() {
                     </select>
                     <input type="button" class="button3"
                             onclick="updateBedrijftoGebruiker()"
-                            value="Koppelen" data-dismiss="modal"><br>
+                            value="Koppelen" data-dismiss="modal"><br>    
                 </div>
             </div>
         </div>
     </div>
+    
+    <div class="modal fade" id="myModal4" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <h5 class="modal-title">Zoek een gebruiker</h5>
+            <table>
+                    <tr>
+                    <th>
+                    </form><input type="text" placeholder="Zoek op voornaam" name="search" id="voornaam"></th>
+                    <td> <input type=button onclick=zoekGebruikerOpVoornaam() value="Zoek en vindt!"><br>
+                        </td>
+                    </tr>
+                    <div id="demoVoornaam"></div>
+                    <tr>
+                        <th>
+                            <input type="text" placeholder="Zoek op achternaam" name="search" id="achternaam"></th>
+                        <td><input type=button onclick=zoekGebruikerOpAchternaam() value="Zoek en vindt!">
+                      </td>
+                    </tr>
+                    <div id="demoAchternaam"></div>
+                    <tr>
+                        <th>
+                            <input type="text" placeholder="Zoek op woonplaats" name="search" id="woonplaats"></th>
+                        <td> <input type=button onclick=zoekGebruikerOpWoonplaats() value="Zoek en vindt!">
+                           </td>
+                    </tr>
+                    <div id="demoWoonplaats">
+                    <tr>
+                        <th>
+                            <input type="text" placeholder="Zoek op geboortedatum" name="search"
+                                id="geboortedatum"></th>
+                        <td> <input type=button onclick=zoekGebruikerOpGeboortedatum() value="Zoek en vindt!">
+                          </td>
+                    </tr>
+                    <div id="demoGeboortedatum">
+            </table>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Sluiten</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
     <!-- Header -->
     <header>
         <!-- Qien Logo -->
@@ -462,6 +505,8 @@ function emailenMaar() {
                             aanpassen</button>
                         <input type="button" class="button2" data-toggle="modal"
                             data-target="#myModal2" value="Urenfomulieren">
+                        <input type="button" class="button2" data-toggle="modal"
+                            data-target="#myModal4" value="Zoek een gebruiker">
                     </div>
                 </div>
                 <!-- main content -->
@@ -478,35 +523,6 @@ function emailenMaar() {
                             <div id="lijst-medewerkers"></div>
                             <!-- <div id="showGebruikers"></div> -->
                         </section>
-
-                        <h1>Zoek gebruikers</h1>
-                        <form action="/action_page.php">
-                            <input type="text" placeholder="Zoek op voornaam" name="search" id="voornaam">
-                            <input type=button onclick=zoekGebruikerOpVoornaam() value="Zoek en vindt!">
-                            <div id="demoVoornaam"></div>
-                        </form>
-                        <form action="/action_page.php">
-                            <input type="text" placeholder="Zoek op achternaam" name="search" id="achternaam">
-                            <input type=button onclick=zoekGebruikerOpAchternaam() value="Zoek en vindt!">
-                            <div id="demoAchternaam"></div>
-                        </form>
-                        <form action="/action_page.php">
-                            <input type="text" placeholder="Zoek op woonplaats" name="search" id="woonplaats">
-                            <input type=button onclick=zoekGebruikerOpWoonplaats() value="Zoek en vindt!">
-                            <div id="demoWoonplaats"></div>
-                        </form>
-                        <form action="/action_page.php">
-                            <input type="text" placeholder="Zoek op geboortedatum" name="search"
-                                id="geboortedatum">
-                            <input type=button onclick=zoekGebruikerOpGeboortedatum() value="Zoek en vindt!">
-                            <div id="demoGeboortedatum"></div>
-                        </form>
-                        <form>
-                            <input type="text" placeholder="E-mailadres" id="emailNaar">
-                            <input type="text" placeholder="Onderwerpregel" id="onderwerpregel">
-                            <input type="text" placeholder="Bericht" id="bodyVanEmail">
-                            <input type=button onclick=emailenMaar() value="Mail!!">
-                        </form>
                     </div>
                 </div>
             </div>
