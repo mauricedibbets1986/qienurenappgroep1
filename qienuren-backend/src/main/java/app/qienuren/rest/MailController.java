@@ -21,7 +21,7 @@ public class MailController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ADMIN') or hasAnyRole('GEBRUIKER') or hasAnyRole('BEDRIJF')")
+    @PreAuthorize("hasAnyRole('ADMIN') or hasAnyRole('TRAINEE') or hasAnyRole('MEDEWERKER')")
     public void sendMail(@RequestBody Mail mail) {
         mailService.sendEmail(mail);
     }
