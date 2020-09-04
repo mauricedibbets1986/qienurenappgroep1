@@ -60,6 +60,13 @@ public class GebruikerEndpoint {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
+    @GetMapping("/gebruiker/userid/{id}")
+    public Gebruiker getGebruikerByuserId(@PathVariable(value = "id") String id) {
+        System.out.println("endpoint called");
+        return gebruikerService.getGebruikerByuserId(id);
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
     @GetMapping("/gebruiker/rol-id/{id}")
     public Object getGebruikerrolById(@PathVariable(value = "id") long id) {
         return gebruikerService.getGebruikerById(id).getClass();
