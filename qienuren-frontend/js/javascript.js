@@ -6,6 +6,7 @@ function gebruikersnaam() {
       var obj = JSON.parse(this.responseText);
       voornaam = "Hallo " + obj.voornaam + "!";
       naam = obj.voornaam + " " + obj.achternaam;
+      document.getElementById("gebruikersnaam").innerHTML = naam;
       document.getElementById("gebruikersnaam2").innerHTML = naam;
     }
   };
