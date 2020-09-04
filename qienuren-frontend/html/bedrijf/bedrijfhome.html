@@ -51,7 +51,9 @@
                             var uid = obj.lijstGebruikers[x].userId;
                             var ufid = obj.lijstGebruikers[x].urenFormulier[y].id;
 
-                            if (obj.lijstGebruikers[x].urenFormulier[y].statusGoedkeuring != "OPEN" || obj.lijstGebruikers[x].urenFormulier[y].opmerking != "") {
+                            if (obj.lijstGebruikers[x].urenFormulier[y].statusGoedkeuring != "OPEN" 
+                            && obj.lijstGebruikers[x].urenFormulier[y].statusGoedkeuring != "GOEDGEKEURD_ADMIN"
+                            || obj.lijstGebruikers[x].urenFormulier[y].opmerking != "") {
                                 lijst +=
                                     ` <tr>
                                 <td>${nam}</td>

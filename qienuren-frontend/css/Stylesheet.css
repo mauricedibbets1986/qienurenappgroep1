@@ -381,6 +381,13 @@ ul.breadcrumb {
   background-image: url(../image/achtergrond.png)
 }
 
+.enkeleGebruikerTabelLaden{
+  margin: auto;
+  width: 50%;
+  /* border: 3px solid green; */
+  padding: 10px;
+}
+
 .navbar{
   background-color: #C894F8;
   min-height:120px;
@@ -579,6 +586,7 @@ input[type=text], input[type=password] input[type=email], select {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
 
 #nieuwGeboorteDatum{
   width: 199.6px;

@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="../../css/Stylesheet.css" />
   <!-- ../../css/Stylesheet.css -->
 
-  <title>Goedgekeurde formulieren</title>
+  <title>Overzicht medewerkers</title>
 
   <!-- Eigen JavaScript -->
   <script src="../../js/javascript.js"></script>
@@ -81,7 +81,7 @@
                                       <td>${obj.lijstGebruikers[x].telefoonNummer}</td>
                                       <td><button onclick="overzichtFormulieren('${uid}'), 
                                         getNaam('${nam}')" 
-                                        class="button3-sm" data-toggle="modal" data-target="#myModal2">profiel</button></td>
+                                        class="button3-sm" data-toggle="modal" data-target="#myModal3">profiel</button></td>
                                       <td><button onclick="overzichtFormulieren('${uid}'), 
                                         getNaam('${nam}')" 
                                         class="button3-sm" data-toggle="modal" data-target="#myModal1">formulieren</button></td>
@@ -146,7 +146,6 @@
   }
 
   function medewerkerUrenFormulier(userid, formid) {
-    console.log(userid)
     var form = "";
     var xhr = new XMLHttpRequest();
 
@@ -215,7 +214,7 @@
 
 </script>
 
-<body onload=lijstMedewerkers()>
+<body onload=bedrijfsnaam(),lijstMedewerkers()>
     <!-- Modal gebruiker overzicht -->
     <div class="modal fade" id="myModal1" role="dialog">
       <div class="modal-dialog modal-lg">
@@ -232,6 +231,37 @@
       </div>
     </div>
     </div>
+        <!-- Modal gebruiker profiel -->
+        <div class="modal fade" id="myModal3" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div id="showNaam-modal">
+              </div>
+              <div class="modal-body">
+                <div id="gebruikerprofiel"></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Sluiten</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      <!-- Modal uren overzicht -->
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div id="showDatum-modal">
+        </div>
+        <div class="modal-body">
+          <div id="showUrenformulier-modal"></div>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
   <!-- Header -->
   <header>
     <!-- Qien Logo -->

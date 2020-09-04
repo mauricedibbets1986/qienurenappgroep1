@@ -175,6 +175,101 @@ function emailenMaar() {
 
 
         // alle medewerkers zien
+        function lijstMedewerkers() {
+    var lijst = "";
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        var obj = JSON.parse(this.responseText);
+        var x;
+        lijst += `
+                    <table id="overzichttable" class="table-sm overzichtformulieren tableFixHead" cellspacing="0"
+                        width="100%">
+                        <thead>
+                            <tr>
+                            <th class="th-sm">Naam</th>
+                            <th class="th-sm">Profiel</th>
+                            <th></th> 
+                        </tr>
+                        </thead><tbody>
+                        `
+        for (x = 0; x < obj.length; x++) {
+          var volleNaam = obj[x].voornaam + " " + obj[x].achternaam;
+          var userId = obj[x].userId;
+          if (obj[x].voornaam != undefined && obj[x].achternaam != undefined && obj[x].achternaam != "Qien") {
+            lijst +=
+              ` <tr>
+                                      <td>${volleNaam}</td>
+                                      <td><button onclick="persoonsGegevens('${userId}')" 
+                                        class="button3-sm" data-toggle="modal" data-target="#myModal1">bekijken</button></td>
+  
+                                </tr>
+                                `
+          }
+        }
+      }
+      lijst += `</tbody></table>`;
+
+      document.getElementById("lijst-medewerkers").innerHTML = lijst;
+
+    }
+    xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true);
+    xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+    xhr.send();
+  }
+
+  function persoonsGegevens(id) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    var databaseContents = JSON.parse(this.responseText);
+                    var employeeString = "";
+                    employeeString +=
+                        `
+                        <div>
+                            <h5>Gebruiker Profiel</h5>
+                        <table class="enkeleGebruikerTabelLaden">
+                            <tr>
+                            <th>Naam:</th>
+                            <td>${databaseContents.voornaam + " " + databaseContents.achternaam}</td>
+                            </tr>
+                            <tr>
+                            <th>Email: </th>
+                            <td>${databaseContents.email}</td>
+                            </tr>
+                            <tr>
+                            <th>Telefoonnummer: </th>
+                            <td>${databaseContents.telefoonNummer}</td>
+                            </tr>
+                            <tr>
+                            <th>Adres: </th>
+                            <td>${databaseContents.adres + " " + databaseContents.evtToevoeging}</td>
+                            </tr>
+                            <tr>
+                            <th>Postcode: </th>
+                            <td>${databaseContents.postcode}</td>
+                            </tr>
+                            <tr>
+                            <th>Woonplaats: </th>
+                            <td>${databaseContents.woonplaats}</td>
+                            </tr>
+                            <tr>
+                            <th>Opdrachtgever: </th>
+                            <td>${databaseContents.opdrachtgever}</td>
+                            </tr>
+                        </table>
+                        </div>
+                            `
+                    document.getElementById("persoonsgegevens").innerHTML = employeeString;
+                }
+            }
+            xhr.open("GET", "http://173.212.208.199:1337/api/users/" + id, true);
+            console.log("werkt dit?");
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send();
+        }
+
+
         function alleGebruikers() {
             var employeeString = "";
             var xhr = new XMLHttpRequest();
@@ -189,8 +284,9 @@ function emailenMaar() {
                         for (c = 0; c < databaseContents[x].roles.length; c++) {
 
                             if (databaseContents[x].roles[c].name == "ROLE_ADMIN" || databaseContents[x].roles[c].name == "ROLE_BEDRIJF") {
-                                console.log("nah fucking way")
-                            } else if (document.getElementById("filter").value == "all" || databaseContents[x].roles[c].name == document.getElementById("filter").value) {
+                                console.log("admin en bedrijf zijn hier niet geladen")
+                            // }
+                            //  else if (document.getElementById("filter").value == "all" || databaseContents[x].roles[c].name == document.getElementById("filter").value) {
                                 employeeString +=
                                 `
                                 <div>
@@ -244,7 +340,23 @@ function emailenMaar() {
         
 </head>
 
-<body onload="alleGebruikers(), alleGebruikersModal(), alleBedrijvenModal(), loginAuthAdmin()">
+<body onload="lijstMedewerkers(), alleGebruikersModal(), alleBedrijvenModal(), loginAuthAdmin()">
+    <div class="modal fade" id="myModal1" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div id="showNaam-modal">
+                <div id="persoonsgegevens"></div>
+            </div>
+            <div class="modal-body">
+              <div id="alleGebruikers"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Sluiten</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
     <div class="modal fade" id="myModal2" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -355,15 +467,16 @@ function emailenMaar() {
                 <!-- main content -->
                 <div class="col-lg-9">
                     <div class="content">
-                        <form name="type-form">
+                        <!-- <form name="type-form">
                             <select name="filter-soort" onclick=alleGebruikers() id="filter">
                                 <option value="all">--filter--</option>
                                 <option value="ROLE_MEDEWERKER">medewerker</option>
                                 <option value="ROLE_TRAINEE">trainee</option>
                             </select>
-                        </form>
+                        </form> -->
                         <section>
-                            <div id="showGebruikers"></div>
+                            <div id="lijst-medewerkers"></div>
+                            <!-- <div id="showGebruikers"></div> -->
                         </section>
 
                         <h1>Zoek gebruikers</h1>
