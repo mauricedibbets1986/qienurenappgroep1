@@ -38,8 +38,8 @@
                             <h4 class="alignleft">Opdrachtgever:</h4><p class="alignright">${databaseContents.opdrachtgever}</p><div style="clear: both;"></div>
                             </div>
                             `
-                    var emailplaceholder = `<label>E-mailadres</label><input type=text value="${databaseContents.email}" disabled>`   
-                         
+                    var emailplaceholder = `<label>E-mailadres</label><input type=text value="${databaseContents.email}" disabled>`
+
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
                     document.getElementById("emailplaceholder").innerHTML = emailplaceholder;
                 }
@@ -53,15 +53,15 @@
             var xhr = new XMLHttpRequest();
             var obj = {};
             xhr.onreadystatechange = function () {
-            obj.voornaam = document.getElementById("nieuwVoornaam").value;
-            obj.achternaam = document.getElementById("nieuwAchternaam").value;
-            obj.adres = document.getElementById("nieuwAdres").value;
-            obj.evtToevoeging = document.getElementById("nieuwEvtToevoeging").value;
-            obj.postcode = document.getElementById("nieuwPostcode").value;
-            obj.woonplaats = document.getElementById("nieuwWoonplaats").value;
-            obj.geboorteDatum = document.getElementById("nieuwGeboorteDatum").value;
-            obj.telefoonNummer = document.getElementById("nieuwTelefoonNummer").value;
-            objJSON = JSON.stringify(obj);  
+                obj.voornaam = document.getElementById("nieuwVoornaam").value;
+                obj.achternaam = document.getElementById("nieuwAchternaam").value;
+                obj.adres = document.getElementById("nieuwAdres").value;
+                obj.evtToevoeging = document.getElementById("nieuwEvtToevoeging").value;
+                obj.postcode = document.getElementById("nieuwPostcode").value;
+                obj.woonplaats = document.getElementById("nieuwWoonplaats").value;
+                obj.geboorteDatum = document.getElementById("nieuwGeboorteDatum").value;
+                obj.telefoonNummer = document.getElementById("nieuwTelefoonNummer").value;
+                objJSON = JSON.stringify(obj);
             }
             xhr.open("PUT", "http://173.212.208.199:1337/api/users/" + localStorage.getItem("userId"), true);
             xhr.setRequestHeader("Content-type", "application/json")
@@ -116,7 +116,7 @@
                         <label>Geboortedatum</label><input id="nieuwGeboorteDatum" type="date"><br>
                         <label>Telefoonnummer</label><input type=text id=nieuwTelefoonNummer><br>
                         <div id="emailplaceholder"></div><br>
-                        
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default button3" onclick="gegevensAanpassen()"
