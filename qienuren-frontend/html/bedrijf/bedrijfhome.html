@@ -152,7 +152,7 @@
             console.log(storedvalue);
             var xhr = new XMLHttpRequest();
             document.getElementById("modal-bericht").innerHTML = "Formulier goedgekeurd!";
-            xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/admin/" + storedvalue + "/setstatus-goedkeuring-admin", true);
+            xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/bedrijf/" + storedvalue + "/setstatus-goedkeuring-bedrijf", true);
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
             lijstMedewerkers();
@@ -311,7 +311,7 @@
                 <!-- sidebar -->
                 <div class="col-sm-3">
                     <div class="sidebar">
-                        <button href="" class="button2">Overzicht Trainee's</button>
+                        <button onclick="window.location.href='bedrijfmedewerkeroverzicht.html'" class="button2">Overzicht medewerkers</button>
                         <!-- <button href="" class="button2" onclick="generateTablelocked()">Openstaande goedkeuringen</button> -->
                     </div>
                 </div>
