@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="../../css/Stylesheet.css" />
   <!-- ../../css/Stylesheet.css -->
 
-  <title>Admin check urenformulier</title>
+  <title>Openstaande Uren Formulieren</title>
 
   <!-- Eigen JavaScript -->
   <script src="../../js/javascript.js"></script>
@@ -33,6 +33,21 @@
 </head>
 
 <script>
+
+  //disable afkeur knop wanneer textarea leeg is
+  $(document).ready(function () {
+    $("#afkeur-knop").attr('disabled', true);
+
+    $('input[type="button"],textarea').on('keyup', function () {
+      var textarea_value = $("#afkeur-text").val();
+      if (textarea_value != '') {
+        $("#afkeur-knop").attr('disabled', false);
+      } else {
+        $("#afkeur-knop").attr('disabled', true);
+      }
+    });
+  });
+
   var storedvalue = "";
 
   function lijstMedewerkers() {
@@ -52,6 +67,7 @@
                             <th class="th-sm">Jaar</th>
                             <th class="th-sm">Totaal Uren</th>
                             <th class="th-sm">Status</th>
+                            <th class="th-sm">Opmerking</th>
                             <th></th> 
                         </tr>
                         </thead><tbody>
@@ -61,7 +77,7 @@
           var uid = obj[x].id;
           if (obj[x].urenFormulier != undefined) {
             for (y = 0; y < obj[x].urenFormulier.length; y++) {
-              if (obj[x].urenFormulier[y].statusGoedkeuring != "OPEN") {
+              if (obj[x].urenFormulier[y].statusGoedkeuring != "OPEN" && obj[x].urenFormulier[y].statusGoedkeuring != "GOEDGEKEURD_ADMIN" || obj[x].urenFormulier[y].opmerking != "") {
                 lijst +=
                   ` <tr>
                                       <td>${nam}</td>
@@ -69,6 +85,7 @@
                                       <td>${obj[x].urenFormulier[y].jaar}</td>
                                       <td>${obj[x].urenFormulier[y].totaalGewerkteUren}</td>
                                       <td>${obj[x].urenFormulier[y].statusGoedkeuring}</td>
+                                      <td>${obj[x].urenFormulier[y].opmerking}</td>
                                       <td><button onclick="medewerkerUrenFormulier('${uid}','${obj[x].urenFormulier[y].id}'), 
                                         getNaamEnDatum('${nam}','${obj[x].urenFormulier[y].maand}','${obj[x].urenFormulier[y].jaar}'),
                                         saveFormulierId('${obj[x].urenFormulier[y].id}')" 
@@ -152,16 +169,21 @@
   function formulierGoedkeuren() {
     console.log(storedvalue);
     var xhr = new XMLHttpRequest();
+    document.getElementById("modal-bericht").innerHTML = "Formulier goedgekeurd!";
     xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/admin/" + storedvalue + "/setstatus-goedkeuring-admin", true);
     xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
     xhr.send();
+    GoedkeurOpmerking();
   }
 
   function formulierAfkeuren() {
+    console.log(storedvalue);
     var xhr = new XMLHttpRequest();
+    document.getElementById("modal-bericht").innerHTML = "Formulier afgekeurd.";
     xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/" + storedvalue + "/setstatus-afkeuring", true);
     xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
     xhr.send();
+    afkeurOpmerking();
   }
 
   function afkeurOpmerking() {
@@ -173,6 +195,19 @@
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
     xhr.send(objJSON);
+    lijstMedewerkers();
+  }
+
+  function GoedkeurOpmerking() {
+    var xhr = new XMLHttpRequest();
+    var obj = {};
+    obj.opmerking = "";
+    objJSON = JSON.stringify(obj);
+    xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/afkeur-opmerking/" + storedvalue, true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+    xhr.send(objJSON);
+    lijstMedewerkers();
   }
 
 </script>
@@ -187,7 +222,9 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
-            <p><b>Formulier goedgekeurd!</b></p>
+            <p><b>
+                <div id="modal-bericht"></div>
+              </b></p>
           </div>
         </div>
       </div>
@@ -215,9 +252,9 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default button2" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default button2" data-dismiss="modal">Annuleren</button>
           <button type="button" class="btn btn-default button1" id="afkeur-knop" data-dismiss="modal"
-            data-target="#myModal3" onclick="afkeurOpmerking(),formulierAfkeuren()">Afkeuren</button>
+            data-toggle="modal" data-target="#myModal" onclick="formulierAfkeuren()">Afkeuren</button>
         </div>
       </div>
     </div>
@@ -234,10 +271,9 @@
         <div class="modal-footer">
 
           <button type="button" class="btn btn-default button3" id="indien-knop" data-dismiss="modal"
-            data-toggle="modal" data-target="#myModal"
-            onclick="formulierGoedkeuren(), lijstMedewerkers()">Goedkeuren</button>
-          <button type="button" class="btn btn-default button1" id="afkeur-knop" data-dismiss="modal"
-            data-toggle="modal" data-target="#myModal3" onclick="">Afkeuren</button>
+            data-toggle="modal" data-target="#myModal" onclick="formulierGoedkeuren()">Goedkeuren</button>
+          <button type="button" class="btn btn-default button1" id="" data-dismiss="modal" data-toggle="modal"
+            data-target="#myModal3" onclick="">Afkeuren</button>
           <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Annuleren</button>
         </div>
       </div>
@@ -277,7 +313,7 @@
     <div>
       <ul class="breadcrumb">
         <li><a href="admin.html">Admin Home</a></li>
-        <li>Uren Checken</li>
+        <li>Openstaande Uren Formulieren</li>
       </ul>
     </div>
   </header>
@@ -290,7 +326,7 @@
         <!-- sidebar -->
         <div class="col-sm-3">
           <div class="sidebar">
-            <button class="button2">Uren Invoeren</button>
+            <button class="button2" onclick="window.location.href='urenformuliergoedgekeurd.html'">Goedgekeurd</button>
             <!-- Trigger the modal with a button -->
             <br>
           </div>
