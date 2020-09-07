@@ -122,6 +122,7 @@ public class UrenFormulier {
     }
 
     public double getZiekteUren() {
+        this.ziekteUren = 0;
         for (Werkdag wd : this.werkdag){
             this.ziekteUren += wd.getZiekteDag();
         }
