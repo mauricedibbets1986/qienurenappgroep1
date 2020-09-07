@@ -404,11 +404,17 @@ ul.breadcrumb {
   /*toevoegingen*/
 
 #achtergrondbeeld{
-  background-image: url(../image/achtergrond.png)
+  background-image: url(../image/achtergrond.png);
+  height: 100%;
+}
+
+#idVanMain{
+  height: 1000px;
 }
 
 .body{
   background-color: #FFFFFF;
+  height: 1080px;
 }
 
 .enkeleGebruikerTabelLaden{
@@ -468,11 +474,15 @@ ul.breadcrumb {
 }
 
 .footer-container{
-  background-color: #8D8D8D;
-  margin-top: 20px;
-  height: 120px;
+  background-color: #8D8D8D; 
+  /* margin-top: 20px; */
+  height: 72px;
   text-align: left;
-  padding: 48px;
+  padding: 24px;
+  position: fixed;   
+  left: 0;  
+  bottom: 0;   
+  width: 100%;
 }
 
 .sidebar{
@@ -499,6 +509,7 @@ ul.breadcrumb {
   border-radius: 10px;
   border-style: solid;
   border-width: thin;
+  margin-top: 100px;
 }
 
 
@@ -627,11 +638,14 @@ input[type=text], input[type=password], input[type=email], input[type=date], sel
   transform: translate(-50%, -50%);
 }
 
+#nieuwGeboorteDatum{
+.modal-edit body{
+}
+
 .modal-edit select{
   min-width:200px;
   margin: 0px 0;
 }
-
 
 /* #nieuwGeboorteDatum{
   width: 199.6px;
