@@ -87,13 +87,19 @@ public class UrenFormulierService {
             try {
                 werkdagService.enoughWorkedthisMonth(getTotaalGewerkteUren(urenformulierId));            }
             catch(OnderwerkException onderwerkException) {
+                urenFormulierRepository.save(urenFormulierRepository.findById(urenformulierId).get());
                 System.out.println("je hebt te weinig uren ingevuld deze maand");
                 return "onderwerk";
             } catch (OverwerkException overwerkexception){
+                urenFormulierRepository.save(urenFormulierRepository.findById(urenformulierId).get());
                 System.out.println("Je hebt teveel uren ingevuld deze maand!");
                 return "overwerk";
+            } catch (Exception e) {
+                urenFormulierRepository.save(urenFormulierRepository.findById(urenformulierId).get());
+                return "random exception";
             }
             getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
+            urenFormulierRepository.save(urenFormulierRepository.findById(urenformulierId).get());
             return "gelukt";
         }
 
