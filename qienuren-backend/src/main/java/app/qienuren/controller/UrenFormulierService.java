@@ -85,8 +85,8 @@ public class UrenFormulierService {
         // door de trainee is ingediend ter goedkeuring
         if (welkeGoedkeurder.equals("GEBRUIKER")) {
             try {
-                werkdagService.enoughWorkedthisMonth(getTotaalGewerkteUren(urenformulierId));            }
-            catch(OnderwerkException onderwerkException) {
+                enoughWorkedthisMonth(getTotaalGewerkteUren(urenformulierId));
+            } catch(OnderwerkException onderwerkException) {
                 urenFormulierRepository.save(urenFormulierRepository.findById(urenformulierId).get());
                 System.out.println("je hebt te weinig uren ingevuld deze maand");
                 return "onderwerk";
@@ -140,4 +140,15 @@ public class UrenFormulierService {
             }
         }
     }
+
+    public void enoughWorkedthisMonth(double totalHoursWorked) throws OnderwerkException {
+        if (totalHoursWorked <= 139){
+            throw new OnderwerkException("Je hebt te weinig uren ingevuld deze maand");
+        } else if (totalHoursWorked >= 220){
+            throw new OverwerkException("Je hebt teveel gewerkt, take a break");
+        } else {
+            return;
+        }
+    }
+    // try catch blok maken als deze exception getrowt wordt. if false krijgt die een bericht terug. in classe urenformulierservice regel 80..
 }
