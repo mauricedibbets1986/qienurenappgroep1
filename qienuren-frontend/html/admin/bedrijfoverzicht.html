@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+
 <!doctype html>
 <html lang="nl">
 
@@ -16,69 +15,103 @@
     <link rel="stylesheet" href="../../css/Stylesheet.css" />
     <!-- ../../css/Stylesheet.css -->
 
-    <title>Bedrijven overzicht</title>
+    <title>Overzicht van medewerkers/trainees</title>
 
     <!-- Eigen JavaScript -->
     <script src="../../js/javascript.js"></script>
+<script>
+        function lijstBedrijven() {
+    var lijst = "";
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        var obj = JSON.parse(this.responseText);
+        var x;
+        lijst += `
+                    <table id="overzichttable" class="table-sm overzichtformulieren tableFixHead" cellspacing="0"
+                        width="100%">
+                        <thead>
+                            <tr>
+                            <th class="th-sm">Bedrijven</th>
+                            <th class="th-sm">Profiel</th>
+                            <th></th> 
+                        </tr>
+                        </thead><tbody>
+                        `
+        for (x = 0; x < obj.length; x++) {
+          var bedrijfsNaam = `<i>Naam: </i>` + `<strong>${obj[x].bedrijfsNaam}</strong>` + "<br>    " + `<i>Contactpersoon: </i>` + `<strong>${obj[x].contactPersoon}</strong>`;
+          var userId = obj[x].userId;
+          if (obj[x].bedrijfsNaam != undefined && obj[x].contactPersoon != undefined && obj[x].voornaam != "Admin") {
+            lijst +=
+              ` <tr>
+                                      <td>${bedrijfsNaam}</td>
+                                      <td><button onclick="bedrijfsGegevens('${userId}')" 
+                                        class="button3-sm" data-toggle="modal" data-target="#myModal1">bekijken</button></td>
+  
+                                </tr>
+                                `
+          }
+        }
+      }
+      lijst += `</tbody></table>`;
 
-    <script>
-        // alle medewerkers zien
-        function alleBedrijven() {
-            var bedrijfString = "";
+      document.getElementById("lijst-bedrijven").innerHTML = lijst;
+
+    }
+    xhr.open("GET", "http://173.212.208.199:1337/api/bedrijf/all", true);
+    xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+    xhr.send();
+  }
+
+  function bedrijfsGegevens(id) {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     var databaseContents = JSON.parse(this.responseText);
-                    var lijstGebruikers = JSON.parse(this.responseText);
-                    var x;
-
-                    for (x = 0; x < databaseContents.length; x++) {
-
-                        bedrijfString +=
+                    var employeeString = "";
+                    employeeString +=
+                        `
+                        <div>
+                            <h5>Profiel bedrijf</h5>
+                        <table class="enkeleGebruikerTabelLaden">
+                            <tr>
+                            <th>Naam Bedrijf: </th>
+                            <td>${databaseContents.bedrijfsNaam}</td>
+                            </tr>
+                            <tr>
+                            <th>Contactpersoon: </th>
+                            <td>${databaseContents.contactPersoon}</td>
+                            </tr>
+                            <tr>
+                            <th>Email: </th>
+                            <td>${databaseContents.email}</td>
+                            </tr>
+                            <tr>
+                            <th>Telefoonnummer: </th>
+                            <td>${databaseContents.telefoonNummer}</td>
+                            </tr>
+                            <tr>
+                            <th>Adres: </th>
+                            <td>${databaseContents.adres + " " + databaseContents.evtToevoeging}</td>
+                            </tr>
+                            <tr>
+                            <th>Postcode: </th>
+                            <td>${databaseContents.postcode}</td>
+                            </tr>
+                            <tr>
+                            <th>Woonplaats: </th>
+                            <td>${databaseContents.woonplaats}</td>
+                            </tr>
+                        </table>
+                        </div>
                             `
-                            <div>
-                            <h2> ${databaseContents[x].bedrijfsNaam}</h2>
-                            <b>Contacht Persoon:</b> ${databaseContents[x].contactPersoon}<br>
-                            <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
-                            <b>E-mailadres:</b> ${databaseContents[x].email}<br>
-                            <b>Adres:</b> ${databaseContents[x].adres}<br>
-                            <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
-                            <b>Postcode:</b> ${databaseContents[x].postcode}<br>
-                            <b>Plaats:</b> ${databaseContents[x].plaats}<br>
-                            <b>Trainees werkzaam: 
-                            `
-                        for (var y = 0; y < databaseContents[x].lijstGebruikers.length; y++) {
-                            bedrijfString +=
-                                `
-                             ${databaseContents[x].lijstGebruikers[y].voornaam}`
-                        }
-                        bedrijfString +=
-                            `
-                            </p><p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p>
-                            <hr>
-                            </div>
-                            `
-                    }
+                    document.getElementById("persoonsgegevens").innerHTML = employeeString;
                 }
-
-                document.getElementById("bedrijvenOverzicht").innerHTML = bedrijfString;
             }
-            xhr.open("GET", "http://173.212.208.199:1337/api/bedrijf/all", true)
+            xhr.open("GET", "http://173.212.208.199:1337/api/users/" + id, true);
+            console.log("werkt dit?");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
-        }
-
-
-        function updateBedrijftoGebruiker() {
-            var obj = {};
-            obj.bid = document.getElementById("bid").value;
-            obj.gid = document.getElementById("gid").value;
-            objJSON = JSON.stringify(obj);
-            var xhr = new XMLHttpRequest();
-            xhr.open("PUT", "http://173.212.208.199:1337/api/bedrijf/" + obj.bid + "/" + obj.gid, true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-            xhr.send(objJSON);
         }
         
     </script>
@@ -92,9 +125,27 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+        
 </head>
 
-<body onload= alleBedrijven(),loginAuthAdmin()>
+<body onload="lijstBedrijven(), alleGebruikersModal(), alleBedrijvenModal(), loginAuthAdmin()">
+    <div class="modal fade" id="myModal1" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div id="showNaam-modal">
+                <div id="persoonsgegevens"></div>
+            </div>
+            <div class="modal-body">
+              <div id="alleGebruikers"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Sluiten</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
     <!-- Header -->
     <header>
         <!-- Qien Logo -->
@@ -144,33 +195,23 @@
                 <!-- sidebar -->
                 <div class="col-sm-3">
                     <div class="sidebar">
-                        <button class="button2" onclick="window.location.href='bedrijfnieuw.html'">Nieuwe
-                            opdrachtgevers</button>
-                        <button class="button2" onclick="window.location.href='bedrijfaanpassen.html'">Opdrachtgever
+                        <button class="button2" onclick="window.location.href='bedrijfnieuw.html'">Nieuw
+                            bedrijf</button>
+                        <button class="button2" onclick="window.location.href='bedrijfaanpassen.html'">Bedrijf
                             aanpassen</button>
                     </div>
                 </div>
-                <!-- Bedrijf lijst -->
+                <!-- main content -->
                 <div class="col-lg-9">
                     <div class="content">
-                        <div>
-                            <div id="bedrijvenOverzicht"></div>
-                        </div>
-                        <div class="modal fade" id="myModal2" role="dialog">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h3 class="modal-title">Bewerk mijn profiel</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <section>
+                            <div id="lijst-bedrijven"></div>
+                        </section>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-
 
     <!-- Footer -->
     <footer class="page-footer font-small footer-page">
@@ -201,6 +242,7 @@
             </div>
         </div>
     </footer>
-</body>
 
+
+</body>
 </html>

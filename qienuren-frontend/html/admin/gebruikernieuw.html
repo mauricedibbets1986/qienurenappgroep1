@@ -19,6 +19,16 @@
     <script>
 
         function functionPicker() {
+            var voornaam = document.getElementById("voornaam").value;
+            var achternaam = document.getElementById("achternaam").value;
+            var email = document.getElementById("email").value;
+            var wachtwoord = document.getElementById("wachtwoord").value;
+
+            if(voornaam == "" || achternaam == "" || email == "" || wachtwoord == ""){
+                document.getElementById("modal-text").innerHTML = "Niet alle verplichte velden zijn ingevuld!";
+            $('#myModal').modal('show');
+            }
+            else{            
             var form = document.forms["type-form"];
             var typ = form["soort"].value;
             if (typ == "MEDEWERKER") {
@@ -28,6 +38,8 @@
             } else if (typ == "TRAINEE") {
                 traineeToevoegen();
             }
+            }
+
         }
 
         function traineeToevoegen() {
@@ -47,14 +59,13 @@
             obj.rol = typ;
             var objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                console.log("answer in console");
-            }
-            xhr.open("POST", "http://173.212.208.199:1337/api/admin/users/addTrainee", true);
+             xhr.open("POST", "http://173.212.208.199:1337/api/admin/users/addTrainee", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
-            alert("Nieuwe " + typ.toLowerCase() + " aangemaakt")
+            document.getElementById("modal-text").innerHTML = "Trainee "+obj.voornaam +" "+ obj.achternaam+ " aangemaakt";
+            $('#myModal').modal('show');
+                       setTimeout(paginaTerug,2000);
         }
 
         function medewerkerToevoegen() {
@@ -82,60 +93,11 @@
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
-            alert("Nieuwe " + typ.toLowerCase() + " aangemaakt")
+            document.getElementById("modal-text").innerHTML = "Medewerker "+obj.voornaam +" "+ obj.achternaam+ " aangemaakt";
+            $('#myModal').modal('show');
+            setTimeout(paginaTerug,2000);
         }
-        function bedrijfToevoegen() {
-            var obj = {};
-            var form = document.forms["type-form"];
-            var typ = form["soort"].value;
-            obj.voornaam = document.getElementById("voornaam").value;
-            obj.achternaam = document.getElementById("achternaam").value;
-            obj.adres = document.getElementById("adres").value;
-            obj.evtToevoeging = document.getElementById("evtToevoeging").value;
-            obj.postcode = document.getElementById("postcode").value;
-            obj.woonplaats = document.getElementById("woonplaats").value;
-            obj.geboorteDatum = document.getElementById("kalenderGeboortedatum").value;
-            obj.telefoonNummer = document.getElementById("telefoonNummer").value;
-            obj.email = document.getElementById("email").value;
-            obj.password = document.getElementById("wachtwoord").value;
-            obj.rol = typ;
-            objJSON = JSON.stringify(obj);
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                console.log("answer in console");
-            }
-            xhr.open("POST", "http://173.212.208.199:1337/api/admin/users/addBedrijf", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-            xhr.send(objJSON);
-            alert("Nieuwe " + typ.toLowerCase() + " aangemaakt")
-        }
-        // function bedrijfToevoegen() {
-        //     var obj = {};
-        //     var form = document.forms["type-form"];
-        //     var typ = form["soort"].value;
-        //     obj.voornaam = document.getElementById("voornaam").value;
-        //     obj.achternaam = document.getElementById("achternaam").value;
-        //     obj.adres = document.getElementById("adres").value;
-        //     obj.evtToevoeging = document.getElementById("evtToevoeging").value;
-        //     obj.postcode = document.getElementById("postcode").value;
-        //     obj.woonplaats = document.getElementById("woonplaats").value;
-        //     obj.geboorteDatum = document.getElementById("geboorteDatum").value;
-        //     obj.telefoonNummer = document.getElementById("telefoonNummer").value;
-        //     obj.email = document.getElementById("emailadres").value;
-        //     obj.password = document.getElementById("password").value;
-        //     obj.rol = typ;
-        //     objJSON = JSON.stringify(obj);
-        //     var xhr = new XMLHttpRequest();
-        //     xhr.onreadystatechange = function () {
-        //         console.log("answer in console");
-        //     }
-        //     xhr.open("POST", "http://173.212.208.199:1337/api/admin/users/addBedrijf", true);
-        //     xhr.setRequestHeader("Content-Type", "application/json");
-        //     xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-        //     xhr.send(objJSON);
-        //     alert("Nieuwe " + typ.toLowerCase() + " aangemaakt")
-        // }
+
         function administratorToevoegen() {
             var obj = {};
             var form = document.forms["type-form"];
@@ -159,8 +121,13 @@
             xhr.open("POST", "http://173.212.208.199:1337/api/admin/users/addAdmin", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-            xhr.send(objJSON);
-            alert("Nieuwe " + typ.toLowerCase() + " aangemaakt")
+            document.getElementById("modal-text").innerHTML = "Admin "+obj.voornaam +" "+ obj.achternaam+ " aangemaakt";
+            $('#myModal').modal('show');
+            setTimeout(paginaTerug,2000);
+        }
+
+        function paginaTerug(){
+            window.location.replace("gebruikeroverzicht.html");
         }
 
     </script>
@@ -177,6 +144,23 @@
 </head>
 
 <body onload="loginAuthAdmin()">
+      <!-- Modal bevestiging -->
+  <div>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p><b>
+                <div id=modal-text></div>
+              </b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
     <!-- Header -->
     <header>
         <!-- Qien Logo -->
@@ -248,22 +232,19 @@
                                 <br>
                                 <br>
                                 <div class="inputData">
-                                    <label>Voornaam*</label><input type="text" id=voornaam><br>
-                                    <label>Achternaam*</label><input type="text" id=achternaam><br>
+                                    <label>Voornaam*</label><input type="text" id=voornaam required><br>
+                                    <label>Achternaam*</label><input type="text" id=achternaam required><br>
                                     <label>Adres</label><input type="text" id=adres><br>
                                     <label>Evt. toevoeging</label><input type="text" id=evtToevoeging><br>
                                     <label>Postcode</label><input type="text" id=postcode><br>
                                     <label>Woonplaats</label><input type="text" id=woonplaats><br>
                                     <label>Geboortedatum</label><input id="kalenderGeboortedatum" type="date"><br>
                                     <label>Telefoonnummer</label><input type=text id=telefoonNummer><br>
-                                    <label>E-mailadres*</label><input type=text id=email><br>
-                                    <label>Wachtwoord*</label><input type=password id=wachtwoord> <br>
+                                    <label>E-mailadres*</label><input type=text id=email required><br>
+                                    <label>Wachtwoord*</label><input type=password id=wachtwoord required> <br>
                                 </div>
-
-                                <input id="buttonGebruikerAanmaken" type="button"
-                                    onclick="functionPicker()"
-                                    value="Gebruiker aanmaken"><br>
-
+                                <br>
+                                <input type=button id="buttonGebruikerAanmaken" onclick="functionPicker()" value="Aanmaken"><br>
                             </form>
                         </div>
                     </div>

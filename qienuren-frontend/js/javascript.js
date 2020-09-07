@@ -60,6 +60,20 @@ const deleteGebruiker = () => {
   xhr.send();
 };
 
+const deleteBedrijf = () => {
+  let xhr = new XMLHttpRequest();
+  console.log(document.getElementById("selectBedrijf").value);
+  xhr.open(
+    "DELETE",
+    "http://173.212.208.199:1337/api/bedrijf/delete/" +
+      document.getElementById("selectBedrijf").value,
+    true
+  );
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+  xhr.send();
+};
+
 const loginAuthAdmin = () => {
   if (localStorage.getItem("userRole") != "[ROLE_ADMIN]")
     window.location.href = "../inlogscherm.html";
@@ -104,6 +118,8 @@ const GebruikersVerwijderenModal = () => {
   xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true);
   xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
   xhr.send();
+  document.getElementById("modal-text").innerHTML = databaseContents[x].voornaam +" "+ databaseContents[x].achternaam+ " verwijdert";
+  $('#myModal-aanpassen').modal('show');
 };
 
 const alleGebruikersModal = () => {
@@ -156,5 +172,3 @@ const updateBedrijftoGebruiker = () => {
   xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
   xhr.send();
 };
-
-

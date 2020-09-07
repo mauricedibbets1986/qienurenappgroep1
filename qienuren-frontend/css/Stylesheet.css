@@ -1,5 +1,6 @@
 /* titillium-web-regular - latin */
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap%27');
 /*@font-face {
         /* src: url('../fonts/titillium-web-v8-latin-regular.eot'); /* IE9 Compat Modes */
         /*src: local('Titillium Web Regular'), local('TitilliumWeb-Regular'),
@@ -338,7 +339,10 @@ ul.breadcrumb {
       max-height: 35px;
       width: auto;
       max-width: 500px;
-      padding: 15px;
+      padding-top: 7px;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 10px;
       margin: 20px;
       background-color: green;
       color: #ffffff;
@@ -353,7 +357,10 @@ ul.breadcrumb {
     max-height: 35px;
     width: auto;
     max-width: 500px;
-    padding: 15px;
+    padding-top: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
     margin: 20px;
     background-color: red;
     color: #ffffff;
@@ -384,6 +391,10 @@ ul.breadcrumb {
   background-image: url(../image/achtergrond.png)
 }
 
+.body{
+  background-color: #FFFFFF;
+}
+
 .enkeleGebruikerTabelLaden{
   margin: auto;
   width: 50%;
@@ -399,7 +410,7 @@ ul.breadcrumb {
 
 .container{
   margin-top: 20px;
-  
+  min-height: 100%;
 }
 
 .content{
@@ -438,6 +449,14 @@ ul.breadcrumb {
   background-size: 100%;
   background-color: #8D8D8D; 
   color:#ffffff;
+}
+
+.footer-container{
+  background-color: #8D8D8D; 
+  margin-top: 20px;
+  height: 120px;
+  text-align: left;
+  padding: 48px;
 }
 
 .sidebar{
@@ -538,14 +557,18 @@ color: #fff;
   display: block;
 }
 
-input[type=text], input[type=password] input[type=email], select {
-
+input[type=text], input[type=password], input[type=email],input[type=date], select {
+  min-width:200px;
   padding: 4px 20px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
+  background-color:#fff;
   box-sizing: border-box;
+}
+input[type=submit]:focus{
+outline: none;
 }
 
 .alignleft {
@@ -568,16 +591,16 @@ input[type=text], input[type=password] input[type=email], select {
   }
 }
 
-.inputData input{
+.inputData input,select{
   margin-left: 9em;
   margin-top: 0;
 }
 
-#kalenderGeboortedatum{
+/* #kalenderGeboortedatum{
   width: 199.6px;
   height: 34px;
   margin-bottom: 8px;
-}
+} */
 
 .inputData label{
   position: absolute;
@@ -591,10 +614,19 @@ input[type=text], input[type=password] input[type=email], select {
   transform: translate(-50%, -50%);
 }
 
+.modal-edit body{
 
-#nieuwGeboorteDatum{
+}
+
+.modal-edit select{
+  min-width:200px;
+  margin: 0px 0;
+}
+
+
+/* #nieuwGeboorteDatum{
   width: 199.6px;
   height: 34px;
   margin-bottom: 8px;
   margin-top: 12px;
-}
+} */
