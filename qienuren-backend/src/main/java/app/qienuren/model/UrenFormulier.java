@@ -81,6 +81,15 @@ public class UrenFormulier {
     }
 
     public double getTotaalGewerkteUren() {
+        this.totaalGewerkteUren = 0.0;
+        for(Werkdag wd : this.werkdag){
+            this.totaalGewerkteUren += wd.getOpdrachtUren();
+            this.totaalGewerkteUren += wd.getOverigeUren();
+            this.totaalGewerkteUren += wd.getTrainingsUren();
+            this.totaalGewerkteUren += wd.getVerlofUren();
+            this.totaalGewerkteUren += wd.getZiekteDag();
+            this.totaalGewerkteUren += wd.getOverwerkUren();
+        }
         return totaalGewerkteUren;
     }
 
@@ -98,24 +107,7 @@ public class UrenFormulier {
 
     public void addWerkdayToArray(Werkdag wd) throws Exception {
         werkdag.add(wd);
-        /*calculateTotaalGewerkt(wd);*/
         wd.setUrenformulier(this);
-    }
-
-    public void calculateTotaalGewerkt(Werkdag wd) throws Exception {
-        totaalGewerkteUren += wd.getUren();
-        checkOverUren();
-    }
-
-    private void checkOverUren() throws Exception {
-        if (totaalGewerkteUren >= 220) {
-            throw new OverwerkException("HO STOP JE HEBT TEVEEL GEWERKT DEZE MAAND");
-        }
-        if (totaalGewerkteUren <= 136) {
-            throw new OnderwerkException("HO NIET STOPPEN, DOORWERKEN!");
-        } else {
-            System.out.println("Uren kloppen");
-        }
     }
 
     public StatusGoedkeuring getStatusGoedkeuring() {
