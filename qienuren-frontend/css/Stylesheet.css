@@ -545,7 +545,7 @@ color: #fff;
   display: block;
 }
 
-input[type=text], input[type=password] input[type=email], select {
+input[type=text], input[type=password], input[type=email], select {
 
   padding: 4px 20px;
   margin: 8px 0;
@@ -553,6 +553,9 @@ input[type=text], input[type=password] input[type=email], select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+input[type=submit]:focus{
+outline: none;
 }
 
 .alignleft {
