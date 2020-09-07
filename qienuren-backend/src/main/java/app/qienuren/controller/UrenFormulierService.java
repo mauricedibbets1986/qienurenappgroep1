@@ -1,7 +1,10 @@
 package app.qienuren.controller;
 
 import app.qienuren.exceptions.OnderwerkException;
+import app.qienuren.exceptions.OverwerkException;
 import app.qienuren.model.*;
+import com.sun.xml.bind.v2.runtime.output.SAXOutput;
+import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,7 +81,7 @@ public class UrenFormulierService {
     return 0.0;
     }
 
-    public UrenFormulier setStatusUrenFormulier(long urenformulierId, String welkeGoedkeurder){
+    public Object setStatusUrenFormulier(long urenformulierId, String welkeGoedkeurder){
 
         //deze methode zet de statusGoedkeuring van OPEN naar INGEDIEND_TRAINEE nadat deze
         // door de trainee is ingediend ter goedkeuring
@@ -87,6 +90,10 @@ public class UrenFormulierService {
                 werkdagService.enoughWorkedthisMonth(getTotaalGewerkteUren(urenformulierId));            }
             catch(OnderwerkException onderwerkException) {
                 System.out.println("je hebt te weinig uren ingevuld deze maand");
+                return "onderwerk";
+            } catch (OverwerkException overwerkexception){
+                System.out.println("Je hebt teveel uren ingevuld deze maand!");
+                return "overwerk";
             }
             getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
         }

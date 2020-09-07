@@ -59,6 +59,9 @@ import javax.transaction.Transactional;
         boolean enoughWorked = false;
         if (totalHoursWorked >= 139){
             enoughWorked = true;
+        } else if (totalHoursWorked >= 220){
+            enoughWorked = false;
+            throw new OverwerkException("Je hebt teveel gewerkt, take a break");
         } else {
             enoughWorked = false;
             throw new OnderwerkException("Je hebt te weinig uren ingevuld deze maand");
