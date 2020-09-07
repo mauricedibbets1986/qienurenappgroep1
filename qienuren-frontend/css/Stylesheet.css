@@ -8,7 +8,7 @@
         /*  url('../fonts/titillium-web-v8-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
         /* url('../fonts/titillium-web-v8-latin-regular.woff') format('woff'), /* Modern Browsers */
         /* url('../fonts/titillium-web-v8-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-        /* url('../fonts/titillium-web-v8-latin-regular.svg#TitilliumWeb') format('svg'); /* Legacy iOS */ 
+        /* url('../fonts/titillium-web-v8-latin-regular.svg#TitilliumWeb') format('svg'); /* Legacy iOS */
     /*font-family: 'Titillium Web';
     font-style: normal;
     font-weight: 400;
@@ -50,11 +50,17 @@ h5{
   margin-bottom: 26pt;
   text-align: center;
 }
+h6 {
+    font-family: 'Titillium Web';
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8pt;
+}
 
 p {
     font-family: 'Titillium Web';
     font-size: 14px;
-    margin-bottom: 12pt;  
+    margin-bottom: 12pt;
 }
 
 /* div kleurenschema */
@@ -113,7 +119,7 @@ p {
     padding: 8px 16px;
     text-decoration: none;
   }
-  
+
   /* Change the link color on hover */
   .li-navigatie a:hover {
     background-color: #555;
@@ -216,7 +222,7 @@ p {
 }
 
 a{
-    
+
     text-align: center;
     /* height: 50px;
     width: 150px; */
@@ -226,7 +232,7 @@ a{
     text-decoration: none;
 }
 
-a:hover{ 
+a:hover{
     color: #5E5E5E;
     cursor: pointer;
 }
@@ -270,8 +276,8 @@ text-align: center;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
   }
-  
-  
+
+
   .tab button {
     background-color:  #7F4BB7;
     float: left;
@@ -282,18 +288,18 @@ text-align: center;
     padding: 14px 16px;
     transition: 0.3s;
   }
-  
+
 
   .tab button:hover {
     background-color:  #682BAA;
   }
-  
- 
+
+
   .tab button.active {
     background-color: #510E99;
   }
-  
- 
+
+
   .tabcontent {
     display: none;
     padding: 6px 12px;
@@ -303,30 +309,30 @@ text-align: center;
 
   /* breadcrumbs */
 
-  
+
 ul.breadcrumb {
     padding: 10px 16px;
     list-style: none;
     background-color: #eee;
   }
-  
+
   ul.breadcrumb li {
     display: inline;
     font-size: 18px;
     font-family: 'Titillium Web';
   }
-  
+
   ul.breadcrumb li+li:before {
     padding: 8px;
     color: black;
     content: ">>";
   }
-  
+
   ul.breadcrumb li a {
     color: #7F4BB7;
     text-decoration: none;
   }
-  
+
   ul.breadcrumb li a:hover {
     color: #682BAA;
     text-decoration: underline;
@@ -371,7 +377,7 @@ ul.breadcrumb {
   }
 
   .notification{
-    
+
     max-height: 35px;
     width: auto;
     max-width: 500px;
@@ -386,7 +392,7 @@ ul.breadcrumb {
   }
 
   /*toevoegingen*/
-  
+
 #achtergrondbeeld{
   background-image: url(../image/achtergrond.png);
   height: 100%;
@@ -453,7 +459,7 @@ ul.breadcrumb {
   width: 100%;
   background-repeat: no-repeat;
   background-size: 100%;
-  background-color: #8D8D8D; 
+  background-color: #8D8D8D;
   color:#ffffff;
 }
 
@@ -546,16 +552,16 @@ background-color: #682BAA;
 color: #fff;
 }
 
-.tableFixHead { 
-  overflow-y: auto; 
-  height: 100px; 
+.tableFixHead {
+  overflow-y: auto;
+  height: 100px;
 }
 
-.tableFixHead thead th { 
-  position: sticky; 
-  top: 0; 
-  z-index: 3;   
-  line-height: 20px 
+.tableFixHead thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  line-height: 20px
 }
 
 .my-custom-scrollbar {
@@ -568,13 +574,14 @@ color: #fff;
   display: block;
 }
 
-input[type=text], input[type=password], input[type=email], select {
-
+input[type=text], input[type=password], input[type=email],input[type=date], select {
+  min-width:200px;
   padding: 4px 20px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
+  background-color:#fff;
   box-sizing: border-box;
 }
 input[type=submit]:focus{
@@ -601,16 +608,16 @@ outline: none;
   }
 }
 
-.inputData input{
+.inputData input,select{
   margin-left: 9em;
   margin-top: 0;
 }
 
-#kalenderGeboortedatum{
+/* #kalenderGeboortedatum{
   width: 199.6px;
   height: 34px;
   margin-bottom: 8px;
-}
+} */
 
 .inputData label{
   position: absolute;
@@ -624,9 +631,19 @@ outline: none;
   transform: translate(-50%, -50%);
 }
 
+
 #nieuwGeboorteDatum{
+.modal-edit body{
+}
+
+.modal-edit select{
+  min-width:200px;
+  margin: 0px 0;
+}
+
+/* #nieuwGeboorteDatum{
   width: 199.6px;
   height: 34px;
   margin-bottom: 8px;
   margin-top: 12px;
-}
+} */
