@@ -67,20 +67,6 @@
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
         }
-
-
-        function updateBedrijftoGebruiker() {
-            var obj = {};
-            obj.bid = document.getElementById("bid").value;
-            obj.gid = document.getElementById("gid").value;
-            objJSON = JSON.stringify(obj);
-            var xhr = new XMLHttpRequest();
-            xhr.open("PUT", "http://173.212.208.199:1337/api/bedrijf/" + obj.bid + "/" + obj.gid, true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-            xhr.send(objJSON);
-        }
-        
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -144,9 +130,9 @@
                 <!-- sidebar -->
                 <div class="col-sm-3">
                     <div class="sidebar">
-                        <button class="button2" onclick="window.location.href='bedrijfnieuw.html'">Nieuwe
-                            opdrachtgevers</button>
-                        <button class="button2" onclick="window.location.href='bedrijfaanpassen.html'">Opdrachtgever
+                        <button class="button2" onclick="window.location.href='bedrijfnieuw.html'">Nieuw
+                            bedrijf</button>
+                        <button class="button2" onclick="window.location.href='bedrijfaanpassen.html'">Bedrijf
                             aanpassen</button>
                     </div>
                 </div>
