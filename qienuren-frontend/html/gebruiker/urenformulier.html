@@ -194,7 +194,7 @@
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
         if (this.readyState == 4) {
-          alert(this.responseText);
+          visueleFeedback(this.responseText);
         }
       }
       xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/gebruiker/"+ x.id +"/setstatus-indienengebruiker", true);
@@ -202,6 +202,31 @@
       xhr.send();
       generateTable();
     }
+
+    function visueleFeedback(status) {
+      if (status == "overwerk") {
+        var overwerk = document.getElementById("overwerkdiv");
+        overwerk.style.display = "block";
+        setTimeout(function(){overwerk.style.display = "none"}, 10000);
+      } else if (status == "onderwerk") {
+        var onderwerk = document.getElementById("onderwerkdiv");
+        onderwerk.style.display = "block";
+        setTimeout(function(){onderwerk.style.display = "none"}, 10000);
+      } else {
+        var gelukt = document.getElementById("geluktdiv");
+        gelukt.style.display = "block";
+        setTimeout(function(){gelukt.style.display = "none"}, 10000);
+      }
+    }
+
+    function hidedivs() {
+      var overwerk = document.getElementById("overwerkdiv");
+        overwerk.style.display = "none";
+        var onderwerk = document.getElementById("onderwerkdiv");
+        onderwerk.style.display = "none";
+        var gelukt = document.getElementById("geluktdiv");
+        gelukt.style.display = "none";
+      }
 
     function urenOpslaanDag() {
       var xhr = new XMLHttpRequest();
@@ -353,7 +378,7 @@
   </script>
 </head>
 
-<body onload="generateTable(),  gebruikersnaam(), generateTablelocked(), statusUrenformulier()">
+<body onload="generateTable(),  gebruikersnaam(), generateTablelocked(), statusUrenformulier(), hidedivs()">
   <!-- Modal bevestiging -->
   <div>
     <div class="modal fade" id="myModal" role="dialog">
@@ -453,6 +478,9 @@
         <!-- main content -->
         <div class="col-lg-9">
           <div class="content">
+            <div class="exception" id="overwerkdiv">Het lijkt erop dat je teveel uren hebt ingevuld. Kijk het even na!</div>
+            <div class="exception" id="onderwerkdiv">Het lijkt erop dat je te weinig uren hebt ingevuld. Kijk het even na!</div>
+            <div class="confirm" id="geluktdiv">Formulier ingedient!</div>
             <select name="jaar-formulier" id="jaar-formulier" onchange="generateTable(), statusUrenformulier()">
               <option value="2020">2020</option>
               <option value="2019">2019</option>
