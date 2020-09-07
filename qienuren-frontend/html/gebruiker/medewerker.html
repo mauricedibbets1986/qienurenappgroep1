@@ -2,7 +2,7 @@
 <html lang="nl">
 
 <head>
-    <link rel="icon" href="https://www.qien.nl/wp-content/uploads/2017/10/logo.svg">
+    <link rel="icon" href="../../image/logo-qien-zonder-tekst-ronder.png">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,6 +31,8 @@
 
     <script>
 
+        var naam;
+
         function ziekMelden() {
             var date = new Date();
             var datumDag = date.getUTCDate();
@@ -44,24 +46,59 @@
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send(urenFormulierJSON);
+            ziekMailenMaar();
+        }
+
+        function ziekMailenMaar() {
+            var xhr = new XMLHttpRequest();
+            var obj = {};
+            obj.emailTo = "jorisvanbreugel@gmail.com";
+            obj.subject = `${naam} is ziek vandaag`;
+            obj.text = `Beste Cora,
+            
+${naam} is ziek en komt niet op werk vandaag. Dit is automatisch opgeslagen in het systeem.
+            
+Met vriendelijke groeten,
+
+
+Groep 1`;
+            var json = JSON.stringify(obj);
+            xhr.open("POST", "http://173.212.208.199:1337/mail", true);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send(json);
+        }
+
+        function getNaamGebruiker() {
+            var xhr = new XMLHttpRequest();
+            var obj = {};
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                    var obj = JSON.parse(this.responseText);
+                    naam = obj.voornaam + " " + obj.achternaam;
+                }
+            }
+            xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/userid/" + localStorage.getItem("userId"), true);
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send();   
         }
 
     </script>
 
 </head>
 
-<body onload="gebruikersnaam()">
+<body onload="gebruikersnaam(), getNaamGebruiker()">
     <!-- Header -->
     <div class="modal fade" id="myModal4" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Ziek melden? Veel Beterschap</h3>
+                    <input type="button" class="button3" 
+                    onclick="ziekMelden()" value="Bevestigen" 
+                    data-dismiss="modal"><br>
                     <input type="button" class="button3"
-                            onclick="ziekMelden()"
-                            value="Bevestigen" data-dismiss="modal"><br>
-                    <input type="button" class="button3"
-                            value="Annuleren" data-dismiss="modal"><br>
+                    value="Annuleren" data-dismiss="modal"><br>
                 </div>
             </div>
         </div>
@@ -70,7 +107,7 @@
         <!-- Qien Logo -->
         <nav class="navbar navbar navbar-light navbar-expand-sm">
             <a class="navbar-brand" href="https://www.qien.nl">
-                <img src="https://www.qien.nl/wp-content/uploads/2017/10/logo.svg" width="75" height="75"
+                <img src="../../image/qienlogowit.png" width="75" height="75"
                     alt="Qien Logo">
             </a>
             <!-- Profiel menu -->
@@ -123,16 +160,17 @@
                 <div class="col-lg-9">
                     <div class="content">
                         <section>
-                            <h1 id="gebruikersnaam2"></h1>
-                            <p><i>Huidige periode 1 Augustus 2020 t/m 31 Augustus 2020</i></p>
+                           <h1 text-align: center;>Welkom</h1><h1 id="gebruikersnaam2"></h1>
+                            <!-- <p><i>Huidige periode 1 Augustus 2020 t/m 31 Augustus 2020</i></p> -->
+                            <!-- <p><i>Welkom</i></p> -->
                             <div class="dashboard">
-                                <h2>Registratie deze periode</h2><br>
+                                <!-- <h2>Registratie deze periode</h2><br>
                                 <ul style="list-style-type:none;">
                                     <li>Aantal gewerkte uren: 0</li><br>
                                     <li>Aantal overuren: 0</li><br>
                                     <li>Aantal vakante-uren: 0</li><br>
                                     <li>Aantal ziekte-uren: 0</li><br>
-                                </ul>
+                                </ul> -->
                         </section>
                     </div>
                 </div>

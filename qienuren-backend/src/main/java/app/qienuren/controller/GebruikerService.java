@@ -59,7 +59,6 @@ public class GebruikerService implements GebruikerServiceInterface {
     }
 
     public Gebruiker getGebruikerById(long id) {
-
         return gebruikerRepository.findById(id).get();
     }
 
@@ -231,12 +230,15 @@ public class GebruikerService implements GebruikerServiceInterface {
                     }
                 }
                 if (!exists) {
-                    urenformulierService.addNewUrenFormulier(newUrenFormulier);
-                    gebruiker.addUrenFormulierToArray(newUrenFormulier);
+                    gebruiker.addUrenFormulierToArray(urenformulierService.addNewUrenFormulier(new UrenFormulier(newUrenFormulier)));
                     gebruikerRepository.save(gebruiker);
                 }
             }
         }
+    }
+
+    public Gebruiker getGebruikerByuserId(String id) {
+        return gebruikerRepository.findByUserId(id);
     }
 }
 

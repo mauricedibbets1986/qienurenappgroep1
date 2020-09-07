@@ -60,6 +60,13 @@ public class GebruikerEndpoint {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
+    @GetMapping("/gebruiker/userid/{id}")
+    public Gebruiker getGebruikerByuserId(@PathVariable(value = "id") String id) {
+        System.out.println("endpoint called");
+        return gebruikerService.getGebruikerByuserId(id);
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
     @GetMapping("/gebruiker/rol-id/{id}")
     public Object getGebruikerrolById(@PathVariable(value = "id") long id) {
         return gebruikerService.getGebruikerById(id).getClass();
@@ -216,7 +223,7 @@ public class GebruikerEndpoint {
         return returnValue;
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
+    @PreAuthorize("hasAnyRole('ADMIN','BEDRIJF')or #id == principal.userId")
     @GetMapping("/users/{id}")
     public GebruikerDetailsResponse getUserByUserId(@PathVariable(value = "id") String id) {
         GebruikerDetailsResponse returnValue = new GebruikerDetailsResponse();
@@ -227,7 +234,7 @@ public class GebruikerEndpoint {
         return returnValue;
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN') or #id == principal.userId")
+    @PreAuthorize("hasAnyRole('ADMIN','MEDEWERKER','TRAINEE') or #id == principal.userId")
     @PutMapping("/users/{userId}")
     public GebruikerDetailsResponse updateGebruiker(@PathVariable String userId, @RequestBody GebruikerDetailsRequest gebruikerDetailsRequest) {
         GebruikerDetailsResponse returnValue = new GebruikerDetailsResponse();
