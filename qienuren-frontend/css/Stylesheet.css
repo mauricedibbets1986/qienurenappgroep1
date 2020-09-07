@@ -214,6 +214,11 @@ input[type=button]:focus{
   background-color: #FFDA5C;
 }
 
+.button3-sm:disabled{
+  background-color: #ffe590;
+  color: #535353;
+}
+
 #buttonGebruikerAanmaken{
   border-radius: 30px;
   text-align: center;
@@ -512,6 +517,12 @@ ul.breadcrumb {
   margin-top: 100px;
 }
 
+.login  input[type=password], input[type=email]{
+  min-width: 180px;
+  margin-left: 0;
+  margin-top: 0;
+}
+
 
 .urenform th{
   background-color: #682BAA;
@@ -584,8 +595,7 @@ color: #fff;
   display: block;
 }
 
-input[type=text], input[type=password], input[type=email], input[type=date], select {
-  min-width:200px;
+.body-form input[type=text], input[type=password], input[type=email], input[type=date], select {
   padding: 4px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -615,7 +625,13 @@ input[type=text], input[type=password], input[type=email], input[type=date], sel
   }
 }
 
-.inputData input,select{
+.datum-kiezer select{
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.inputData input[type=text], input[type=password], input[type=date], select{
+  min-width: 215px;
   margin-left: 9em;
   margin-top: 0;
 }
@@ -638,13 +654,16 @@ input[type=text], input[type=password], input[type=email], input[type=date], sel
   transform: translate(-50%, -50%);
 }
 
-#nieuwGeboorteDatum{
-.modal-edit body{
-}
 
 .modal-edit select{
-  min-width:200px;
-  margin: 0px 0;
+  width:100%;
+  display: inline-block;
+  margin: 10px 0;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  color: #000;
+  background-color: #FFDA5C;
 }
 
 /* #nieuwGeboorteDatum{
