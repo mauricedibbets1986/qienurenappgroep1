@@ -538,13 +538,14 @@ color: #fff;
   display: block;
 }
 
-input[type=text], input[type=password], input[type=email], select {
-
+input[type=text], input[type=password], input[type=email],input[type=date], select {
+  min-width:200px;
   padding: 4px 20px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
+  background-color:#fff;
   box-sizing: border-box;
 }
 input[type=submit]:focus{
@@ -571,16 +572,16 @@ outline: none;
   }
 }
 
-.inputData input{
+.inputData input,select{
   margin-left: 9em;
   margin-top: 0;
 }
 
-#kalenderGeboortedatum{
+/* #kalenderGeboortedatum{
   width: 199.6px;
   height: 34px;
   margin-bottom: 8px;
-}
+} */
 
 .inputData label{
   position: absolute;
@@ -594,10 +595,19 @@ outline: none;
   transform: translate(-50%, -50%);
 }
 
+.modal-edit body{
 
-#nieuwGeboorteDatum{
+}
+
+.modal-edit select{
+  min-width:200px;
+  margin: 0px 0;
+}
+
+
+/* #nieuwGeboorteDatum{
   width: 199.6px;
   height: 34px;
   margin-bottom: 8px;
   margin-top: 12px;
-}
+} */

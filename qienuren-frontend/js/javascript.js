@@ -118,6 +118,8 @@ const GebruikersVerwijderenModal = () => {
   xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true);
   xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
   xhr.send();
+  document.getElementById("modal-text").innerHTML = databaseContents[x].voornaam +" "+ databaseContents[x].achternaam+ " verwijdert";
+  $('#myModal-aanpassen').modal('show');
 };
 
 const alleGebruikersModal = () => {
