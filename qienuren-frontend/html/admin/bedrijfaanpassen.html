@@ -19,18 +19,49 @@
     <script src="../../js/javascript.js"></script>
 
     <script>
-        function deleteBedrijf() {
-            //make request to delete employee by ID
+ function alleBedrijven() {
+            var bedrijfString = "";
             var xhr = new XMLHttpRequest();
-            var id = document.getElementById("bedrijfID").value;
             xhr.onreadystatechange = function () {
-                console.log("Bedrijf verwijderd")
+                if (this.readyState == 4) {
+                    var databaseContents = JSON.parse(this.responseText);
+                    var lijstGebruikers = JSON.parse(this.responseText);
+                    var x;
+
+                    for (x = 0; x < databaseContents.length; x++) {
+
+                        bedrijfString +=
+                            `
+                            <div>
+                            <h2> ${databaseContents[x].bedrijfsNaam}</h2>
+                            <b>Contacht Persoon:</b> ${databaseContents[x].contactPersoon}<br>
+                            <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
+                            <b>E-mailadres:</b> ${databaseContents[x].email}<br>
+                            <b>Adres:</b> ${databaseContents[x].adres}<br>
+                            <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
+                            <b>Postcode:</b> ${databaseContents[x].postcode}<br>
+                            <b>Plaats:</b> ${databaseContents[x].plaats}<br>
+                            <b>Trainees werkzaam: 
+                            `
+                        for (var y = 0; y < databaseContents[x].lijstGebruikers.length; y++) {
+                            bedrijfString +=
+                                `
+                             ${databaseContents[x].lijstGebruikers[y].voornaam}`
+                        }
+                        bedrijfString +=
+                            `
+                            </p><p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p>
+                            <hr>
+                            </div>
+                            `
+                    }
+                }
             }
-            xhr.open("DELETE", "http://173.212.208.199:1337/api/bedrijf/delete/" + id, true);
+            xhr.open("GET", "http://173.212.208.199:1337/api/bedrijf/all", true)
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
-            alert("Bedrijf met id " + id + " verwijdert");
         }
+        
 
         function bedrijfAanpassen() {
             // change details - want to get ID automatically but don't know how to take persistent data from one page to another, will fix
@@ -71,39 +102,53 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body onload="loginAuthAdmin()">
+<body onload="loginAuthAdmin(), alleBedrijvenModal(), alleBedrijven()">
+    <div class="modal fade" id="myModal5" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Verwijder Opdrachtgever</h3>
+                    <select id="selectBedrijf">
+                        <option>Kies een Bedrijf</option>
+                    </select>
+                    <input type="button" class="button3"
+                            onclick="deleteBedrijf()"
+                            value="verwijderen" data-dismiss="modal"><br>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Header -->
     <header>
+        
         <!-- Qien Logo -->
         <nav class="navbar navbar navbar-light navbar-expand-sm">
             <a class="navbar-brand" href="https://www.qien.nl">
                 <img src="../../image/qienlogowit.png" width="75" height="75"
                     alt="Qien Logo">
             </a>
-          <!-- Profiel menu -->
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbar-list-4">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="../../image/adminpic.PNG" width="85" height="85" class="rounded-circle">
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item"><b>
-                    Admin
-                  </b></a>
-                <hr>
-                <a onclick="logout()" class="dropdown-item" href="#">Uitloggen</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-        </div>
-      </nav>
+            <!-- Profiel menu -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-list-4">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="../../image/adminpic.PNG" width="85" height="85" class="rounded-circle">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Profiel</a>
+                            <a class="dropdown-item" href="#">Profiel bewerken</a>
+                            <a onclick="logout()" class="dropdown-item" href="#">Uitloggen</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </nav>
         <!-- Breadcrumb -->
         <div>
             <ul class="breadcrumb">
@@ -122,10 +167,9 @@
                 <!-- sidebar -->
                 <div class="col-sm-3">
                     <div class="sidebar">
-                        <button class="button2" onclick="window.location.href='bedrijfoverzicht.html'">Overzicht
-                            opdrachtgevers</button>
-                        <!-- <button class="button2" onclick="window.location.href='bedrijfnieuw.html'">Nieuw
-                            opdrachtgever</button> -->
+                        <input type="button" class="button2" data-toggle="modal"
+                            data-target="#myModal5" value="Verwijder gebruiker">
+                            <button class="button1" onclick="window.location.href='bedrijfoverzicht.html'">Terug naar overzicht</button>
                     </div>
                 </div>
                 <!-- main content -->
