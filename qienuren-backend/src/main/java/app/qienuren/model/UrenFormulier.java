@@ -81,6 +81,15 @@ public class UrenFormulier {
     }
 
     public double getTotaalGewerkteUren() {
+        this.totaalGewerkteUren = 0.0;
+        for(Werkdag wd : this.werkdag){
+            this.totaalGewerkteUren += wd.getOpdrachtUren();
+            this.totaalGewerkteUren += wd.getOverigeUren();
+            this.totaalGewerkteUren += wd.getTrainingsUren();
+            this.totaalGewerkteUren += wd.getVerlofUren();
+            this.totaalGewerkteUren += wd.getZiekteDag();
+            this.totaalGewerkteUren += wd.getOverwerkUren();
+        }
         return totaalGewerkteUren;
     }
 
