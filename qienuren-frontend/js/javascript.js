@@ -156,3 +156,5 @@ const updateBedrijftoGebruiker = () => {
   xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
   xhr.send();
 };
+
+

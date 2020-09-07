@@ -2,7 +2,7 @@
 <html lang="nl">
 
 <head>
-    <link rel="icon" href="https://www.qien.nl/wp-content/uploads/2017/10/logo.svg">
+    <link rel="icon" href="../../image/logo-qien-zonder-tekst-ronder.png">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -38,36 +38,34 @@
                             <h4 class="alignleft">Opdrachtgever:</h4><p class="alignright">${databaseContents.opdrachtgever}</p><div style="clear: both;"></div>
                             </div>
                             `
+                    var emailplaceholder = `<label>E-mailadres</label><input type=text value="${databaseContents.email}" disabled>`
+
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
+                    document.getElementById("emailplaceholder").innerHTML = emailplaceholder;
                 }
             }
             xhr.open("GET", "http://173.212.208.199:1337/api/users/" + localStorage.getItem("userId"), true);
-            console.log("werkt dit?");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
         }
 
         function gegevensAanpassen() {
-            // change details - want to get ID automatically but don't know how to take persistent data from one page to another, will fix
             var xhr = new XMLHttpRequest();
-            var id = document.getElementById("employeeID").value;
             var obj = {};
-            obj.naam = document.getElementById("nieuwNaam").value;
-            obj.adres = document.getElementById("nieuwAdres").value;
-            obj.evtToevoeging = document.getElementById("nieuwEvtToevoeging").value;
-            obj.postcode = document.getElementById("nieuwPostcode").value;
-            obj.woonplaats = document.getElementById("nieuwWoonplaats").value;
-            obj.geboorteDatum = document.getElementById("nieuwGeboorteDatum").value;
-            obj.telefoonNummer = document.getElementById("nieuwTelefoonNummer").value;
-            obj.emailadres = document.getElementById("nieuwEmailadres").value;
-            objJSON = JSON.stringify(obj);
             xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4) {
-                    console.log("the details have been changed!")
-                }
+                obj.voornaam = document.getElementById("nieuwVoornaam").value;
+                obj.achternaam = document.getElementById("nieuwAchternaam").value;
+                obj.adres = document.getElementById("nieuwAdres").value;
+                obj.evtToevoeging = document.getElementById("nieuwEvtToevoeging").value;
+                obj.postcode = document.getElementById("nieuwPostcode").value;
+                obj.woonplaats = document.getElementById("nieuwWoonplaats").value;
+                obj.geboorteDatum = document.getElementById("nieuwGeboorteDatum").value;
+                obj.telefoonNummer = document.getElementById("nieuwTelefoonNummer").value;
+                objJSON = JSON.stringify(obj);
             }
-            xhr.open("PUT", "http://173.212.208.199:1337/api/gebruiker/changedetails/" + id, true);
-            xhr.setRequestHeader("Content-type", "application/json", "Authorization", localStorage.getItem("token"))
+            xhr.open("PUT", "http://173.212.208.199:1337/api/users/" + localStorage.getItem("userId"), true);
+            xhr.setRequestHeader("Content-type", "application/json")
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
         }
 
@@ -100,36 +98,30 @@
             </div>
         </div>
     </div>
-    <!-- Modal uren overzicht -->
+    <!-- Modal gegevens aanpassen -->
     <div class="modal fade" id="myModal2" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Bewerk mijn profiel</h3>
                 </div>
                 <div class="modal-body">
-                    Gebruiker ID<br>
-                    <input type=text id=employeeID placeholder="temp"><br>
-                    Naam<br>
-                    <input type=text id=nieuwNaam><br>
-                    Adres<br>
-                    <input type="text" id=nieuwAdres><br>
-                    Evt. toevoeging<br>
-                    <input type="text" id=nieuwEvtToevoeging><br>
-                    Postcode<br>
-                    <input type="text" id=nieuwPostcode><br>
-                    Woonplaats<br>
-                    <input type="text" id=nieuwWoonplaats><br>
-                    Geboortedatum<br>
-                    <input type="text" id=nieuwGeboorteDatum><br>
-                    Telefoonnummer<br>
-                    <input type=text id=nieuwTelefoonNummer><br>
-                    E-mailadres <br>
-                    <input type=text id=nieuwEmailadres><br>
+                    <div class="inputData">
+                        <label>Voornaam</label><input type="text" id=nieuwVoornaam><br>
+                        <label>Achternaam</label><input type="text" id=nieuwAchternaam><br>
+                        <label>Adres</label><input type="text" id=nieuwAdres><br>
+                        <label>Evt. toevoeging</label><input type="text" id=nieuwEvtToevoeging><br>
+                        <label>Postcode</label><input type="text" id=nieuwPostcode><br>
+                        <label>Woonplaats</label><input type="text" id=nieuwWoonplaats><br>
+                        <label>Geboortedatum</label><input id="nieuwGeboorteDatum" type="date"><br>
+                        <label>Telefoonnummer</label><input type=text id=nieuwTelefoonNummer><br>
+                        <div id="emailplaceholder"></div><br>
+
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default button3" onclick="gegevensAanpassen()"
                             data-dismiss="modal" data-toggle="modal" data-target="#myModal">Bevestigen</button>
-                        <button type="button" class="btn btn-default button2" onclick="enableTable()"
+                        <button type="button" class="btn btn-default button2" onclick=""
                             data-dismiss="modal">Annuleren</button>
                     </div>
                 </div>
@@ -141,7 +133,7 @@
         <!-- Qien Logo -->
         <nav class="navbar navbar navbar-light navbar-expand-sm">
             <a class="navbar-brand" href="https://www.qien.nl">
-                <img src="https://www.qien.nl/wp-content/uploads/2017/10/logo.svg" width="75" height="75"
+                <img src="../../image/qienlogowit.png" width="75" height="75"
                     alt="Qien Logo">
             </a>
             <!-- Profiel menu -->

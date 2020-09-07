@@ -120,6 +120,9 @@ p {
   }
 
   /* buttons */
+  button:focus {
+    outline: none;
+}
 
   .button1{
     margin-bottom:25px;
@@ -381,8 +384,16 @@ ul.breadcrumb {
   background-image: url(../image/achtergrond.png)
 }
 
+.enkeleGebruikerTabelLaden{
+  margin: auto;
+  width: 50%;
+  /* border: 3px solid green; */
+  padding: 10px;
+}
+
 .navbar{
   background-color: #C894F8;
+  /*background-color: #640080;  /*in case of emergency: Qien PAARS*/
   min-height:120px;
 }
 
@@ -563,7 +574,7 @@ input[type=text], input[type=password] input[type=email], select {
 }
 
 #kalenderGeboortedatum{
-  width: 196px;
+  width: 199.6px;
   height: 34px;
   margin-bottom: 8px;
 }
@@ -580,8 +591,9 @@ input[type=text], input[type=password] input[type=email], select {
   transform: translate(-50%, -50%);
 }
 
+
 #nieuwGeboorteDatum{
-  width: 200px;
+  width: 199.6px;
   height: 34px;
   margin-bottom: 8px;
   margin-top: 12px;
