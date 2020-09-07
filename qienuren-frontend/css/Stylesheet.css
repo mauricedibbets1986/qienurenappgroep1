@@ -131,6 +131,10 @@ p {
     outline: none;
 }
 
+input[type=button]:focus{
+  outline: none;
+}
+
   .button1{
     margin-bottom:25px;
     border-radius: 30px;
@@ -182,6 +186,12 @@ p {
   font-family: 'Titillium Web';
   font-size: 16px;
   color: #000000;
+}
+
+.button3:disabled{
+  background-color: #ffe590;
+  color: #535353;
+
 }
 
 .button3:hover{
@@ -574,7 +584,7 @@ color: #fff;
   display: block;
 }
 
-input[type=text], input[type=password], input[type=email],input[type=date], select {
+input[type=text], input[type=password], input[type=email], input[type=date], select {
   min-width:200px;
   padding: 4px 20px;
   margin: 8px 0;
@@ -583,9 +593,6 @@ input[type=text], input[type=password], input[type=email],input[type=date], sele
   border-radius: 4px;
   background-color:#fff;
   box-sizing: border-box;
-}
-input[type=submit]:focus{
-outline: none;
 }
 
 .alignleft {
@@ -630,7 +637,6 @@ outline: none;
   top: 50%;
   transform: translate(-50%, -50%);
 }
-
 
 #nieuwGeboorteDatum{
 .modal-edit body{

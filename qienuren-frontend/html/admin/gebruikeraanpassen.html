@@ -35,7 +35,7 @@
                         for (c = 0; c < databaseContents[x].roles.length; c++) {
 
                             if (databaseContents[x].roles[c].name == "ROLE_ADMIN" || databaseContents[x].roles[c].name == "ROLE_BEDRIJF") {
-                                
+
                             } else {
 
                                 var el = document.createElement("option");
@@ -43,7 +43,7 @@
                                 el.value = databaseContents[x].userId;
                                 select.appendChild(el);
 
-                            } 
+                            }
                         }
                     }
                 }
@@ -69,6 +69,7 @@
             obj.emailadres = document.getElementById("nieuwEmailadres").value;
             obj.rol = document.getElementById("rol-veranderen").value;
             objJSON = JSON.stringify(obj);
+
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
                     console.log("the details have been changed!")
@@ -78,7 +79,9 @@
             xhr.setRequestHeader("Content-type", "application/json")
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
-            alert("Gebruiker met id " + id + " aangepast");
+            document.getElementById("modal-aanpassen").innerHTML = "Gebruiker aangepast";
+            $('#myModal-aanpassen').modal('show');
+            setTimeout(paginaTerug, 2000);
         }
 
     </script>
@@ -92,49 +95,78 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+    <script>
+        //JQuery, checkbox uncheck na sluiten van modal
+        $(function () {
+            $('#myModal4').on('hidden.bs.modal', function (e) {
+                $("#myModal4").find('input:checkbox').prop('checked', false);
+                $("#myModal4").find('#deleteGebruiker').prop('disabled', true);
+            })
+        });
+
+            //disable knop wanneer textarea leeg is
+            $(document).ready(function () {
+                $("#aanpas-knop").attr('disabled', true);
+
+                $('input[type="text"],input[type="password"],input[type="date"]').on('keyup', function () {
+                    var text_value = $(this).val();
+      
+                    if (text_value != '') {
+                        $("#aanpas-knop").attr('disabled', false);
+                    } else {
+                        var keyCode = event.keyCode || event.which;
+                        if (keyCode == '9') {}
+                        else{
+                        $("#aanpas-knop").attr('disabled', true);
+                    }
+                    }
+                });
+            });
+        
+    </script>
 </head>
 
-<body onload="alleGebruikers(), alleGebruikersModal(), alleBedrijvenModal(), loginAuthAdmin(), GebruikersVerwijderenModal()">
-        <!-- Modal bevestiging -->
-        <div>
-            <div class="modal fade" id="myModal-aanpassen" role="dialog">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <p><b>
-                                    <div id=modal-text></div>
-                                </b></p>
-                        </div>
+<body
+    onload="alleGebruikers(), alleGebruikersModal(), alleBedrijvenModal(), loginAuthAdmin(), GebruikersVerwijderenModal()">
+    <!-- Modal bevestiging -->
+    <div>
+        <div class="modal fade" id="myModal-aanpassen" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p><b>
+                                <div id=modal-aanpassen></div>
+                            </b></p>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- modal bedrijf koppelen -->
+    </div>
+    <!-- modal bedrijf koppelen -->
     <div class="modal fade" id="myModal3" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Koppel gebruiker aan bedrijf</h3>
                 </div>
-                    <div class="modal-body modal-edit">
+                <div class="modal-body modal-edit">
                     <select id="selectGebruiker">
                         <option>Kies een gebruiker</option>
                     </select>
                     <select id="selectBedrijf">
                         <option>Kies een Bedrijf</option>
                     </select>
-                    
-                    <input type="button" class="button3"
-                            onclick="updateBedrijftoGebruiker()"
-                            value="Koppelen" data-dismiss="modal"><br>
-                        </div>
+
+                    <input type="button" class="button3" onclick="updateBedrijftoGebruiker()" value="Koppelen"
+                        data-dismiss="modal"><br>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
+    </div>
     <!-- Modal gebruiker verwijderen -->
     <div class="modal fade" id="myModal4" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -142,51 +174,54 @@
                 <div class="modal-header">
                     <h3 class="modal-title">Verwijder gebruiker</h3>
                 </div>
-                    <div class="modal-body modal-edit">
+                <div class="modal-body modal-edit">
                     <select id="selectVerwijderGebruiker">
                         <option>Kies een gebruiker</option>
                     </select>
-                    <input type="button" class="button3"
-                            onclick="deleteGebruiker()"
-                            value="verwijderen" data-dismiss="modal"><br>
-                            
+                    <input type="button" id="deleteGebruiker" class="button3" onclick="deleteGebruiker()"
+                        value="verwijderen" data-dismiss="modal" disabled><br>
+
+                </div>
+                <div class="modal-footer">
+                    <h4>Ik bevestig hierbij dat ik deze gebruiker uit de database verwijder</h4><br>
+                    <input type="checkbox" id="form-check"
+                        onchange="document.getElementById('deleteGebruiker').disabled = !this.checked;" />
                 </div>
             </div>
         </div>
     </div>
     <!-- Header -->
-    
+
     <header>
         <!-- Qien Logo -->
         <nav class="navbar navbar navbar-light navbar-expand-sm">
             <a class="navbar-brand" href="https://www.qien.nl">
-                <img src="../../image/qienlogowit.png" width="75" height="75"
-                    alt="Qien Logo">
+                <img src="../../image/qienlogowit.png" width="75" height="75" alt="Qien Logo">
             </a>
-          <!-- Profiel menu -->
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbar-list-4">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="../../image/adminpic.PNG" width="85" height="85" class="rounded-circle">
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item"><b>
-                    Admin
-                  </b></a>
-                <hr>
-                <a onclick="logout()" class="dropdown-item" href="#">Uitloggen</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-        </div>
-      </nav>
+            <!-- Profiel menu -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-list-4">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="../../image/adminpic.PNG" width="85" height="85" class="rounded-circle">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item"><b>
+                                    Admin
+                                </b></a>
+                            <hr>
+                            <a onclick="logout()" class="dropdown-item" href="#">Uitloggen</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </nav>
         <!-- Breadcrumb -->
         <div>
             <ul class="breadcrumb">
@@ -205,11 +240,12 @@
                 <!-- sidebar -->
                 <div class="col-sm-3">
                     <div class="sidebar">
-                        <input type="button" class="button2" data-toggle="modal"
-                            data-target="#myModal3" value="Koppel gebruiker">
-                            <input type="button" class="button2" data-toggle="modal"
-                            data-target="#myModal4" value="Verwijder gebruiker">
-                        <button class="button1" onclick="window.location.href='gebruikeroverzicht.html'">Terug naar overzicht</button>
+                        <input type="button" class="button2" data-toggle="modal" data-target="#myModal3"
+                            value="Koppel gebruiker">
+                        <input type="button" class="button2" data-toggle="modal" data-target="#myModal4"
+                            value="Verwijder gebruiker">
+                        <button class="button1" onclick="window.location.href='gebruikeroverzicht.html'">Terug naar
+                            overzicht</button>
                     </div>
                 </div>
                 <!-- main content -->
@@ -218,30 +254,30 @@
                         <h2>Wijzigen NAW-gegevens</h2>
                         <div class="body-form">
                             <form name="type-form">
-                            <div class="inputData">
-                                <label>Gebruiker</label><select id="selectNumber">
-                                    <option>Kies een gebruiker</option>
-                                </select><br>
-                                <label>Voornaam</label><input type="text" id=nieuwVoorNaam><br>
-                                <label>Achternaam</label><input type="text" id=nieuwAchterNaam><br>
-                                <label>Adres</label><input type="text" id=nieuwAdres><br>
-                                <label>Evt. toevoeging</label><input type="text" id=nieuwEvtToevoeging><br>
-                                <label>Postcode</label><input type="text" id=nieuwPostcode><br>
-                                <label>Woonplaats</label><input type="text" id=nieuwWoonplaats><br>
-                                <label>Geboortedatum</label><input type="date" id="nieuwGeboorteDatum"><br>
-                                <label>Telefoonnummer</label><input type=text id=nieuwTelefoonNummer><br>
-                                <label>E-mailadres</label><input type=text id=nieuwEmailadres><br>
-                                <label>Wachtwoord</label><input type=password id=nieuwWachtwoord> <br>
-                                <label>Rol</label><select id=rol-veranderen>
-                                    <option value="trainee">Trainee</option>
-                                    <option value="medewerker">Medewerker</option>
-                                    <option value="admin">Admin</option>
-                                </select> <br>
-                            </div>
-                            <input type="button" class="button3"
-                                onclick="gegevensAanpassen()"
-                                value="Opslaan">
-                            <br>
+                                <div class="inputData">
+                                    <label>Gebruiker</label><select id="selectNumber">
+                                        <option>Kies een gebruiker</option>
+                                    </select><br>
+                                    <label>Voornaam</label><input type="text" id=nieuwVoorNaam><br>
+                                    <label>Achternaam</label><input type="text" id=nieuwAchterNaam><br>
+                                    <label>Adres</label><input type="text" id=nieuwAdres><br>
+                                    <label>Evt. toevoeging</label><input type="text" id=nieuwEvtToevoeging><br>
+                                    <label>Postcode</label><input type="text" id=nieuwPostcode><br>
+                                    <label>Woonplaats</label><input type="text" id=nieuwWoonplaats><br>
+                                    <label>Geboortedatum</label><input type="date" id="nieuwGeboorteDatum"><br>
+                                    <label>Telefoonnummer</label><input type=text id=nieuwTelefoonNummer><br>
+                                    <label>E-mailadres</label><input type=text id=nieuwEmailadres><br>
+                                    <label>Wachtwoord</label><input type=password id=nieuwWachtwoord> <br>
+                                    <label>Rol</label><select id=rol-veranderen>
+                                        <option>Kies een rol</option>
+                                        <option value="trainee">Trainee</option>
+                                        <option value="medewerker">Medewerker</option>
+                                        <option value="admin">Admin</option>
+                                    </select> <br>
+                                </div>
+                                <br>
+                                <input type="button" class="button3" id="aanpas-knop" onclick="gegevensAanpassen()" value="Opslaan">
+                                <br>
                             </form>
                         </div>
                     </div>
