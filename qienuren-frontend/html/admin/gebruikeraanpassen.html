@@ -95,36 +95,61 @@
 </head>
 
 <body onload="alleGebruikers(), alleGebruikersModal(), alleBedrijvenModal(), loginAuthAdmin(), GebruikersVerwijderenModal()">
+        <!-- Modal bevestiging -->
+        <div>
+            <div class="modal fade" id="myModal-aanpassen" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p><b>
+                                    <div id=modal-text></div>
+                                </b></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- modal bedrijf koppelen -->
     <div class="modal fade" id="myModal3" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Koppel gebruiker aan bedrijf</h3>
+                </div>
+                    <div class="modal-body modal-edit">
                     <select id="selectGebruiker">
                         <option>Kies een gebruiker</option>
                     </select>
                     <select id="selectBedrijf">
                         <option>Kies een Bedrijf</option>
                     </select>
+                    
                     <input type="button" class="button3"
                             onclick="updateBedrijftoGebruiker()"
                             value="Koppelen" data-dismiss="modal"><br>
+                        </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    </div> 
+    <!-- Modal gebruiker verwijderen -->
     <div class="modal fade" id="myModal4" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Verwijder gebruiker</h3>
+                </div>
+                    <div class="modal-body modal-edit">
                     <select id="selectVerwijderGebruiker">
                         <option>Kies een gebruiker</option>
                     </select>
                     <input type="button" class="button3"
                             onclick="deleteGebruiker()"
                             value="verwijderen" data-dismiss="modal"><br>
+                            
                 </div>
             </div>
         </div>
@@ -192,38 +217,32 @@
                     <div class="content">
                         <h2>Wijzigen NAW-gegevens</h2>
                         <div class="body-form">
-                            <select id="selectNumber">
-                                <option>Kies een gebruiker</option>
-                            </select>
-                            <br>
-                            Voornaam<br>
-                            <input type=text id=nieuwVoorNaam><br>
-                            Achternaam<br>
-                            <input type=text id=nieuwAchterNaam><br>
-                            Adres<br>
-                            <input type="text" id=nieuwAdres><br>
-                            Evt. toevoeging<br>
-                            <input type="text" id=nieuwEvtToevoeging><br>
-                            Postcode<br>
-                            <input type="text" id=nieuwPostcode><br>
-                            Woonplaats<br>
-                            <input type="text" id=nieuwWoonplaats><br>
-                            Geboortedatum<br>
-                            <input type="date" id=nieuwGeboorteDatum><br>
-                            Telefoonnummer<br>
-                            <input type=text id=nieuwTelefoonNummer><br>
-                            E-mailadres <br>
-                            <input type=text id=nieuwEmailadres><br>
-                            Nieuwe rol toewijzen <br>
-                            <select id=rol-veranderen>
-                                <option value="trainee">Trainee</option>
-                                <option value="medewerker">Medewerker</option>
-                                <option value="admin">Admin</option>
-                            </select><br>
+                            <form name="type-form">
+                            <div class="inputData">
+                                <label>Gebruiker</label><select id="selectNumber">
+                                    <option>Kies een gebruiker</option>
+                                </select><br>
+                                <label>Voornaam</label><input type="text" id=nieuwVoorNaam><br>
+                                <label>Achternaam</label><input type="text" id=nieuwAchterNaam><br>
+                                <label>Adres</label><input type="text" id=nieuwAdres><br>
+                                <label>Evt. toevoeging</label><input type="text" id=nieuwEvtToevoeging><br>
+                                <label>Postcode</label><input type="text" id=nieuwPostcode><br>
+                                <label>Woonplaats</label><input type="text" id=nieuwWoonplaats><br>
+                                <label>Geboortedatum</label><input type="date" id="nieuwGeboorteDatum"><br>
+                                <label>Telefoonnummer</label><input type=text id=nieuwTelefoonNummer><br>
+                                <label>E-mailadres</label><input type=text id=nieuwEmailadres><br>
+                                <label>Wachtwoord</label><input type=password id=nieuwWachtwoord> <br>
+                                <label>Rol</label><select id=rol-veranderen>
+                                    <option value="trainee">Trainee</option>
+                                    <option value="medewerker">Medewerker</option>
+                                    <option value="admin">Admin</option>
+                                </select> <br>
+                            </div>
                             <input type="button" class="button3"
                                 onclick="gegevensAanpassen()"
                                 value="Opslaan">
                             <br>
+                            </form>
                         </div>
                     </div>
                 </div>
