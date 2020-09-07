@@ -29,125 +29,111 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
-        <script>
-            const submitLogInHandler = () => {
-              $(document).ready(() => {
+    <script>
+        const submitLogInHandler = () => {
+            $(document).ready(() => {
                 let loginSubmitAction = () => {
-                  let obj = {};
-                  obj.email = document.getElementById("email").value;
-                  obj.password = document.getElementById("password").value;
-                  objJSON = JSON.stringify(obj);
-                  var xhr = new XMLHttpRequest();
-                  xhr.onreadystatechange = () => {
-                    var myToken = xhr.getResponseHeader("Authorization");
-                    var myUserId = xhr.getResponseHeader("userId");
-                    var myUserRole = xhr.getResponseHeader("userRole");
-        
-                    if (myToken && myUserId && myUserRole != null) {
-                      localStorage.setItem("token", myToken);
-                      localStorage.setItem("userId", myUserId);
-                      localStorage.setItem("userRole", myUserRole);
-                    }
-        
-                    if (myUserRole == "[ROLE_ADMIN]") {
-                      window.location.href = "./admin/admin.html";
-                    }
-                    if (myUserRole == "[ROLE_MEDEWERKER]") {
-                      window.location.href = "./gebruiker/medewerker.html";
-                    }
-                    if (myUserRole == "[ROLE_TRAINEE]") {
-                      window.location.href = "./gebruiker/medewerker.html";
-                    }
-                    if (myUserRole == "[ROLE_BEDRIJF]") {
-                      window.location.href = "./bedrijf/bedrijfhome.html";
-                    }
-                  };
-                  xhr.open("POST", "http://173.212.208.199:1337/api/login", true);
-                  xhr.setRequestHeader("Content-Type", "application/json");
+                    let obj = {};
+                    obj.email = document.getElementById("email").value;
+                    obj.password = document.getElementById("password").value;
+                    objJSON = JSON.stringify(obj);
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = () => {
+                        var myToken = xhr.getResponseHeader("Authorization");
+                        var myUserId = xhr.getResponseHeader("userId");
+                        var myUserRole = xhr.getResponseHeader("userRole");
 
-                  xhr.send(objJSON);
+                        if (myToken && myUserId && myUserRole != null) {
+                            localStorage.setItem("token", myToken);
+                            localStorage.setItem("userId", myUserId);
+                            localStorage.setItem("userRole", myUserRole);
+                        }
+
+                        if (myUserRole == "[ROLE_ADMIN]") {
+                            window.location.href = "./admin/admin.html";
+                        }
+                        if (myUserRole == "[ROLE_MEDEWERKER]") {
+                            window.location.href = "./gebruiker/medewerker.html";
+                        }
+                        if (myUserRole == "[ROLE_TRAINEE]") {
+                            window.location.href = "./gebruiker/medewerker.html";
+                        }
+                        if (myUserRole == "[ROLE_BEDRIJF]") {
+                            window.location.href = "./bedrijf/bedrijfhome.html";
+                        }
+                    };
+                    xhr.open("POST", "http://173.212.208.199:1337/api/login", true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+
+                    xhr.send(objJSON);
                 };
                 loginSubmitAction();
-              });
-            };
-        </script>  
+            });
+        };
+    </script>
 </head>
 <section id="achtergrondbeeld">
-<body>
-    <!-- Header -->
-    <header>
-        <!-- Qien Logo -->
-        <nav class="navbar navbar navbar-light navbar-expand-sm">
-            <a class="navbar-brand" href="https://www.qien.nl">
-                <img src="../image/qienlogowit.png" width="75" height="75" alt="Qien Logo">
-            </a>
-        </nav>
-    </header>
+
+    <body class="body">
+        <!-- Header -->
+        <header>
+            <!-- Qien Logo -->
+            <nav class="navbar navbar navbar-light navbar-expand-sm">
+                <a class="navbar-brand" href="https://www.qien.nl">
+                    <img src="../image/qienlogowit.png" width="75" height="75" alt="Qien Logo">
+                </a>
+            </nav>
+        </header>
 
 
-    <!-- Main content -->
-    <main>
-        <div class="container">
-            <div class="row">
-                <!-- left -->
-                <div class="col-sm-4">
-                    <div>
+        <!-- Main content -->
+        <main>
+            <div class="container">
+                <div id="main">
+                <div class="row">
+                    <!-- left -->
+                    <div class="col-sm-4">
+                        <div>
+                        </div>
                     </div>
-                </div>
-                <!-- center -->
-                <div class="col-sm-4">
-                    <div class="login">
-                        <p>
-                        <h2>Inloggen</h2>
-                        <b>E-mailadres<br> </b><input type=email id=email><br>
-                        <b>Wachtwoord<br> </b><input type=password id=password><br>
-                        </p>
-                        <input type="button" class="button3" onclick="submitLogInHandler()" value="Log In" />
-                        <br>
+                    <!-- center -->
+                    <div class="col-sm-4">
+                        <div class="login">
+                            <p>
+                            <h2>Inloggen</h2>
+                            <b>E-mailadres<br> </b><input type=email id=email><br>
+                            <b>Wachtwoord<br> </b><input type=password id=password><br>
+                            </p>
+                            <input type="button" class="button3" onclick="submitLogInHandler()" value="Log In" />
+                            <br>
+                        </div>
                     </div>
-                </div>
-                <!-- right -->
-                <div class="col-sm-4">
-                    <div>
+                    <!-- right -->
+                    <div class="col-sm-4">
+                        <div>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
-
-
-    <!-- Footer -->
-    <footer class="page-footer font-small footer-page">
-        <div class="container">
-            <div class="row footer-content">
-
-                <div class="col">
-                    <b>Bedrijfsinformatie</b><br>
-                    <br>
-                    <a href="https://www.qien.nl/over-ons/">Over Ons</a><br>
-                    <a href="https://www.qien.nl/contact/">Contact</a><br>
-                </div>
-                <div class="col">
-                    <b>Contact</b><br>
-                    <br>
-                    Qien BV<br>
-                    Atoomweg 350<br>
-                    3542 AB Utrecht<br>
-                    030-7514777<br>
-                    info@qien.nl<br>
-                </div>
             </div>
-            <!-- Copyright -->
-            <div class="footer-copyright py-3">
-                <hr style="background-color:white">
-                © 2020 Team 1:
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"> Qien.nl</a>
+        </main>
+
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                
+                    © 2020 Team 1&nbsp;&nbsp;&nbsp;
+                    <a href="https://www.qien.nl/contact/">Contact</a>&nbsp;&nbsp;&nbsp;
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"> Qien.nl</a>
+                
             </div>
-        </div>
-    </footer>
-</body>
+        </footer>
 </section>
+</body>
+
+
 </html>
 
 <!--
@@ -164,4 +150,3 @@ zie individuele gebruiker(userId) ===>  http://173.212.208.199:1337/api/users/<S
 update individule gebruiker(userId) =>  http://173.212.208.199:1337/api/users/<String userId invullen>   (mag alleen admin/eigen account  (""))      (PUT)           
 
 -->
-
