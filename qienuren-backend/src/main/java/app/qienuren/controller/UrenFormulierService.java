@@ -27,6 +27,9 @@ public class UrenFormulierService {
     @Autowired
     GebruikerRepository gebruikerRepository;
 
+    @Autowired
+    MailService mailService;
+
     public Iterable<UrenFormulier> getAllUrenFormulieren() {
         return urenFormulierRepository.findAll();
     }
@@ -151,4 +154,14 @@ public class UrenFormulierService {
         }
     }
     // try catch blok maken als deze exception getrowt wordt. if false krijgt die een bericht terug. in classe urenformulierservice regel 80..
+
+    public void checkMaximaalZiekuren(double getZiekurenFormulier){
+        if (getZiekurenFormulier >= 64){
+           Mail teveelZiekMailCora = new Mail();
+           teveelZiekMailCora.setEmailTo("casparsteinebach@gmail.com");
+           teveelZiekMailCora.setSubject("een medewerker heeft meer dan 9 ziektedagen. Check het even!");
+           teveelZiekMailCora.setText("Hoi Cora, Het ziet er naar uit dat iemand zieke shit heeft afgeleverd en niet op een goeie manier hahaha");
+           mailService.sendEmail(teveelZiekMailCora);
+        }
+    }
 }
