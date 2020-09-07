@@ -1,5 +1,6 @@
 package app.qienuren.model;
 
+import app.qienuren.exceptions.OnderwerkException;
 import app.qienuren.exceptions.OverwerkException;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -101,15 +102,19 @@ public class UrenFormulier {
         wd.setUrenformulier(this);
     }
 
- /*   public void calculateTotaalGewerkt(Werkdag wd) throws Exception {
+    public void calculateTotaalGewerkt(Werkdag wd) throws Exception {
         totaalGewerkteUren += wd.getUren();
         checkOverUren();
-
-    }*/
+    }
 
     private void checkOverUren() throws Exception {
         if (totaalGewerkteUren >= 220) {
             throw new OverwerkException("HO STOP JE HEBT TEVEEL GEWERKT DEZE MAAND");
+        }
+        if (totaalGewerkteUren <= 136) {
+            throw new OnderwerkException("HO NIET STOPPEN, DOORWERKEN!");
+        } else {
+            System.out.println("Uren kloppen");
         }
     }
 
