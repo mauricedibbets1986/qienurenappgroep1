@@ -96,6 +96,7 @@ public class UrenFormulierService {
                 return "overwerk";
             }
             getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
+            return "gelukt";
         }
 
         //deze methode zet de statusGoedkeuring van INGEDIEND_TRAINEE of INGEDIEND_MEDEWERKER naar

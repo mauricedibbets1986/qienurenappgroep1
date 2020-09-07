@@ -72,10 +72,8 @@ public class UrenFormulierEndpoint {
     @PutMapping("/gebruiker/{urenformulierid}/setstatus-indienengebruiker")
     //Als iemand met de rol Gebruiker deze methode aanroept,
     // zet deze de statusGoedkeuring van OPEN naar INGEDIEND_GEBRUIKER
-    public UrenFormulier setStatusFormulierIngediendGebruiker(
-            @PathVariable(value = "urenformulierid") long urenformulierid) {
-        urenFormulierService.setStatusUrenFormulier(urenformulierid, "GEBRUIKER");
-        return urenFormulierService.getUrenFormulierById(urenformulierid);
+    public Object setStatusFormulierIngediendGebruiker(@PathVariable(value = "urenformulierid") long urenformulierid) {
+        return urenFormulierService.setStatusUrenFormulier(urenformulierid, "GEBRUIKER");
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')or #id == principal.userId")
