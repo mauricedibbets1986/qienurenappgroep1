@@ -1,6 +1,7 @@
 package app.qienuren.controller;
 
 import app.qienuren.exceptions.OnderwerkException;
+import app.qienuren.exceptions.OverwerkException;
 import app.qienuren.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,7 +79,7 @@ public class UrenFormulierService {
     return 0.0;
     }
 
-    public UrenFormulier setStatusUrenFormulier(long urenformulierId, String welkeGoedkeurder){
+    public Object setStatusUrenFormulier(long urenformulierId, String welkeGoedkeurder){
 
         //deze methode zet de statusGoedkeuring van OPEN naar INGEDIEND_TRAINEE nadat deze
         // door de trainee is ingediend ter goedkeuring
@@ -86,9 +87,20 @@ public class UrenFormulierService {
             try {
                 werkdagService.enoughWorkedthisMonth(getTotaalGewerkteUren(urenformulierId));            }
             catch(OnderwerkException onderwerkException) {
+                urenFormulierRepository.save(urenFormulierRepository.findById(urenformulierId).get());
                 System.out.println("je hebt te weinig uren ingevuld deze maand");
+                return "onderwerk";
+            } catch (OverwerkException overwerkexception){
+                urenFormulierRepository.save(urenFormulierRepository.findById(urenformulierId).get());
+                System.out.println("Je hebt teveel uren ingevuld deze maand!");
+                return "overwerk";
+            } catch (Exception e) {
+                urenFormulierRepository.save(urenFormulierRepository.findById(urenformulierId).get());
+                return "random exception";
             }
             getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
+            urenFormulierRepository.save(urenFormulierRepository.findById(urenformulierId).get());
+            return "gelukt";
         }
 
         //deze methode zet de statusGoedkeuring van INGEDIEND_TRAINEE of INGEDIEND_MEDEWERKER naar
