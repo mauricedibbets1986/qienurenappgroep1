@@ -93,6 +93,7 @@ public class UrenFormulier {
         return totaalGewerkteUren;
     }
 
+
     public void setTotaalGewerkteUren(double totaalGewerkteUren) {
         this.totaalGewerkteUren = totaalGewerkteUren;
     }
