@@ -214,6 +214,11 @@ input[type=button]:focus{
   background-color: #FFDA5C;
 }
 
+.button3-sm:disabled{
+  background-color: #ffe590;
+  color: #535353;
+}
+
 #buttonGebruikerAanmaken{
   border-radius: 30px;
   text-align: center;
@@ -651,8 +656,14 @@ color: #fff;
 
 
 .modal-edit select{
-  min-width:200px;
-  margin: 0px 0;
+  width:100%;
+  display: inline-block;
+  margin: 10px 0;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  color: #000;
+  background-color: #FFDA5C;
 }
 
 /* #nieuwGeboorteDatum{
