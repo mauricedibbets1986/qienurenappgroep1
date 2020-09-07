@@ -1,5 +1,6 @@
 package app.qienuren.controller;
 
+import app.qienuren.exceptions.OnderwerkException;
 import app.qienuren.exceptions.OverwerkException;
 import app.qienuren.model.Werkdag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +49,22 @@ import javax.transaction.Transactional;
         newWerkdag.setVerklaring(werkdag.getVerklaring());
         werkdagRepository.save(newWerkdag);
     }
-}
+
 //        public Werkdag addNewHours(long hours, long dayId) {
 //           wr.findById(dayId).get().setUren(hours);
 //           return wr.save(wr.findById(dayId).get());
 //        }
+
+    public boolean enoughWorkedthisMonth(double totalHoursWorked) throws OnderwerkException {
+        boolean enoughWorked = false;
+        if (totalHoursWorked >= 139){
+            enoughWorked = true;
+        } else {
+            enoughWorked = false;
+            throw new OnderwerkException("Je hebt te weinig uren ingevuld deze maand");
+        }
+        return enoughWorked;
+    }
+
+    // try catch blok maken als deze exception getrowt wordt. if false krijgt die een bericht terug. in classe urenformulierservice regel 80..
+}

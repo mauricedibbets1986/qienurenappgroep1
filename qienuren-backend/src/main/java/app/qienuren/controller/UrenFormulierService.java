@@ -1,5 +1,6 @@
 package app.qienuren.controller;
 
+import app.qienuren.exceptions.OnderwerkException;
 import app.qienuren.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,6 +83,11 @@ public class UrenFormulierService {
         //deze methode zet de statusGoedkeuring van OPEN naar INGEDIEND_TRAINEE nadat deze
         // door de trainee is ingediend ter goedkeuring
         if (welkeGoedkeurder.equals("GEBRUIKER")) {
+            try {
+                werkdagService.enoughWorkedthisMonth(getTotaalGewerkteUren(urenformulierId));            }
+            catch(OnderwerkException onderwerkException) {
+                System.out.println("je hebt te weinig uren ingevuld deze maand");
+            }
             getUrenFormulierById(urenformulierId).setStatusGoedkeuring(StatusGoedkeuring.INGEDIEND_GEBRUIKER);
         }
 
