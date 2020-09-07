@@ -55,19 +55,14 @@ import javax.transaction.Transactional;
 //           return wr.save(wr.findById(dayId).get());
 //        }
 
-    public boolean enoughWorkedthisMonth(double totalHoursWorked) throws OnderwerkException {
-        boolean enoughWorked = false;
-        if (totalHoursWorked >= 139){
-            enoughWorked = true;
+    public void enoughWorkedthisMonth(double totalHoursWorked) throws OnderwerkException {
+        if (totalHoursWorked <= 139){
+            throw new OnderwerkException("Je hebt te weinig uren ingevuld deze maand");
         } else if (totalHoursWorked >= 220){
-            enoughWorked = false;
             throw new OverwerkException("Je hebt teveel gewerkt, take a break");
         } else {
-            enoughWorked = false;
-            throw new OnderwerkException("Je hebt te weinig uren ingevuld deze maand");
+            return;
         }
-        return enoughWorked;
     }
-
     // try catch blok maken als deze exception getrowt wordt. if false krijgt die een bericht terug. in classe urenformulierservice regel 80..
 }
