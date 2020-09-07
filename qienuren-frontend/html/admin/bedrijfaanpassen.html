@@ -107,9 +107,9 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">Verwijder Opdrachtgever</h3>
+                    <h3 class="modal-title">Verwijder bedrijf</h3>
                     <select id="selectBedrijf">
-                        <option>Kies een Bedrijf</option>
+                        <option>Kies een bedrijf</option>
                     </select>
                     <input type="button" class="button3"
                             onclick="deleteBedrijf()"
@@ -168,14 +168,14 @@
                 <div class="col-sm-3">
                     <div class="sidebar">
                         <input type="button" class="button2" data-toggle="modal"
-                            data-target="#myModal5" value="Verwijder gebruiker">
+                            data-target="#myModal5" value="Verwijder bedrijf">
                             <button class="button1" onclick="window.location.href='bedrijfoverzicht.html'">Terug naar overzicht</button>
                     </div>
                 </div>
                 <!-- main content -->
                 <div class="col-lg-9">
                     <div class="content">
-                        <h2>Opdrachtgever gegevens wijzigen</h2>
+                        <h2>Bedrijf gegevens wijzigen</h2>
                         <div class="body-form">
                             Bedrijf ID<br>
                             <input type=text id=bedrijfID placeholder="temp"><br>
@@ -198,10 +198,7 @@
                             <input type="button" class="button3"
                                 onclick="bedrijfAanpassen(),window.location.href='bedrijfoverzicht.html'"
                                 value="Opslaan">
-                            <input type="button" class="button3"
-                                onclick="deleteBedrijf(),window.location.href='bedrijfoverzicht.html'"
-                                value="Bedrijf verwijderen"><br>
-
+                        <br>
                         </div>
                     </div>
                 </div>
