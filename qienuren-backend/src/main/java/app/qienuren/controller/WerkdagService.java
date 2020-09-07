@@ -48,8 +48,10 @@ import javax.transaction.Transactional;
         newWerkdag.setVerklaring(werkdag.getVerklaring());
         werkdagRepository.save(newWerkdag);
     }
-}
+
 //        public Werkdag addNewHours(long hours, long dayId) {
 //           wr.findById(dayId).get().setUren(hours);
 //           return wr.save(wr.findById(dayId).get());
 //        }
+
+}

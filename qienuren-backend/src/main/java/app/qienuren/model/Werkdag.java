@@ -115,6 +115,10 @@ public class Werkdag {
         this.overigeUren = overigeUren;
     }
 
+
+    public double getUren() {
+        return overigeUren;
+    }
     public Werkdag ikBenZiek() {
         this.setZiekteDag(8);
         this.setOverigeUren(0);

@@ -1,5 +1,6 @@
 package app.qienuren.model;
 
+import app.qienuren.exceptions.OnderwerkException;
 import app.qienuren.exceptions.OverwerkException;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -80,6 +81,15 @@ public class UrenFormulier {
     }
 
     public double getTotaalGewerkteUren() {
+        this.totaalGewerkteUren = 0.0;
+        for(Werkdag wd : this.werkdag){
+            this.totaalGewerkteUren += wd.getOpdrachtUren();
+            this.totaalGewerkteUren += wd.getOverigeUren();
+            this.totaalGewerkteUren += wd.getTrainingsUren();
+            this.totaalGewerkteUren += wd.getVerlofUren();
+            this.totaalGewerkteUren += wd.getZiekteDag();
+            this.totaalGewerkteUren += wd.getOverwerkUren();
+        }
         return totaalGewerkteUren;
     }
 
@@ -97,20 +107,7 @@ public class UrenFormulier {
 
     public void addWerkdayToArray(Werkdag wd) throws Exception {
         werkdag.add(wd);
-        /*calculateTotaalGewerkt(wd);*/
         wd.setUrenformulier(this);
-    }
-
- /*   public void calculateTotaalGewerkt(Werkdag wd) throws Exception {
-        totaalGewerkteUren += wd.getUren();
-        checkOverUren();
-
-    }*/
-
-    private void checkOverUren() throws Exception {
-        if (totaalGewerkteUren >= 220) {
-            throw new OverwerkException("HO STOP JE HEBT TEVEEL GEWERKT DEZE MAAND");
-        }
     }
 
     public StatusGoedkeuring getStatusGoedkeuring() {
