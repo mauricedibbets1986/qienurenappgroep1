@@ -336,21 +336,20 @@
                 </div>
                 <div class="modal-body">
                     <div id="alleGebruikers"></div>
+
+                    <form>
+                        <input type="text" size="35" placeholder="Emailadres" id="emailNaar">
+                        <br>
+                        <br>
+                        <input type="text" size="35" placeholder="Onderwerpregel" id="onderwerpregel">
+                        <br>
+                        <br>
+                        <textarea type="text" placeholder="Bericht" id="bodyVanEmail" rows="10" cols="100"></textarea>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <tr>
-                        <th>
-                            <input type="text" placeholder="E-mailadres" id="emailNaar">
-                        </th>
-                        <th>
-                            <input type="text" placeholder="Onderwerpregel" id="onderwerpregel">
-                        </th>
-                        <br>
-                            <textarea type="text" placeholder="Bericht" id="bodyVanEmail"></textarea>
-                            <input type=button onclick=emailenMaar() value="Mail!!">
-                    </tr>
-                    <button type="button" class="btn btn-default button2" onclick=""
-                        data-dismiss="modal">Sluiten</button>
+                    <input type=button class="button3" onclick=emailenMaar() value="Dien verzoek in">
+                    <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Annuleren</button>
                 </div>
             </div>
         </div>
@@ -428,8 +427,6 @@
                     <button type="button" class="btn btn-default button2" onclick=""
                         data-dismiss="modal">Sluiten</button>
                 </div>
-<<<<<<< HEAD
-=======
 
                 <div id="ifWoonplaats" style="display:none">
                     <input type="text" placeholder="Zoek op woonplaats" name="search" id="woonplaats">
@@ -445,7 +442,6 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default button3-sm" onclick="" data-dismiss="modal">Sluiten</button>
->>>>>>> master
             </div>
         </div>
     </div>
