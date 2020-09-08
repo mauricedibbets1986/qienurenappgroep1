@@ -336,30 +336,24 @@
                 </div>
                 <div class="modal-body">
                     <div id="alleGebruikers"></div>
+                    <form>
+                        <input type="text" size="35" placeholder="Emailadres" id="emailNaar">
+                        <br>
+                        <br>
+                        <input type="text" size="35" placeholder="Onderwerpregel" id="onderwerpregel">
+                        <br>
+                        <br>
+                        <textarea type="text" placeholder="Bericht" id="bodyVanEmail" rows="10" cols="100"></textarea>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <tr>
-                        <th>
-                            <input type="text" placeholder="E-mailadres" id="emailNaar">
-                        </th>
-                        <th>
-                            <input type="text" placeholder="Onderwerpregel" id="onderwerpregel">
-                        </th>
-                        <br>
-                        
-                            <textarea type="text" placeholder="Bericht" id="bodyVanEmail"></textarea>
-                           
-                        
-                            <input type=button onclick=emailenMaar() value="Mail!!">
-                           
-                    </tr>
-                    <button type="button" class="btn btn-default button2" onclick=""
-                        data-dismiss="modal">Sluiten</button>
+                    <input type=button class="button3" onclick=emailenMaar() value="Dien verzoek in">
+                    <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Annuleren</button>
                 </div>
             </div>
         </div>
-      </div>
-      </div>
+    </div>
+    </div>
     <div class="modal fade" id="myModal3" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -420,12 +414,8 @@
                                     <input type="text" placeholder="Onderwerpregel" id="onderwerpregel">
                                 </th>
                                 <br>
-                                
-                                    <textarea type="text" placeholder="Bericht" id="bodyVanEmail"></textarea>
-                                   
-                                
-                                    <input type=button onclick=emailenMaar() value="Mail!!">
-                                   
+                                <textarea type="text" placeholder="Bericht" id="bodyVanEmail"></textarea>
+                                <input type=button onclick=emailenMaar() value="Mail!!">
                             </tr>
                 </table>
                 <div class="modal-footer">

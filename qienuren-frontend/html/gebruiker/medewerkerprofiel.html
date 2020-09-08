@@ -118,22 +118,22 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">Verzoek tot aanpassing profiel</h3>
-                    <h6>Via de onderstaande knop kun je ons per e-mail verzoeken je gegevens aan te passen</h6>
+                    <h5 class="modal-title w-100 text-center">Gegevens wijzigen? Stuur ons een e-mail!</h5>
                 </div>
                 <div class="modal-body">
                     <form>
-                        <input type="text" width="300px" placeholder="klaasjankostelijk@gmail.com" id="emailNaar">
-                        <input type="text" placeholder="Verzoek tot wijzigen gegevens" id="onderwerpregel">
+                        <input type="text" size="35" value="klaasjankostelijk@gmail.com" id="emailNaar" disabled>
                         <br>
-                        <input type="text" placeholder="Bericht" id="bodyVanEmail">
-                        <input type=button onclick=emailenMaar() value="Dien verzoek in">
+                        <br>
+                        <input type="text" size="35" value="Verzoek tot wijzigen gegevens" id="onderwerpregel" disabled>
+                        <br>
+                        <br>
+                        <textarea type="text" placeholder="Bericht" id="bodyVanEmail" rows="10" cols="100"></textarea>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    
-                    <button type="button" class="btn btn-default button2" onclick=""
-                        data-dismiss="modal">Annuleren</button>
+                    <input type=button class="button3" onclick=emailenMaar() value="Dien verzoek in">
+                    <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Annuleren</button>
                 </div>
             </div>
         </div>
