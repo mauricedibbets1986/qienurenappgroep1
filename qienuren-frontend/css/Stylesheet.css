@@ -375,7 +375,7 @@ ul.breadcrumb {
 
   .exception{
     display: inline-flexbox;
-    max-height: 35px;
+    
     width: auto;
     max-width: 500px;
     padding-top: 7px;
