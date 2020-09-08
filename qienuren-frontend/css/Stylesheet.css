@@ -675,6 +675,7 @@ color: #fff;
 } */
 
 .zoek-modal input[type=text]{
+  border-color: #fff;
   min-width: 80%;
 }
 

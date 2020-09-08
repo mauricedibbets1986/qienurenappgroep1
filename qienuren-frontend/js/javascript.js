@@ -200,6 +200,10 @@ function paginaTerug() {
   window.location.replace("gebruikeroverzicht.html");
 }
 
+function paginaTerugBedrijf() {
+  window.location.replace("bedrijfoverzicht.html");
+}
+
 function paginaReload() {
   location.reload();
 }
