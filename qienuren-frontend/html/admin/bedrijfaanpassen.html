@@ -18,7 +18,6 @@
     <!-- Eigen JavaScript -->
     <script src="../../js/javascript.js"></script>
 
-
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -42,7 +41,7 @@
                 obj.adres = document.getElementById("nieuwAdres").value;
                 obj.evtToevoeging = document.getElementById("nieuwEvtToevoeging").value;
                 obj.postcode = document.getElementById("nieuwPostcode").value;
-                obj.plaats = document.getElementById("nieuwWoonplaats").value;
+                obj.woonplaats = document.getElementById("nieuwWoonplaats").value;
                 objJSON = JSON.stringify(obj);
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState == 4) {
