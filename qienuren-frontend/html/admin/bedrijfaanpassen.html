@@ -22,16 +22,16 @@
         function bedrijfAanpassen() {
             // change details - want to get ID automatically but don't know how to take persistent data from one page to another, will fix
             var xhr = new XMLHttpRequest();
-            var id = document.getElementById("bedrijfID").value;
+            var id = document.getElementById("selectNumber").value;
             var obj = {};
-            obj.bedrijfsNaam = document.getElementById("bedrijfsNaam").value;
-            obj.contactPersoon = document.getElementById("contactPersoon").value;
-            obj.telefoonNummer = document.getElementById("telefoonNummer").value;
-            obj.emailAdres = document.getElementById("emailAdres").value;
-            obj.adres = document.getElementById("adres").value;
-            obj.evtToevoeging = document.getElementById("evtToevoeging").value;
-            obj.postcode = document.getElementById("postcode").value;
-            obj.plaats = document.getElementById("plaats").value;
+            obj.bedrijfsNaam = document.getElementById("nieuwBedrijfsNaam").value;
+            obj.contactPersoon = document.getElementById("nieuwContactpersoon").value;
+            obj.telefoonNummer = document.getElementById("nieuwTelefoonNummer").value;
+            obj.emailAdres = document.getElementById("nieuwEmailadres").value;
+            obj.adres = document.getElementById("nieuwAdres").value;
+            obj.evtToevoeging = document.getElementById("nieuwEvtToevoeging").value;
+            obj.postcode = document.getElementById("nieuwPostcode").value;
+            obj.plaats = document.getElementById("nieuwWoonplaats").value;
             objJSON = JSON.stringify(obj);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
@@ -147,7 +147,7 @@
                                     <label>Bedrijf</label><select id="selectNumber">
                                         <option>Kies een bedrijf</option>
                                     </select><br>
-                                    <label>Bedrijfsnaam</label><input type="text" id=nieuwNaam><br>
+                                    <label>Bedrijfsnaam</label><input type="text" id=nieuwBedrijfsNaam><br>
                                     <label>Contactpersoon</label><input type="text" id=nieuwContactpersoon><br>
                                     <label>Adres</label><input type="text" id=nieuwAdres><br>
                                     <label>Evt. toevoeging</label><input type="text" id=nieuwEvtToevoeging><br>
@@ -160,7 +160,7 @@
                                     <br>
                                 </div>
                                 <br>
-                                <input type="button" class="button3" id="aanpas-knop" onclick="gegevensAanpassen()" value="Opslaan">
+                                <input type="button" class="button3" id="aanpas-knop" onclick="bedrijfAanpassen()" value="Opslaan">
                                 <br>
                             </form>
                         </div>
