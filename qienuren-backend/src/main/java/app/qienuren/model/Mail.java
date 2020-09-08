@@ -6,6 +6,15 @@ public class Mail {
     private String subject;
     private String text;
 
+    public Mail() {
+    }
+
+    public Mail(String emailTo, String subject, String text) {
+        this.emailTo = emailTo;
+        this.subject = subject;
+        this.text = text;
+    }
+
     public String getEmailTo() {
         return emailTo;
     }
@@ -29,5 +38,7 @@ public class Mail {
     public void setText(String text) {
         this.text = text;
     }
+
+
 
 }

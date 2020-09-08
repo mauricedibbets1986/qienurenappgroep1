@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../../css/Stylesheet.css" />
     <!-- ../../css/Stylesheet.css -->
 
-    <title>Medewerker Home</title>
+    <title>Gebruiker Home</title>
 
     <!-- Eigen JavaScript -->
     <script src="../../js/javascript.js"></script>
@@ -55,9 +55,9 @@
             obj.emailTo = "jorisvanbreugel@gmail.com";
             obj.subject = `${naam} is ziek vandaag`;
             obj.text = `Beste Cora,
-            
+
 ${naam} is ziek en komt niet op werk vandaag. Dit is automatisch opgeslagen in het systeem.
-            
+
 Met vriendelijke groeten,
 
 
@@ -80,7 +80,7 @@ Groep 1`;
             }
             xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/userid/" + localStorage.getItem("userId"), true);
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-            xhr.send();   
+            xhr.send();
         }
 
     </script>
@@ -94,8 +94,8 @@ Groep 1`;
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Ziek melden? Veel Beterschap</h3>
-                    <input type="button" class="button3" 
-                    onclick="ziekMelden()" value="Bevestigen" 
+                    <input type="button" class="button3"
+                    onclick="ziekMelden()" value="Bevestigen"
                     data-dismiss="modal"><br>
                     <input type="button" class="button3"
                     value="Annuleren" data-dismiss="modal"><br>
@@ -134,7 +134,7 @@ Groep 1`;
         <!-- Breadcrumb -->
         <div>
             <ul class="breadcrumb">
-                <li>Medewerker Home</li>
+                <li>Gebruiker Home</li>
             </ul>
         </div>
     </header>
