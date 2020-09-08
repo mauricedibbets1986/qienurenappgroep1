@@ -34,6 +34,8 @@
 
 <script>
 
+  var storedform;
+
   //disable afkeur knop wanneer textarea leeg is
   $(document).ready(function () {
     $("#afkeur-knop").attr('disabled', true);
@@ -147,6 +149,7 @@
 
   function medewerkerUrenFormulier(userid, formid) {
     var form = "";
+    storedform = formid;
     var xhr = new XMLHttpRequest();
 
     form += `<table class="table table-striped table-bordered table-sm urenform" cellspacing="0"
@@ -186,13 +189,40 @@
             }
           }
         }
-        form += `</tbody></table>`;
+        form += `</tbody></table> <button class="button2" onclick="csvDownloaden()">CSV Downloaden</button>`;
         document.getElementById("showUrenformulier-modal").innerHTML = form;
       }
     };
     xhr.open("GET", "http://173.212.208.199:1337/api/gebruiker/" + userid + "/urenformulieren", true);
     xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
     xhr.send();
+  }
+
+  function csvDownloaden() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        var bla = xhr.getResponseHeader("Content-Disposition");
+        bla = bla.substr(22, bla.length -1);
+        downloadCSV(this.responseText, bla);
+        }
+      }
+    xhr.open("GET", "http://173.212.208.199:1337/api/export-urenformulier/" + storedform, true);
+    xhr.setRequestHeader("Content-Type", "application/download");
+    xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+    xhr.send();
+  }
+
+  function downloadCSV(csv, filename) {
+   	var csvFile;
+	  var downloadLink;
+    csvFile = new Blob([csv], {type:"text/csv"});
+    downloadLink = document.createElement("a");
+    downloadLink.download = filename;
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
   }
 
   function getNaam(nam) {

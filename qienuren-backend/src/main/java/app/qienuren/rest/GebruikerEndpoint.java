@@ -269,7 +269,7 @@ public class GebruikerEndpoint {
     public void newUrenFormulier(@RequestBody Werkdag werkdag, @PathVariable(value = "werkdagid") long id) {
         werkdagService.editWerkdag(werkdag, id);
     }
-    @PreAuthorize("hasRole('MEDEWERKER') or hasRole('TRAINEE') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('MEDEWERKER') or hasRole('TRAINEE') or hasRole('ADMIN') or hasRole('BEDRIJF')")
     @GetMapping("/export-urenformulier/{id}")
     public void exportCSV(HttpServletResponse response, @PathVariable(value = "id") long id) throws Exception { 
 
