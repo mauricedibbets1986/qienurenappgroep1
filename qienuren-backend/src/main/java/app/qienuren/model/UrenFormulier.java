@@ -16,6 +16,8 @@ public class UrenFormulier {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private double totaalGewerkteUren;
+    private double ziekteUren;
+
     @Enumerated(EnumType.STRING)
     private Maand maand;
     private String jaar;
@@ -117,5 +119,13 @@ public class UrenFormulier {
 
     public void setStatusGoedkeuring(StatusGoedkeuring statusGoedkeuring) {
         this.statusGoedkeuring = statusGoedkeuring;
+    }
+
+    public double getZiekteUren() {
+        this.ziekteUren = 0;
+        for (Werkdag wd : this.werkdag){
+            this.ziekteUren += wd.getZiekteDag();
+        }
+        return ziekteUren;
     }
 }

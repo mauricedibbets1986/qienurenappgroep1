@@ -64,6 +64,10 @@ public class UrenFormulierService {
         return urenFormulierRepository.findById(id).get().getTotaalGewerkteUren();
     }
 
+    public double getZiekteUrenbyId(long id){
+        return urenFormulierRepository.findById(id).get().getZiekteUren();
+    }
+
     public Iterable<UrenFormulier> getUrenFormulierPerMaand(int maandid) {
         List<UrenFormulier> localUren = new ArrayList<>();
         for (UrenFormulier uren : urenFormulierRepository.findAll()) {
@@ -87,6 +91,7 @@ public class UrenFormulierService {
         //deze methode zet de statusGoedkeuring van OPEN naar INGEDIEND_TRAINEE nadat deze
         // door de trainee is ingediend ter goedkeuring
         if (welkeGoedkeurder.equals("GEBRUIKER")) {
+            checkMaximaalZiekuren(getZiekteUrenbyId(urenformulierId));
             try {
                 enoughWorkedthisMonth(getTotaalGewerkteUren(urenformulierId));
             } catch(OnderwerkException onderwerkException) {
@@ -160,8 +165,14 @@ public class UrenFormulierService {
            Mail teveelZiekMailCora = new Mail();
            teveelZiekMailCora.setEmailTo("casparsteinebach@gmail.com");
            teveelZiekMailCora.setSubject("een medewerker heeft meer dan 9 ziektedagen. Check het even!");
-           teveelZiekMailCora.setText("Hoi Cora, Het ziet er naar uit dat iemand zieke shit heeft afgeleverd en niet op een goeie manier hahaha");
+           teveelZiekMailCora.setText("<p>Hoi Cora,</p><br/><p>Een medewerker is volgens zijn of haar ingediende urenformulier meer dag 9 dagen ziek geweest deze maand.</p><br/>" +
+                   "<p>Wil je het fornulier even checken?</p><br/>" +
+                   "<button onclick=\"window.location.href='https://www.nu.nl';\">Bekijk het formulier</button>  ");
            mailService.sendEmail(teveelZiekMailCora);
+            System.out.println("email verzonden omdat maximaal ziekteuren zijn overschreden");
+        } else {
+            System.out.println("ziekteuren zijn niet overschreden. toppiejoppie");
         }
     }
+    // rij 85 voor dat we enough worked this month aanroepen een functie die de ziekteuren oproept.
 }

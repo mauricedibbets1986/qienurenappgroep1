@@ -58,6 +58,9 @@ const deleteGebruiker = () => {
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
   xhr.send();
+  document.getElementById("modal-aanpassen").innerHTML = "Gebruiker verwijdert";
+  $('#myModal-aanpassen').modal('show');
+  setTimeout(paginaReload,2000);
 };
 
 const deleteBedrijf = () => {
@@ -118,8 +121,6 @@ const GebruikersVerwijderenModal = () => {
   xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true);
   xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
   xhr.send();
-  document.getElementById("modal-text").innerHTML = databaseContents[x].voornaam +" "+ databaseContents[x].achternaam+ " verwijdert";
-  $('#myModal-aanpassen').modal('show');
 };
 
 const alleGebruikersModal = () => {
@@ -171,4 +172,14 @@ const updateBedrijftoGebruiker = () => {
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
   xhr.send();
+  document.getElementById("modal-aanpassen").innerHTML = "Gebruiker gekoppeld aan bedrijf";
+  $('#myModal-aanpassen').modal('show');
 };
+
+function paginaTerug(){
+  window.location.replace("gebruikeroverzicht.html");
+}
+
+function paginaReload(){
+  location.reload();
+}
