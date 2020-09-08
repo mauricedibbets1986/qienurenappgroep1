@@ -50,7 +50,7 @@
                     enkeleWerknemer +=
                         `
                                 <div>
-                                <b>Naam:</b>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}<br>
+                                <b>Naam:</b> ${databaseContents[x].voornaam} ${databaseContents[x].achternaam}<br>
                                 <b>Adres:</b> ${databaseContents[x].adres}<br>
                                 <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
                                 <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
@@ -83,7 +83,7 @@
                     enkeleWerknemer +=
                         `
                     <div>
-                    <b>Naam:</b>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}<br>
+                    <b>Naam:</b> ${databaseContents[x].voornaam} ${databaseContents[x].achternaam}<br>
                     <b>Adres:</b> ${databaseContents[x].adres}<br>
                     <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
                     <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
@@ -116,7 +116,7 @@
                     enkeleWerknemer +=
                         `
                     <div>
-                    <b>Naam:</b>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}<br>
+                    <b>Naam:</b> ${databaseContents[x].voornaam} ${databaseContents[x].achternaam}<br>
                     <b>Adres:</b> ${databaseContents[x].adres}<br>
                     <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
                     <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
@@ -149,7 +149,7 @@
                     enkeleWerknemer +=
                         `
                     <div>
-                    <b>Naam:</b>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}<br>
+                    <b>Naam:</b> ${databaseContents[x].voornaam} ${databaseContents[x].achternaam}<br>
                     <b>Adres:</b> ${databaseContents[x].adres}<br>
                     <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
                     <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
@@ -222,14 +222,11 @@
                     employeeString +=
                         `
                         <div>
+                            <h5>Gebruikersprofiel</h5>
                         <table class="enkeleGebruikerTabelLaden">
                             <tr>
                             <th>Naam:</th>
                             <td>${databaseContents.voornaam + " " + databaseContents.achternaam}</td>
-                            </tr>
-                            <tr>
-                            <th>Geboorte Datum: </th>
-                            <td>${databaseContents.geboorteDatum}</td>
                             </tr>
                             <tr>
                             <th>Email: </th>
@@ -297,7 +294,7 @@
                                 <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
                                 <b>E-mailadres:</b> ${databaseContents[x].email}<br>
                                 <b>Opdrachtgever:</b> ${databaseContents[x].opdrachtgever}<br>
-                                <hr>
+                                  <hr>
                                 </div>
                                 `
                             }
@@ -312,27 +309,28 @@
         }
 
         function zoekDisplay() {
-    if (document.getElementById('voornaamCheck').checked) {
-        document.getElementById('ifVoornaam').style.display = 'block';
-    }
-    else document.getElementById('ifVoornaam').style.display = 'none';
+            if (document.getElementById('voornaamCheck').checked) {
+                document.getElementById('ifVoornaam').style.display = 'block';
+            }
+            else document.getElementById('ifVoornaam').style.display = 'none';
 
-    if (document.getElementById('achternaamCheck').checked) {
-        document.getElementById('ifAchternaam').style.display = 'block';
-    }
-    else document.getElementById('ifAchternaam').style.display = 'none';
+            if (document.getElementById('achternaamCheck').checked) {
+                document.getElementById('ifAchternaam').style.display = 'block';
+            }
+            else document.getElementById('ifAchternaam').style.display = 'none';
 
-    if (document.getElementById('woonplaatsCheck').checked) {
-        document.getElementById('ifWoonplaats').style.display = 'block';
-    }
-    else document.getElementById('ifWoonplaats').style.display = 'none';
+            if (document.getElementById('woonplaatsCheck').checked) {
+                document.getElementById('ifWoonplaats').style.display = 'block';
+            }
+            else document.getElementById('ifWoonplaats').style.display = 'none';
 
-    if (document.getElementById('geboorteCheck').checked) {
-        document.getElementById('ifGeboortedatum').style.display = 'block';
-    }
-    else document.getElementById('ifGeboortedatum').style.display = 'none';
+            if (document.getElementById('geboorteCheck').checked) {
+                document.getElementById('ifGeboortedatum').style.display = 'block';
+            }
+            else document.getElementById('ifGeboortedatum').style.display = 'none';
 
-}
+        }
+
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -348,85 +346,81 @@
 </head>
 
 <body onload="lijstMedewerkers(), alleGebruikersModal(), alleBedrijvenModal(), loginAuthAdmin()">
-        <!-- Gebruiker profiel -->
     <div class="modal fade" id="myModal1" role="dialog">
         <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title w-100 text-center">Gebruiker Profiel</h5>
-            </div>
-            <div class="modal-body">
+            <div class="modal-content">
                 <div id="showNaam-modal">
                     <div id="persoonsgegevens"></div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                    <tr>
-                        <th>
-                            <input type="text" placeholder="E-mailadres" id="emailNaar">
-                        </th>
-                        <th>
-                            <input type="text" placeholder="Onderwerpregel" id="onderwerpregel">
-                        </th>
-                        <br>
-                        
-                            <textarea type="text" placeholder="Bericht" id="bodyVanEmail"></textarea>
-                           
-                        
-                            <input type=button onclick=emailenMaar() value="Mail!!">
-                           
-                    </tr>
-                    <button type="button" class="btn btn-default button2" onclick=""
-                        data-dismiss="modal">Sluiten</button>
-                </div>
+                <div class="modal-body">
+                    <div id="alleGebruikers"></div>
 
+                    <form>
+                        <input type="text" size="35" placeholder="Emailadres" id="emailNaar">
+                        <br>
+                        <br>
+                        <input type="text" size="35" placeholder="Onderwerpregel" id="onderwerpregel">
+                        <br>
+                        <br>
+                        <textarea type="text" placeholder="Bericht" id="bodyVanEmail" rows="10" cols="100"></textarea>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type=button class="button3" onclick=emailenMaar() value="Dien verzoek in">
+                    <button type="button" class="btn btn-default button2" onclick=""
+                        data-dismiss="modal">Annuleren</button>
+                </div>
             </div>
         </div>
-      </div>
-      </div>
-             <!-- Gebruiker zoekfunctie -->
+    </div>
+    </div>
     <div class="modal fade" id="myModal2" role="dialog">
         <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title w-100 text-center">Zoek een gebruiker</h5>
-            </div>
-            <div class="modal-body zoek-modal">
-                Voornaam <input type="radio" onclick="javascript:zoekDisplay();"  name="zoekfunctie" id="voornaamCheck"> 
-                Achternaam <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie" id="achternaamCheck">
-                Woonplaats <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie" id="woonplaatsCheck">
-                Geboortedatum <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie" id="geboorteCheck"><br>
-
-                <div id="ifVoornaam" style="display:none">
-                    <input type="text" placeholder="Zoek op voornaam" name="search" id="voornaam">
-                    <input type=button onclick=zoekGebruikerOpVoornaam() value="Zoek">
-                    <div id="demoVoornaam"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title w-100 text-center">Zoek een gebruiker</h5>
                 </div>
+                <div class="modal-body zoek-modal">
+                    Voornaam <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
+                        id="voornaamCheck">
+                    Achternaam <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
+                        id="achternaamCheck">
+                    Woonplaats <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
+                        id="woonplaatsCheck">
+                    Geboortedatum <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
+                        id="geboorteCheck"><br>
 
-                <div id="ifAchternaam" style="display:none">
-                    <input type="text" placeholder="Zoek op achternaam" name="search" id="achternaam">
-                    <input type=button onclick=zoekGebruikerOpAchternaam() value="Zoek">
-                    <div id="demoAchternaam"></div>
-                </div>
+                    <div id="ifVoornaam" style="display:none">
+                        <input type="text" placeholder="Zoek op voornaam" name="search" id="voornaam">
+                        <input type=button onclick=zoekGebruikerOpVoornaam() value="Zoek">
+                        <div id="demoVoornaam"></div>
+                    </div>
 
-                <div id="ifWoonplaats" style="display:none">
-                    <input type="text" placeholder="Zoek op woonplaats" name="search" id="woonplaats">
-                    <input type=button onclick=zoekGebruikerOpWoonplaats() value="Zoek">
-                    <div id="demoWoonplaats"></div>
-                </div>
+                    <div id="ifAchternaam" style="display:none">
+                        <input type="text" placeholder="Zoek op achternaam" name="search" id="achternaam">
+                        <input type=button onclick=zoekGebruikerOpAchternaam() value="Zoek">
+                        <div id="demoAchternaam"></div>
+                    </div>
 
-                <div id="ifGeboortedatum" style="display:none">
-                    <input type="text" placeholder="Zoek op geboortedatum" name="search" id="geboortedatum">
-                    <input type=button onclick=zoekGebruikerOpGeboortedatum() value="Zoek">
-                    <div id="demoGeboortedatum"></div>
+                    <div id="ifWoonplaats" style="display:none">
+                        <input type="text" placeholder="Zoek op woonplaats" name="search" id="woonplaats">
+                        <input type=button onclick=zoekGebruikerOpWoonplaats() value="Zoek">
+                        <div id="demoWoonplaats"></div>
+                    </div>
+
+                    <div id="ifGeboortedatum" style="display:none">
+                        <input type="text" placeholder="Zoek op geboortedatum" name="search" id="geboortedatum">
+                        <input type=button onclick=zoekGebruikerOpGeboortedatum() value="Zoek">
+                        <div id="demoGeboortedatum"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default button3-sm" onclick="" data-dismiss="modal">Sluiten</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default button3-sm" onclick=""
+                        data-dismiss="modal">Sluiten</button>
+                </div>
             </div>
         </div>
-      </div>
-      </div>
+    </div>
     <!-- Header -->
     <header>
         <!-- Qien Logo -->
@@ -479,14 +473,22 @@
                             gebruiker</button>
                         <button class="button2" onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker
                             aanpassen</button>
-                            <button class="button2" data-toggle="modal" data-target="#myModal2">Zoeken</button>
+                        <button class="button2" data-toggle="modal" data-target="#myModal2">Zoeken</button>
                     </div>
                 </div>
                 <!-- main content -->
                 <div class="col-lg-9">
                     <div class="content">
+                        <!-- <form name="type-form">
+                            <select name="filter-soort" onclick=alleGebruikers() id="filter">
+                                <option value="all">--filter--</option>
+                                <option value="ROLE_MEDEWERKER">medewerker</option>
+                                <option value="ROLE_TRAINEE">trainee</option>
+                            </select>
+                        </form> -->
                         <section>
                             <div id="lijst-medewerkers"></div>
+                            <!-- <div id="showGebruikers"></div> -->
                         </section>
                     </div>
                 </div>

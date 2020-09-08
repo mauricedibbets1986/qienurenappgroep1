@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../../css/Stylesheet.css" />
     <!-- ../../css/Stylesheet.css -->
 
-    <title>Overzicht van medewerkers/trainees</title>
+    <title>Overzicht van bedrijven</title>
 
     <!-- Eigen JavaScript -->
     <script src="../../js/javascript.js"></script>
@@ -34,7 +34,6 @@
                             <tr>
                             <th class="th-sm">Bedrijven</th>
                             <th class="th-sm">Profiel</th>
-                            <th></th> 
                         </tr>
                         </thead><tbody>
                         `
@@ -63,7 +62,7 @@
     xhr.send();
   }
 
-  function bedrijfsGegevens(id) {
+  function bedrijfsGegevens(userId) {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
@@ -106,9 +105,10 @@
                         </div>
                             `
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
+                    console.log(databaseContents)
                 }
             }
-            xhr.open("GET", "http://173.212.208.199:1337/api/users/" + id, true);
+            xhr.open("GET", "http://173.212.208.199:1337/api/bedrijf/" + userId, true);
             console.log("werkt dit?");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
@@ -181,8 +181,8 @@
         <!-- Breadcrumb -->
         <div>
             <ul class="breadcrumb">
-                <li><a href="admin.html">Admin overzicht </a></li>
-                <li>Overzicht bedrijf</li>
+                <li><a href="admin.html">Admin Home</a></li>
+                <li>Overzicht bedrijven</li>
             </ul>
         </div>
     </header>
