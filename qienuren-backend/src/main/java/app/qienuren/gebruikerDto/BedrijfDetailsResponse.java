@@ -13,6 +13,11 @@ public class BedrijfDetailsResponse {
     private String email;
     private String bedrijfsNaam;
     private String contactPersoon;
+    private long telefoonNummer;
+    private String adres;
+    private String evtToevoeging;
+    private String postcode;
+    private String woonplaats;
 
     @OneToMany
     @JsonManagedReference
@@ -56,5 +61,45 @@ public class BedrijfDetailsResponse {
 
     public void setLijstGebruikers(List<Gebruiker> lijstGebruikers) {
         this.lijstGebruikers = lijstGebruikers;
+    }
+
+    public long getTelefoonNummer() {
+        return telefoonNummer;
+    }
+
+    public void setTelefoonNummer(long telefoonNummer) {
+        this.telefoonNummer = telefoonNummer;
+    }
+
+    public String getAdres() {
+        return adres;
+    }
+
+    public void setAdres(String adres) {
+        this.adres = adres;
+    }
+
+    public String getEvtToevoeging() {
+        return evtToevoeging;
+    }
+
+    public void setEvtToevoeging(String evtToevoeging) {
+        this.evtToevoeging = evtToevoeging;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
+
+    public String getWoonplaats() {
+        return woonplaats;
+    }
+
+    public void setWoonplaats(String woonplaats) {
+        this.woonplaats = woonplaats;
     }
 }
