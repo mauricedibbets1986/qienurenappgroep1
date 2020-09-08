@@ -165,7 +165,7 @@ public class UrenFormulierService {
            Mail teveelZiekMailCora = new Mail();
            teveelZiekMailCora.setEmailTo("casparsteinebach@gmail.com");
            teveelZiekMailCora.setSubject("Een medewerker heeft meer dan 9 ziektedagen. Check het even!");
-           teveelZiekMailCora.setText("Hoi Cora. Een medewerker is volgens zijn of haar ingediende urenformulier meer dag 9 dagen ziek geweest deze maand." +
+           teveelZiekMailCora.setText("Hoi Cora, Een medewerker is volgens zijn of haar ingediende urenformulier meer dag 9 dagen ziek geweest deze maand." +
                    " Wil je het formulier even checken? Log dan in bij het urenregistratiesysteem van Qien."
                    );
            mailService.sendEmail(teveelZiekMailCora);
