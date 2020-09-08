@@ -26,24 +26,6 @@
       $('.dataTables_length').addClass('bs-select');
     });
 
-    // function test() {
-    //   var myRows = [];
-    //   var $headers = $("th");
-    //   var $rows = $("tbody tr").each(function (index) {
-    //     $cells = $(this).find("td");
-    //     myRows[index] = {};
-    //     $cells.each(function (cellIndex) {
-    //       myRows[index][$($headers[cellIndex]).html()] = $(this).html();
-    //     });
-    //   });
-
-    //   // Let's put this in the object like you want and convert to JSON (Note: jQuery will also do this for you on the Ajax request)
-    //   var myObj = {};
-    //   myObj.myrows = myRows;
-    //   alert(JSON.stringify(myObj));
-    // }
-
-
     // here the table is generated with input fields for the employee to fill in
     function generateTable() {
       var y = "";
@@ -195,12 +177,12 @@
       xhr.onreadystatechange = function () {
         if (this.readyState == 4) {
           visueleFeedback(this.responseText);
+          generateTable();
         }
       }
       xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/gebruiker/"+ x.id +"/setstatus-indienengebruiker", true);
       xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
       xhr.send();
-      generateTable();
     }
 
     function visueleFeedback(status) {
@@ -358,6 +340,22 @@
             downloadLink.click();
           }
 
+          function autodisplaymonth() {
+            var date = new Date();
+            var urenFormulier = {};
+            var months = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"];
+            var thismonth = months[date.getMonth()];
+            var thisyear = new Date().getFullYear();
+            selectElement(thismonth, thisyear);
+          }
+
+          function selectElement(thismonth, thisyear) {  
+            let month = document.getElementById("maand-formulier");
+            let year = document.getElementById("jaar-formulier");
+            month.value = thismonth;
+            year.value = thisyear;
+          }
+
   </script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -378,7 +376,7 @@
   </script>
 </head>
 
-<body onload="generateTable(),  gebruikersnaam(), generateTablelocked(), statusUrenformulier(), hidedivs()">
+<body onload="hidedivs(), autodisplaymonth(), generateTable(),  gebruikersnaam(), generateTablelocked(), statusUrenformulier()">
   <!-- Modal bevestiging -->
   <div>
     <div class="modal fade" id="myModal" role="dialog">
@@ -482,12 +480,12 @@
           <div class="content">
             <div class="exception" id="overwerkdiv">Het lijkt erop dat je teveel uren hebt ingevuld. Kijk het even na!</div>
             <div class="exception" id="onderwerkdiv">Het lijkt erop dat je te weinig uren hebt ingevuld. Kijk het even na!</div>
-            <div class="confirm" id="geluktdiv">Formulier ingedient!</div>
+            <div class="confirm" id="geluktdiv">Formulier ingediend!</div>
             <div class="datum-kiezer">
             <select name="jaar-formulier" id="jaar-formulier" onchange="generateTable(), statusUrenformulier()">
+              <option value="2021">2021</option>
               <option value="2020">2020</option>
               <option value="2019">2019</option>
-              <option value="2018">2018</option>
             </select>
             <select name="maand-formulier" id="maand-formulier" onchange="generateTable(), statusUrenformulier()">
               <option value="JANUARI">januari</option>
@@ -530,7 +528,6 @@
             © 2020 Team 1&nbsp;&nbsp;&nbsp;
             <a href="https://www.qien.nl/contact/">Contact</a>&nbsp;&nbsp;&nbsp;
             <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"> Qien.nl</a>
-
     </div>
 </footer>
 
