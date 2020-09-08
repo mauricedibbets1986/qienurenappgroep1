@@ -388,7 +388,8 @@ ul.breadcrumb {
   /*toevoegingen*/
   
 #achtergrondbeeld{
-  background-image: url(../image/achtergrond.png)
+  background-image: url(../image/achtergrond.png);
+  min-height: 1000px;
 }
 
 .body{
