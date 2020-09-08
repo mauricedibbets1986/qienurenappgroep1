@@ -7,7 +7,7 @@ function gebruikersnaam() {
       voornaam = "Hallo " + obj.voornaam + "!";
       naam = obj.voornaam + " " + obj.achternaam;
       document.getElementById("gebruikersnaam").innerHTML = naam;
-      document.getElementById("gebruikersnaam2").innerHTML = naam;
+      document.getElementById("gebruikersnaam2").innerHTML = "Welkom "+ naam;
     }
   };
   xhr.open(
@@ -182,4 +182,14 @@ function paginaTerug(){
 
 function paginaReload(){
   location.reload();
+}
+
+function vandaag(){
+  var months = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "October", "November", "December"];
+  var n = new Date();
+  var y = n.getFullYear();
+  var m = n.getMonth();
+  var d = n.getDate();
+  document.getElementById("vandaag").innerHTML = d + " " + months[m] + " " + y;
+  document.getElementById("vandaag2").innerHTML = d + " " + months[m] + " " + y;
 }
