@@ -63,7 +63,7 @@
     xhr.send();
   }
 
-  function bedrijfsGegevens(id) {
+  function bedrijfsGegevens(userId) {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
@@ -108,7 +108,7 @@
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
                 }
             }
-            xhr.open("GET", "http://173.212.208.199:1337/api/users/" + id, true);
+            xhr.open("GET", "http://173.212.208.199:1337/api/bedrijf/" + userId, true);
             console.log("werkt dit?");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
