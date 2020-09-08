@@ -50,7 +50,7 @@
                     enkeleWerknemer +=
                         `
                                 <div>
-                                <b >${databaseContents[x].voornaam} ${databaseContents[x].achternaam}</b>
+                                <b>Naam:</b> ${databaseContents[x].voornaam} ${databaseContents[x].achternaam}<br>
                                 <b>Adres:</b> ${databaseContents[x].adres}<br>
                                 <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
                                 <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
@@ -59,7 +59,6 @@
                                 <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
                                 <b>E-mailadres:</b> ${databaseContents[x].email}<br>
                                 <b>Opdrachtgever:</b> ${databaseContents[x].opdrachtgever}<br>
-                                <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br>
                                 <hr>
                                 </div>
                                 `
@@ -84,7 +83,7 @@
                     enkeleWerknemer +=
                         `
                     <div>
-                    <b>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}</b>
+                    <b>Naam:</b> ${databaseContents[x].voornaam} ${databaseContents[x].achternaam}<br>
                     <b>Adres:</b> ${databaseContents[x].adres}<br>
                     <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
                     <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
@@ -93,7 +92,6 @@
                     <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
                     <b>E-mailadres:</b> ${databaseContents[x].email}<br>
                     <b>Opdrachtgever:</b> ${databaseContents[x].opdrachtgever}<br>
-                    <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br>
                     <hr>
                     </div>
                     `
@@ -118,7 +116,7 @@
                     enkeleWerknemer +=
                         `
                     <div>
-                    <b>${databaseContents[x].voornaam} ${databaseContents[x].achternaam} </b>
+                    <b>Naam:</b> ${databaseContents[x].voornaam} ${databaseContents[x].achternaam}<br>
                     <b>Adres:</b> ${databaseContents[x].adres}<br>
                     <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
                     <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
@@ -127,7 +125,6 @@
                     <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
                     <b>E-mailadres:</b> ${databaseContents[x].email}<br>
                     <b>Opdrachtgever:</b> ${databaseContents[x].opdrachtgever}<br>
-                    <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br>
                     <hr>
                     </div>
                     `
@@ -152,7 +149,7 @@
                     enkeleWerknemer +=
                         `
                     <div>
-                    <b>${databaseContents[x].voornaam} ${databaseContents[x].achternaam} </b>
+                    <b>Naam:</b> ${databaseContents[x].voornaam} ${databaseContents[x].achternaam}<br>
                     <b>Adres:</b> ${databaseContents[x].adres}<br>
                     <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
                     <b>Woonplaats:</b> ${databaseContents[x].woonplaats}<br>
@@ -161,7 +158,6 @@
                     <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
                     <b>E-mailadres:</b> ${databaseContents[x].email}<br>
                     <b>Opdrachtgever:</b> ${databaseContents[x].opdrachtgever}<br>
-                    <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br>
                     <hr>
                     </div>
                     `
@@ -298,8 +294,7 @@
                                 <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
                                 <b>E-mailadres:</b> ${databaseContents[x].email}<br>
                                 <b>Opdrachtgever:</b> ${databaseContents[x].opdrachtgever}<br>
-                                <p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p><br>
-                                <hr>
+                                  <hr>
                                 </div>
                                 `
                             }
@@ -311,6 +306,29 @@
             xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true);
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
+        }
+
+        function zoekDisplay() {
+            if (document.getElementById('voornaamCheck').checked) {
+                document.getElementById('ifVoornaam').style.display = 'block';
+            }
+            else document.getElementById('ifVoornaam').style.display = 'none';
+
+            if (document.getElementById('achternaamCheck').checked) {
+                document.getElementById('ifAchternaam').style.display = 'block';
+            }
+            else document.getElementById('ifAchternaam').style.display = 'none';
+
+            if (document.getElementById('woonplaatsCheck').checked) {
+                document.getElementById('ifWoonplaats').style.display = 'block';
+            }
+            else document.getElementById('ifWoonplaats').style.display = 'none';
+
+            if (document.getElementById('geboorteCheck').checked) {
+                document.getElementById('ifGeboortedatum').style.display = 'block';
+            }
+            else document.getElementById('ifGeboortedatum').style.display = 'none';
+
         }
 
     </script>
@@ -349,102 +367,59 @@
                 </div>
                 <div class="modal-footer">
                     <input type=button class="button3" onclick=emailenMaar() value="Dien verzoek in">
-                    <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Annuleren</button>
+                    <button type="button" class="btn btn-default button2" onclick=""
+                        data-dismiss="modal">Annuleren</button>
                 </div>
             </div>
         </div>
-      </div>
-      </div>
-    <div class="modal fade" id="myModal3" role="dialog">
+    </div>
+    </div>
+    <div class="modal fade" id="myModal2" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">Bewerk mijn profiel</h3>
-                    <select id="selectGebruiker">
-                        <option>Kies een gebruiker</option>
-                    </select>
-                    <select id="selectBedrijf">
-                        <option>Kies een Bedrijf</option>
-                    </select>
-                    <input type="button" class="button3" onclick="updateBedrijftoGebruiker()" value="Koppelen"
-                        data-dismiss="modal"><br>
+                    <h5 class="modal-title w-100 text-center">Zoek een gebruiker</h5>
                 </div>
-            </div>
-        </div>
-    </div>
+                <div class="modal-body zoek-modal">
+                    Voornaam <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
+                        id="voornaamCheck">
+                    Achternaam <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
+                        id="achternaamCheck">
+                    Woonplaats <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
+                        id="woonplaatsCheck">
+                    Geboortedatum <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
+                        id="geboorteCheck"><br>
 
-    <div class="modal fade" id="myModal4" role="dialog">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <h5 class="modal-title">Zoek een gebruiker</h5>
-                <table>
-                    <tr>
-                        <th>
-                            </form><input type="text" placeholder="Zoek op voornaam" name="search" id="voornaam"></th>
-                        <td> <input type=button onclick=zoekGebruikerOpVoornaam() value="Zoek en vindt!"><br>
-                        </td>
-                    </tr>
-                    <div id="demoVoornaam"></div>
-                    <tr>
-                        <th>
-                            <input type="text" placeholder="Zoek op achternaam" name="search" id="achternaam"></th>
-                        <td><input type=button onclick=zoekGebruikerOpAchternaam() value="Zoek en vindt!">
-                        </td>
-                    </tr>
-                    <div id="demoAchternaam"></div>
-                    <tr>
-                        <th>
-                            <input type="text" placeholder="Zoek op woonplaats" name="search" id="woonplaats"></th>
-                        <td> <input type=button onclick=zoekGebruikerOpWoonplaats() value="Zoek en vindt!">
-                        </td>
-                    </tr>
-                    <div id="demoWoonplaats">
-                        <tr>
-                            <th>
-                                <input type="text" placeholder="Zoek op geboortedatum" name="search" id="geboortedatum">
-                            </th>
-                            <td> <input type=button onclick=zoekGebruikerOpGeboortedatum() value="Zoek en vindt!">
-                            </td>
-                        </tr>
-                        <div id="demoGeboortedatum">
-                            <tr>
-                                <th>
-                                    <input type="text" placeholder="E-mailadres" id="emailNaar">
-                                </th>
-                                <th>
-                                    <input type="text" placeholder="Onderwerpregel" id="onderwerpregel">
-                                </th>
-                                <br>
-                                
-                                    <textarea type="text" placeholder="Bericht" id="bodyVanEmail"></textarea>
-                                   
-                                
-                                    <input type=button onclick=emailenMaar() value="Mail!!">
-                                   
-                            </tr>
-                </table>
+                    <div id="ifVoornaam" style="display:none">
+                        <input type="text" placeholder="Zoek op voornaam" name="search" id="voornaam">
+                        <input type=button onclick=zoekGebruikerOpVoornaam() value="Zoek">
+                        <div id="demoVoornaam"></div>
+                    </div>
+
+                    <div id="ifAchternaam" style="display:none">
+                        <input type="text" placeholder="Zoek op achternaam" name="search" id="achternaam">
+                        <input type=button onclick=zoekGebruikerOpAchternaam() value="Zoek">
+                        <div id="demoAchternaam"></div>
+                    </div>
+
+                    <div id="ifWoonplaats" style="display:none">
+                        <input type="text" placeholder="Zoek op woonplaats" name="search" id="woonplaats">
+                        <input type=button onclick=zoekGebruikerOpWoonplaats() value="Zoek">
+                        <div id="demoWoonplaats"></div>
+                    </div>
+
+                    <div id="ifGeboortedatum" style="display:none">
+                        <input type="text" placeholder="Zoek op geboortedatum" name="search" id="geboortedatum">
+                        <input type=button onclick=zoekGebruikerOpGeboortedatum() value="Zoek">
+                        <div id="demoGeboortedatum"></div>
+                    </div>
+                </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default button2" onclick=""
+                    <button type="button" class="btn btn-default button3-sm" onclick=""
                         data-dismiss="modal">Sluiten</button>
                 </div>
-
-                <div id="ifWoonplaats" style="display:none">
-                    <input type="text" placeholder="Zoek op woonplaats" name="search" id="woonplaats">
-                    <input type=button onclick=zoekGebruikerOpWoonplaats() value="Zoek">
-                    <div id="demoWoonplaats"></div>
-                </div>
-
-                <div id="ifGeboortedatum" style="display:none">
-                    <input type="text" placeholder="Zoek op geboortedatum" name="search" id="geboortedatum">
-                    <input type=button onclick=zoekGebruikerOpGeboortedatum() value="Zoek">
-                    <div id="demoGeboortedatum"></div>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default button3-sm" onclick="" data-dismiss="modal">Sluiten</button>
             </div>
         </div>
-    </div>
     </div>
     <!-- Header -->
     <header>
@@ -498,6 +473,7 @@
                             gebruiker</button>
                         <button class="button2" onclick="window.location.href='gebruikeraanpassen.html'">Gebruiker
                             aanpassen</button>
+                        <button class="button2" data-toggle="modal" data-target="#myModal2">Zoeken</button>
                     </div>
                 </div>
                 <!-- main content -->
