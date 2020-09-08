@@ -277,10 +277,6 @@
                             <th>Woonplaats: </th>
                             <td>${databaseContents.woonplaats}</td>
                             </tr>
-                            <tr>
-                            <th>Opdrachtgever: </th>
-                            <td>${databaseContents.opdrachtgever}</td>
-                            </tr>
                         </table>
                         </div>
                             `
@@ -288,7 +284,6 @@
       }
     }
     xhr.open("GET", "http://173.212.208.199:1337/api/users/" + id, true);
-    console.log("werkt dit?");
     xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
     xhr.send();
   }
@@ -389,7 +384,7 @@
         <!-- sidebar -->
         <div class="col-sm-3">
           <div class="sidebar">
-            <button class="button2" onclick="window.location.href='bedrijfhome.html'">Terug</button>
+            <button class="button1" onclick="window.location.href='bedrijfhome.html'">Terug</button>
             <!-- Trigger the modal with a button -->
             <br>
           </div>

@@ -164,10 +164,10 @@ public class UrenFormulierService {
         if (getZiekurenFormulier >= 64){
            Mail teveelZiekMailCora = new Mail();
            teveelZiekMailCora.setEmailTo("casparsteinebach@gmail.com");
-           teveelZiekMailCora.setSubject("een medewerker heeft meer dan 9 ziektedagen. Check het even!");
-           teveelZiekMailCora.setText("<p>Hoi Cora,</p><br/><p>Een medewerker is volgens zijn of haar ingediende urenformulier meer dag 9 dagen ziek geweest deze maand.</p><br/>" +
-                   "<p>Wil je het fornulier even checken?</p><br/>" +
-                   "<button onclick=\"window.location.href='https://www.nu.nl';\">Bekijk het formulier</button>  ");
+           teveelZiekMailCora.setSubject("Een medewerker heeft meer dan 9 ziektedagen. Check het even!");
+           teveelZiekMailCora.setText("Hoi Cora, Een medewerker is volgens zijn of haar ingediende urenformulier meer dag 9 dagen ziek geweest deze maand." +
+                   " Wil je het formulier even checken? Log dan in bij het urenregistratiesysteem van Qien."
+                   );
            mailService.sendEmail(teveelZiekMailCora);
             System.out.println("email verzonden omdat maximaal ziekteuren zijn overschreden");
         } else {

@@ -375,7 +375,7 @@ ul.breadcrumb {
 
   .exception{
     display: inline-flexbox;
-    max-height: 35px;
+    
     width: auto;
     max-width: 500px;
     padding-top: 7px;
@@ -687,3 +687,23 @@ color: #fff;
   margin-bottom: 8px;
   margin-top: 12px;
 } */
+
+.zoek-modal input[type=text]{
+  min-width: 80%;
+}
+
+.zoek-modal input[type=button]{
+  border-radius: 30px;
+  text-align: center;
+  height: 30px;
+  width: 19%;
+  border-width: 0px;
+  background-color: #FBCC2F;
+  font-family: 'Titillium Web';
+  font-size: 16px;
+  color: #000000;
+}
+
+.zoek-modal input[type=button]:hover{
+  background-color: #FFDA5C;
+}

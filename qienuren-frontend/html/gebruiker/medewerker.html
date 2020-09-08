@@ -83,21 +83,29 @@ Groep 1`;
             xhr.send();
         }
 
+
     </script>
 
 </head>
 
-<body onload="gebruikersnaam(), getNaamGebruiker()">
+<body onload="gebruikersnaam(), getNaamGebruiker(), vandaag()">
     <!-- Header -->
     <div class="modal fade" id="myModal4" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">Ziek melden? </h3>
+                    <h3 class="modal-title">Ziek melden?</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    Datum ziekmelding:
+                    <div id="vandaag2"></div>
+                </div>
+                <div class="modal-footer">
                     <input type="button" class="button3"
                     onclick="ziekMelden()" value="Bevestigen"
                     data-dismiss="modal" data-toggle="modal" data-target="#myModal"><br>
-                    <input type="button" class="button3"
+                    <input type="button" class="button2"
                     value="Annuleren" data-dismiss="modal"><br>
                 </div>
             </div>
@@ -163,22 +171,25 @@ Groep 1`;
                 <div class="col-sm-3">
                     <div class="sidebar">
                         <button class="button2" onclick="window.location.href='urenformulier.html'">Urenregistratie</button>
-                        <button class="button2" onclick="window.location.href='medewerkeruroverzicht.html'"
-                            disabled>Historie
-                            urenregistratie</button>
-                        <input type="button" class="button2" data-toggle="modal"
+                        <button class="button2" onclick="window.location.href='medewerkeruroverzicht.html'">Historie</button>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                        <input type="button" class="button3" data-toggle="modal"
                             data-target="#myModal4" value="Ziek melden">
                     </div>
                 </div>
                 <!-- main content -->
-                <div class="col-lg-9">
+                <div class="col-lg-9" style="text-align:center">
                     <div class="content">
                         <section>
-                           
-                            <p text-align: center; style= "font-size:50px; display: inline;" >Welkom, </p><p style= "font-size:50px; display: inline;" id="gebruikersnaam2"></p>
-                           
-                            <!-- <p><i>Huidige periode 1 Augustus 2020 t/m 31 Augustus 2020</i></p> -->
-                            <!-- <p><i>Welkom</i></p> -->
+                           <h5><div id="gebruikersnaam2"></div></h5>
+                           <div id="vandaag"></div>
+                           <hr>
+                           <img src="../../image/clock.png" width=400px alt="clock" title="Qien Uren App">
                             <div class="dashboard">
                                 <!-- <h2>Registratie deze periode</h2><br>
                                 <ul style="list-style-type:none;">

@@ -26,24 +26,6 @@
       $('.dataTables_length').addClass('bs-select');
     });
 
-    // function test() {
-    //   var myRows = [];
-    //   var $headers = $("th");
-    //   var $rows = $("tbody tr").each(function (index) {
-    //     $cells = $(this).find("td");
-    //     myRows[index] = {};
-    //     $cells.each(function (cellIndex) {
-    //       myRows[index][$($headers[cellIndex]).html()] = $(this).html();
-    //     });
-    //   });
-
-    //   // Let's put this in the object like you want and convert to JSON (Note: jQuery will also do this for you on the Ajax request)
-    //   var myObj = {};
-    //   myObj.myrows = myRows;
-    //   alert(JSON.stringify(myObj));
-    // }
-
-
     // here the table is generated with input fields for the employee to fill in
     function generateTable() {
       var y = "";
@@ -73,6 +55,11 @@
           for (c = 0; c < obj.length; c++) {
             if (obj[c].maand == document.getElementById("maand-formulier").value && obj[c].jaar == document.getElementById("jaar-formulier").value) {
               if(obj[c].statusGoedkeuring == "OPEN" ){
+                if (obj[c].opmerking !== "") {
+                  document.getElementById("opmerkingdiv").innerHTML = `Afgekeurd met reden: <br>` + obj[c].opmerking;
+                  var verklaring = document.getElementById("verklaringdiv");
+                  verklaring.style.display= "block";
+                }
                 var x;
                 for (x = 0; x < obj[c].werkdag.length; x++) {
                   y += `<tr id="${obj[c].werkdag[x].id}">
@@ -200,21 +187,28 @@
       xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/gebruiker/"+ x.id +"/setstatus-indienengebruiker", true);
       xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
       xhr.send();
-      generateTable();
     }
 
     function visueleFeedback(status) {
       if (status == "overwerk") {
+        var verklaring = document.getElementById("verklaringdiv");
+        verklaring.style.display = "none";
         var overwerk = document.getElementById("overwerkdiv");
         overwerk.style.display = "block";
         setTimeout(function(){overwerk.style.display = "none"}, 10000);
       } else if (status == "onderwerk") {
+        var verklaring = document.getElementById("verklaringdiv");
+        verklaring.style.display = "none";
         var onderwerk = document.getElementById("onderwerkdiv");
         onderwerk.style.display = "block";
         setTimeout(function(){onderwerk.style.display = "none"}, 10000);
       } else {
+        var verklaring = document.getElementById("verklaringdiv");
+        verklaring.style.display = "none";
         var gelukt = document.getElementById("geluktdiv");
         gelukt.style.display = "block";
+        generateTable();
+        statusUrenformulier();
         setTimeout(function(){gelukt.style.display = "none"}, 10000);
       }
     }
@@ -226,6 +220,8 @@
         onderwerk.style.display = "none";
         var gelukt = document.getElementById("geluktdiv");
         gelukt.style.display = "none";
+        var verklaring = document.getElementById("verklaringdiv");
+        verklaring.style.display = "none";
       }
 
     function urenOpslaanDag() {
@@ -289,28 +285,10 @@
 
     // checks to see if hours have been filled in and (in another method) will get saved
     function checkValidDagen(dag) {
-      if (dag.opdrachtUren > 0 || dag.overwerkUren > 0 || dag.verlofUren > 0 || dag.trainingsUren > 0 || dag.ziekteDag > 0) {
+      if (dag.opdrachtUren > 0 || dag.overwerkUren > 0 || dag.verlofUren > 0 || dag.trainingsUren > 0 || dag.ziekteDag > 0 || dag.overigeUren > 0) {
         return true;
       }
       return false;
-    }
-
-    // creates new urenformulier in database
-    function nieuwUrenFormulier() {
-      var obj = {};
-      obj.jaar = document.getElementById("jaar-formulier").value;
-      obj.maand = document.getElementById("maand-formulier").value;
-      objJSON = JSON.stringify(obj);
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-          var objresponse = JSON.parse(this.responseText);
-          return objresponse;
-        }
-      }
-      xhr.open("POST", "http://173.212.208.199:1337/api/urenformulier/new", true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.send(objJSON);
     }
 
           function formulierTest() {
@@ -358,6 +336,22 @@
             downloadLink.click();
           }
 
+          function autodisplaymonth() {
+            var date = new Date();
+            var urenFormulier = {};
+            var months = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"];
+            var thismonth = months[date.getMonth()];
+            var thisyear = new Date().getFullYear();
+            selectElement(thismonth, thisyear);
+          }
+
+          function selectElement(thismonth, thisyear) {  
+            let month = document.getElementById("maand-formulier");
+            let year = document.getElementById("jaar-formulier");
+            month.value = thismonth;
+            year.value = thisyear;
+          }
+
   </script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -378,7 +372,7 @@
   </script>
 </head>
 
-<body onload="generateTable(),  gebruikersnaam(), generateTablelocked(), statusUrenformulier(), hidedivs()">
+<body onload="hidedivs(), autodisplaymonth(), generateTable(),  gebruikersnaam(), generateTablelocked(), statusUrenformulier()">
   <!-- Modal bevestiging -->
   <div>
     <div class="modal fade" id="myModal" role="dialog">
@@ -450,7 +444,8 @@
     <!-- Breadcrumb -->
     <div>
       <ul class="breadcrumb">
-        <li><a href="medewerker.html">Medewerker Home</a></li>
+        <li><a href="medewerker.html">Gebruiker Home</a></li>
+        <li>Urenregistratie</li>
       </ul>
     </div>
   </header>
@@ -464,8 +459,7 @@
         <div class="col-sm-3">
           <div class="sidebar">
             <button class="button2" onclick="formulierTest()">CSV Downloaden</button>
-            <button class="button2" onclick="window.location.href='medewerkeruroverzicht.html'">Historie
-                urenregistratie</button>
+            <button class="button2" onclick="window.location.href='medewerkeruroverzicht.html'">Historie</button>
             <!-- Trigger the modal with a button -->
             <br>
             <br>
@@ -482,12 +476,15 @@
           <div class="content">
             <div class="exception" id="overwerkdiv">Het lijkt erop dat je teveel uren hebt ingevuld. Kijk het even na!</div>
             <div class="exception" id="onderwerkdiv">Het lijkt erop dat je te weinig uren hebt ingevuld. Kijk het even na!</div>
-            <div class="confirm" id="geluktdiv">Formulier ingedient!</div>
+            <div class="confirm" id="geluktdiv">Formulier ingediend!</div>
+            <div class="exception" id="verklaringdiv">
+              <div id="opmerkingdiv"></div>
+            </div>
             <div class="datum-kiezer">
             <select name="jaar-formulier" id="jaar-formulier" onchange="generateTable(), statusUrenformulier()">
+              <option value="2021">2021</option>
               <option value="2020">2020</option>
               <option value="2019">2019</option>
-              <option value="2018">2018</option>
             </select>
             <select name="maand-formulier" id="maand-formulier" onchange="generateTable(), statusUrenformulier()">
               <option value="JANUARI">januari</option>
@@ -530,7 +527,6 @@
             © 2020 Team 1&nbsp;&nbsp;&nbsp;
             <a href="https://www.qien.nl/contact/">Contact</a>&nbsp;&nbsp;&nbsp;
             <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"> Qien.nl</a>
-
     </div>
 </footer>
 
