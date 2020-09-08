@@ -157,7 +157,7 @@
             xhr.open("PUT", "http://173.212.208.199:1337/api/urenformulier/bedrijf/" + storedvalue + "/setstatus-goedkeuring-bedrijf", true);
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
-            lijstMedewerkers();
+            setTimeout(paginaReload,2000);
         }
 
         function formulierAfkeuren() {
@@ -179,7 +179,7 @@
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
-            lijstMedewerkers();
+            setTimeout(paginaReload,2000);
         }
 
 
