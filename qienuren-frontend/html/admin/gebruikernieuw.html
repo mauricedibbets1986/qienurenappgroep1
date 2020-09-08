@@ -63,9 +63,9 @@
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
-            document.getElementById("modal-text").innerHTML = "Trainee "+obj.voornaam +" "+ obj.achternaam+ " aangemaakt";
+            document.getElementById("modal-text").innerHTML = "Trainee "+obj.voornaam.bold() +" "+ obj.achternaam.bold() + " aangemaakt";
             $('#myModal').modal('show');
-                       setTimeout(paginaTerug,2000);
+            setTimeout(paginaTerug,2000);
         }
 
         function medewerkerToevoegen() {
@@ -93,7 +93,7 @@
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(objJSON);
-            document.getElementById("modal-text").innerHTML = "Medewerker "+obj.voornaam +" "+ obj.achternaam+ " aangemaakt";
+            document.getElementById("modal-text").innerHTML = "Medewerker "+obj.voornaam.bold() +" "+ obj.achternaam.bold() + " aangemaakt";
             $('#myModal').modal('show');
             setTimeout(paginaTerug,2000);
         }
@@ -121,7 +121,7 @@
             xhr.open("POST", "http://173.212.208.199:1337/api/admin/users/addAdmin", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-            document.getElementById("modal-text").innerHTML = "Admin "+obj.voornaam +" "+ obj.achternaam+ " aangemaakt";
+            document.getElementById("modal-text").innerHTML = "Admin "+obj.voornaam.bold() +" "+ obj.achternaam.bold()+ " aangemaakt";
             $('#myModal').modal('show');
             setTimeout(paginaTerug,2000);
         }
@@ -206,8 +206,7 @@
                 <!-- sidebar -->
                 <div class="col-sm-3">
                     <div class="sidebar">
-                        <button class="button1" onclick="window.location.href='gebruikeroverzicht.html'">Terug naar
-                            overzicht</button>
+                        <button class="button1" onclick="window.location.href='gebruikeroverzicht.html'">Terug</button>
                     </div>
                 </div>
                 <!-- main content , window.location.href='gebruikeroverzicht.html'-->
