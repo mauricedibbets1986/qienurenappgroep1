@@ -138,8 +138,7 @@ const alleGebruikersModal = () => {
         for (c = 0; c < databaseContents[x].roles.length; c++) {
           if (
             databaseContents[x].roles[c].name == "ROLE_ADMIN" ||
-            databaseContents[x].roles[c].name == "ROLE_BEDRIJF" ||
-            databaseContents[x].roles[c].name == "ROLE_MEDEWERKER"
+            databaseContents[x].roles[c].name == "ROLE_BEDRIJF"
           ) {
           } else {
             var el = document.createElement("option");
