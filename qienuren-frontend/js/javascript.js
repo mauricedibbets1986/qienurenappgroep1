@@ -75,6 +75,9 @@ const deleteBedrijf = () => {
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
   xhr.send();
+  document.getElementById("modal-aanpassen").innerHTML = "Bedrijf verwijdert";
+  $("#myModal-aanpassen").modal("show");
+  setTimeout(paginaReload, 2000);
 };
 
 const loginAuthAdmin = () => {
@@ -198,6 +201,10 @@ const updateBedrijftoGebruiker = () => {
 
 function paginaTerug() {
   window.location.replace("gebruikeroverzicht.html");
+}
+
+function paginaTerugBedrijf() {
+  window.location.replace("bedrijfoverzicht.html");
 }
 
 function paginaReload() {
