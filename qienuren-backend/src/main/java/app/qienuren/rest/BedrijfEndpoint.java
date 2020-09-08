@@ -2,7 +2,12 @@ package app.qienuren.rest;
 
 import app.qienuren.controller.BedrijfRepository;
 import app.qienuren.controller.BedrijfService;
+import app.qienuren.gebruikerDto.BedrijfDetailsResponse;
+import app.qienuren.gebruikerDto.GebruikerDetailsResponse;
+import app.qienuren.gebruikerDto.GebruikerDto;
 import app.qienuren.model.Bedrijf;
+import app.qienuren.model.Gebruiker;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -52,5 +57,16 @@ public class BedrijfEndpoint {
     @GetMapping("/naam/{naam}")
     public Iterable<Bedrijf> getBedrijfByNaam(@PathVariable(value = "naam") String bedrijfsNaam){
         return bedrijfService.getByBedrijfsNaam(bedrijfsNaam);
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','BEDRIJF')or #id == principal.userId")
+    @GetMapping("/{userId}")
+    public BedrijfDetailsResponse getBedrijfByUserId(@PathVariable(value = "userId") String userId) {
+        BedrijfDetailsResponse returnValue = new BedrijfDetailsResponse();
+
+        GebruikerDto userDto = bedrijfService.getBedrijfByUserId(userId);
+        BeanUtils.copyProperties(userDto, returnValue);
+
+        return returnValue;
     }
 }
