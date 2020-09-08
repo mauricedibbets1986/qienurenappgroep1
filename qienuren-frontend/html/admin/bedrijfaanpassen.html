@@ -19,50 +19,6 @@
     <script src="../../js/javascript.js"></script>
 
     <script>
- function alleBedrijven() {
-            var bedrijfString = "";
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (this.readyState == 4) {
-                    var databaseContents = JSON.parse(this.responseText);
-                    var lijstGebruikers = JSON.parse(this.responseText);
-                    var x;
-
-                    for (x = 0; x < databaseContents.length; x++) {
-
-                        bedrijfString +=
-                            `
-                            <div>
-                            <h2> ${databaseContents[x].bedrijfsNaam}</h2>
-                            <b>Contacht Persoon:</b> ${databaseContents[x].contactPersoon}<br>
-                            <b>Telefoonnummer:</b> ${databaseContents[x].telefoonNummer}<br>
-                            <b>E-mailadres:</b> ${databaseContents[x].email}<br>
-                            <b>Adres:</b> ${databaseContents[x].adres}<br>
-                            <b>Toev.:</b> ${databaseContents[x].evtToevoeging}<br>
-                            <b>Postcode:</b> ${databaseContents[x].postcode}<br>
-                            <b>Plaats:</b> ${databaseContents[x].plaats}<br>
-                            <b>Trainees werkzaam: 
-                            `
-                        for (var y = 0; y < databaseContents[x].lijstGebruikers.length; y++) {
-                            bedrijfString +=
-                                `
-                             ${databaseContents[x].lijstGebruikers[y].voornaam}`
-                        }
-                        bedrijfString +=
-                            `
-                            </p><p style="color:grey"><b>id:</b> ${databaseContents[x].id}</p>
-                            <hr>
-                            </div>
-                            `
-                    }
-                }
-            }
-            xhr.open("GET", "http://173.212.208.199:1337/api/bedrijf/all", true)
-            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-            xhr.send();
-        }
-        
-
         function bedrijfAanpassen() {
             // change details - want to get ID automatically but don't know how to take persistent data from one page to another, will fix
             var xhr = new XMLHttpRequest();
@@ -102,7 +58,7 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body onload="loginAuthAdmin(), alleBedrijvenModal(), alleBedrijven()">
+<body onload="loginAuthAdmin(), alleBedrijvenModal(), alleBedrijvenWijzigModal()">
     <div class="modal fade" id="myModal5" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -175,30 +131,29 @@
                 <!-- main content -->
                 <div class="col-lg-9">
                     <div class="content">
-                        <h2>Bedrijf gegevens wijzigen</h2>
+                        <h2>Wijzigen bedrijf gegevens</h2>
                         <div class="body-form">
-                            Bedrijf ID<br>
-                            <input type=text id=bedrijfID placeholder="temp"><br>
-                            Bedrijfsnaam<br>
-                            <input type=text id=bedrijfsNaam><br>
-                            Naam contact persoon<br>
-                            <input type="text" id=contactPersoon><br>
-                            Telefoonnummer<br>
-                            <input type="text" id=telefoonNummer><br>
-                            E-mailadres<br>
-                            <input type="text" id=emailAdres><br>
-                            Adres<br>
-                            <input type="text" id=adres><br>
-                            Evt. toevoeging<br>
-                            <input type="text" id=evtToevoeging><br>
-                            Postcode<br>
-                            <input type=text id=postcode><br>
-                            Plaats<br>
-                            <input type=text id=plaats><br>
-                            <input type="button" class="button3"
-                                onclick="bedrijfAanpassen(),window.location.href='bedrijfoverzicht.html'"
-                                value="Opslaan">
-                        <br>
+                            <form name="type-form">
+                                <div class="inputData">
+                                    <label>Bedrijf</label><select id="selectNumber">
+                                        <option>Kies een bedrijf</option>
+                                    </select><br>
+                                    <label>Bedrijfsnaam</label><input type="text" id=nieuwNaam><br>
+                                    <label>Contactpersoon</label><input type="text" id=nieuwContactpersoon><br>
+                                    <label>Adres</label><input type="text" id=nieuwAdres><br>
+                                    <label>Evt. toevoeging</label><input type="text" id=nieuwEvtToevoeging><br>
+                                    <label>Postcode</label><input type="text" id=nieuwPostcode><br>
+                                    <label>Woonplaats</label><input type="text" id=nieuwWoonplaats><br>
+                                    <label>Geboortedatum</label><input type="date" id="nieuwGeboorteDatum"><br>
+                                    <label>Telefoonnummer</label><input type=text id=nieuwTelefoonNummer><br>
+                                    <label>E-mailadres</label><input type=text id=nieuwEmailadres><br>
+                                    <label>Wachtwoord</label><input type=password id=nieuwWachtwoord> <br>
+                                    <br>
+                                </div>
+                                <br>
+                                <input type="button" class="button3" id="aanpas-knop" onclick="gegevensAanpassen()" value="Opslaan">
+                                <br>
+                            </form>
                         </div>
                     </div>
                 </div>
