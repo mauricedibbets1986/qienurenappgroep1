@@ -31,7 +31,7 @@
             obj.adres = document.getElementById("nieuwAdres").value;
             obj.evtToevoeging = document.getElementById("nieuwEvtToevoeging").value;
             obj.postcode = document.getElementById("nieuwPostcode").value;
-            obj.plaats = document.getElementById("nieuwWoonplaats").value;
+            obj.woonplaats = document.getElementById("nieuwWoonplaats").value;
             objJSON = JSON.stringify(obj);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
