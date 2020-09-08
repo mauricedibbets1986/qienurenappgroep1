@@ -22,6 +22,21 @@
     <script src="../../js/javascript.js"></script>
 
     <script>
+        function functionPicker() {
+            var bedrijfsNaam = document.getElementById("bedrijfsNaam").value;
+            var contactPersoon = document.getElementById("contactPersoon").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            if(bedrijfsNaam == "" || contactPersoon == "" || email == "" || password == ""){
+                document.getElementById("modal-text").innerHTML = "Niet alle verplichte velden zijn ingevuld!";
+            $('#myModal').modal('show');
+            } else {
+                bedrijfToevoegen();
+                }
+        }
+
+
         function bedrijfToevoegen() {
             var obj = {};
             obj.bedrijfsNaam = document.getElementById("bedrijfsNaam").value;
@@ -31,7 +46,7 @@
             obj.adres = document.getElementById("adres").value;
             obj.evtToevoeging = document.getElementById("evtToevoeging").value;
             obj.postcode = document.getElementById("postcode").value;
-            obj.plaats = document.getElementById("plaats").value;
+            obj.plaats = document.getElementById("woonplaats").value;
             obj.password = document.getElementById("password").value;
             objJSON = JSON.stringify(obj);
             var xhr = new XMLHttpRequest();
@@ -114,27 +129,27 @@
                 </div>
                 <!-- main content -->
                 <div class="col-lg-9">
-                    <h2>Nieuw Bedrijf</h2>
-                    <div class="body-form">
-                        Bedrijfsnaam<br>
-                        <input type="text" id=bedrijfsNaam><br>
-                        Naam contact persoon<br>
-                        <input type="text" id=contactPersoon><br>
-                        Telefoonnummer<br>
-                        <input type="text" id=telefoonNummer><br>
-                        E-mailadres<br>
-                        <input type="text" id=email><br>
-                        Adres<br>
-                        <input type="text" id=adres><br>
-                        Evt. toevoeging<br>
-                        <input type="text" id="evtToevoeging"><br>
-                        Postcode<br>
-                        <input type=text id=postcode><br>
-                        Plaats<br>
-                        <input type="text" id=plaats><br>
-                        Wachtwoord<br>
-                        <input type="password" id=password id=password><br>
-                        <input class="button3" type="button" onclick="bedrijfToevoegen()" value="Opslaan"><br>
+                    <div class="content">
+                        <h2>NAW-gegevens nieuw bedrijf</h2>
+                        <div class="body-form">
+                            <form name="type-form">
+                                
+                                <br>
+                                <div class="inputData">
+                                    <label>Bedrijfsnaam*</label><input type="text" id=bedrijfsNaam required><br>
+                                    <label>Contactpersoon*</label><input type="text" id=contactPersoon required><br>
+                                    <label>Adres</label><input type="text" id=adres><br>
+                                    <label>Evt. toevoeging</label><input type="text" id=evtToevoeging><br>
+                                    <label>Postcode</label><input type="text" id=postcode><br>
+                                    <label>Woonplaats</label><input type="text" id=woonplaats><br>
+                                    <label>Telefoonnummer</label><input type=text id=telefoonNummer><br>
+                                    <label>E-mailadres*</label><input type=text id=email required><br>
+                                    <label>Wachtwoord*</label><input type=password id=password required> <br>
+                                </div>
+                                <br>
+                                <input type=button id="buttonGebruikerAanmaken" onclick="functionPicker()" value="Aanmaken"><br>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
