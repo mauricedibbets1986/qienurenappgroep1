@@ -417,6 +417,7 @@ ul.breadcrumb {
 .container{
   margin-top: 20px;
   min-height: 100%;
+  margin-bottom: 85px;
 }
 
 .content{
