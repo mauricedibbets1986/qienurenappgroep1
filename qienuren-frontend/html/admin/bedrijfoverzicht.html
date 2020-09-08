@@ -100,15 +100,16 @@
                             </tr>
                             <tr>
                             <th>Woonplaats: </th>
-                            <td>${databaseContents.woonplaats}</td>
+                            <td>${databaseContents.woonplaat}</td>
                             </tr>
                         </table>
                         </div>
                             `
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
+                    console.log(databaseContents);
                 }
             }
-            xhr.open("GET", "http://173.212.208.199:1337/api/users/" + id, true);
+            xhr.open("GET", "http://173.212.208.199:1337/api/bedrijf/" + userId, true);
             console.log("werkt dit?");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send();
