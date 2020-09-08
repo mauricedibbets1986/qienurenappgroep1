@@ -271,7 +271,7 @@
 
     // checks to see if hours have been filled in and (in another method) will get saved
     function checkValidDagen(dag) {
-      if (dag.opdrachtUren > 0 || dag.overwerkUren > 0 || dag.verlofUren > 0 || dag.trainingsUren > 0 || dag.ziekteDag > 0) {
+      if (dag.opdrachtUren > 0 || dag.overwerkUren > 0 || dag.verlofUren > 0 || dag.trainingsUren > 0 || dag.ziekteDag > 0 || dag.overigeUren > 0) {
         return true;
       }
       return false;
