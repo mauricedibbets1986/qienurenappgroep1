@@ -63,7 +63,7 @@
     xhr.send();
   }
 
-  function bedrijfsGegevens(id) {
+  function bedrijfsGegevens(userId) {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
@@ -100,13 +100,12 @@
                             </tr>
                             <tr>
                             <th>Woonplaats: </th>
-                            <td>${databaseContents.woonplaat}</td>
+                            <td>${databaseContents.woonplaats}</td>
                             </tr>
                         </table>
                         </div>
                             `
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
-                    console.log(databaseContents);
                 }
             }
             xhr.open("GET", "http://173.212.208.199:1337/api/bedrijf/" + userId, true);
