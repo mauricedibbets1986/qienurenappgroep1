@@ -59,21 +59,30 @@
 </head>
 
 <body onload="loginAuthAdmin(), alleBedrijvenModal(), alleBedrijvenWijzigModal()">
-    <div class="modal fade" id="myModal5" role="dialog">
-        <div class="modal-dialog modal-lg">
+    <div class="modal fade" id="myModal6" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">Verwijder bedrijf</h3>
+                    <h3 class="modal-title">Verwijder gebruiker</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body modal-edit">
                     <select id="selectBedrijf">
-                        <option>Kies een bedrijf</option>
+                        <option>Kies een Bedrijf</option>
                     </select>
-                    <input type="button" class="button3"
-                            onclick="deleteBedrijf()"
-                            value="verwijderen" data-dismiss="modal"><br>
+                    <input type="button" id="deleteBedrijf" class="button3-sm" onclick="deleteBedrijf()"
+                        value="verwijderen" data-dismiss="modal" disabled><br>
+
+                </div>
+                <div class="modal-footer">
+                    <h4>Ik bevestig hierbij dat ik dit bedrijf uit de database verwijder</h4><br>
+                    <input type="checkbox" id="form-check"
+                        onchange="document.getElementById('deleteBedrijf').disabled = !this.checked;" />
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Header -->
     <header>
         
@@ -124,7 +133,7 @@
                 <div class="col-sm-3">
                     <div class="sidebar">
                         <input type="button" class="button2" data-toggle="modal"
-                            data-target="#myModal5" value="Verwijder bedrijf">
+                            data-target="#myModal6" value="Verwijder bedrijf">
                             <button class="button1" onclick="window.location.href='bedrijfoverzicht.html'">Terug naar overzicht</button>
                     </div>
                 </div>
