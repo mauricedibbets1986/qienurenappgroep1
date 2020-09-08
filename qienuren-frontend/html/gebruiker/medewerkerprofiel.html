@@ -19,6 +19,21 @@
     <!-- Eigen JavaScript -->
     <script src="../../js/javascript.js"></script>
     <script>
+
+        function emailenMaar() {
+            console.log("test 1")
+            var xhr = new XMLHttpRequest();
+            var obj = {};
+            obj.emailTo = document.getElementById("emailNaar").value;
+            obj.subject = document.getElementById("onderwerpregel").value;
+            obj.text = document.getElementById("bodyVanEmail").value;
+            var json = JSON.stringify(obj);
+            xhr.open("POST", "http://localhost:8082/mail", true);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send(json);
+        }
+
         function persoonsGegevens() {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
@@ -103,38 +118,33 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">Bewerk mijn profiel</h3>
+                    <h3 class="modal-title">Verzoek tot aanpassing profiel</h3>
+                    <h6>Via de onderstaande knop kun je ons per e-mail verzoeken je gegevens aan te passen</h6>
                 </div>
                 <div class="modal-body">
-                    <div class="inputData">
-                        <label>Voornaam</label><input type="text" id=nieuwVoornaam><br>
-                        <label>Achternaam</label><input type="text" id=nieuwAchternaam><br>
-                        <label>Adres</label><input type="text" id=nieuwAdres><br>
-                        <label>Evt. toevoeging</label><input type="text" id=nieuwEvtToevoeging><br>
-                        <label>Postcode</label><input type="text" id=nieuwPostcode><br>
-                        <label>Woonplaats</label><input type="text" id=nieuwWoonplaats><br>
-                        <label>Geboortedatum</label><input id="nieuwGeboorteDatum" type="date"><br>
-                        <label>Telefoonnummer</label><input type=text id=nieuwTelefoonNummer><br>
-                        <div id="emailplaceholder"></div><br>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default button3" onclick="gegevensAanpassen()"
-                            data-dismiss="modal" data-toggle="modal" data-target="#myModal">Bevestigen</button>
-                        <button type="button" class="btn btn-default button2" onclick=""
-                            data-dismiss="modal">Annuleren</button>
-                    </div>
+                    <form>
+                        <input type="text" width="300px" placeholder="klaasjankostelijk@gmail.com" id="emailNaar">
+                        <input type="text" placeholder="Verzoek tot wijzigen gegevens" id="onderwerpregel">
+                        <br>
+                        <input type="text" placeholder="Bericht" id="bodyVanEmail">
+                        <input type=button onclick=emailenMaar() value="Dien verzoek in">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-default button2" onclick=""
+                        data-dismiss="modal">Annuleren</button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- Header -->
     <header>
         <!-- Qien Logo -->
         <nav class="navbar navbar navbar-light navbar-expand-sm">
             <a class="navbar-brand" href="https://www.qien.nl">
-                <img src="../../image/qienlogowit.png" width="75" height="75"
-                    alt="Qien Logo">
+                <img src="../../image/qienlogowit.png" width="75" height="75" alt="Qien Logo">
             </a>
             <!-- Profiel menu -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4"
@@ -203,19 +213,17 @@
         </div>
     </main>
 
-
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             
                 © 2020 Team 1&nbsp;&nbsp;&nbsp;
                 <a href="https://www.qien.nl/contact/">Contact</a>&nbsp;&nbsp;&nbsp;
+
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"> Qien.nl</a>
             
         </div>
     </footer>
-
-
 </body>
 
 </html>

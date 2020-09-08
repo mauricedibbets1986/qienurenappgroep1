@@ -19,11 +19,11 @@
     <!-- Eigen JavaScript -->
     <script src="../../js/javascript.js"></script>
 
-    
+
     <script>
 
 
-function emailenMaar() {
+        function emailenMaar() {
             console.log("test 1")
             var xhr = new XMLHttpRequest();
             var obj = {};
@@ -35,7 +35,7 @@ function emailenMaar() {
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(json);
-            }
+        }
 
         function zoekGebruikerOpVoornaam() {
             var xhr = new XMLHttpRequest();
@@ -172,13 +172,13 @@ function emailenMaar() {
 
         // alle medewerkers zien
         function lijstMedewerkers() {
-    var lijst = "";
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-      if (this.readyState == 4) {
-        var obj = JSON.parse(this.responseText);
-        var x;
-        lijst += `
+            var lijst = "";
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    var obj = JSON.parse(this.responseText);
+                    var x;
+                    lijst += `
                     <table id="overzichttable" class="table-sm overzichtformulieren tableFixHead" cellspacing="0"
                         width="100%">
                         <thead>
@@ -188,32 +188,32 @@ function emailenMaar() {
                         </tr>
                         </thead><tbody>
                         `
-        for (x = 0; x < obj.length; x++) {
-          var volleNaam = obj[x].voornaam + " " + obj[x].achternaam;
-          var userId = obj[x].userId;
-          if (obj[x].voornaam != undefined && obj[x].achternaam != undefined && obj[x].achternaam != "Qien") {
-            lijst +=
-              ` <tr>
+                    for (x = 0; x < obj.length; x++) {
+                        var volleNaam = obj[x].voornaam + " " + obj[x].achternaam;
+                        var userId = obj[x].userId;
+                        if (obj[x].voornaam != undefined && obj[x].achternaam != undefined && obj[x].achternaam != "Qien") {
+                            lijst +=
+                                ` <tr>
                                       <td>${volleNaam}</td>
                                       <td><button onclick="persoonsGegevens('${userId}')" 
                                         class="button3-sm" data-toggle="modal" data-target="#myModal1">bekijken</button></td>
   
                                 </tr>
                                 `
-          }
+                        }
+                    }
+                }
+                lijst += `</tbody></table>`;
+
+                document.getElementById("lijst-medewerkers").innerHTML = lijst;
+
+            }
+            xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true);
+            xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xhr.send();
         }
-      }
-      lijst += `</tbody></table>`;
 
-      document.getElementById("lijst-medewerkers").innerHTML = lijst;
-
-    }
-    xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true);
-    xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
-    xhr.send();
-  }
-
-  function persoonsGegevens(id) {
+        function persoonsGegevens(id) {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
@@ -283,10 +283,10 @@ function emailenMaar() {
 
                             if (databaseContents[x].roles[c].name == "ROLE_ADMIN" || databaseContents[x].roles[c].name == "ROLE_BEDRIJF") {
                                 console.log("admin en bedrijf zijn hier niet geladen")
-                            // }
-                            //  else if (document.getElementById("filter").value == "all" || databaseContents[x].roles[c].name == document.getElementById("filter").value) {
+                                // }
+                                //  else if (document.getElementById("filter").value == "all" || databaseContents[x].roles[c].name == document.getElementById("filter").value) {
                                 employeeString +=
-                                `
+                                    `
                                 <div>
                                 <h2>${databaseContents[x].voornaam} ${databaseContents[x].achternaam}</h2>
                                 <b>Adres:</b> ${databaseContents[x].adres}<br>
@@ -300,10 +300,10 @@ function emailenMaar() {
                                 <hr>
                                 </div>
                                 `
-                        } 
-                       }
+                            }
+                        }
                     }
-                document.getElementById("showGebruikers").innerHTML = employeeString;
+                    document.getElementById("showGebruikers").innerHTML = employeeString;
                 }
             }
             xhr.open("GET", "http://173.212.208.199:1337/api/admin/all-users", true);
@@ -344,7 +344,7 @@ function emailenMaar() {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
-        
+
 </head>
 
 <body onload="lijstMedewerkers(), alleGebruikersModal(), alleBedrijvenModal(), loginAuthAdmin()">
@@ -361,9 +361,26 @@ function emailenMaar() {
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default button3-sm" onclick="" data-dismiss="modal">Sluiten</button>
+                    <tr>
+                        <th>
+                            <input type="text" placeholder="E-mailadres" id="emailNaar">
+                        </th>
+                        <th>
+                            <input type="text" placeholder="Onderwerpregel" id="onderwerpregel">
+                        </th>
+                        <br>
+                        
+                            <textarea type="text" placeholder="Bericht" id="bodyVanEmail"></textarea>
+                           
+                        
+                            <input type=button onclick=emailenMaar() value="Mail!!">
+                           
+                    </tr>
+                    <button type="button" class="btn btn-default button2" onclick=""
+                        data-dismiss="modal">Sluiten</button>
+                </div>
+
             </div>
-          </div>
         </div>
       </div>
       </div>
@@ -407,43 +424,40 @@ function emailenMaar() {
             <div class="modal-footer">
               <button type="button" class="btn btn-default button3-sm" onclick="" data-dismiss="modal">Sluiten</button>
             </div>
-          </div>
         </div>
       </div>
       </div>
-
     <!-- Header -->
     <header>
         <!-- Qien Logo -->
         <nav class="navbar navbar navbar-light navbar-expand-sm">
             <a class="navbar-brand" href="https://www.qien.nl">
-                <img src="../../image/qienlogowit.png" width="75" height="75"
-                    alt="Qien Logo">
+                <img src="../../image/qienlogowit.png" width="75" height="75" alt="Qien Logo">
             </a>
-          <!-- Profiel menu -->
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbar-list-4">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="../../image/adminpic.PNG" width="85" height="85" class="rounded-circle">
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item"><b>
-                    Admin
-                  </b></a>
-                <hr>
-                <a onclick="logout()" class="dropdown-item" href="#">Uitloggen</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-        </div>
-      </nav>
+            <!-- Profiel menu -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-list-4">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="../../image/adminpic.PNG" width="85" height="85" class="rounded-circle">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item"><b>
+                                    Admin
+                                </b></a>
+                            <hr>
+                            <a onclick="logout()" class="dropdown-item" href="#">Uitloggen</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </nav>
         <!-- Breadcrumb -->
         <div>
             <ul class="breadcrumb">
@@ -492,4 +506,5 @@ function emailenMaar() {
         </div>
     </footer>
 </body>
+
 </html>
