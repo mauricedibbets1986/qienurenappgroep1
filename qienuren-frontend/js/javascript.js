@@ -59,8 +59,8 @@ const deleteGebruiker = () => {
   xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
   xhr.send();
   document.getElementById("modal-aanpassen").innerHTML = "Gebruiker verwijdert";
-  $('#myModal-aanpassen').modal('show');
-  setTimeout(paginaReload,2000);
+  $("#myModal-aanpassen").modal("show");
+  setTimeout(paginaReload, 2000);
 };
 
 const deleteBedrijf = () => {
@@ -88,12 +88,32 @@ const alleBedrijvenModal = () => {
     if (this.readyState == 4) {
       var bedrijven = JSON.parse(this.responseText);
       var x;
-      var select = document.getElementById("selectBedrijf");
+      var selectVerwijderBedrijf = document.getElementById("selectBedrijf");
       for (x = 0; x < bedrijven.length; x++) {
         var el = document.createElement("option");
         el.textContent = bedrijven[x].bedrijfsNaam;
         el.value = bedrijven[x].id;
-        select.appendChild(el);
+        selectVerwijderBedrijf.appendChild(el);
+      }
+    }
+  };
+  xhr.open("GET", "http://173.212.208.199:1337/api/bedrijf/all", true);
+  xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+  xhr.send();
+};
+
+const alleBedrijvenWijzigModal = () => {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (this.readyState == 4) {
+      var bedrijven = JSON.parse(this.responseText);
+      var x;
+      var selectWijzigBedrijf = document.getElementById("selectNumber");
+      for (x = 0; x < bedrijven.length; x++) {
+        var el = document.createElement("option");
+        el.textContent = bedrijven[x].bedrijfsNaam;
+        el.value = bedrijven[x].id;
+        selectWijzigBedrijf.appendChild(el);
       }
     }
   };
@@ -172,14 +192,15 @@ const updateBedrijftoGebruiker = () => {
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
   xhr.send();
-  document.getElementById("modal-aanpassen").innerHTML = "Gebruiker gekoppeld aan bedrijf";
-  $('#myModal-aanpassen').modal('show');
+  document.getElementById("modal-aanpassen").innerHTML =
+    "Gebruiker gekoppeld aan bedrijf";
+  $("#myModal-aanpassen").modal("show");
 };
 
-function paginaTerug(){
+function paginaTerug() {
   window.location.replace("gebruikeroverzicht.html");
 }
 
-function paginaReload(){
+function paginaReload() {
   location.reload();
 }
