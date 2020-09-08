@@ -358,6 +358,22 @@
             downloadLink.click();
           }
 
+          function autodisplaymonth() {
+            var date = new Date();
+            var urenFormulier = {};
+            var months = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"];
+            var thismonth = months[date.getMonth()];
+            var thisyear = new Date().getFullYear();
+            selectElement(thismonth, thisyear);
+          }
+
+          function selectElement(thismonth, thisyear) {  
+            let month = document.getElementById("maand-formulier");
+            let year = document.getElementById("jaar-formulier");
+            month.value = thismonth;
+            year.value = thisyear;
+          }
+
   </script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -378,7 +394,7 @@
   </script>
 </head>
 
-<body onload="generateTable(),  gebruikersnaam(), generateTablelocked(), statusUrenformulier(), hidedivs()">
+<body onload="hidedivs(), autodisplaymonth(), generateTable(),  gebruikersnaam(), generateTablelocked(), statusUrenformulier()">
   <!-- Modal bevestiging -->
   <div>
     <div class="modal fade" id="myModal" role="dialog">
@@ -484,9 +500,9 @@
             <div class="confirm" id="geluktdiv">Formulier ingedient!</div>
             <div class="datum-kiezer">
             <select name="jaar-formulier" id="jaar-formulier" onchange="generateTable(), statusUrenformulier()">
+              <option value="2021">2021</option>
               <option value="2020">2020</option>
               <option value="2019">2019</option>
-              <option value="2018">2018</option>
             </select>
             <select name="maand-formulier" id="maand-formulier" onchange="generateTable(), statusUrenformulier()">
               <option value="JANUARI">januari</option>
@@ -529,7 +545,6 @@
             © 2020 Team 1&nbsp;&nbsp;&nbsp;
             <a href="https://www.qien.nl/contact/">Contact</a>&nbsp;&nbsp;&nbsp;
             <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"> Qien.nl</a>
-        
     </div>
 </footer>
 
