@@ -131,6 +131,10 @@ p {
     outline: none;
 }
 
+input[type=button]:focus{
+  outline: none;
+}
+
   .button1{
     margin-bottom:25px;
     border-radius: 30px;
@@ -184,6 +188,12 @@ p {
   color: #000000;
 }
 
+.button3:disabled{
+  background-color: #ffe590;
+  color: #535353;
+
+}
+
 .button3:hover{
   background-color: #FFDA5C;
 }
@@ -202,6 +212,11 @@ p {
 
 .button3-sm:hover{
   background-color: #FFDA5C;
+}
+
+.button3-sm:disabled{
+  background-color: #ffe590;
+  color: #535353;
 }
 
 #buttonGebruikerAanmaken{
@@ -503,6 +518,12 @@ ul.breadcrumb {
   margin-top: 100px;
 }
 
+.login  input[type=password], input[type=email]{
+  min-width: 180px;
+  margin-left: 0;
+  margin-top: 0;
+}
+
 
 .urenform th{
   background-color: #682BAA;
@@ -575,8 +596,7 @@ color: #fff;
   display: block;
 }
 
-input[type=text], input[type=password], input[type=email],input[type=date], select {
-  min-width:200px;
+.body-form input[type=text], input[type=password], input[type=email], input[type=date], select {
   padding: 4px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -584,9 +604,6 @@ input[type=text], input[type=password], input[type=email],input[type=date], sele
   border-radius: 4px;
   background-color:#fff;
   box-sizing: border-box;
-}
-input[type=submit]:focus{
-outline: none;
 }
 
 .alignleft {
@@ -609,7 +626,13 @@ outline: none;
   }
 }
 
-.inputData input,select{
+.datum-kiezer select{
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.inputData input[type=text], input[type=password], input[type=date], select{
+  min-width: 215px;
   margin-left: 9em;
   margin-top: 0;
 }
@@ -633,13 +656,15 @@ outline: none;
 }
 
 
-#nieuwGeboorteDatum{
-.modal-edit body{
+.modal-edit select{
+  width:100%;
+  display: inline-block;
+  margin: 10px 0;
 }
 
-.modal-edit select{
-  min-width:200px;
-  margin: 0px 0;
+.dropdown-item.active, .dropdown-item:active {
+  color: #000;
+  background-color: #FFDA5C;
 }
 
 /* #nieuwGeboorteDatum{

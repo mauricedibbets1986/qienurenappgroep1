@@ -93,16 +93,31 @@ Groep 1`;
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">Ziek melden? Veel Beterschap</h3>
+                    <h3 class="modal-title">Ziek melden? </h3>
                     <input type="button" class="button3"
                     onclick="ziekMelden()" value="Bevestigen"
-                    data-dismiss="modal"><br>
+                    data-dismiss="modal" data-toggle="modal" data-target="#myModal"><br>
                     <input type="button" class="button3"
                     value="Annuleren" data-dismiss="modal"><br>
                 </div>
             </div>
         </div>
     </div>
+    <!-- ziekmelden bevestiging modal -->
+    <div>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p><b>Veel Beterschap! We hebben je bericht doorgestuurd naar je leidinggevende.</b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
     <header>
         <!-- Qien Logo -->
         <nav class="navbar navbar navbar-light navbar-expand-sm">
@@ -181,32 +196,13 @@ Groep 1`;
 
 
     <!-- Footer -->
-    <footer class="page-footer font-small footer-page">
-        <div class="container">
-            <div class="row footer-content">
-
-                <div class="col">
-                    <b>Bedrijfsinformatie</b><br>
-                    <br>
-                    <a href="https://www.qien.nl/over-ons/">Over Ons</a><br>
-                    <a href="https://www.qien.nl/contact/">Contact</a><br>
-                </div>
-                <div class="col">
-                    <b>Contact</b><br>
-                    <br>
-                    Qien BV<br>
-                    Atoomweg 350<br>
-                    3542 AB Utrecht<br>
-                    030-7514777<br>
-                    info@qien.nl<br>
-                </div>
-            </div>
-            <!-- Copyright -->
-            <div class="footer-copyright py-3">
-                <hr style="background-color:white">
-                © 2020 Team 1:
+    <footer class="footer">
+        <div class="footer-container">
+            
+                © 2020 Team 1&nbsp;&nbsp;&nbsp;
+                <a href="https://www.qien.nl/contact/">Contact</a>&nbsp;&nbsp;&nbsp;
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"> Qien.nl</a>
-            </div>
+            
         </div>
     </footer>
 
