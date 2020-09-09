@@ -3,6 +3,7 @@ package app.qienuren.controller;
 import app.qienuren.gebruikerDto.GebruikerDto;
 import app.qienuren.gebruikerDto.Utils;
 import app.qienuren.model.Bedrijf;
+import app.qienuren.model.Gebruiker;
 import app.qienuren.model.RoleEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,16 @@ public class BedrijfService {
     }
 
     public void addGebruikerToBedrijf(long bedrijfId, long gebruikerId) {
+        Gebruiker gebruiker = gebruikerRepository.findById(gebruikerId).get();
+        if (gebruiker.getBedrijf() != null) {
+            gebruiker.setBedrijf(null);
+            Bedrijf bedrijf = bedrijfRepository.findById(bedrijfId).get();
+            for (Gebruiker gebruiker1 : bedrijf.getLijstGebruikers()) {
+                if(gebruiker1.equals(gebruiker)) {
+                    bedrijf.getLijstGebruikers().remove(gebruiker);
+                }
+            }
+        }
         bedrijfRepository.findById(bedrijfId).get().addGebruikerToLijst(gebruikerRepository.findById(gebruikerId).get());
     }
 

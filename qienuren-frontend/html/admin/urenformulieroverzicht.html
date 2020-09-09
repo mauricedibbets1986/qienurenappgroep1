@@ -226,9 +226,26 @@
  function paginaUFOpen(){
   window.location.replace("urenformulieropen.html");
 }
+
+function autodisplaymonth() {
+            var date = new Date();
+            var urenFormulier = {};
+            var months = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"];
+            var thismonth = months[date.getMonth()];
+            var thisyear = new Date().getFullYear();
+            selectElement(thismonth, thisyear);
+          }
+
+          function selectElement(thismonth, thisyear) {  
+            let month = document.getElementById("selectMaand");
+            let year = document.getElementById("selectJaar");
+            month.value = thismonth;
+            year.value = thisyear;
+          }
+
 </script>
 
-<body onload=loginAuthAdmin(),lijstMedewerkers()>
+<body onload=loginAuthAdmin(),lijstMedewerkers(),autodisplaymonth()>
   <!-- Modal bevestiging -->
   <div>
     <div class="modal fade" id="myModal" role="dialog">
