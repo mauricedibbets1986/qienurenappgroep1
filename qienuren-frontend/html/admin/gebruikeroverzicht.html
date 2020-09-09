@@ -281,6 +281,7 @@
                         </div>
                             `
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
+                    document.getElementById("persoonsmail").innerHTML =  `<input type="text" size="35" value=${databaseContents.email} id="emailNaar" disabled>`;
                 }
             }
             xhr.open("GET", "http://173.212.208.199:1337/api/users/" + id, true);
@@ -376,12 +377,11 @@
             <div class="modal-content">
                 <div id="showNaam-modal">
                     <div id="persoonsgegevens"></div>
+                    <hr>
                 </div>
                 <div class="modal-body">
-                    <div id="alleGebruikers"></div>
                     <form>
-                        <input type="text" size="35" placeholder="Emailadres" id="emailNaar">
-                        <br>
+                        <div id="persoonsmail"></div>
                         <br>
                         <input type="text" size="35" placeholder="Onderwerpregel" id="onderwerpregel">
                         <br>
