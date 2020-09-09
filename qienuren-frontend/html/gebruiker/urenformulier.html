@@ -273,7 +273,7 @@
         }
         objJSON = JSON.stringify(obj);
 
-        if (checkValidDagen(obj)) {
+        if (checkValidDagen(obj, x)) {
           var xhr = new XMLHttpRequest();
           xhr.open("PUT", "http://173.212.208.199:1337/api/werkdag/edit/" + UF.werkdag[x].id, true);
           xhr.setRequestHeader("Content-Type", "application/json");
@@ -284,8 +284,8 @@
     }
 
     // checks to see if hours have been filled in and (in another method) will get saved
-    function checkValidDagen(dag) {
-      if (dag.opdrachtUren > 0 || dag.overwerkUren > 0 || dag.verlofUren > 0 || dag.trainingsUren > 0 || dag.ziekteDag > 0 || dag.overigeUren > 0 || dag.verklaring !== "") {
+    function checkValidDagen(dag, x) {
+      if (dag.opdrachtUren !== document.getElementById("opdracht" + x).getAttribute("placeholder") || dag.overwerkUren !== document.getElementById("overwerk" + x).getAttribute("placeholder") || dag.verlofUren !== document.getElementById("verlof" + x).getAttribute("placeholder") || dag.trainingsUren !== document.getElementById("training" + x).getAttribute("placeholder") || dag.ziekteDag !== document.getElementById("ziektedag" + x).getAttribute("placeholder") || dag.overigeUren !== document.getElementById("overig" + x).getAttribute("placeholder") || dag.verklaring !== document.getElementById("verklaring" + x).getAttribute("placeholder")) {
         return true;
       }
       return false;
