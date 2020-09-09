@@ -54,7 +54,7 @@ public class InitialGebruikerSetup {
         AuthorityEntity deleteUrenformulierAuthority = createAuthority("DELETE:URENFORMULIER");
         AuthorityEntity approveUrenformulierAuthority = createAuthority("APPROVE:URENFORMULIER");
 
-        RoleEntity roleAdmin = createRole(Roles.ROLE_ADMIN.name(), Arrays.asList(readUserAuthority, createUserAuthority,updateUserAuthority,deleteUserAuthority, readUrenformulierAuthority, createUrenformulierAuthority, updateUrenformulierAuthority, approveUrenformulierAuthority));
+        RoleEntity roleAdmin = createRole(Roles.ROLE_ADMIN.name(), Arrays.asList(readUserAuthority, createUserAuthority,updateUserAuthority,deleteUserAuthority, readUrenformulierAuthority, createUrenformulierAuthority, updateUrenformulierAuthority, approveUrenformulierAuthority, deleteUrenformulierAuthority));
         RoleEntity roleMedewerker = createRole(Roles.ROLE_MEDEWERKER.name(), Arrays.asList(readUserAuthority,updateUserAuthority, readUrenformulierAuthority, createUrenformulierAuthority, updateUrenformulierAuthority));
         RoleEntity roleTrainee = createRole(Roles.ROLE_TRAINEE.name(), Arrays.asList(readUserAuthority,updateUserAuthority, readUrenformulierAuthority, createUrenformulierAuthority, updateUrenformulierAuthority));
         RoleEntity roleBedrijf = createRole(Roles.ROLE_BEDRIJF.name(), Arrays.asList(readUserAuthority, readUrenformulierAuthority, approveUrenformulierAuthority));
