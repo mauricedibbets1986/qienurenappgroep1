@@ -68,6 +68,11 @@
                 if (this.readyState == 4) {
                     var databaseContents = JSON.parse(this.responseText);
                     var employeeString = "";
+                    var werknemers = "";
+                    for(var x=0; x<databaseContents.lijstGebruikers.length; x++){
+                       werknemers += databaseContents.lijstGebruikers[x].voornaam+ " " + databaseContents.lijstGebruikers[x].achternaam + `<br>`;
+                    }
+
                     employeeString +=
                         `
                         <div>
@@ -100,6 +105,10 @@
                             <tr>
                             <th>Plaats: </th>
                             <td>${databaseContents.woonplaats}</td>
+                            </tr>
+                            <tr>
+                            <th>Werknemers: </th>
+                            <td>${werknemers} </td>
                             </tr>
                         </table>
                         </div>
