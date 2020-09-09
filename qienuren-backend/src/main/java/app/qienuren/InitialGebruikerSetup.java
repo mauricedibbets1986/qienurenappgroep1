@@ -72,6 +72,7 @@ public class InitialGebruikerSetup {
         } return;
     }
 
+    
     //function to create authority in table and save it in db
     @Transactional
     public AuthorityEntity createAuthority(String name) {
