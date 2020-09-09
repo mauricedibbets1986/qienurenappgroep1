@@ -79,7 +79,7 @@
             for (y = 0; y < obj[x].urenFormulier.length; y++) {
               if (obj[x].urenFormulier[y].statusGoedkeuring != "OPEN" && obj[x].urenFormulier[y].statusGoedkeuring != "GOEDGEKEURD_ADMIN" || obj[x].urenFormulier[y].opmerking != "") {
                 lijst +=
-                  ` <tr>
+                                ` <tr>
                                       <td>${nam}</td>
                                       <td>${obj[x].urenFormulier[y].maand}</td>
                                       <td>${obj[x].urenFormulier[y].jaar}</td>
@@ -90,7 +90,6 @@
                                         getNaamEnDatum('${nam}','${obj[x].urenFormulier[y].maand}','${obj[x].urenFormulier[y].jaar}'),
                                         saveFormulierId('${obj[x].urenFormulier[y].id}')" 
                                         class="button3-sm" data-toggle="modal" data-target="#myModal2">bekijken</button></td>
-  
                                 </tr>
                                 `
               }
@@ -370,7 +369,7 @@
     <div>
       <ul class="breadcrumb">
         <li><a href="admin.html">Admin Home</a></li>
-        <li>Uren formulieren</li>
+        <li>Urenformulieren</li>
       </ul>
     </div>
   </header>
@@ -383,10 +382,10 @@
         <!-- sidebar -->
         <div class="col-sm-3">
           <div class="sidebar">
-            <button class="button2" onclick="window.location.href='urenformulieropen.html'">Open</button>
+            <button class="button2" onclick="window.location.href='urenformulieropen.html'">Openstaand</button>
             <button class="button2" onclick="window.location.href='urenformuliergoedgekeurd.html'">Goedgekeurd</button>
             <input type="button" class="button2" data-toggle="modal"
-            data-target="#myModal5" value="Nieuw Formulier">
+            data-target="#myModal5" value="Nieuw formulier">
             <!-- Trigger the modal with a button -->
             <br>
           </div>
@@ -394,7 +393,7 @@
         <!-- main content -->
         <div class="col-lg-9">
           <div class="content">
-            <h6>Uren formulieren</h6>
+            <h6>Urenformulieren</h6>
 
             <div class="table-wrapper-scroll-y my-custom-scrollbar">
               <div id="lijst-medewerkers"></div>
