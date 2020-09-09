@@ -20,8 +20,8 @@
     <script src="../../js/javascript.js"></script>
     <script>
 
-        function emailenMaar() {
-            console.log("test 1")
+function emailenMaar() {
+            annulerenKnopVerwijderen();
             var xhr = new XMLHttpRequest();
             var obj = {};
             obj.emailTo = document.getElementById("emailNaar").value;
@@ -32,6 +32,33 @@
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
             xhr.send(json);
+            aanHetVersturen();
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    veranderTekstOpEmailknop();
+                    setTimeout(paginaReload, 1500);
+                }
+            }
+        }
+
+        function annulerenKnopVerwijderen() {
+            var x = document.getElementById("annuleerknop");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function aanHetVersturen() {
+            var element = document.getElementById("emailknop");
+            if (element.value == "Dien verzoek in") element.value = "Aan het versturen...";
+        }
+
+        function veranderTekstOpEmailknop() {
+            var element = document.getElementById("emailknop");
+            if (element.value == "Aan het versturen...") element.value = "E-mail verstuurd :)";
+            else element.value = "Verstuur e-mail";
         }
 
         function persoonsGegevens() {
@@ -132,8 +159,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <input type=button class="button3" onclick=emailenMaar() value="Dien verzoek in">
-                    <button type="button" class="btn btn-default button2" onclick="" data-dismiss="modal">Annuleren</button>
+                    <input type=button id="emailknop" class="button3" onclick=emailenMaar() value="Dien verzoek in">
+                    <button type="button" id="annuleerknop" class="btn btn-default button2" onclick="" data-dismiss="modal">Annuleren</button>
                 </div>
             </div>
         </div>
