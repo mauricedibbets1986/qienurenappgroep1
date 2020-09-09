@@ -26,7 +26,6 @@ public class MailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-
     public MailService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
@@ -38,5 +37,4 @@ public class MailService {
         msg.setText(mail.getText());
         javaMailSender.send(msg);
     }
-
 }
