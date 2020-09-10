@@ -19,8 +19,8 @@
     <!-- Eigen JavaScript -->
     <script src="../../js/javascript.js"></script>
 
-
     <script>
+
         function emailenMaar() {
             annulerenKnopVerwijderen();
             var xhr = new XMLHttpRequest();
@@ -44,22 +44,16 @@
 
         function annulerenKnopVerwijderen() {
             var x = document.getElementById("annuleerknop");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
+            x.style.display = "none";
         }
-
         function aanHetVersturen() {
             var element = document.getElementById("emailknop");
-            if (element.value == "Verstuur e-mail") element.value = "Aan het versturen...";
+            element.value = "Aan het versturen...";
         }
 
         function veranderTekstOpEmailknop() {
             var element = document.getElementById("emailknop");
-            if (element.value == "Aan het versturen...") element.value = "E-mail verstuurd :)";
-            else element.value = "Verstuur e-mail";
+            element.value = "E-mail verstuurd :)";
         }
 
         function zoekGebruikerOpVoornaam() {
@@ -281,7 +275,7 @@
                         </div>
                             `
                     document.getElementById("persoonsgegevens").innerHTML = employeeString;
-                    document.getElementById("persoonsmail").innerHTML =  `<input type="text" size="35" value=${databaseContents.email} id="emailNaar" disabled>`;
+                    document.getElementById("persoonsmail").innerHTML = `<input type="text" size="35" value=${databaseContents.email} id="emailNaar" disabled>`;
                 }
             }
             xhr.open("GET", "http://173.212.208.199:1337/api/users/" + id, true);
@@ -405,14 +399,14 @@
                     <h5 class="modal-title w-100 text-center">Zoek een gebruiker</h5>
                 </div>
                 <div class="modal-body zoek-modal">
-                    Voornaam <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
-                        id="voornaamCheck"><br>
-                    Achternaam <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
-                        id="achternaamCheck"><br>
-                    Woonplaats <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
-                        id="woonplaatsCheck"><br>
-                    Geboortedatum <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
-                        id="geboorteCheck"><br>
+                    <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
+                        id="voornaamCheck"> Voornaam <br>
+                     <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
+                        id="achternaamCheck"> Achternaam<br>
+                     <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
+                        id="woonplaatsCheck"> Woonplaats<br>
+                     <input type="radio" onclick="javascript:zoekDisplay();" name="zoekfunctie"
+                        id="geboorteCheck"> Geboortedatum<br>
 
                     <div id="ifVoornaam" style="display:none">
                         <input type="text" placeholder="Zoek op voornaam" name="search" id="voornaam">

@@ -15,9 +15,7 @@ public class MailController {
 
     private MailService mailService;
 
-    public MailController(MailService mailService) {
-        this.mailService = mailService;
-    }
+    public MailController(MailService mailService) {this.mailService = mailService;}
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN') or hasAnyRole('TRAINEE') or hasAnyRole('MEDEWERKER')")
