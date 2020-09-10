@@ -43,22 +43,16 @@
 
     function annulerenKnopVerwijderen() {
       var x = document.getElementById("annuleerknop");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
-      }
+      x.style.display = "none";
     }
-
     function aanHetVersturen() {
       var element = document.getElementById("emailknop");
-      if (element.value == "Verstuur e-mail") element.value = "Aan het versturen...";
+      element.value = "Aan het versturen...";
     }
 
     function veranderTekstOpEmailknop() {
       var element = document.getElementById("emailknop");
-      if (element.value == "Aan het versturen...") element.value = "E-mail verstuurd :)";
-      else element.value = "Verstuur e-mail";
+      element.value = "E-mail verstuurd :)";
     }
 
     function lijstBedrijven() {
@@ -103,19 +97,19 @@
       xhr.send();
     }
 
-  function bedrijfsGegevens(userId) {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (this.readyState == 4) {
-                    var databaseContents = JSON.parse(this.responseText);
-                    var employeeString = "";
-                    var werknemers = "";
-                    for(var x=0; x<databaseContents.lijstGebruikers.length; x++){
-                       werknemers += databaseContents.lijstGebruikers[x].voornaam+ " " + databaseContents.lijstGebruikers[x].achternaam + `<br>`;
-                    }
+    function bedrijfsGegevens(userId) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (this.readyState == 4) {
+          var databaseContents = JSON.parse(this.responseText);
+          var employeeString = "";
+          var werknemers = "";
+          for (var x = 0; x < databaseContents.lijstGebruikers.length; x++) {
+            werknemers += databaseContents.lijstGebruikers[x].voornaam + " " + databaseContents.lijstGebruikers[x].achternaam + `<br>`;
+          }
 
-                    employeeString +=
-                        `
+          employeeString +=
+            `
                         <div>
                             <h5>Profiel bedrijf</h5>
                         <table class="enkeleGebruikerTabelLaden">
@@ -155,8 +149,8 @@
                         </div>
                             `
           document.getElementById("persoonsgegevens").innerHTML = employeeString;
-          document.getElementById("persoonsmail").innerHTML =  `<input type="text" size="35" value=${databaseContents.email} id="emailNaar" disabled>`;
-                
+          document.getElementById("persoonsmail").innerHTML = `<input type="text" size="35" value=${databaseContents.email} id="emailNaar" disabled>`;
+
         }
       }
       xhr.open("GET", "http://173.212.208.199:1337/api/bedrijf/" + userId, true);
@@ -195,13 +189,13 @@
             <br>
             <br>
             <textarea type="text" placeholder="Bericht" id="bodyVanEmail" rows="10" cols="100"></textarea>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <input type=button id="emailknop" class="button3" onclick=emailenMaar() value="Verstuur e-mail">
-        <button type="button" id="annuleerknop" class="btn btn-default button2" onclick=""
+          </form>
+        </div>
+        <div class="modal-footer">
+          <input type=button id="emailknop" class="button3" onclick=emailenMaar() value="Verstuur e-mail">
+          <button type="button" id="annuleerknop" class="btn btn-default button2" onclick=""
             data-dismiss="modal">Annuleren</button>
-    </div>
+        </div>
       </div>
     </div>
   </div>
