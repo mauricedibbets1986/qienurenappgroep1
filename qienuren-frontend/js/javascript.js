@@ -131,13 +131,21 @@ const GebruikersVerwijderenModal = () => {
     if (this.readyState == 4) {
       var databaseContents = JSON.parse(this.responseText);
       var x;
-      var select = document.getElementById("selectVerwijderGebruiker");
+      var c;
+      var select = document.getElementById("selectVerwijderGebruikermodal");
       for (x = 0; x < databaseContents.length; x++) {
         var el = document.createElement("option");
-        el.textContent =
-          databaseContents[x].voornaam + " " + databaseContents[x].achternaam;
-        el.value = databaseContents[x].userId;
-        select.appendChild(el);
+        for (c = 0; c < databaseContents[x].roles.length; c++) {
+          if (
+            databaseContents[x].roles[c].name !== "ROLE_ADMIN" &&
+            databaseContents[x].roles[c].name !== "ROLE_BEDRIJF"
+          ) {
+            el.textContent =
+              databaseContents[x].voornaam + " " + databaseContents[x].achternaam;
+            el.value = databaseContents[x].userId;
+            select.appendChild(el);
+          }
+        }
       }
     }
   };
